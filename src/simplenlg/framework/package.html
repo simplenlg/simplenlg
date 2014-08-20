@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>SimpleNLG Framework</title>
+</head>
+<body>
+<p>The framework package contains the base components required for
+running the SimpleNLG package. The components can be split into four
+different categories. The first category contains only the <code>NLGModule</code>
+abstract class. This module is used to define processors that will run
+in the SimpleNLG package. Some example basic processors are included
+with the application and they all extend this class. Note that modules
+and processors are interchangeable in this documentation. They both
+refer to a class that extends the <code>NLGModule</code> base class.</p>
+<p>The second category of components are formed from the elements.
+Elements in SimpleNLG form the document structure, phrases, clauses,
+canned text and the words themselves. There are numerous Element classes
+all of which extend from the top-level abstract class <code>NLGElement</code>.
+Generic modules can be written to run with the generic NLGElement class.
+The other element classes are:
+<ul>
+	<li><code>CoordinatedPhraseElement</code> - used for coordinating
+	phrases together through the use of conjunctions such as <em>and</em>
+	and <em>but</em>.</li>
+	<li><code>DocumentElement</code> - defines document structure of a
+	text to the level of document, section, paragraph and sentences.</li>
+	<li><code>InflectedWordElement</code> - represents a word that
+	needs to be inflected.</li>
+	<li><code>ListElement</code> - a single element entity
+	representing a list of <code>NLGElement</code>s and should not be
+	confused with <code>List&lt;NLGElement&gt;</code></li>
+	<li><code>PhraseElement</code> - defines the phrases of the text
+	such as: clauses, noun phrases and verb phrases.</li>
+	<li><code>StringElement</code> - a canned text representation that
+	is not meant to be changed by any of the processors.</li>
+	<li><code>WordElement</code> - a representation of a base word as
+	read from the lexicon definition.</li>
+</ul>
+</p>
+<p>The third set of components are the enumerated types representing
+the different categories for the elements. All the enumerations
+implement the <code>ElementCategory</code> interface. This allows for
+generic modules to access a generic category type. The other
+enumerations are:
+<ul>
+	<li><code>DocumentCategory</code> - defines which part of the
+	document structure the <code>DocumentElement</code> represents. For
+	example, sentence and paragraph.</li>
+	<li><code>LexicalCategory</code> - represents the types of
+	grammatical categories for the individual words. For example, noun,
+	verb and adjective.</li>
+	<li><code>PhraseCategory</code> - details the type of phrase a <code>PhraseElement</code>
+	represents. For example, noun phrase, clause, prepositional phrase.</li>
+</ul>
+</p>
+<p>The final category covers the two factories. The factories should
+be used to construct other elements. They are: <code>DocumentFactory</code>,
+which constructs document elements pertaining to the text structure; and
+<code>PhraseFactory</code>, which constructs various types of phrases.</p>
+<hr />
+<P>The contents of this file are subject to the Mozilla Public
+License Version 1.1 (the "License"); you may not use this file except in
+compliance with the License. You may obtain a copy of the License at
+http://www.mozilla.org/MPL/</P>
+
+<P>Software distributed under the License is distributed on an "AS
+IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+the License for the specific language governing rights and limitations
+under the License.</P>
+
+<P>The Original Code is "Simplenlg".</P>
+
+<P>The Initial Developer of the Original Code is Ehud Reiter, Albert
+Gatt and Dave Westwater. Portions created by Ehud Reiter, Albert Gatt
+and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen.
+All Rights Reserved.</P>
+
+<P>Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman
+Kutlak, Margaret Mitchell.</P>
+
+</body>
+</html>

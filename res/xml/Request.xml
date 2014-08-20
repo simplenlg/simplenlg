@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nlg:NLGSpec xmlns="http://code.google.com/p/simplenlg/schemas/version1"
+	xmlns:nlg="http://code.google.com/p/simplenlg/schemas/version1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://code.google.com/p/simplenlg/schemas/version1 RealizerSchema.xsd ">
+ <Request>
+    <Document cat="PARAGRAPH">
+      <child xsi:type="StringElement">
+        <val>hello, world</val>
+      </child>
+    </Document>
+  </Request>
+ </nlg:NLGSpec>

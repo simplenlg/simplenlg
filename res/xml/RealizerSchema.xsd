@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+	<!--
+		Schema for simplenlg edited by Christopher Howell (Agfa Healthcare
+		Corporation) and Albert Gatt (University of Malta)
+    
+    This is the schema for a realisation request.
+    Attribute groups contain feature attributes. Each group contains features that,
+    according to the javadoc of the Feature class, can apply to that type of element,
+    and are user-settable.
+    
+    This version of the schema is based on simplenlg 4.42.
+    
+    Java classes in \simplenlg\src\simplenlg\xmlrealiser\wrapper are generated from this
+    schema using xjc, the java utility., which is available in the JDK.
+	-->
+<xs:schema targetNamespace="http://simplenlg.googlecode.com/svn/trunk/res/xml"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:nlg="http://simplenlg.googlecode.com/svn/trunk/res/xml"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0">
+
+	<xs:element name="NLGSpec">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="Request" type="nlg:RequestType" />
+				<xs:element name="Recording" type="nlg:RecordSet" />
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="RequestType">
+		<xs:sequence>
+			<xs:element name="Document" type="nlg:DocumentElement"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="RecordSet">
+		<xs:sequence>
+			<xs:element name="Record" type="nlg:DocumentRealisation"
+				maxOccurs="unbounded" minOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="DocumentRealisation">
+		<xs:sequence>
+			<xs:element name="Document" type="nlg:DocumentElement"
+				maxOccurs="1" minOccurs="1" />
+			<xs:element name="Realisation" type="xs:string" minOccurs="0"
+				maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="DocumentElement">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlDocumentElement" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="nlg:NLGElement">
+				<xs:sequence>
+					<xs:element name="child" type="nlg:NLGElement"
+						minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+				<xs:attributeGroup ref="nlg:docAtts" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:attributeGroup name="docAtts">
+		<xs:attribute name="cat" type="nlg:documentCategory" />
+		<xs:attribute name="title" type="xs:string" />
+	</xs:attributeGroup>
+
+	<xs:complexType name="SPhraseSpec">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlSPhraseSpec" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="nlg:PhraseElement">
+				<xs:sequence>
+					<xs:element name="cuePhrase" type="nlg:NLGElement"
+						minOccurs="0" />
+					<xs:element name="subj" type="nlg:NLGElement" minOccurs="0"
+						maxOccurs="unbounded" />
+					<xs:element name="vp" type="nlg:NLGElement" />
+				</xs:sequence>
+				<xs:attributeGroup ref="nlg:sPhraseAtts" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:attributeGroup name="sPhraseAtts">
+    <xs:attribute name="AGGREGATE_AUXILIARY" type="xs:boolean" />
+		<xs:attribute name="CLAUSE_STATUS" type="nlg:clauseStatus" />
+		<xs:attribute name="COMPLEMENTISER" type="xs:string" />
+		<xs:attribute name="FORM" type="nlg:form" />
+		<xs:attribute name="INTERROGATIVE_TYPE" type="nlg:interrogativeType" />
+		<xs:attribute name="MODAL" type="xs:string" />
+		<xs:attribute name="NEGATED" type="xs:boolean" />
+		<xs:attribute name="PASSIVE" type="xs:boolean" />
+		<xs:attribute name="PERFECT" type="xs:boolean" />
+		<xs:attribute name="PERSON" type="nlg:person" />
+		<xs:attribute name="PROGRESSIVE" type="xs:boolean" />
+    <xs:attribute name="SUPPRESS_GENITIVE_IN_GERUND" type="xs:boolean" />
+    <xs:attribute name="SUPRESSED_COMPLEMENTISER" type="xs:boolean" />
+		<xs:attribute name="TENSE" type="nlg:tense" />
+	</xs:attributeGroup>
+
+	<xs:complexType name="VPPhraseSpec">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlVPPhraseSpec" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="nlg:PhraseElement">
+				<xs:sequence />
+				<xs:attributeGroup ref="nlg:vpPhraseAtts" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:attributeGroup name="vpPhraseAtts">
+    <xs:attribute name="AGGREGATE_AUXILIARY" type="xs:boolean" />
+		<xs:attribute name="FORM" type="nlg:form" />
+		<xs:attribute name="MODAL" type="xs:string" />
+		<xs:attribute name="NEGATED" type="xs:boolean" />
+		<xs:attribute name="PASSIVE" type="xs:boolean" />
+		<xs:attribute name="PERFECT" type="xs:boolean" />
+		<xs:attribute name="PERSON" type="nlg:person" />
+		<xs:attribute name="PROGRESSIVE" type="xs:boolean" />
+		<xs:attribute name="SUPPRESS_GENITIVE_IN_GERUND" type="xs:boolean" />
+		<xs:attribute name="SUPRESSED_COMPLEMENTISER" type="xs:boolean" />
+		<xs:attribute name="TENSE" type="nlg:tense" />
+	</xs:attributeGroup>
+
+	<xs:complexType name="NPPhraseSpec">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlNPPhraseSpec" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="nlg:PhraseElement">
+				<xs:sequence>
+					<xs:element name="spec" type="nlg:NLGElement" minOccurs="0" />
+				</xs:sequence>
+				<xs:attributeGroup ref="nlg:npPhraseAtts" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:attributeGroup name="npPhraseAtts">
+		<xs:attribute name="ADJECTIVE_ORDERING" type="xs:boolean" />
+		<xs:attribute name="ELIDED" type="xs:boolean" />
+		<xs:attribute name="NUMBER" type="nlg:numberAgreement" />
+		<xs:attribute name="GENDER" type="nlg:gender"></xs:attribute>
+		<xs:attribute name="PERSON" type="nlg:person" />
+		<xs:attribute name="POSSESSIVE" type="xs:boolean" />
+		<xs:attribute name="PRONOMINAL" type="xs:boolean" />
+	</xs:attributeGroup>
+
+	<xs:complexType name="AdjPhraseSpec">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlAdjPhraseSpec" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="nlg:PhraseElement">
+				<xs:sequence />
+				<xs:attributeGroup ref="nlg:adjAdvPhraseAtts" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:attributeGroup name="adjAdvPhraseAtts">
+		<xs:attribute name="IS_COMPARATIVE" type="xs:boolean" />
+		<xs:attribute name="IS_SUPERLATIVE" type="xs:boolean" />
+	</xs:attributeGroup>
+
+	<xs:complexType name="AdvPhraseSpec">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlAdvPhraseSpec" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="nlg:PhraseElement">
+				<xs:sequence />
+				<xs:attributeGroup ref="nlg:adjAdvPhraseAtts" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="PPPhraseSpec">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlPPPhraseSpec" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="nlg:PhraseElement">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="CoordinatedPhraseElement">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlCoordinatedPhraseElement" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="nlg:NLGElement">
+				<xs:sequence>
+					<xs:element name="coord" type="nlg:NLGElement"
+						maxOccurs="unbounded" />
+				</xs:sequence>
+				<xs:attributeGroup ref="nlg:CoordinatedPhraseAtts" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:attributeGroup name="CoordinatedPhraseAtts">
+		<xs:attribute name="conj" type="xs:string" default="and" />
+		<xs:attribute name="cat" type="nlg:phraseCategory" />
+		<xs:attribute name="APPOSITIVE" type="xs:boolean" />
+		<xs:attribute name="CONJUNCTION_TYPE" type="xs:string" />
+		<xs:attribute name="MODAL" type="xs:string" />
+		<xs:attribute name="NEGATED" type="xs:boolean" />
+		<xs:attribute name="NUMBER" type="nlg:numberAgreement" />
+		<xs:attribute name="PERSON" type="nlg:person" />
+		<xs:attribute name="POSSESSIVE" type="xs:boolean" />
+    <xs:attribute name="PROGRESSIVE" type="xs:boolean" />
+		<xs:attribute name="RAISE_SPECIFIER" type="xs:boolean" />
+		<xs:attribute name="SUPRESSED_COMPLEMENTISER" type="xs:boolean" />
+		<xs:attribute name="TENSE" type="nlg:tense" />
+	</xs:attributeGroup>
+
+	<xs:complexType name="PhraseElement" abstract="true">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlPhraseElement" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="nlg:NLGElement">
+				<xs:sequence>
+					<xs:element name="frontMod" type="nlg:NLGElement"
+						minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="preMod" type="nlg:NLGElement"
+						minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="compl" type="nlg:NLGElement"
+						minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="postMod" type="nlg:NLGElement"
+						minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="head" type="nlg:WordElement" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="cat" type="nlg:phraseCategory" />
+				<xs:attribute name="discourseFunction" type="nlg:discourseFunction">
+				</xs:attribute>
+				<xs:attribute name="appositive" type="xs:boolean"></xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="StringElement">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlStringElement" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="nlg:NLGElement">
+				<xs:sequence>
+					<xs:element name="val" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="NLGElement" abstract="true">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlNLGElement" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence />
+	</xs:complexType>
+
+	<xs:complexType name="WordElement">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="XmlWordElement" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="nlg:NLGElement">
+				<xs:sequence>
+					<xs:element name="base" type="xs:string" />
+				</xs:sequence>
+				<xs:attributeGroup ref="nlg:wordAtts" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:attributeGroup name="wordAtts">
+		<xs:attribute name="cat" type="nlg:lexicalCategory" />
+		<xs:attribute name="id" type="xs:string" />
+		<xs:attribute name="EXPLETIVE_SUBJECT" type="xs:boolean" />
+		<xs:attribute name="PROPER" type="xs:boolean" />
+		<xs:attribute name="var" type="nlg:inflection" />
+		<xs:attribute name="canned" type="xs:boolean"></xs:attribute>
+	</xs:attributeGroup>
+
+	<xs:simpleType name="phraseCategory">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlPhraseCategory" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CLAUSE" />
+			<xs:enumeration value="ADJECTIVE_PHRASE" />
+			<xs:enumeration value="ADVERB_PHRASE" />
+			<xs:enumeration value="NOUN_PHRASE" />
+			<xs:enumeration value="PREPOSITIONAL_PHRASE" />
+			<xs:enumeration value="VERB_PHRASE" />
+			<xs:enumeration value="CANNED_TEXT" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="tense">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlTense" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FUTURE" />
+			<xs:enumeration value="PAST" />
+			<xs:enumeration value="PRESENT" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="clauseStatus">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlClauseStatus" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MATRIX" />
+			<xs:enumeration value="SUBORDINATE" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="discourseFunction">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlDiscourseFunction" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AUXILIARY" />
+			<xs:enumeration value="COMPLEMENT" />
+			<xs:enumeration value="CONJUNCTION" />
+			<xs:enumeration value="CUE_PHRASE" />
+			<xs:enumeration value="FRONT_MODIFIER" />
+			<xs:enumeration value="HEAD" />
+			<xs:enumeration value="INDIRECT_OBJECT" />
+			<xs:enumeration value="OBJECT" />
+			<xs:enumeration value="PRE_MODIFIER" />
+			<xs:enumeration value="POST_MODIFIER" />
+			<xs:enumeration value="SPECIFIER" />
+			<xs:enumeration value="SUBJECT" />
+			<xs:enumeration value="VERB_PHRASE" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="documentCategory">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlDocumentCategory" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DOCUMENT" />
+			<xs:enumeration value="SECTION" />
+			<xs:enumeration value="PARAGRAPH" />
+			<xs:enumeration value="SENTENCE" />
+			<xs:enumeration value="LIST" />
+			<xs:enumeration value="LIST_ITEM" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="form">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlForm" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BARE_INFINITIVE" />
+			<xs:enumeration value="GERUND" />
+			<xs:enumeration value="IMPERATIVE" />
+			<xs:enumeration value="INFINITIVE" />
+			<xs:enumeration value="NORMAL" />
+			<xs:enumeration value="PAST_PARTICIPLE" />
+			<xs:enumeration value="PRESENT_PARTICIPLE" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="gender">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlGender" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MASCULINE" />
+			<xs:enumeration value="FEMININE" />
+			<xs:enumeration value="NEUTER" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="lexicalCategory">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlLexicalCategory" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ANY" />
+			<xs:enumeration value="SYMBOL" />
+			<xs:enumeration value="NOUN" />
+			<xs:enumeration value="ADJECTIVE" />
+			<xs:enumeration value="ADVERB" />
+			<xs:enumeration value="VERB" />
+			<xs:enumeration value="DETERMINER" />
+			<xs:enumeration value="PRONOUN" />
+			<xs:enumeration value="CONJUNCTION" />
+			<xs:enumeration value="PREPOSITION" />
+			<xs:enumeration value="COMPLEMENTISER" />
+			<xs:enumeration value="MODAL" />
+			<xs:enumeration value="AUXILIARY" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="numberAgreement">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlNumberAgreement" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BOTH" />
+			<xs:enumeration value="PLURAL" />
+			<xs:enumeration value="SINGULAR" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="person">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlPerson" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FIRST" />
+			<xs:enumeration value="SECOND" />
+			<xs:enumeration value="THIRD" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="interrogativeType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlInterrogativeType" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="HOW" />
+			<xs:enumeration value="WHAT_OBJECT" />
+			<xs:enumeration value="WHAT_SUBJECT" />
+			<xs:enumeration value="WHERE" />
+			<xs:enumeration value="WHO_INDIRECT_OBJECT" />
+			<xs:enumeration value="WHO_OBJECT" />
+			<xs:enumeration value="WHO_SUBJECT" />
+			<xs:enumeration value="WHY" />
+			<xs:enumeration value="YES_NO" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="inflection">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass name="XmlInflection" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GRECO_LATIN_REGULAR" />
+			<xs:enumeration value="IRREGULAR" />
+			<xs:enumeration value="REGULAR" />
+			<xs:enumeration value="REGULAR_DOUBLE" />
+			<xs:enumeration value="UNCOUNT" />
+			<xs:enumeration value="INVARIANT" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

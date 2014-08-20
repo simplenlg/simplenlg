@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><NLGSpec xmlns="http://simplenlg.googlecode.com/svn/trunk/res/xml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Recording name="Clause tests">
+    <Record name="Interrogative WH Object">
+      <Document cat="PARAGRAPH">
+        <child xsi:type="SPhraseSpec" INTERROGATIVE_TYPE="WHAT_OBJECT" TENSE="PAST">
+          <subj xsi:type="NPPhraseSpec">
+            <head cat="NOUN">
+              <base>dog</base>
+            </head>
+            <spec xsi:type="WordElement" cat="DETERMINER">
+              <base>the</base>
+            </spec>
+          </subj>
+          <vp xsi:type="VPPhraseSpec">
+            <compl xsi:type="NPPhraseSpec" discourseFunction="OBJECT">
+              <head cat="NOUN">
+                <base>man</base>
+              </head>
+              <spec xsi:type="WordElement" cat="DETERMINER">
+                <base>the</base>
+              </spec>
+            </compl>
+            <head cat="VERB">
+              <base>upset</base>
+            </head>
+          </vp>
+        </child>
+      </Document>
+      <Realisation>What did the dog upset?
+
+</Realisation>
+    </Record>
+  </Recording>
+</NLGSpec>

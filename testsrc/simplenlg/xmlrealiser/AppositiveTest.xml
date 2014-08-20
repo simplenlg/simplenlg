@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><NLGSpec xmlns="http://simplenlg.googlecode.com/svn/trunk/res/xml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Recording name="">
+    <Record name="">
+      <Document cat="PARAGRAPH">
+        <child xsi:type="SPhraseSpec" PASSIVE="true">
+          <vp xsi:type="VPPhraseSpec" TENSE="PAST">
+            <compl xsi:type="NPPhraseSpec">
+              <postMod xsi:type="NPPhraseSpec" appositive="true">
+                <head cat="NOUN">
+                  <base>D701000000992</base>
+                </head>
+                <spec xsi:type="WordElement" cat="DETERMINER">
+                  <base>the</base>
+                </spec>
+              </postMod>
+              <head cat="NOUN">
+                <base>angioplasty balloon catheter</base>
+              </head>
+              <spec xsi:type="WordElement" cat="DETERMINER">
+                <base>a</base>
+              </spec>
+            </compl>
+            <head cat="VERB">
+              <base>deploy</base>
+            </head>
+          </vp>
+        </child>
+      </Document>
+      <Realisation>An angioplasty balloon catheter, the D701000000992 was deployed.
+
+</Realisation>
+    </Record>
+  </Recording>
+</NLGSpec>

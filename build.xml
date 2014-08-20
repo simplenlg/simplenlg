@@ -1,0 +1,228 @@
+<!-- SimpleNLG Ant Script -->
+<!--
+The contents of this file are subject to the Mozilla Public License
+Version 1.1 (the "License"); you may not use this file except in
+compliance with the License. You may obtain a copy of the License at
+http://www.mozilla.org/MPL/
+
+Software distributed under the License is distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+License for the specific language governing rights and limitations
+under the License.
+
+The Original Code is "Simplenlg".
+
+The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
+Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
+ 
+Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, Saad Mahamood.
+-->
+<project name="simplenlg" basedir="." default="main">
+    
+    <presetdef name="javac">
+        <javac includeantruntime="false" />
+    </presetdef>
+    
+    <property name="src.dir"     value="src"/>
+    <property name="testsrc.dir" value="testsrc"/>
+    <property name="res.dir"     value="res" />
+    
+
+    <property name="build.dir"   value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
+    <property name="report.dir"  value="${build.dir}/junitreport"/>
+    <property name="lexicon.dir" value="lexicon" />
+
+    <property name="main-class"  value="simplenlg.server.SimpleServer"/>
+    
+    <property name="lib.dir"     value="lib"/>
+
+    <!-- Compiles to Java 1.6 -->
+    <property name="ant.build.javac.source" value="1.6"/>
+    <property name="ant.build.javac.target" value="1.6"/>
+    
+    <!-- Includes all of JARs in lib.dir. No longer used.
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+    -->
+    <!-- Selective Libraries included on the classpath -->
+    <path id="classpath">
+        <pathelement path="${lib.dir}/junit-4.4.jar" />
+        <pathelement path="${lib.dir}/lexAccess2011dist.jar" />
+        <pathelement path="${lib.dir}/lexCheck2006api.jar" />
+        <pathelement path="${lib.dir}/lvg2011api.jar" />
+    </path>
+    
+    <path id="application" location="${jar.dir}/${ant.project.name}.jar"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- Compiles SimpleNLG and includes the lexicon.properties file -->
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac target="1.6" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
+	   <!-- Someone is using internal Sun/Oracle classes... -->
+	   <compilerarg value="-XDignore.symbol.file" />
+	</javac>
+        <copy todir="${classes.dir}">
+            <fileset dir="${res.dir}" includes="*.properties"/>
+        </copy>
+        <copy todir="${classes.dir}/simplenlg/lexicon">
+        	<fileset dir="${res.dir}" includes="default-lexicon.xml" />
+        </copy>
+    </target>
+
+    <!-- Compiles SimpleNLG without including the lexicon.properties file -->
+    <target name="compile-noproperties">
+        <mkdir dir="${classes.dir}"/>
+        <javac target="1.6" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
+       <!-- Someone is using internal Sun/Oracle classes... -->
+       <compilerarg value="-XDignore.symbol.file" />
+    </javac>
+        <copy todir="${classes.dir}/simplenlg/lexicon">
+            <fileset dir="${res.dir}" includes="default-lexicon.xml" />
+        </copy>
+    </target>
+
+    <!-- Check to see if the code compiles -->
+    <target name="compile.test" depends="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac target="1.6" srcdir="${testsrc.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+    </target>
+
+    <!-- Builds a SimpleNLG Library JAR and bundles third-party libraries -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+            
+            <!--Copies all the jar files into the package-->
+            <fileset dir="${classes.dir}" includes="**/*.class" />
+            <fileset dir="${src.dir}" includes="**/*.java" />
+            <zipgroupfileset dir="${lib.dir}" includes="**/*.jar">
+	        <exclude name="lexAccess2013dis.jar"/>
+            </zipgroupfileset>
+        </jar>
+    </target>
+
+    <!-- Builds a SimpleNLG Library JAR without bundling third-party libraries -->
+    <target name="jar-nodeps" depends="compile-noproperties">
+       <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+            <fileset dir="${classes.dir}" excludes="**/*.properties" />
+            <fileset dir="${classes.dir}" includes="**/*.class" />
+            <fileset dir="${src.dir}" includes="**/*.java" />
+        </jar> 
+    </target>
+
+    <!-- Runs the SimpleNLG SimpleServer -->
+    <target name="run" depends="jar">
+        <java fork="true" classname="${main-class}">
+            <classpath>
+                <path refid="classpath"/>
+                <path refid="application"/>
+            </classpath>
+            <jvmarg line="-Xmx512m"/>
+        </java>
+    </target>
+    
+    <!-- Conditionally check to see if someone is running Windows -->
+    <condition property="windowsos">
+        <os family="windows" />
+    </condition>
+
+    <!-- JUnit test command that runs all the JUnit test for Windows 
+         and sets the relevant enviroment variables -->
+    <target name="junit-winenv" if="windowsos">
+        <exec executable="cmd" dir=".">
+            <env key="LexDBPath" value="${lexicon.dir}/lexAccess2011.data"/>
+            <env key="TestFilePath" value="${testsrc.dir}/simplenlg/xmlrealiser/"/> 
+            <arg value="/c"/>
+            <arg value="ant junit-full"/>
+        </exec>
+    </target>	
+
+    <!-- Runs all JUnit tests including those that require enviroment variables -->
+    <target name="junit-full" depends="compile.test,jar">
+	<mkdir dir="${report.dir}"/>
+        <junit fork="true" printsummary="yes">
+            <classpath>
+                <path refid="classpath"/>
+                <path refid="application"/>
+            </classpath>
+            
+            <jvmarg line="-Xmx512m"/>
+            
+            <formatter type="xml"/>
+            
+            <batchtest todir="${report.dir}">
+                <fileset dir="${testsrc.dir}">
+                    <!-- the following files are excluded as they are not actual
+                    tests. Usually, just a superclass with the test setup. -->
+                        <exclude name="**/SyntaxTests.*" />
+                        <exclude name="**/SharedLexiconTests.*" />
+                        <exclude name="**/SimpleNLG4Test.*" />
+                        <exclude name="**/StandAloneExample*" />
+                        <exclude name="**/ClauseAggregationTest2*"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!-- Standard JUnit that excludes test that require platform 
+         specific enviroment variables -->
+    <target name="junit" depends="compile.test,jar">
+    <mkdir dir="${report.dir}"/>
+        <junit fork="true" printsummary="yes">
+            <classpath>
+                <path refid="classpath"/>
+                <path refid="application"/>
+            </classpath>
+            
+            <jvmarg line="-Xmx512m"/>
+            
+            <formatter type="xml"/>
+            
+            <batchtest todir="${report.dir}">
+                <fileset dir="${testsrc.dir}">
+                    <!-- the following files are excluded as they are not actual
+                    tests. Usually, just a superclass with the test setup. -->
+                        <exclude name="**/SyntaxTests.*" />
+                        <exclude name="**/SharedLexiconTests.*" />
+                        <exclude name="**/SimpleNLG4Test.*" />
+                        <exclude name="**/StandAloneExample*" />
+                        <exclude name="**/ClauseAggregationTest2*"/>
+                         <!-- XML Tests: Excluded as they require enviroment variables. -->
+                        <exclude name="**/Tester.*" /> 
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+    
+    <!-- Runs the JUnit Report -->
+	<target name="junitreport">
+        <junitreport todir="${report.dir}">
+            <fileset dir="${report.dir}" includes="TEST-*.xml"/>
+            <report todir="${report.dir}"/>
+        </junitreport>
+    </target>
+    
+    <!-- Cleans the build directory and builds a JAR with third party libs -->
+    <target name="clean-build" depends="clean,jar"/>
+
+    <!-- Cleans the build directory and builds a JAR without third party libs -->
+    <target name="clean-build-nodeps" depends="clean,jar-nodeps"/>
+
+    <!-- Cleans the build directoy, builds SimpleNLG and runs the SimpleServer -->
+    <target name="main" depends="clean,run"/>
+
+</project>

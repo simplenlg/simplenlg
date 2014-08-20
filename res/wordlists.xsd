@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="item">
+    <xs:complexType>
+    	<xs:sequence>
+    		<xs:element name="value" type="xs:string" />
+    	</xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="list">
+    <xs:complexType>
+    	<xs:sequence>
+    		<xs:element name="name" type="xs:string" maxOccurs="1" minOccurs="1" />
+    		<xs:element ref="item" minOccurs="1" maxOccurs="unbounded" />
+    	</xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+  <xs:element name="word_list">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="list" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
