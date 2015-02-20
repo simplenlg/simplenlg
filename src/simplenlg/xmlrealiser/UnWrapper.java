@@ -729,6 +729,12 @@ public class UnWrapper {
 				Feature.PROGRESSIVE).booleanValue();
 		sp.setFeature(Feature.PROGRESSIVE, sProg || vProg);
 
+		// perfect: can be set on S or VP
+		boolean sPerf = wp.isPERFECT() == null ? false : wp.isPERFECT();
+		boolean vPerf = vp == null ? false : vp.getFeatureAsBoolean(
+				Feature.PERFECT).booleanValue();
+		sp.setFeature(Feature.PERFECT, sPerf || vPerf);
+
 		// negation: can be set on S or VP
 		boolean sNeg = wp.isNEGATED() == null ? false : wp.isNEGATED();
 		boolean vNeg = vp == null ? false : vp.getFeatureAsBoolean(
