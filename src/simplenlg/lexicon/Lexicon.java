@@ -226,8 +226,13 @@ public abstract class Lexicon {
 			if (wordElement.getBaseForm().equals(baseForm))
 				return wordElement;
 		
+		// Roman Kutlak: I don't think it is a good idea to return a word whose
+		// case does not match because if a word appears in the lexicon
+		// as an acronym only, it will be replaced as such. For example,
+		// "foo" will return as the acronym "FOO". This does not seem desirable.
 		// else return first element in list
-		return wordElements.get(0);
+//		return wordElements.get(0);
+		return createWord(baseForm, LexicalCategory.ANY);
 	}
 
 	/**
@@ -396,7 +401,7 @@ public abstract class Lexicon {
 		// using variant as base
 		// form
 		else
-			return wordElements.get(0); // else return first match
+			return selectMatchingWord(wordElements, variant);
 
 	}
 
