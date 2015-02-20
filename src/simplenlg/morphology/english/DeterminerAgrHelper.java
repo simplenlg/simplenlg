@@ -1,5 +1,7 @@
 package simplenlg.morphology.english;
 
+import simplenlg.framework.StringElement;
+
 /**
  * This class is used to parse numbers that are passed as figures, to determine
  * whether they should take "a" or "an" as determiner.
@@ -130,4 +132,50 @@ public class DeterminerAgrHelper {
 		return numeric.length() == 0 ? null : numeric.toString();
 	}
 
+	
+	/**
+	 * Check to see if a string ends with the indefinite article "a" and it agrees with {@code np}. 
+	 * @param text
+	 * @param np
+	 * @return an altered version of {@code text} to use "an" if it agrees with {@code np}, the original string otherwise.
+	 */
+	static String checkEndsWithIndefiniteArticle(String text, String np){
+		
+		String[] tokens = text.split(" ");
+		
+		String lastToken = tokens[tokens.length - 1];
+		
+		if(lastToken.equalsIgnoreCase("a") && DeterminerAgrHelper.requiresAn(np)){
+			
+			tokens[tokens.length - 1] = "an";
+			
+			return stringArrayToString(tokens);
+			
+		}
+			
+		return text;
+		
+	}
+	
+	// Turns ["a","b","c"] into "a b c"
+	private static String stringArrayToString(String[] sArray){
+		
+		StringBuilder buf = new StringBuilder();
+		
+		for(int i = 0; i < sArray.length; i++){
+			
+			buf.append(sArray[i]);
+			
+			if(i != sArray.length - 1){
+				
+				buf.append(" ");
+				
+			}
+			
+		}
+		
+		return buf.toString();
+		
+	}
+	
 }

@@ -149,7 +149,7 @@ public class OrthographyProcessor extends NLGModule {
 						// NB: this will realise embedded lists within list
 						// items
 						realisedElement = new ListElement(realise(components));
-                        realisedElement.setParent(element.getParent());
+						realisedElement.setParent(element.getParent());
 					}
 					break;
 
@@ -190,7 +190,10 @@ public class OrthographyProcessor extends NLGModule {
 							}
 						} else {
 							buffer.append(realise(postmod));
-							buffer.append(" ");
+							if(postmod instanceof ListElement
+							   || (postmod.getRealisation() != null && !postmod.getRealisation().equals(""))) {
+								buffer.append(" ");
+							}
 						}
 					}
 
@@ -293,7 +296,7 @@ public class OrthographyProcessor extends NLGModule {
 	 *            sentence is an interrogative, <code>false</code> otherwise.
 	 */
 	private void terminateSentence(StringBuffer realisation, boolean interrogative) {
-		char character = realisation.charAt(realisation.length() - 2);
+		char character = realisation.charAt(realisation.length() - 1);
 		if(character != '.' && character != '?') {
 			if(interrogative) {
 				realisation.append('?');

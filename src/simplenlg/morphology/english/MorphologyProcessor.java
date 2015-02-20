@@ -19,6 +19,7 @@
 package simplenlg.morphology.english;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import simplenlg.features.DiscourseFunction;
@@ -34,6 +35,7 @@ import simplenlg.framework.NLGElement;
 import simplenlg.framework.NLGModule;
 import simplenlg.framework.StringElement;
 import simplenlg.framework.WordElement;
+import simplenlg.phrasespec.NPPhraseSpec;
 
 /**
  * <p>
@@ -201,6 +203,7 @@ public class MorphologyProcessor extends NLGModule {
 		List<NLGElement> realisedElements = new ArrayList<NLGElement>();
 		NLGElement currentElement = null;
 		NLGElement determiner = null;
+		NLGElement prevElement = null;
 
 		if (elements != null) {
 			for (NLGElement eachElement : elements) {
@@ -214,11 +217,19 @@ public class MorphologyProcessor extends NLGModule {
 					if(function != null) {
 						currentElement.setFeature(InternalFeature.DISCOURSE_FUNCTION, function);
 					}
-										
+														
+					if(prevElement != null && prevElement instanceof StringElement && eachElement instanceof InflectedWordElement && ((InflectedWordElement)eachElement).getCategory().equals(LexicalCategory.NOUN)){
+						
+						String prevString = prevElement.getRealisation();
+						
+						//realisedElements.get(realisedElements.size() - 1)
+						
+						prevElement.setRealisation(DeterminerAgrHelper.checkEndsWithIndefiniteArticle(prevString,currentElement.getRealisation())); 
+						
+					}
+					
 					// realisedElements.add(realise(currentElement));
 					realisedElements.add(currentElement);
-
-					
 					
 					if (determiner == null
 							&& DiscourseFunction.SPECIFIER
@@ -260,9 +271,11 @@ public class MorphologyProcessor extends NLGModule {
 						determiner = null;
 					}
 				}
+				prevElement = eachElement;
 			}
 		}
 
 		return realisedElements;
 	}
+		
 }
