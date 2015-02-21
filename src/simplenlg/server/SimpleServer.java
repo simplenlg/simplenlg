@@ -57,7 +57,7 @@ public class SimpleServer implements Runnable {
     /**
      * Set to true to enable printing debug messages.
      */
-    static boolean DEBUG = false;
+    static boolean DEBUG = true;
     
     /**
      * This path should be replaced by the path to the specialist lexicon.
@@ -65,7 +65,7 @@ public class SimpleServer implements Runnable {
      * will be searched for the lexicon file. Otherwise, the path below will
      * be used.
      */
-    String lexiconPath = "/tmp/lexAccess2011lite/data/HSqlDb/lexAccess2011.data";
+    String lexiconPath = "";
 
     // control the run loop
     private boolean isActive = true;
@@ -118,9 +118,12 @@ public class SimpleServer implements Runnable {
             else
                 throw new Exception("No DB_FILENAME in lexicon.properties");
         } catch (Exception e) {
+            System.err.println("Server could not find the lexicon.properties file.");
             e.printStackTrace();
         }
         
+        if (lexiconPath.equals(""))
+            throw new IOException("No lexicon found.");
         System.out.println("Server is using the following lexicon: "
                            + lexiconPath);
         
@@ -236,13 +239,16 @@ public class SimpleServer implements Runnable {
      *          Program arguments
      */
     public static void main(String[] args) {
-        int port;
-        try {
-            port = Integer.parseInt(args[0]);
-        } catch (Exception e) {
-            port = 50007;
+        int port = 50007;
+        if (args.length > 0) {
+            try {
+                port = Integer.parseInt(args[0]);
+            } catch (Exception e) {
+                System.err.println("Server could not parse the server port: '" + args[0] + "'");
+                port = 50007;
+            }
         }
-
+        
         try {
             SimpleServer serverapp = new SimpleServer(port);
 
@@ -260,7 +266,8 @@ public class SimpleServer implements Runnable {
                     bw.flush();
                     String input = br.readLine();
 
-                    if (null != input && input.compareToIgnoreCase("exit") == 0) {
+                    if (null != input && 
+                            input.trim().compareToIgnoreCase("exit") == 0) {
                         serverapp.shutdown();
                         serverapp.exit();
                     }

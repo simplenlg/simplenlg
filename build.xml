@@ -32,7 +32,7 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir"     value="${build.dir}/jar"/>
     <property name="report.dir"  value="${build.dir}/junitreport"/>
-    <property name="lexicon.dir" value="lexicon" />
+    <property name="lexicon.dir" value="/Users/roman/NLP/Lexicons/lexAccess2013lite/data/HSqlDb" />
 
     <property name="main-class"  value="simplenlg.server.SimpleServer"/>
     
@@ -49,8 +49,9 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     -->
     <!-- Selective Libraries included on the classpath -->
     <path id="classpath">
+        <!-- <pathelement path="${lib.dir}/jaxb-impl.jar" /> -->
         <pathelement path="${lib.dir}/junit-4.4.jar" />
-        <pathelement path="${lib.dir}/lexAccess2011dist.jar" />
+        <pathelement path="${lib.dir}/lexAccess2013dist.jar" />
         <pathelement path="${lib.dir}/lexCheck2006api.jar" />
         <pathelement path="${lib.dir}/lvg2011api.jar" />
     </path>
@@ -64,10 +65,10 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     <!-- Compiles SimpleNLG and includes the lexicon.properties file -->
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac target="1.6" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
-	   <!-- Someone is using internal Sun/Oracle classes... -->
-	   <compilerarg value="-XDignore.symbol.file" />
-	</javac>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
+            <!-- Someone is using internal Sun/Oracle classes... -->
+            <compilerarg value="-XDignore.symbol.file" />
+       </javac>
         <copy todir="${classes.dir}">
             <fileset dir="${res.dir}" includes="*.properties"/>
         </copy>
@@ -79,10 +80,10 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     <!-- Compiles SimpleNLG without including the lexicon.properties file -->
     <target name="compile-noproperties">
         <mkdir dir="${classes.dir}"/>
-        <javac target="1.6" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
-       <!-- Someone is using internal Sun/Oracle classes... -->
-       <compilerarg value="-XDignore.symbol.file" />
-    </javac>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
+            <!-- Someone is using internal Sun/Oracle classes... -->
+            <compilerarg value="-XDignore.symbol.file" />
+        </javac>
         <copy todir="${classes.dir}/simplenlg/lexicon">
             <fileset dir="${res.dir}" includes="default-lexicon.xml" />
         </copy>
@@ -91,7 +92,8 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     <!-- Check to see if the code compiles -->
     <target name="compile.test" depends="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac target="1.6" srcdir="${testsrc.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+        <javac srcdir="${testsrc.dir}" destdir="${classes.dir}" classpathref="classpath">
+        </javac>
     </target>
 
     <!-- Builds a SimpleNLG Library JAR and bundles third-party libraries -->
@@ -106,7 +108,7 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
             <fileset dir="${classes.dir}" includes="**/*.class" />
             <fileset dir="${src.dir}" includes="**/*.java" />
             <zipgroupfileset dir="${lib.dir}" includes="**/*.jar">
-	        <exclude name="lexAccess2013dis.jar"/>
+	        <exclude name="jaxb-impl.jar"/>
             </zipgroupfileset>
         </jar>
     </target>
@@ -189,7 +191,9 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
             </classpath>
             
             <jvmarg line="-Xmx512m"/>
-            
+        	<env key="LexDBPath" value="${lexicon.dir}/lexAccess2013.data"/>
+            <env key="TestFilePath" value="${testsrc.dir}/simplenlg/xmlrealiser/"/>      
+        	                        
             <formatter type="xml"/>
             
             <batchtest todir="${report.dir}">
@@ -201,8 +205,8 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
                         <exclude name="**/SimpleNLG4Test.*" />
                         <exclude name="**/StandAloneExample*" />
                         <exclude name="**/ClauseAggregationTest2*"/>
-                         <!-- XML Tests: Excluded as they require enviroment variables. -->
-                        <exclude name="**/Tester.*" /> 
+                	    <!-- XML Tests: Excluded as they require enviroment variables. -->
+                	    <!-- <exclude name="**/Tester.*" /> --> 
                 </fileset>
             </batchtest>
         </junit>

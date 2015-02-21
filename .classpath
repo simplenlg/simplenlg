@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="src" path="testsrc"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/junit-4.4.jar"/>
+	<classpathentry kind="lib" path="lib/lexAccess2013dist.jar"/>
+	<classpathentry kind="lib" path="lib/lexCheck2006api.jar"/>
+	<classpathentry kind="lib" path="lib/lvg2011api.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

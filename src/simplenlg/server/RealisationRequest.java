@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.Socket;
+import java.net.URLDecoder;
 
 import simplenlg.xmlrealiser.XMLRealiser;
 import simplenlg.xmlrealiser.XMLRealiserException;
@@ -85,9 +86,12 @@ public class RealisationRequest implements Runnable {
             } 
             
             // now convert the raw bytes to utf-8
-            String tmp = new String(data, "UTF-8");
-            StringReader reader = new StringReader(tmp);
-            
+            String tmp = URLDecoder.decode(new String(data, "UTF-8"), "UTF-8");
+            StringReader reader = new StringReader(tmp.trim());
+            if (DEBUG) {
+                String text = "Client sent the following data:";
+                System.out.println(text + "\n\t" + tmp);
+            }
             // get the realisation
             String result = doRealisation(reader).trim();
             
@@ -104,15 +108,6 @@ public class RealisationRequest implements Runnable {
                 System.out.println(text + "\n\t" + result);
             }
             
-        } catch (Exception e) {
-            e.printStackTrace();
-            try {
-                // attempt to send the error message to the client
-                byte[] tmp = ("Exception: " + e.getMessage()).getBytes("UTF-8");
-                output.writeInt(tmp.length);
-                output.write(tmp);
-            } catch (IOException e1) {
-            }
         } catch (XMLRealiserException e) {
             e.printStackTrace();
             try {
@@ -121,6 +116,17 @@ public class RealisationRequest implements Runnable {
                 output.writeInt(tmp.length);
                 output.write(tmp);
             } catch (IOException e1) {
+                e1.printStackTrace(System.err);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                // attempt to send the error message to the client
+                byte[] tmp = ("Exception: " + e.getMessage()).getBytes("UTF-8");
+                output.writeInt(tmp.length);
+                output.write(tmp);
+            } catch (IOException e1) {
+                e1.printStackTrace(System.err);
             }
         } finally {
             try {

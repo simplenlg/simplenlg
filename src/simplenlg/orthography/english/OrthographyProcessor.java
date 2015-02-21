@@ -296,8 +296,12 @@ public class OrthographyProcessor extends NLGModule {
 	 *            sentence is an interrogative, <code>false</code> otherwise.
 	 */
 	private void terminateSentence(StringBuffer realisation, boolean interrogative) {
+	    if (realisation.length() == 0) {
+	        return;
+	    }
 		char character = realisation.charAt(realisation.length() - 1);
-		if(character != '.' && character != '?') {
+		if(character != '.' && character != '?' &&
+		        character != ';' && character != '!') {
 			if(interrogative) {
 				realisation.append('?');
 			} else {
