@@ -918,11 +918,21 @@ public abstract class MorphologyRules {
 			if (determiner.getRealisation().equals("a")) { //$NON-NLS-1$
 
 				if (determiner.isPlural()) {
+					
 					determiner.setRealisation("some");
 
-				} else if (DeterminerAgrHelper.requiresAn(realisation)) {
+				}else if (DeterminerAgrHelper.requiresAn(realisation)) {
+				
 					determiner.setRealisation("an");
+				
 				}
+			}
+		
+//		if(determiner.getRealisation().equals("an") && !DeterminerAgrHelper.requiresAn(realisation)){
+//			
+//			determiner.setRealisation("a");
+//			
+//		}
 
 				// } else if (realisation.matches(MorphologyRules.AN_AGREEMENT)
 				// || realisation
@@ -931,7 +941,8 @@ public abstract class MorphologyRules {
 				// determiner.setRealisation("an");
 				// }
 				// }
-			}
+			//}
+
 		}
 	}
 
