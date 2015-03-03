@@ -17,7 +17,7 @@ Please note that earlier versions of SimpleNLG have different licensing, in part
 
 Getting started
 ---------------
-For information on how to use SimpleNLG, please see the tutorial and [API](https://cdn.rawgit.com/simplenlg/simplenlg/master/docs/javadoc/index.html).
+For information on how to use SimpleNLG, please see the [tutorial](https://github.com/simplenlg/simplenlg/wiki/Section-0-–-SimpleNLG-Tutorial) and [API](https://cdn.rawgit.com/simplenlg/simplenlg/master/docs/javadoc/index.html).
 
 If you have a technical question about using SimpleNLG, please check the SimpleNLG discussion list.
 
