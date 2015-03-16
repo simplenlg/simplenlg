@@ -68,26 +68,6 @@ public class XMLRealiserParameterizedTests {
 		assertEquals(failMessage, expectedResult, realisation.trim());
 	}
 
-	/**
-	 * Convert an XML string into a XmlDocumentElement
-	 * @param nlgSpec XML Request
-	 * @return XmlDocumentElement 
-	 */
-	public XmlDocumentElement readXMLRequest(String nlgSpec) {
-		StringReader reader = new StringReader(nlgSpec);
-		XmlDocumentElement doc = null;
-
-		try {
-			RequestType r = XMLRealiser.getRequest(reader);
-			doc = r.getDocument();
-		} catch (XMLRealiserException e) {
-			fail("Error parsing test xml: " + " " + e.getMessage());
-		} finally {
-			reader.close();
-		}
-		return doc;
-	}
-	
 	static Collection<Object[]> testRecordings(String recording) {
 		Collection<Object[]> tests = new ArrayList<Object[]>();
 		Object testElement[];
