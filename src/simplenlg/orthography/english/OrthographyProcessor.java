@@ -190,7 +190,10 @@ public class OrthographyProcessor extends NLGModule {
 							}
 						} else {
 							buffer.append(realise(postmod));
-							buffer.append(" ");
+							if(postmod instanceof ListElement
+									   || (postmod.getRealisation() != null && !postmod.getRealisation().equals(""))) {
+										buffer.append(" ");
+									}
 						}
 					}
 

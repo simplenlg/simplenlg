@@ -255,5 +255,60 @@ public class ExternalTests2 extends SimpleNLG4Test {
 
 	}
 	
+	/**
+	 * Tests that no empty space is added when a StringElement is instantiated with an empty string
+	 * or null object.
+	 */
+	@Test
+	public void testNullAndEmptyStringElement() {
+
+		NLGElement nullStringElement = this.phraseFactory.createStringElement(null);
+		NLGElement emptyStringElement = this.phraseFactory.createStringElement("");
+		NLGElement beautiful = this.phraseFactory.createStringElement("beautiful");
+		NLGElement horseLike = this.phraseFactory.createStringElement("horse-like");
+		NLGElement creature = this.phraseFactory.createStringElement("creature");
+
+		// Test1: null or empty at beginning
+		SPhraseSpec test1 = this.phraseFactory.createClause("a unicorn", "be", "regarded as a");
+		test1.addPostModifier(emptyStringElement);
+		test1.addPostModifier(beautiful);
+		test1.addPostModifier(horseLike);
+		test1.addPostModifier(creature);
+		System.out.println(realiser.realiseSentence(test1));
+		Assert.assertEquals("A unicorn is regarded as a beautiful horse-like creature.",
+		                    realiser.realiseSentence(test1));
+
+		// Test2: empty or null at end
+		SPhraseSpec test2 = this.phraseFactory.createClause("a unicorn", "be", "regarded as a");
+		test2.addPostModifier(beautiful);
+		test2.addPostModifier(horseLike);
+		test2.addPostModifier(creature);
+		test2.addPostModifier(nullStringElement);
+		System.out.println(realiser.realiseSentence(test2));
+		Assert.assertEquals("A unicorn is regarded as a beautiful horse-like creature.",
+		                    realiser.realiseSentence(test2));
+
+		// Test3: empty or null in the middle
+		SPhraseSpec test3 = this.phraseFactory.createClause("a unicorn", "be", "regarded as a");
+		test3.addPostModifier("beautiful");
+		test3.addPostModifier("horse-like");
+		test3.addPostModifier("");
+		test3.addPostModifier("creature");
+		System.out.println(realiser.realiseSentence(test3));
+		Assert.assertEquals("A unicorn is regarded as a beautiful horse-like creature.",
+		                    realiser.realiseSentence(test3));
+
+		// Test4: empty or null in the middle with empty or null at beginning
+		SPhraseSpec test4 = this.phraseFactory.createClause("a unicorn", "be", "regarded as a");
+		test4.addPostModifier("");
+		test4.addPostModifier("beautiful");
+		test4.addPostModifier("horse-like");
+		test4.addPostModifier(nullStringElement);
+		test4.addPostModifier("creature");
+		System.out.println(realiser.realiseSentence(test4));
+		Assert.assertEquals("A unicorn is regarded as a beautiful horse-like creature.",
+		                    realiser.realiseSentence(test4));
+
+	}
 	
 }
