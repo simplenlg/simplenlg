@@ -230,6 +230,7 @@ public class NIHDBLexicon extends Lexicon {
 	 * @param record
 	 * @return
 	 */
+	@SuppressWarnings("incomplete-switch")
 	private WordElement makeWord(LexRecord record) {
 		// get basic data
 		String baseForm = record.GetBase();		
@@ -337,7 +338,7 @@ public class NIHDBLexicon extends Lexicon {
 	 *            syntactic category
 	 * @return true if standard (regular) inflection
 	 */
-	@SuppressWarnings("unused")
+	@SuppressWarnings({ "unused", "incomplete-switch" })
 	private boolean standardInflections(LexRecord record,
 			LexicalCategory category) {
 		List<String> variants = null;
@@ -646,8 +647,7 @@ public class NIHDBLexicon extends Lexicon {
 	 * @param list
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	private boolean notEmpty(List list) {
+	private boolean notEmpty(List<?> list) {
 		return list != null && !list.isEmpty();
 	}
 

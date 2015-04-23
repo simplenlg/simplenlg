@@ -20,7 +20,6 @@
 package simplenlg.syntax.english;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import simplenlg.framework.DocumentElement;

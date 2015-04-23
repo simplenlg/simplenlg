@@ -1,6 +1,5 @@
 package simplenlg.morphology.english;
 
-import simplenlg.framework.StringElement;
 
 /**
  * This class is used to parse numbers that are passed as figures, to determine

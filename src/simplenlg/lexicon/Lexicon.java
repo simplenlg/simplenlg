@@ -231,8 +231,12 @@ public abstract class Lexicon {
 		// as an acronym only, it will be replaced as such. For example,
 		// "foo" will return as the acronym "FOO". This does not seem desirable.
 		// else return first element in list
-//		return wordElements.get(0);
-		return createWord(baseForm, LexicalCategory.ANY);
+		if(wordElements.get(0).getBaseForm().equalsIgnoreCase(baseForm)) {
+			return createWord(baseForm, LexicalCategory.ANY);
+		}
+		
+    	return wordElements.get(0);
+		
 	}
 
 	/**

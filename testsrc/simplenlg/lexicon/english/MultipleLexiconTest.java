@@ -18,6 +18,8 @@
  */
 package simplenlg.lexicon.english;
 
+import java.io.File;
+import java.io.FileReader;
 import java.util.Properties;
 
 import junit.framework.Assert;
@@ -39,8 +41,8 @@ import simplenlg.lexicon.XMLLexicon;
 public class MultipleLexiconTest {
 
 	// NIH, XML lexicon location
-	static String DB_FILENAME = "src/test/resources/lexAccess2011";
-	static String XML_FILENAME = "src/main/resources/default-lexicon.xml";
+	static String DB_FILENAME = "res/NIHLexicon/lexAccess2011.data";
+	static String XML_FILENAME = "res/default-lexicon.xml";
 	
 	// multi lexicon
 	MultipleLexicon lexicon;
@@ -50,8 +52,8 @@ public class MultipleLexiconTest {
 	public void setUp() throws Exception {
         try {
             Properties prop = new Properties();
-            prop.load(getClass().getClassLoader().
-                      getResourceAsStream("lexicon.properties"));
+            FileReader reader = new FileReader(new File("./res/lexicon.properties"));
+            prop.load(reader);
 
             String xmlFile = prop.getProperty("XML_FILENAME");
             String dbFile = prop.getProperty("DB_FILENAME");

@@ -19,7 +19,6 @@
 package simplenlg.morphology.english;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import simplenlg.features.DiscourseFunction;
@@ -34,8 +33,7 @@ import simplenlg.framework.ListElement;
 import simplenlg.framework.NLGElement;
 import simplenlg.framework.NLGModule;
 import simplenlg.framework.StringElement;
-import simplenlg.framework.WordElement;
-import simplenlg.phrasespec.NPPhraseSpec;
+import simplenlg.framework.WordElement; 
 
 /**
  * <p>

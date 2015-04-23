@@ -150,6 +150,7 @@ public class ClauseTest extends SimpleNLG4Test {
 	/**
 	 * Test did not
 	 */
+	@Test
 	public void testDidNot() {
 		PhraseElement s = phraseFactory.createClause("John", "eat");
 		s.setFeature(Feature.TENSE, Tense.PAST);
@@ -163,6 +164,7 @@ public class ClauseTest extends SimpleNLG4Test {
 	/**
 	 * Test did not
 	 */
+	@Test
 	public void testVPNegation() {
 		// negate the VP
 		PhraseElement vp = phraseFactory.createVerbPhrase("lie");
@@ -183,6 +185,7 @@ public class ClauseTest extends SimpleNLG4Test {
 	/**
 	 * Test that pronominal args are being correctly cast as NPs.
 	 */
+	@Test
 	public void testPronounArguments() {
 		// the subject of s2 should have been cast into a pronominal NP
 		NLGElement subj = this.s2.getFeatureAsElementList(
@@ -315,6 +318,7 @@ public class ClauseTest extends SimpleNLG4Test {
 	/**
 	 * Slightly more complex tests for forms.
 	 */
+	@Test
 	public void testForm2() {
 		// set s4 as subject of a new sentence
 		SPhraseSpec temp = this.phraseFactory.createClause(this.s4, "be", //$NON-NLS-1$
@@ -681,6 +685,7 @@ public class ClauseTest extends SimpleNLG4Test {
 	 * Test that complements set within the VP are raised when sentence is
 	 * passivised.
 	 */
+	@Test
 	public void testPassiveWithInternalVPComplement() {
 		PhraseElement vp = this.phraseFactory.createVerbPhrase(phraseFactory
 				.createWord("upset", LexicalCategory.VERB));
@@ -699,6 +704,7 @@ public class ClauseTest extends SimpleNLG4Test {
 	/**
 	 * Tests tenses with modals.
 	 */
+	@Test
 	public void testModal() {
 
 		setUp();

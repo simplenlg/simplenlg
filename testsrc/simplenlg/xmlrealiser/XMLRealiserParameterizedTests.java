@@ -14,7 +14,6 @@ import org.junit.runners.Parameterized.Parameters;
 import simplenlg.xmlrealiser.XMLRealiser.LexiconType;
 import simplenlg.xmlrealiser.wrapper.DocumentRealisation;
 import simplenlg.xmlrealiser.wrapper.RecordSet;
-import simplenlg.xmlrealiser.wrapper.RequestType;
 import simplenlg.xmlrealiser.wrapper.XmlDocumentElement;
 
 @RunWith(Parameterized.class)
@@ -22,7 +21,7 @@ public class XMLRealiserParameterizedTests {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		String lexDB = "D:\\dev\\workspaces\\simplenlgGoogleCode\\lexAccess2013\\lexAccess2013.data";
+		String lexDB = "res/NIHLexicon/lexAccess2011.data";
 		LexiconType lexType = LexiconType.NIHDB; // Some tests require this.
 		XMLRealiser.setLexicon(lexType, lexDB);
 	}

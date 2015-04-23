@@ -21,6 +21,8 @@ package simplenlg.server;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -65,7 +67,7 @@ public class SimpleServer implements Runnable {
      * will be searched for the lexicon file. Otherwise, the path below will
      * be used.
      */
-    String lexiconPath = "/tmp/lexAccess2011lite/data/HSqlDb/lexAccess2011.data";
+    String lexiconPath = "res/NIHLexicon/lexAccess2011.data";
 
     // control the run loop
     private boolean isActive = true;
@@ -108,8 +110,8 @@ public class SimpleServer implements Runnable {
         // try to read the lexicon path from lexicon.properties file
         try {
             Properties prop = new Properties();
-            prop.load(getClass().getClassLoader().
-                      getResourceAsStream("lexicon.properties"));
+            FileReader reader = new FileReader(new File("./res/lexicon.properties"));
+            prop.load(reader);
             
             String dbFile = prop.getProperty("DB_FILENAME");
             
