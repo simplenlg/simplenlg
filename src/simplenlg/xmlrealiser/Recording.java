@@ -42,8 +42,6 @@ import simplenlg.xmlrealiser.wrapper.DocumentRealisation;
 import simplenlg.xmlrealiser.wrapper.NLGSpec;
 import simplenlg.xmlrealiser.wrapper.RecordSet;
 
-import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
-
 /**
  * A recording is a utility class that holds xml objects for testing the
  * xmlrealiser.
@@ -189,15 +187,6 @@ public class Recording {
 				.newInstance(simplenlg.xmlrealiser.wrapper.NLGSpec.class);
 		Marshaller m = jc.createMarshaller();
 
-		// For the meaning of the next property, see the
-		// Java Architecture for XML Binding JAXB RI Vendor Extensions Runtime
-		// Properties
-		// It was added so that the namespace declarations would be at the top
-		// of the file, once,
-		// instead of on the elements.
-		m.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper",
-				new RecordingNamespacePrefixMapper());
-
 		NLGSpec nlg = new NLGSpec();
 		nlg.setRecording(record);
 
@@ -216,27 +205,5 @@ public class Recording {
 					"{http://xml.apache.org/xslt}indent-amount", "2");
 			transformer.transform(xmlInput, xmlOutput);
 		}
-	}
-}
-
-/**
- * Coerces the JAXB marshaller to declare the "xsi" and "xsd" namespaces at the
- * root element instead of putting them inline on each element that uses one of
- * the namespaces.
- */
-class RecordingNamespacePrefixMapper extends NamespacePrefixMapper {
-
-	@Override
-	public String getPreferredPrefix(String namespaceUri, String suggestion,
-			boolean requirePrefix) {
-		return suggestion;
-	}
-
-	@Override
-	public String[] getPreDeclaredNamespaceUris2() {
-		return new String[] { "xsi",
-				"http://www.w3.org/2001/XMLSchema-instance", "xsd",
-				"http://www.w3.org/2001/XMLSchema" };
-
 	}
 }
