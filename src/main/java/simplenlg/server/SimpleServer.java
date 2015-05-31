@@ -67,7 +67,7 @@ public class SimpleServer implements Runnable {
      * will be searched for the lexicon file. Otherwise, the path below will
      * be used.
      */
-    String lexiconPath = "res/NIHLexicon/lexAccess2011.data";
+    String lexiconPath = "src/main/resources/NIHLexicon/lexAccess2011.data";
 
     // control the run loop
     private boolean isActive = true;
@@ -110,7 +110,7 @@ public class SimpleServer implements Runnable {
         // try to read the lexicon path from lexicon.properties file
         try {
             Properties prop = new Properties();
-            FileReader reader = new FileReader(new File("./res/lexicon.properties"));
+            FileReader reader = new FileReader(new File("./src/main/resources/lexicon.properties"));
             prop.load(reader);
             
             String dbFile = prop.getProperty("DB_FILENAME");

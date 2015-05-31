@@ -23,9 +23,9 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
         <javac includeantruntime="false" />
     </presetdef>
     
-    <property name="src.dir"     value="src"/>
-    <property name="testsrc.dir" value="testsrc"/>
-    <property name="res.dir"     value="res" />
+    <property name="src.dir"     value="src/main/java"/>
+    <property name="testsrc.dir" value="src/test/java"/>
+    <property name="res.dir"     value="src/test/resources" />
     
 
     <property name="build.dir"   value="build"/>
@@ -51,7 +51,6 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     <path id="classpath">
         <pathelement path="${lib.dir}/junit-4.4.jar" />
         <pathelement path="${lib.dir}/lexAccess2011dist.jar" />
-        <pathelement path="${lib.dir}/lexCheck2006api.jar" />
         <pathelement path="${lib.dir}/lvg2011api.jar" />
     </path>
     
@@ -126,6 +125,9 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
 
     <!-- Runs the SimpleNLG SimpleServer -->
     <target name="run" depends="jar">
+      <unzip src="${lexicon.dir}/lexAccess2011.data.zip" dest="${lexicon.dir}" />
+	  <echo message="**** Starting the SimpleNLG Simple Server"/>
+	  <echo message="**** Waiting for clients. Type 'exit' and press enter to quit. "/>
         <java fork="true" classname="${main-class}">
             <classpath>
                 <path refid="classpath"/>
@@ -133,6 +135,7 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
             </classpath>
             <jvmarg line="-Xmx512m"/>
         </java>
+	<delete file="${lexicon.dir}/lexAccess2011.data" />
     </target>
 
     <!-- Standard JUnit that excludes test that require platform 

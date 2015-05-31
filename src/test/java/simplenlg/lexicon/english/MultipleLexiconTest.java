@@ -41,8 +41,8 @@ import simplenlg.lexicon.XMLLexicon;
 public class MultipleLexiconTest {
 
 	// NIH, XML lexicon location
-	static String DB_FILENAME = "res/NIHLexicon/lexAccess2011.data";
-	static String XML_FILENAME = "res/default-lexicon.xml";
+	static String DB_FILENAME = "src/test/resources/NIHLexicon/lexAccess2011.data";
+	static String XML_FILENAME = "src/main/resources/default-lexicon.xml";
 	
 	// multi lexicon
 	MultipleLexicon lexicon;
@@ -52,7 +52,7 @@ public class MultipleLexiconTest {
 	public void setUp() throws Exception {
         try {
             Properties prop = new Properties();
-            FileReader reader = new FileReader(new File("./res/lexicon.properties"));
+            FileReader reader = new FileReader(new File("./src/main/resources/lexicon.properties"));
             prop.load(reader);
 
             String xmlFile = prop.getProperty("XML_FILENAME");

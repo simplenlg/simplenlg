@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+  
+	
+	<groupId>abdn</groupId>
+	<artifactId>SimpleNLG</artifactId>
+	<version>4.4.7-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
+  	<name>SimpleNLG</name>
+  	<url>https://github.com/simplenlg/simplenlg</url>
+  
+  	<properties>
+    	 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	</properties>
+  
+	<dependencies>
+  		<dependency>
+    		<groupId>junit</groupId>
+     		<artifactId>junit</artifactId>
+			<version>4.4</version>
+        	<scope>system</scope>
+			<systemPath>${basedir}/lib/junit-4.4.jar</systemPath>
+		</dependency>
+  		<dependency>
+   			<groupId>gov.nih.nlm.nls.lexAccess.Api</groupId>
+    		<artifactId>LexAccess2011dist</artifactId>
+    		<version>0.0.1</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/lexAccess2011dist.jar</systemPath>
+  		</dependency>
+		<dependency>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-antrun-plugin</artifactId>
+		      <version>1.8</version>
+		</dependency>    
+		
+	</dependencies>
+  	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+			    <executions>
+			    	<execution>
+						<id>unzip</id>
+			        	<phase>process-test-resources</phase>
+			            <configuration>
+			            	<tasks>
+								<echo message="**** Unziping NIH Lexicon..."/>
+								<unzip src="${basedir}/src/test/resources/NIHLexicon/lexAccess2011.data.zip" dest="${basedir}/src/test/resources/NIHLexicon/" overwrite="true"/>
+			                    </tasks>
+			                </configuration>
+				            <goals>
+				            	<goal>run</goal>
+				            </goals>
+			            </execution>
+				    	<execution>
+							<id>delete</id>
+				        	<phase>clean</phase>
+				            <configuration>
+				            	<tasks>
+									<echo message="**** Deleting NIH Lexicon..."/>
+									<delete file="${basedir}/src/test/resources/NIHLexicon/lexAccess2011.data"/>
+				                    </tasks>
+				                </configuration>
+					            <goals>
+					            	<goal>run</goal>
+					            </goals>
+				            </execution>
+			        </executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	
+
+</project>
