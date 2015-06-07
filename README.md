@@ -1,7 +1,7 @@
 SimpleNLG
 =========
 
-SimpleNLG is a simple Java API designed to facilitate the generation of Natural Language. It was originally developed at the [University of Aberdeen's Department of Computing Science](http://www.abdn.ac.uk/ncs/departments/computing-science/index.php).
+SimpleNLG is a simple Java API designed to facilitate the generation of Natural Language. It was originally developed at the [University of Aberdeen's Department of Computing Science](http://www.abdn.ac.uk/ncs/departments/computing-science/index.php). The [discussion list for SimpleNLG is on Google Groups](https://groups.google.com/forum/#!forum/simplenlg).
 
 SimpleNLG is intended to function as a "[realisation engine](http://en.wikipedia.org/wiki/Realization_(linguistics))" for [Natural Language Generation](http://en.wikipedia.org/wiki/Natural_language_generation) architectures, and has been used successfully in a number of projects, both academic and commercial. It handles the following:
 
