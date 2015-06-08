@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/simplenlg/simplenlg.svg?branch=master)](https://travis-ci.org/simplenlg/simplenlg)
+
+
 SimpleNLG
 =========
 
