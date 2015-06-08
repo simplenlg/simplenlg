@@ -91,7 +91,8 @@ MOZILLA PUBLIC LICENSE  Version 1.1
      The Initial Developer hereby grants You a world-wide, royalty-free,
      non-exclusive license, subject to third party intellectual property
      claims:
-          (a)  under intellectual property rights (other than patent or
+          
+		  (a)  under intellectual property rights (other than patent or
           trademark) Licensable by Initial Developer to use, reproduce,
           modify, display, perform, sublicense and distribute the Original
           Code (or portions thereof) with or without Modifications, and/or
@@ -185,7 +186,8 @@ MOZILLA PUBLIC LICENSE  Version 1.1
      origin or ownership of the Covered Code.
 
      3.4. Intellectual Property Matters
-          (a) Third Party Claims.
+          
+		  (a) Third Party Claims.
           If Contributor has knowledge that a license under a third party's
           intellectual property rights is required to exercise the rights
           granted by such Contributor under Sections 2.1 or 2.2,
@@ -456,4 +458,4 @@ EXHIBIT A -Mozilla Public License.
      Portions created by Dave Westwater, Albert Gatt, and Ehud Reiter are Copyright (C) 2010-11
      The University of Aberdeen. All Rights Reserved.
 
-     Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad                      Mahamood.
+     Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
