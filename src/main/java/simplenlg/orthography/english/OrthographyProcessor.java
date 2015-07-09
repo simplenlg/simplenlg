@@ -263,6 +263,7 @@ public class OrthographyProcessor extends NLGModule {
 
 			if(realisation != null) {
 				realisation = realisation.replaceAll(" ,", ",");
+				realisation = realisation.replaceAll(",,+", ",");
 				realisedElement.setRealisation(realisation);
 			}
 
