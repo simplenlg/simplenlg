@@ -56,7 +56,7 @@ public class ClauseTest extends SimpleNLG4Test {
 
 	/**
 	 * Instantiates a new s test.
-	 * 
+	 *
 	 * @param name
 	 *            the name
 	 */
@@ -66,7 +66,7 @@ public class ClauseTest extends SimpleNLG4Test {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see simplenlg.test.SimplenlgTest#setUp()
 	 */
 	@Override
@@ -74,7 +74,7 @@ public class ClauseTest extends SimpleNLG4Test {
 	protected void setUp() {
 		super.setUp();
 
-		// the woman kissed the man behind the curtain
+		// the woman kisses the man
 		this.s1 = this.phraseFactory.createClause();
 		this.s1.setSubject(this.woman);
 		this.s1.setVerbPhrase(this.kiss);
@@ -116,17 +116,17 @@ public class ClauseTest extends SimpleNLG4Test {
 		this.s4.addPostModifier("in the shop"); //$NON-NLS-1$
 		this.s4.setFeature(Feature.TENSE, Tense.FUTURE);
 	}
-	
+
 	@After
 	public void tearDown() {
 		super.tearDown();
-		
-		this.s1 = null; 
+
+		this.s1 = null;
 		this.s2 = null;
 		this.s3 = null;
 		this.s4 = null;
 	}
-	
+
 
 	/**
 	 * Initial test for basic sentences.
@@ -251,7 +251,7 @@ public class ClauseTest extends SimpleNLG4Test {
 	 * Test the various forms of a sentence, including subordinates.
 	 */
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testForm() {
@@ -817,7 +817,7 @@ public class ClauseTest extends SimpleNLG4Test {
 				"surfers are carried to the shore by waves", this.realiser //$NON-NLS-1$
 						.realise(_s1).getRealisation());
 	}
-	
+
 	@Test
 	public void testCuePhrase() {
 		NPPhraseSpec subject = this.phraseFactory.createNounPhrase("wave");
@@ -834,15 +834,15 @@ public class ClauseTest extends SimpleNLG4Test {
 		_s1.addPostModifier(pp);
 
 		_s1.setFeature(Feature.PASSIVE, true);
-		
+
 		_s1.addFrontModifier("however");
-		
-		
+
+
 		//without comma separation of cue phrase
 		Assert.assertEquals(
 				"however surfers are carried to the shore by waves", this.realiser //$NON-NLS-1$
 						.realise(_s1).getRealisation());
-		
+
 		//with comma separation
 		this.realiser.setCommaSepCuephrase(true);
 		Assert.assertEquals(
