@@ -174,8 +174,7 @@ abstract class NounPhraseHelper {
 		if (specifierElement != null
 				&& !phrase.getFeatureAsBoolean(InternalFeature.RAISED)
 						.booleanValue() && !phrase.getFeatureAsBoolean(Feature.ELIDED).booleanValue()) {
-
-			if (!specifierElement.isA(LexicalCategory.PRONOUN)) {
+			if (!specifierElement.isA(LexicalCategory.PRONOUN) && specifierElement.getCategory() != PhraseCategory.NOUN_PHRASE) {
 				specifierElement.setFeature(Feature.NUMBER, phrase
 						.getFeature(Feature.NUMBER));
 			}
