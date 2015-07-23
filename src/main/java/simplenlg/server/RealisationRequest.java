@@ -55,7 +55,6 @@ public class RealisationRequest implements Runnable {
         this.socket = s;
     }
     
-    @Override
     public void run() {
         if (null == socket)
             return;
@@ -132,7 +131,7 @@ public class RealisationRequest implements Runnable {
         }
     }
 
-    String doRealisation(Reader inputReader) throws XMLRealiserException {
+    protected String doRealisation(Reader inputReader) throws XMLRealiserException {
         simplenlg.xmlrealiser.wrapper.RequestType request =
                 XMLRealiser.getRequest(inputReader);
         String output = XMLRealiser.realise(request.getDocument());

@@ -34,9 +34,8 @@ import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.PPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.features.Feature;
-import simplenlg.features.NumberAgreement;
 
-public class OrthographyFormatTests extends SimpleNLG4Test {
+public class OrthographyFormatTest extends SimpleNLG4Test {
 
 	private DocumentElement list1, list2;
 	private DocumentElement listItem1, listItem2, listItem3;
@@ -45,7 +44,7 @@ public class OrthographyFormatTests extends SimpleNLG4Test {
 	private String list2Realisation = new StringBuffer("* on the rock")
 			.append("\n* ").append(list1Realisation).append("\n").toString();
 
-	public OrthographyFormatTests(String name) {
+	public OrthographyFormatTest(String name) {
 		super(name);
 	}
 

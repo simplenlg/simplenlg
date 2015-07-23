@@ -44,7 +44,7 @@ public class SyntaxTests {
 		suite.addTestSuite(FPTest.class);
 		suite.addTestSuite(InterrogativeTest.class);
 		suite.addTestSuite(NounPhraseTest.class);
-		suite.addTestSuite(OrthographyFormatTests.class);
+		suite.addTestSuite(OrthographyFormatTest.class);
 		suite.addTestSuite(PhraseSpecTest.class);
 		suite.addTestSuite(PrepositionalPhraseTest.class);
 		suite.addTestSuite(StringElementTests.class);
