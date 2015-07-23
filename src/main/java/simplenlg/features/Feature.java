@@ -205,7 +205,7 @@ abstract public class Feature {
 	 * </tr>
 	 * </table>
 	 */
-	public static String COMPLEMENTISER = "complementiser";
+	public static final String COMPLEMENTISER = "complementiser";
 
 	/**
 	 * <p>

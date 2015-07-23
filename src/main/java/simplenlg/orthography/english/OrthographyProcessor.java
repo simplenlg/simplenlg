@@ -166,8 +166,20 @@ public class OrthographyProcessor extends NLGModule {
 				StringBuffer buffer = new StringBuffer();
 
 				if(DiscourseFunction.PRE_MODIFIER.equals(function)) {
-					realiseList(buffer, element.getChildren(), this.commaSepPremodifiers ? "," : "");
 
+					boolean all_appositives = true;
+					for(NLGElement child : element.getChildren()){
+						all_appositives = all_appositives && child.getFeatureAsBoolean(Feature.APPOSITIVE);
+					}
+
+					// TODO: unless this is the end of the sentence
+					if(all_appositives){
+						buffer.append(", ");
+					}
+					realiseList(buffer, element.getChildren(), this.commaSepPremodifiers ? "," : "");
+					if(all_appositives){
+						buffer.append(", ");
+					}
 				} else if(DiscourseFunction.POST_MODIFIER.equals(function)) {// &&
 					                                                         // appositive)
 					                                                         // {
@@ -197,6 +209,10 @@ public class OrthographyProcessor extends NLGModule {
 						}
 					}
 
+				} else if((DiscourseFunction.CUE_PHRASE.equals(function) || DiscourseFunction.FRONT_MODIFIER.equals(function))
+			   && this.commaSepCuephrase){
+					realiseList(buffer, element.getChildren(), this.commaSepCuephrase ? "," : "");
+
 				} else {
 					realiseList(buffer, element.getChildren(), "");
 				}
@@ -206,7 +222,6 @@ public class OrthographyProcessor extends NLGModule {
 
 			} else if(element instanceof CoordinatedPhraseElement) {
 				realisedElement = realiseCoordinatedPhrase(element.getChildren());
-
 			} else {
 				realisedElement = element;
 			}
@@ -248,6 +263,7 @@ public class OrthographyProcessor extends NLGModule {
 
 			if(realisation != null) {
 				realisation = realisation.replaceAll(" ,", ",");
+				realisation = realisation.replaceAll(",,+", ",");
 				realisedElement.setRealisation(realisation);
 			}
 
@@ -272,6 +288,7 @@ public class OrthographyProcessor extends NLGModule {
 			StringBuffer realisation = new StringBuffer();
 			realiseList(realisation, components, "");
 
+			stripLeadingCommas(realisation);
 			capitaliseFirstLetter(realisation);
 			terminateSentence(realisation, element.getFeatureAsBoolean(InternalFeature.INTERROGATIVE).booleanValue());
 
@@ -305,6 +322,23 @@ public class OrthographyProcessor extends NLGModule {
 			}
 		}
 	}
+
+	/**
+	 * Remove recursively any leading spaces or commas at the start 
+	 * of a sentence.
+	 * 
+	 * @param realisation
+	 *            the <code>StringBuffer<code> containing the current 
+	 * realisation of the sentence.
+	 */
+	private void stripLeadingCommas(StringBuffer realisation) {
+		char character = realisation.charAt(0);
+		if(character == ' ' || character == ',') {
+			realisation.deleteCharAt(0);
+			stripLeadingCommas(realisation);
+		}
+	}
+
 
 	/**
 	 * Capitalises the first character of a sentence if it is a lower case

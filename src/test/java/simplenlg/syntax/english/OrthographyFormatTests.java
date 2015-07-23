@@ -30,6 +30,11 @@ import org.junit.Test;
 import simplenlg.format.english.TextFormatter;
 import simplenlg.framework.DocumentElement;
 import simplenlg.framework.NLGElement;
+import simplenlg.phrasespec.NPPhraseSpec;
+import simplenlg.phrasespec.PPPhraseSpec;
+import simplenlg.phrasespec.SPhraseSpec;
+import simplenlg.features.Feature;
+import simplenlg.features.NumberAgreement;
 
 public class OrthographyFormatTests extends SimpleNLG4Test {
 
@@ -96,5 +101,106 @@ public class OrthographyFormatTests extends SimpleNLG4Test {
 		NLGElement realised = this.realiser.realise(this.list2);
 		Assert.assertEquals(this.list2Realisation, realised.getRealisation());
 	}
+
+	/**
+	 * Test the realisation of appositive pre-modifiers with commas around them.
+	 */
+	@Test
+	public void testAppositivePreModifiers() {
+		NPPhraseSpec subject = this.phraseFactory.createNounPhrase("I");
+		NPPhraseSpec object = this.phraseFactory.createNounPhrase("a bag");
+
+		SPhraseSpec _s1 = this.phraseFactory.createClause(subject,
+				"carry", object);
+
+		// add a PP complement
+		PPPhraseSpec pp = this.phraseFactory.createPrepositionPhrase("on",
+				this.phraseFactory.createNounPhrase("most", "Tuesdays"));
+		_s1.addPreModifier(pp);
+		
+		//without appositive feature on pp
+		Assert.assertEquals(
+				"I on most Tuesdays carry a bag", this.realiser
+						.realise(_s1).getRealisation());
+		
+		//with appositive feature
+		pp.setFeature(Feature.APPOSITIVE, true);
+		Assert.assertEquals(
+				"I, on most Tuesdays, carry a bag", this.realiser
+						.realise(_s1).getRealisation());
+	}
+
+
+	/**
+	 * Test the realisation of appositive pre-modifiers with commas around them.
+	 */
+	@Test
+	public void testCommaSeparatedFrontModifiers() {
+		NPPhraseSpec subject = this.phraseFactory.createNounPhrase("I");
+		NPPhraseSpec object = this.phraseFactory.createNounPhrase("a bag");
+
+		SPhraseSpec _s1 = this.phraseFactory.createClause(subject,
+				"carry", object);
+
+		// add a PP complement
+		PPPhraseSpec pp1 = this.phraseFactory.createPrepositionPhrase("on",
+				this.phraseFactory.createNounPhrase("most", "Tuesdays"));
+		_s1.addFrontModifier(pp1);
+
+		PPPhraseSpec pp2 = this.phraseFactory.createPrepositionPhrase("since",
+				this.phraseFactory.createNounPhrase("1991"));
+		_s1.addFrontModifier(pp2);
+		pp1.setFeature(Feature.APPOSITIVE, true);
+		pp2.setFeature(Feature.APPOSITIVE, true);
+
+		//without setCommaSepCuephrase
+		Assert.assertEquals(
+				"on most Tuesdays since 1991 I carry a bag", this.realiser
+						.realise(_s1).getRealisation());
+		
+		//with setCommaSepCuephrase
+		this.realiser.setCommaSepCuephrase(true);
+		Assert.assertEquals(
+				"on most Tuesdays, since 1991, I carry a bag", this.realiser
+						.realise(_s1).getRealisation());
+	}
+
+	/**
+	 * Ensure we don't end up with doubled commas.
+	 */
+	@Test
+	public void testNoDoubledCommas() {
+		NPPhraseSpec subject = this.phraseFactory.createNounPhrase("I");
+		NPPhraseSpec object = this.phraseFactory.createNounPhrase("a bag");
+
+		SPhraseSpec _s1 = this.phraseFactory.createClause(subject,
+				"carry", object);
+
+		PPPhraseSpec pp1 = this.phraseFactory.createPrepositionPhrase("on",
+				this.phraseFactory.createNounPhrase("most", "Tuesdays"));
+		_s1.addFrontModifier(pp1);
+
+		PPPhraseSpec pp2 = this.phraseFactory.createPrepositionPhrase("since",
+				this.phraseFactory.createNounPhrase("1991"));
+		PPPhraseSpec pp3 = this.phraseFactory.createPrepositionPhrase("except",
+				this.phraseFactory.createNounPhrase("yesterday"));
+
+		pp2.setFeature(Feature.APPOSITIVE, true);
+		pp3.setFeature(Feature.APPOSITIVE, true);
+
+		pp1.addPostModifier(pp2);
+		pp1.addPostModifier(pp3);
+
+		this.realiser.setCommaSepCuephrase(true);
+		
+		Assert.assertEquals(
+				"on most Tuesdays, since 1991, except yesterday, I carry a bag", this.realiser
+						.realise(_s1).getRealisation());
+		// without my fix (that we're testing here), you'd end up with 
+		// "on most Tuesdays, since 1991,, except yesterday, I carry a bag"
+	}
+
+// <[on most Tuesdays, since 1991, except yesterday, ]I carry a bag> but was:<[]I carry a bag>
+
 
 }
