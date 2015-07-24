@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import simplenlg.features.DiscourseFunction;
 import simplenlg.features.Feature;
+import simplenlg.features.Tense;
 import simplenlg.features.Gender;
 import simplenlg.features.InternalFeature;
 import simplenlg.features.LexicalFeature;
@@ -566,7 +567,41 @@ public class NounPhraseTest extends SimpleNLG4Test {
 				cat).getRealisation());
 
 	}
-	
+	 @Test
+  public void testPluralNounsBelongingToASingular() {
+
+    SPhraseSpec sent = this.phraseFactory.createClause("I", "count up");
+    sent.setFeature(Feature.TENSE, Tense.PAST);
+    NPPhraseSpec obj = this.phraseFactory.createNounPhrase("digit"); 
+    obj.setPlural(true);
+    NPPhraseSpec possessor = this.phraseFactory.createNounPhrase("the", "box");
+    possessor.setPlural(false);
+    possessor.setFeature(Feature.POSSESSIVE, true);
+    obj.setSpecifier(possessor);
+    sent.setObject(obj);
+
+    Assert.assertEquals("I counted up the box's digits", this.realiser.realise(sent) //$NON-NLS-1$
+        .getRealisation());
+  }
+
+
+	 @Test
+  public void testSingularNounsBelongingToAPlural() {
+
+    SPhraseSpec sent = this.phraseFactory.createClause("I", "clean");
+    sent.setFeature(Feature.TENSE, Tense.PAST);
+    NPPhraseSpec obj = this.phraseFactory.createNounPhrase("car"); 
+    obj.setPlural(false);
+    NPPhraseSpec possessor = this.phraseFactory.createNounPhrase("the", "parent");
+    possessor.setPlural(true);
+    possessor.setFeature(Feature.POSSESSIVE, true);
+    obj.setSpecifier(possessor);
+    sent.setObject(obj);
+
+    Assert.assertEquals("I cleaned the parents' car", this.realiser.realise(sent) //$NON-NLS-1$
+        .getRealisation());
+  }
+
 	/**
 	 * Test for appositive postmodifiers
 	 */
