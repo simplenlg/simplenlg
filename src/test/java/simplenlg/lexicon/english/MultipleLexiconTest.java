@@ -73,16 +73,16 @@ public class MultipleLexiconTest {
 	}
 
 	@Test
-	public void testBasics() {
-		SharedLexiconTests.doBasicTests(lexicon);
+	public void basicLexiconTests() {
+		SharedLexiconTests tests = new SharedLexiconTests();
+		tests.doBasicTests(lexicon);
 	}
 	
 	@Test
-	public void testMultipleSpecifics() {
+	public void multipleSpecificsTests() {
 		// try to get word which is only in NIH lexicon
 		WordElement UK = lexicon.getWord("UK");
-		// Saad Mahamood: Removed this test as UK Acyromn doesn't just return United Kingdom in 2011 NIH lexicon:
-		//Assert.assertEquals("United Kingdom", UK.getFeatureAsString(LexicalFeature.ACRONYM_OF));
+		
 		Assert.assertEquals(true, UK.getFeatureAsString(LexicalFeature.ACRONYM_OF).contains("United Kingdom"));
 
 		// test alwaysSearchAll flag

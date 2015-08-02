@@ -41,7 +41,8 @@ import simplenlg.realiser.english.Realiser;
  * @author Dave Westwater, Data2Text Ltd
  *
  */
-@Ignore public class StandAloneExample {
+@Ignore 
+public class StandAloneExample {
 
 	/**
 	 * @param args

@@ -20,6 +20,7 @@
 package simplenlg.syntax.english;
 
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import junit.framework.Assert;
@@ -29,9 +30,10 @@ import simplenlg.phrasespec.SPhraseSpec;
 /**
  * Tests for elision of phrases and words
  */
-public class ElisionTests extends SimpleNLG4Test {
+@Ignore
+public class ElisionTest extends SimpleNLG4Test {
 
-	public ElisionTests(String name) {
+	public ElisionTest(String name) {
 		super(name);
 	}
 	
@@ -72,7 +74,7 @@ public class ElisionTests extends SimpleNLG4Test {
      * Test for elision of specific words rather than phrases
      */
 	@Test
-    public void testWordElision() {
+    public void wordElisionTest() {
             this.realiser.setDebugMode(true);
             SPhraseSpec s1 = this.phraseFactory.createClause();
             s1.setSubject(this.np4); //the rock

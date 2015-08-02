@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Properties;
 
 import junit.framework.Assert;
-import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -51,7 +50,7 @@ import simplenlg.realiser.english.Realiser;
  * @author bertugatt
  * 
  */
-public class LexicalVariantsTests extends TestCase {
+public class LexicalVariantsTest {
 
 	// lexicon object -- an instance of Lexicon
 	Lexicon lexicon = null;
@@ -65,7 +64,6 @@ public class LexicalVariantsTests extends TestCase {
 	// DB location -- change this to point to the lex access data dir
 	static String DB_FILENAME = "src/test/resources/NIHLexicon/lexAccess2011.data";
 
-	@Override
 	@Before
 	/*
 	 * * Sets up the accessor and runs it -- takes ca. 26 sec
@@ -101,10 +99,8 @@ public class LexicalVariantsTests extends TestCase {
 	/**
 	 * Close the lexicon
 	 */
-	@Override
 	@After
 	public void tearDown() throws Exception {
-		super.tearDown();
 
 		if (lexicon != null)
 			lexicon.close();
@@ -114,7 +110,7 @@ public class LexicalVariantsTests extends TestCase {
 	 * check that spelling variants are properly set
 	 */
 	@Test
-	public void testSpellingVariants() {
+	public void spellingVariantsTest() {
 		WordElement asd = lexicon.getWord("Adams-Stokes disease");
 		List<String> spellVars = asd
 				.getFeatureAsStringList(LexicalFeature.SPELL_VARS);
@@ -138,7 +134,7 @@ public class LexicalVariantsTests extends TestCase {
 	 * Test spelling/orthographic variants with different inflections
 	 */
 	@Test
-	public void testSpellingVariantWithInflection() {
+	public void spellingVariantWithInflectionTest() {
 		WordElement word = lexicon.getWord("formalization");
 		List<String> spellVars = word
 				.getFeatureAsStringList(LexicalFeature.SPELL_VARS);
@@ -162,7 +158,7 @@ public class LexicalVariantsTests extends TestCase {
 	 * Test the inflectional variants for a verb.
 	 */
 	@Test
-	public void testVerbInflectionalVariants() {
+	public void verbInflectionalVariantsTest() {
 		WordElement word = lexicon.getWord("lie", LexicalCategory.VERB);
 		Assert.assertEquals(Inflection.REGULAR, word
 				.getDefaultInflectionalVariant());
@@ -193,7 +189,7 @@ public class LexicalVariantsTests extends TestCase {
 	 * Test inflectional variants for nouns
 	 */
 	@Test
-	public void testNounInflectionalVariants() {
+	public void nounInflectionalVariantsTest() {
 		WordElement word = lexicon.getWord("sanctum", LexicalCategory.NOUN);
 		Assert.assertEquals(Inflection.REGULAR, word
 				.getDefaultInflectionalVariant());
@@ -224,7 +220,7 @@ public class LexicalVariantsTests extends TestCase {
 	 * Check that spelling variants are preserved during realisation of NPs
 	 */
 	@Test
-	public void testSpellingVariantsInNP() {
+	public void spellingVariantsInNPTest() {
 		WordElement asd = lexicon.getWord("Adams-Stokes disease");
 		Assert.assertEquals("Adams-Stokes disease", asd
 				.getDefaultSpellingVariant());
@@ -255,7 +251,7 @@ public class LexicalVariantsTests extends TestCase {
 	 * Check that spelling variants are preserved during realisation of VPs
 	 */
 	@Test
-	public void testSpellingVariantsInVP() {
+	public void spellingVariantsInVPTest() {
 		WordElement eth = (WordElement) factory.createWord("etherise",
 				LexicalCategory.VERB);
 		Assert.assertEquals("etherize", eth.getDefaultSpellingVariant());
@@ -270,7 +266,7 @@ public class LexicalVariantsTests extends TestCase {
 	 * Test the difference between an uncount and a count noun
 	 */
 	@Test
-	public void testUncountInflectionalVariant() {
+	public void uncountInflectionalVariantTest() {
 		WordElement calc = (WordElement) factory.createWord("calcification", LexicalCategory.NOUN);
 		NPPhraseSpec theCalc = this.factory.createNounPhrase("the", calc);
 		theCalc.setFeature(Feature.NUMBER, NumberAgreement.PLURAL);

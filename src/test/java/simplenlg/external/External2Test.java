@@ -16,10 +16,11 @@
  *
  * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
  */
-package simplenlg.syntax.english;
+package simplenlg.external;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import simplenlg.features.Feature;
@@ -28,28 +29,37 @@ import simplenlg.features.Tense;
 import simplenlg.framework.CoordinatedPhraseElement;
 import simplenlg.framework.LexicalCategory;
 import simplenlg.framework.NLGElement;
+import simplenlg.framework.NLGFactory;
+import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.AdvPhraseSpec;
 import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.phrasespec.VPPhraseSpec;
-
+import simplenlg.realiser.english.Realiser;
 /**
  * Further tests from third parties
  * 
  * @author Albert Gatt, University of Malta and University of Aberdeen
  * 
  */
-public class ExternalTests2 extends SimpleNLG4Test {
+public class External2Test {
 
-	public ExternalTests2(String name) {
-		super(name);
+	private Lexicon lexicon = null;
+	private NLGFactory phraseFactory = null;
+	private Realiser realiser = null;
+	
+	@Before
+	public void setup() {
+		lexicon = Lexicon.getDefaultLexicon();
+		phraseFactory = new NLGFactory(lexicon);
+		realiser = new Realiser(lexicon);
 	}
 
 	/**
 	 * Check that empty phrases are not realised as "null"
 	 */
 	@Test
-	public void testEmptyPhraseRealisation() {
+	public void emptyPhraseRealisationTest() {
 		SPhraseSpec emptyClause = this.phraseFactory.createClause();
 		Assert.assertEquals("", this.realiser.realise(emptyClause)
 				.getRealisation());
@@ -59,7 +69,7 @@ public class ExternalTests2 extends SimpleNLG4Test {
 	 * Check that empty coordinate phrases are not realised as "null"
 	 */
 	@Test
-	public void testEmptyCoordination() {
+	public void emptyCoordinationTest() {
 		// first a simple phrase with no coordinates
 		CoordinatedPhraseElement coord = this.phraseFactory
 				.createCoordinatedPhrase();
@@ -76,7 +86,7 @@ public class ExternalTests2 extends SimpleNLG4Test {
 	 * vowel
 	 */
 	@Test
-	public void testIndefiniteWithPremodifier() {
+	public void indefiniteWithPremodifierTest() {
 		SPhraseSpec s = this.phraseFactory.createClause("there", "be");
 		s.setFeature(Feature.TENSE, Tense.PRESENT);
 		NPPhraseSpec np = this.phraseFactory.createNounPhrase("a", "stenosis");
@@ -96,7 +106,7 @@ public class ExternalTests2 extends SimpleNLG4Test {
 	 * Test for comma separation between premodifers
 	 */
 	@Test
-	public void testMultipleAdjPremodifiers() {
+	public void multipleAdjPremodifiersTest() {
 		NPPhraseSpec np = this.phraseFactory.createNounPhrase("a", "stenosis");
 		np.addPreModifier(this.phraseFactory.createAdjectivePhrase("eccentric"));
 		np.addPreModifier(this.phraseFactory.createAdjectivePhrase("discrete"));
@@ -108,7 +118,7 @@ public class ExternalTests2 extends SimpleNLG4Test {
 	 * Test for comma separation between verb premodifiers
 	 */
 	@Test
-	public void testMultipleAdvPremodifiers() {
+	public void multipleAdvPremodifiersTest() {
 		AdvPhraseSpec adv1 = this.phraseFactory.createAdverbPhrase("slowly");
 		AdvPhraseSpec adv2 = this.phraseFactory
 				.createAdverbPhrase("discretely");
@@ -129,34 +139,34 @@ public class ExternalTests2 extends SimpleNLG4Test {
 	}
 
 	
-	@Test
-	public void testParticipleModifier() {
-
-		String verb = "associate";
-		VPPhraseSpec adjP = this.phraseFactory.createVerbPhrase(verb);
-		adjP.setFeature(Feature.TENSE, Tense.PAST);
-
-		NPPhraseSpec np = this.phraseFactory.createNounPhrase("a", "thrombus");
-		np.addPreModifier(adjP);
-		String realised = this.realiser.realise(np).getRealisation();
-		System.out.println(realised);
-		// cch TESTING The following line doesn't work when the lexeme is a
-		// verb.
-		// morphP.preMod.Add(new AdjPhraseSpec((Lexeme)modifier));
-
-		// It doesn't work for verb "associate" as adjective past participle.
-		// Instead of realizing as "associated" it realizes as "ed".
-		// Need to use verb phrase.
-
-		// cch TODO : handle general case making phrase type corresponding to
-		// lexeme category and usage.
-	}
+	
+//	public void participleModifierTest() {
+//
+//		String verb = "associate";
+//		VPPhraseSpec adjP = this.phraseFactory.createVerbPhrase(verb);
+//		adjP.setFeature(Feature.TENSE, Tense.PAST);
+//
+//		NPPhraseSpec np = this.phraseFactory.createNounPhrase("a", "thrombus");
+//		np.addPreModifier(adjP);
+//		String realised = this.realiser.realise(np).getRealisation();
+//		System.out.println(realised);
+//		// cch TESTING The following line doesn't work when the lexeme is a
+//		// verb.
+//		// morphP.preMod.Add(new AdjPhraseSpec((Lexeme)modifier));
+//
+//		// It doesn't work for verb "associate" as adjective past participle.
+//		// Instead of realizing as "associated" it realizes as "ed".
+//		// Need to use verb phrase.
+//
+//		// cch TODO : handle general case making phrase type corresponding to
+//		// lexeme category and usage.
+//	}
 
 	/**
 	 * Check that setComplement replaces earlier complements
 	 */
 	@Test
-	public void testSetComplement() {
+	public void setComplementTest() {
 		SPhraseSpec s = this.phraseFactory.createClause();
 		s.setSubject("I");
 		s.setVerb("see");
@@ -180,7 +190,7 @@ public class ExternalTests2 extends SimpleNLG4Test {
 	 * Bennett
 	 */
 	@Test
-	public void testSubclauses() {
+	public void subclausesTest() {
 		// Once upon a time, there was an Accountant, called Jeff, who lived in
 		// a forest.
 
@@ -227,7 +237,7 @@ public class ExternalTests2 extends SimpleNLG4Test {
 	 * Vlonjati
 	 */
 	@Test
-	public void testFutureTense() {
+	public void futureTenseTest() {
 		SPhraseSpec test = this.phraseFactory.createClause();
 
 		NPPhraseSpec subj = this.phraseFactory.createNounPhrase("I");
@@ -260,7 +270,7 @@ public class ExternalTests2 extends SimpleNLG4Test {
 	 * or null object.
 	 */
 	@Test
-	public void testNullAndEmptyStringElement() {
+	public void nullAndEmptyStringElementTest() {
 
 		NLGElement nullStringElement = this.phraseFactory.createStringElement(null);
 		NLGElement emptyStringElement = this.phraseFactory.createStringElement("");

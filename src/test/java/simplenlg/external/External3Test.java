@@ -16,7 +16,7 @@
  *
  * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
  */
-package simplenlg.syntax.english;
+package simplenlg.external;
 
 import junit.framework.Assert;
 
@@ -37,7 +37,7 @@ import simplenlg.realiser.english.Realiser;
  * @author Rodrigo de Oliveira, University of Aberdeen
  * 
  */
-public class ExternalTests3 {
+public class External3Test {
 
 	/**
 	 * Case 1 checks that "What do you think about John?" can be generated.
@@ -46,7 +46,7 @@ public class ExternalTests3 {
 	 * declared.
 	 */
 	@Test
-	public void test01() {
+	public void interrogativeTest() {
 
 		Lexicon lexicon = Lexicon.getDefaultLexicon();
 		NLGFactory nlg = new NLGFactory(lexicon);

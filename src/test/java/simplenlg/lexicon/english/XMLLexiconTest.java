@@ -18,27 +18,32 @@
  */
 package simplenlg.lexicon.english;
 
-import junit.framework.TestCase;
+import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import simplenlg.features.Feature;
+import simplenlg.features.NumberAgreement;
+import simplenlg.features.Tense;
+import simplenlg.framework.NLGFactory;
 import simplenlg.lexicon.XMLLexicon;
+import simplenlg.phrasespec.NPPhraseSpec;
+import simplenlg.phrasespec.PPPhraseSpec;
+import simplenlg.phrasespec.SPhraseSpec;
+import simplenlg.realiser.english.Realiser;
 
 /**
  * @author D. Westwater, Data2Text Ltd
  * 
  */
-public class XMLLexiconTest extends TestCase {
+public class XMLLexiconTest {
 
 	// lexicon object -- an instance of Lexicon
 	XMLLexicon lexicon = null;
 
-	// lexicon location - omit, use default lexicon instead
-	//static String XML_FILENAME = "res/simple-lexicon.xml";
 
-	@Override
 	@Before
 	/*
 	 * * Sets up the accessor and runs it -- takes ca. 26 sec
@@ -49,27 +54,55 @@ public class XMLLexiconTest extends TestCase {
 														// lexicon instead
 		this.lexicon = new XMLLexicon();
 		long stopTime = System.currentTimeMillis();
-		;
+	
 		System.out.format("Loading XML lexicon took %d ms%n",
                           stopTime - startTime);
 
 	}
 
-	/*
-	 * close the lexicon
+	/**
+	 * Close the lexicon and cleanup.
 	 */
-	@Override
 	@After
 	public void tearDown() throws Exception {
-		// TODO Auto-generated method stub
-		super.tearDown();
 		if (lexicon != null)
 			lexicon.close();
 	}
-
+	
+	/**
+	 * Runs basic Lexicon tests.
+	 */
 	@Test
-	public void testBasics() {
-		SharedLexiconTests.doBasicTests(lexicon);
+	public void basicLexiconTests() {
+		SharedLexiconTests tests = new SharedLexiconTests();
+		tests.doBasicTests(lexicon);
+	}
+	
+	/**
+	 * Tests the immutability of the XMLLexicon by checking to make sure features 
+	 * are not inadvertently propagated to the canonical XMLLexicon WordElement object.
+	 */
+	@Test
+	public void xmlLexiconImmutabilityTest() {
+	    NLGFactory factory = new NLGFactory(lexicon);
+	    Realiser realiser = new Realiser(lexicon);
+
+	    // "wall" is singular.
+	    NPPhraseSpec wall = factory.createNounPhrase("the", "wall");
+	    Assert.assertEquals(NumberAgreement.SINGULAR, wall.getFeature(Feature.NUMBER));    
+
+	    // Realise a sentence with plural form of "wall"
+	    wall.setPlural(true);       
+	    SPhraseSpec sentence = factory.createClause("motion", "observe");
+	    sentence.setFeature(Feature.TENSE, Tense.PAST); 
+	    PPPhraseSpec pp = factory.createPrepositionPhrase("in", wall);
+	    sentence.addPostModifier(pp);
+	    realiser.realiseSentence(sentence);
+
+	    // Create a new 'the wall' NP and check to make sure that the syntax processor has
+	    // not propagated plurality to the canonical XMLLexicon WordElement object.
+	    wall = factory.createNounPhrase("the", "wall");
+	    Assert.assertEquals(NumberAgreement.SINGULAR, wall.getFeature(Feature.NUMBER));    
 	}
 
 }

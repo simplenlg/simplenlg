@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell, Saad Mahamood.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, Saad Mahamood.
  */
 package simplenlg.syntax.english;
 
@@ -34,12 +34,12 @@ import simplenlg.framework.PhraseElement;
 import simplenlg.phrasespec.SPhraseSpec;
 
 /**
- * Test added to break the realiser 
+ * Tests that check that realization of different Features against NLGElements.
  * 
  * @author François Portet
  */
 
-public class FPTest extends SimpleNLG4Test {
+public class FeatureTest extends SimpleNLG4Test {
 	
 	
 	NLGFactory docFactory = new NLGFactory(this.lexicon);
@@ -50,7 +50,7 @@ public class FPTest extends SimpleNLG4Test {
 	 * @param name
 	 *            the name
 	 */
-	public FPTest(String name) {
+	public FeatureTest(String name) {
 		super(name);
 	}
 	

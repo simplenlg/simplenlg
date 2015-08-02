@@ -31,7 +31,7 @@ import simplenlg.lexicon.Lexicon;
  */
 public class SharedLexiconTests {
 
-	public static void doBasicTests(Lexicon lexicon) {
+	public void doBasicTests(Lexicon lexicon) {
 		// test getWords. Should be 2 "can" (of any cat), 1 noun tree, 0 adj
 		// trees
 		Assert.assertEquals(3, lexicon.getWords("can").size());

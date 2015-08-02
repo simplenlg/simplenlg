@@ -26,7 +26,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import junit.framework.Assert;
-import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -49,7 +48,7 @@ import simplenlg.realiser.english.Realiser;
  * 
  * @author Ehud Reiter, Albert Gatt
  */
-public class NIHDBLexiconTest extends TestCase {
+public class NIHDBLexiconTest {
 
 	// lexicon object -- an instance of Lexicon
 	NIHDBLexicon lexicon = null;
@@ -57,7 +56,6 @@ public class NIHDBLexiconTest extends TestCase {
 	// DB location -- change this to point to the lex access data dir
 	static String DB_FILENAME = "src/test/resources/NIHLexicon/lexAccess2011.data";
 
-	@Override
 	@Before
 	/*
 	 * * Sets up the accessor and runs it -- takes ca. 26 sec
@@ -81,21 +79,25 @@ public class NIHDBLexiconTest extends TestCase {
 	/**
 	 * Close the lexicon
 	 */
-	@Override
 	@After
 	public void tearDown() throws Exception {
-		super.tearDown();
-
 		if (lexicon != null)
 			lexicon.close();
 	}
 
+	/**
+	 * Runs basic Lexicon Tests.
+	 */
 	@Test
-	public void testBasics() {
-		SharedLexiconTests.doBasicTests(lexicon);
+	public void basicLexiconTests() {
+		SharedLexiconTests tests = new SharedLexiconTests();
+		tests.doBasicTests(lexicon);
 	}
 
-	public void testBEInflection() {
+	/**
+	 * Verb 'be' conjugation tests.
+	 */
+	public void beInflectionTest() {
 		Realiser r = new Realiser();
 		WordElement word = lexicon.getWord("be", LexicalCategory.VERB);
 		InflectedWordElement inflWord = new InflectedWordElement(word);
@@ -103,69 +105,72 @@ public class NIHDBLexiconTest extends TestCase {
 		//1st person sg past
 		inflWord.setFeature(Feature.PERSON, Person.FIRST);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
-		assertEquals("was", r.realise(inflWord).toString());
+		Assert.assertEquals("was", r.realise(inflWord).toString());
 		
 		//2nd person sg past
 		inflWord.setFeature(Feature.PERSON, Person.SECOND);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
-		assertEquals("were", r.realise(inflWord).toString());
+		Assert.assertEquals("were", r.realise(inflWord).toString());
 		
 		//3rd person sg past
 		inflWord.setFeature(Feature.PERSON, Person.THIRD);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
-		assertEquals("was", r.realise(inflWord).toString());
+		Assert.assertEquals("was", r.realise(inflWord).toString());
 		
 		//1st person sg present
 		inflWord.setFeature(Feature.PERSON, Person.FIRST);
 		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);		
-		assertEquals("am", r.realise(inflWord).toString());
+		Assert.assertEquals("am", r.realise(inflWord).toString());
 		
 		//2nd person sg present
 		inflWord.setFeature(Feature.PERSON, Person.SECOND);
 		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);
-		assertEquals("are", r.realise(inflWord).toString());
+		Assert.assertEquals("are", r.realise(inflWord).toString());
 		
 		//3rd person sg present
 		inflWord.setFeature(Feature.PERSON, Person.THIRD);
 		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);
-		assertEquals("is", r.realise(inflWord).toString());
+		Assert.assertEquals("is", r.realise(inflWord).toString());
 		
 		inflWord.setFeature(Feature.NUMBER, NumberAgreement.PLURAL);
 		
 		//1st person pl past
 		inflWord.setFeature(Feature.PERSON, Person.FIRST);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
-		assertEquals("were", r.realise(inflWord).toString());
+		Assert.assertEquals("were", r.realise(inflWord).toString());
 		
 		//2nd person pl past
 		inflWord.setFeature(Feature.PERSON, Person.SECOND);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
-		assertEquals("were", r.realise(inflWord).toString());
+		Assert.assertEquals("were", r.realise(inflWord).toString());
 		
 		//3rd person pl past
 		inflWord.setFeature(Feature.PERSON, Person.THIRD);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
-		assertEquals("were", r.realise(inflWord).toString());
+		Assert.assertEquals("were", r.realise(inflWord).toString());
 		
 		//1st person pl present
 		inflWord.setFeature(Feature.PERSON, Person.FIRST);
 		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);		
-		assertEquals("are", r.realise(inflWord).toString());
+		Assert.assertEquals("are", r.realise(inflWord).toString());
 		
 		//2nd person pl present
 		inflWord.setFeature(Feature.PERSON, Person.SECOND);
 		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);
-		assertEquals("are", r.realise(inflWord).toString());
+		Assert.assertEquals("are", r.realise(inflWord).toString());
 		
 		//3rd person pl present
 		inflWord.setFeature(Feature.PERSON, Person.THIRD);
 		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);
-		assertEquals("are", r.realise(inflWord).toString());
+		Assert.assertEquals("are", r.realise(inflWord).toString());
 		
 	}
-
+	
+	/**
+	 * Tests the lexicon for recall of Acryonms.
+	 */
 	@Test
-	public void testAcronyms() {
+	public void acronymsTests() {
 		WordElement uk = lexicon.getWord("UK");
 		WordElement unitedKingdom = lexicon.getWord("United Kingdom");
 		List<NLGElement> fullForms = uk
@@ -176,8 +181,11 @@ public class NIHDBLexiconTest extends TestCase {
 		Assert.assertTrue(fullForms.contains(unitedKingdom));
 	}
 
+	/**
+	 * Tests the lexicon for recall of baseforms with their standard inflected forms. 
+	 */
 	@Test
-	public void testStandardInflections() {
+	public void standardInflectionsTest() {
 		// test keepStandardInflection flag
 		boolean keepInflectionsFlag = lexicon.isKeepStandardInflections();
 
@@ -201,7 +209,7 @@ public class NIHDBLexiconTest extends TestCase {
 	 * same Lexicon
 	 */
 	@SuppressWarnings("static-access")
-	public void testMultiThreadApp() {
+	public void multiThreadAppAccessTest() {
 
 		LexThread runner1 = new LexThread("lie");
 		LexThread runner2 = new LexThread("bark");

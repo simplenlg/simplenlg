@@ -16,15 +16,16 @@
  *
  * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell, Saad Mahamood.
  */
-package simplenlg.syntax.english;
+package simplenlg.external;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.Assert;
 
-import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
 
 import simplenlg.aggregation.ClauseCoordinationRule;
 import simplenlg.features.Feature;
@@ -40,36 +41,40 @@ import simplenlg.framework.DocumentElement;
 import simplenlg.framework.InflectedWordElement;
 import simplenlg.framework.LexicalCategory;
 import simplenlg.framework.NLGElement;
+import simplenlg.framework.NLGFactory;
 import simplenlg.framework.PhraseElement;
 import simplenlg.framework.WordElement;
+import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.phrasespec.VPPhraseSpec;
+import simplenlg.realiser.english.Realiser;
 
 /**
  * Tests from third parties
  * @author ereiter
  * 
  */
-public class ExternalTest extends SimpleNLG4Test {
+public class External1Test {
 
-	public ExternalTest(String name) {
-		super(name);
-	}
 	
-	@Override
-	@After
-	public void tearDown() {
-		super.tearDown();
-	}
+	private Lexicon lexicon = null;
+	private NLGFactory phraseFactory = null;
+	private Realiser realiser = null;
 	
+	@Before
+	public void setup() {
+		lexicon = Lexicon.getDefaultLexicon();
+		phraseFactory = new NLGFactory(lexicon);
+		realiser = new Realiser(lexicon);
+	}
 
 	/**
 	 * Basic tests
 	 * 
 	 */
 	@Test
-	public void testForcher() {
+	public void forcherTest() {
 		// Bjorn Forcher's tests
 		this.phraseFactory.setLexicon(this.lexicon);
 		PhraseElement s1 = this.phraseFactory.createClause(null, "associate",
@@ -93,11 +98,10 @@ public class ExternalTest extends SimpleNLG4Test {
 
 		Assert.assertEquals("Peter has something to do with Paul", //$NON-NLS-1$
 				this.realiser.realise(s2).getRealisation());
-		tearDown();
 	}
 
 	@Test
-	public void testLu() {
+	public void luTest() {
 		// Xin Lu's test
 		this.phraseFactory.setLexicon(this.lexicon);
 		PhraseElement s1 = this.phraseFactory.createClause("we", //$NON-NLS-1$
@@ -110,7 +114,7 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 
 	@Test
-	public void testDwight() {
+	public void dwightTest() {
 		// Rachel Dwight's test
 		this.phraseFactory.setLexicon(this.lexicon);
 
@@ -167,7 +171,7 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 
 	@Test
-	public void testNovelli() {
+	public void novelliTest() {
 		// Nicole Novelli's test
 		PhraseElement p = this.phraseFactory.createClause(
 				"Mary", "chase", "George"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -193,7 +197,7 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 
 	@Test
-	public void testPiotrek() {
+	public void piotrekTest() {
 		// Piotrek Smulikowski's test
 		this.phraseFactory.setLexicon(this.lexicon);
 		PhraseElement sent = this.phraseFactory.createClause(
@@ -210,7 +214,7 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 
 	@Test
-	public void testPrescott() {
+	public void prescottTest() {
 		// Michael Prescott's test
 		this.phraseFactory.setLexicon(this.lexicon);
 		PhraseElement embedded = this.phraseFactory.createClause(
@@ -225,11 +229,8 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 
 	@Test
-	public void testWissner() {
+	public void wissnerTest() {
 		// Michael Wissner's text
-
-		setUp();
-
 		PhraseElement p = this.phraseFactory.createClause("a wolf", "eat"); //$NON-NLS-1$ //$NON-NLS-2$
 		p.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHAT_OBJECT);
 		Assert.assertEquals("what does a wolf eat", this.realiser.realise(p) //$NON-NLS-1$
@@ -238,19 +239,16 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 	
 	@Test
-	public void testPhan() {
+	public void phanTest() {
 		// Thomas Phan's text
+	      PhraseElement subjectElement = this.phraseFactory.createNounPhrase("I");
+	      PhraseElement verbElement = this.phraseFactory.createVerbPhrase("run");
 
-		setUp();
-
-	      PhraseElement subjectElement = phraseFactory.createNounPhrase("I");
-	      PhraseElement verbElement = phraseFactory.createVerbPhrase("run");
-
-	      PhraseElement prepPhrase = phraseFactory.createPrepositionPhrase("from");
+	      PhraseElement prepPhrase = this.phraseFactory.createPrepositionPhrase("from");
 	      prepPhrase.addComplement("home");
 
 	      verbElement.addComplement(prepPhrase);
-	      SPhraseSpec newSentence = phraseFactory.createClause();
+	      SPhraseSpec newSentence = this.phraseFactory.createClause();
 	      newSentence.setSubject(subjectElement);
 	      newSentence.setVerbPhrase(verbElement);
 
@@ -260,10 +258,10 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 
 	@Test
-	public void testKerber() {
+	public void kerberTest() {
 		// Frederic Kerber's tests
-        SPhraseSpec sp =  phraseFactory.createClause("he", "need");
-        SPhraseSpec secondSp = phraseFactory.createClause();
+        SPhraseSpec sp =  this.phraseFactory.createClause("he", "need");
+        SPhraseSpec secondSp = this.phraseFactory.createClause();
         secondSp.setVerb("build");
         secondSp.setObject("a house");
         secondSp.setFeature(Feature.FORM,Form.INFINITIVE);
@@ -271,7 +269,7 @@ public class ExternalTest extends SimpleNLG4Test {
         sp.addComplement(secondSp);
         Assert.assertEquals("he needs stone to build a house", this.realiser.realise(sp).getRealisation());
        
-        SPhraseSpec sp2 =  phraseFactory.createClause("he", "give");
+        SPhraseSpec sp2 =  this.phraseFactory.createClause("he", "give");
         sp2.setIndirectObject("I");
         sp2.setObject("the book");
         Assert.assertEquals("he gives me the book", this.realiser.realise(sp2).getRealisation());
@@ -279,7 +277,7 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 	
 	@Test
-	public void testStephenson() {
+	public void stephensonTest() {
 		// Bruce Stephenson's test
 		SPhraseSpec qs2 = this.phraseFactory.createClause();
 		qs2 = this.phraseFactory.createClause();
@@ -294,7 +292,7 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 	
 	@Test
-	public void testPierre() {
+	public void pierreTest() {
 		// John Pierre's test
 		SPhraseSpec p = this.phraseFactory.createClause("Mary", "chase", "George");
 		p.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHAT_OBJECT);
@@ -320,7 +318,7 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 	
 	@Test
-	public void testData2Text() {
+	public void data2TextTest() {
 		// Data2Text tests
 		// test OK to have number at end of sentence
 		SPhraseSpec p = this.phraseFactory.createClause("the dog", "weigh", "12");
@@ -371,7 +369,7 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 	
 	@Test
-	public void testRafael() {
+	public void rafaelTest() {
 		// Rafael Valle's tests
 		List<NLGElement> ss=new ArrayList<NLGElement>();
 		ClauseCoordinationRule coord = new ClauseCoordinationRule();
@@ -389,27 +387,27 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 	
 	private NLGElement commentPhrase(String name){  // used by testRafael
-		SPhraseSpec s = phraseFactory.createClause();
-		s.setSubject(phraseFactory.createNounPhrase(name));
-		s.setVerbPhrase(phraseFactory.createVerbPhrase("comment on"));
+		SPhraseSpec s = this.phraseFactory.createClause();
+		s.setSubject(this.phraseFactory.createNounPhrase(name));
+		s.setVerbPhrase(this.phraseFactory.createVerbPhrase("comment on"));
 		s.setObject("it");
 		s.setFeature(Feature.TENSE, Tense.PAST);
 		return s;
 	}
 
 	private NLGElement agreePhrase(String name){  // used by testRafael
-		SPhraseSpec s = phraseFactory.createClause();
-		s.setSubject(phraseFactory.createNounPhrase(name));
-		s.setVerbPhrase(phraseFactory.createVerbPhrase("agree with"));
+		SPhraseSpec s = this.phraseFactory.createClause();
+		s.setSubject(this.phraseFactory.createNounPhrase(name));
+		s.setVerbPhrase(this.phraseFactory.createVerbPhrase("agree with"));
 		s.setObject("it");
 		s.setFeature(Feature.TENSE, Tense.PAST);
 		return s;
 	}
 
 	private NLGElement disagreePhrase(String name){  // used by testRafael
-		SPhraseSpec s = phraseFactory.createClause();
-		s.setSubject(phraseFactory.createNounPhrase(name));
-		s.setVerbPhrase(phraseFactory.createVerbPhrase("disagree with"));
+		SPhraseSpec s = this.phraseFactory.createClause();
+		s.setSubject(this.phraseFactory.createNounPhrase(name));
+		s.setVerbPhrase(this.phraseFactory.createVerbPhrase("disagree with"));
 		s.setObject("it");
 		s.setFeature(Feature.TENSE, Tense.PAST);
 		return s;
@@ -425,43 +423,43 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 	
 	@Test
-	public void testWikipedia() {
+	public void wikipediaTest() {
 		// test code fragments in wikipedia
 		// realisation
-		NPPhraseSpec subject = phraseFactory.createNounPhrase("the", "woman");
+		NPPhraseSpec subject = this.phraseFactory.createNounPhrase("the", "woman");
 		subject.setPlural(true);
-		SPhraseSpec sentence = phraseFactory.createClause(subject, "smoke");
+		SPhraseSpec sentence = this.phraseFactory.createClause(subject, "smoke");
 		sentence.setFeature(Feature.NEGATED, true);
 		Assert.assertEquals("The women do not smoke.", realiser.realiseSentence(sentence));
 
 		// aggregation
-		SPhraseSpec s1 = phraseFactory.createClause("the man", "be", "hungry");
-		SPhraseSpec s2 = phraseFactory.createClause("the man", "buy", "an apple");
+		SPhraseSpec s1 = this.phraseFactory.createClause("the man", "be", "hungry");
+		SPhraseSpec s2 = this.phraseFactory.createClause("the man", "buy", "an apple");
 		NLGElement result = new ClauseCoordinationRule().apply(s1, s2);
 		Assert.assertEquals("The man is hungry and buys an apple.", realiser.realiseSentence(result));
 
 	}
 	
 	@Test
-	public void testLean() {
+	public void leanTest() {
 		// A Lean's test
-		SPhraseSpec sentence = phraseFactory.createClause();
+		SPhraseSpec sentence = this.phraseFactory.createClause();
 		sentence.setVerb("be");
 		sentence.setObject("a ball");
 		sentence.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHAT_SUBJECT);
 		Assert.assertEquals("What is a ball?", realiser.realiseSentence(sentence));
 		
-		sentence = phraseFactory.createClause();
+		sentence = this.phraseFactory.createClause();
 		sentence.setVerb("be");
-		NPPhraseSpec object = phraseFactory.createNounPhrase("example");
+		NPPhraseSpec object = this.phraseFactory.createNounPhrase("example");
 		object.setPlural(true);
 		object.addModifier("of jobs");
 		sentence.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.WHAT_SUBJECT);
 		sentence.setObject(object);
 		Assert.assertEquals("What are examples of jobs?", realiser.realiseSentence(sentence));
 		
-		SPhraseSpec p = phraseFactory.createClause(); 
-        NPPhraseSpec sub1 = phraseFactory.createNounPhrase("Mary"); 
+		SPhraseSpec p = this.phraseFactory.createClause(); 
+        NPPhraseSpec sub1 = this.phraseFactory.createNounPhrase("Mary"); 
            
         sub1.setFeature(LexicalFeature.GENDER, Gender.FEMININE); 
         sub1.setFeature(Feature.PRONOMINAL, true); 
@@ -471,11 +469,11 @@ public class ExternalTest extends SimpleNLG4Test {
         p.setObject("the monkey"); 
 
 
-        String output2 = realiser.realiseSentence(p); // Realiser created earlier. 
+        String output2 = this.realiser.realiseSentence(p); // Realiser created earlier. 
         Assert.assertEquals("I chase the monkey.", output2);
         
-        SPhraseSpec test = phraseFactory.createClause();
-        NPPhraseSpec subject = phraseFactory.createNounPhrase("Mary");
+        SPhraseSpec test = this.phraseFactory.createClause();
+        NPPhraseSpec subject = this.phraseFactory.createNounPhrase("Mary");
         
         subject.setFeature(Feature.PRONOMINAL, true);
         subject.setFeature(Feature.PERSON, Person.SECOND);
@@ -486,8 +484,8 @@ public class ExternalTest extends SimpleNLG4Test {
         test.setFeature(Feature.TENSE, Tense.PRESENT);
         Assert.assertEquals("Why do you cry?", realiser.realiseSentence(test));
         
-        test = phraseFactory.createClause();
-        subject = phraseFactory.createNounPhrase("Mary");
+        test = this.phraseFactory.createClause();
+        subject = this.phraseFactory.createNounPhrase("Mary");
         
         subject.setFeature(Feature.PRONOMINAL, true);
         subject.setFeature(Feature.PERSON, Person.SECOND);
@@ -503,12 +501,12 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 	
 	@Test
-	public void testKalijurand() {
+	public void kalijurandTest() {
 		// K Kalijurand's test
         String lemma = "walk"; 
 
 
-        WordElement word = lexicon.lookupWord(lemma,  LexicalCategory.VERB); 
+        WordElement word = this.lexicon.lookupWord(lemma,  LexicalCategory.VERB); 
         InflectedWordElement inflectedWord = new InflectedWordElement(word); 
 
         inflectedWord.setFeature(Feature.FORM, Form.PAST_PARTICIPLE); 
@@ -527,7 +525,7 @@ public class ExternalTest extends SimpleNLG4Test {
 	}
 	
 	@Test
-	public void testLay() {
+	public void layTest() {
 		// Richard Lay's test
 	      String lemma = "slap"; 
 

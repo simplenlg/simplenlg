@@ -44,7 +44,7 @@ import simplenlg.features.LexicalFeature;
  */
 
 public class WordElement extends NLGElement {
-
+	
 	/*
 	 * Internal class. This maintains inflectional variants of the word, which
 	 * may be available in the lexicon. For example, a word may have both a
@@ -108,9 +108,6 @@ public class WordElement extends NLGElement {
 	 */
 	public WordElement() {
 		this(null, LexicalCategory.ANY, null);
-		// this.baseForm = null;
-		// setCategory(LexicalCategory.ANY);
-		// this.id = null;
 	}
 
 	/**
@@ -121,10 +118,6 @@ public class WordElement extends NLGElement {
 	 *            - base form of WordElement
 	 */
 	public WordElement(String baseForm) {
-		// super();
-		// this.baseForm = baseForm;
-		// setCategory(LexicalCategory.ANY);
-		// this.id = null;
 		this(baseForm, LexicalCategory.ANY, null);
 	}
 
@@ -137,10 +130,6 @@ public class WordElement extends NLGElement {
 	 *            - category of WordElement
 	 */
 	public WordElement(String baseForm, LexicalCategory category) {
-		// super();
-		// this.baseForm = baseForm;
-		// setCategory(category);
-		// this.id = null;
 		this(baseForm, category, null);
 	}
 
@@ -161,6 +150,25 @@ public class WordElement extends NLGElement {
 		this.id = id;
 		this.inflVars = new HashMap<Inflection, InflectionSet>();
 	}
+	
+	/**
+	 * creates a duplicate WordElement from an existing WordElement
+	 * 
+	 * @param currentWord
+	 *            - An existing WordElement
+	 */
+	public WordElement(WordElement currentWord) {
+		super();
+		this.baseForm = currentWord.getBaseForm();
+		setCategory(currentWord.getCategory());
+		this.id = currentWord.getId();
+		this.inflVars = currentWord.getInflectionalVariants();
+		this.defaultInfl = (Inflection) currentWord.getDefaultInflectionalVariant();
+		setFeatures(currentWord);
+	}
+	
+	
+	
 
 	/**********************************************************/
 	// getters and setters
@@ -239,27 +247,15 @@ public class WordElement extends NLGElement {
 		return this.defaultInfl;
 	}
 
-	/*
+	/**
 	 * Convenience method to get all the inflectional forms of the word.
-	 * Equivalent to
-	 * <code>getFeatureAsStringList(LexicalFeature.INFLECTIONS)</code>.
 	 * 
-	 * @return the list of inflectional variants
+	 * @return the HashMap of inflectional variants
 	 */
-	// public List<Object> getInflectionalVariants() {
-	// return getFeatureAsList(LexicalFeature.INFLECTIONS);
-	// }
+	 public Map<Inflection, InflectionSet> getInflectionalVariants() {
+		 return this.inflVars;
+	 }
 
-	/*
-	 * Convenience method to get all the spelling variants of the word.
-	 * Equivalent to
-	 * <code>getFeatureAsStringList(LexicalFeature.SPELL_VARS)</code>.
-	 * 
-	 * @return the list of spelling variants
-	 */
-	// public List<String> getSpellingVariants() {
-	// return getFeatureAsStringList(LexicalFeature.SPELL_VARS);
-	// }
 
 	/**
 	 * Convenience method to set the default spelling variant of a word.
@@ -289,12 +285,6 @@ public class WordElement extends NLGElement {
 		return defSpell == null ? this.getBaseForm() : defSpell;
 	}
 
-	/*
-	 * @param category the category to set
-	 */
-	// public void setCategory(LexicalCategory category) {
-	// this.category = category;
-	// }
 
 	/**
 	 * Add an inflectional variant to this word element. This method is intended
@@ -356,6 +346,20 @@ public class WordElement extends NLGElement {
 	 */
 	public boolean hasInflectionalVariant(Inflection infl) {
 		return this.inflVars.containsKey(infl);
+	}
+	
+	/**
+	 * Sets Features from another existing WordElement into this WordElement.
+	 * 
+	 * @param currentWord
+	 * 				the WordElement to copy features from
+	 */
+	public void setFeatures(WordElement currentWord) {
+		if(null != currentWord && null != currentWord.getAllFeatures()) {
+			for(String feature : currentWord.getAllFeatureNames()) {
+				this.setFeature(feature, currentWord.getFeature(feature));
+			}
+		}
 	}
 
 	/**********************************************************/

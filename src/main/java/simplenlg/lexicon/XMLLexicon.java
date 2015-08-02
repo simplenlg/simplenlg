@@ -213,7 +213,7 @@ public class XMLLexicon extends Lexicon {
 					value = value.trim();
 
 				if (feature == null) {
-					System.out.println("Error in XML lexicon node for "
+					System.err.println("Error in XML lexicon node for "
 							+ word.toString());
 					break;
 				}
@@ -335,19 +335,25 @@ public class XMLLexicon extends Lexicon {
 		List<WordElement> result = new ArrayList<WordElement>();
 
 		// case 1: unknown, return empty list
-		if (!indexMap.containsKey(indexKey))
+		if (!indexMap.containsKey(indexKey)) {
 			return result;
+		}
 
 		// case 2: category is ANY, return everything
-		if (category == LexicalCategory.ANY)
-			return indexMap.get(indexKey);
-
-		// case 3: other category, search for match
-		else
-			for (WordElement word : indexMap.get(indexKey))
-				if (word.getCategory() == category)
-					result.add(word);
-
+		if (category == LexicalCategory.ANY) {
+			for(WordElement word : indexMap.get(indexKey)) {
+				result.add(new WordElement(word));
+			}
+			return result;
+		}
+		else {
+			// case 3: other category, search for match
+			for (WordElement word : indexMap.get(indexKey)) {
+				if (word.getCategory() == category) {
+					result.add(new WordElement(word));
+				}
+			}
+		}	
 		return result;
 	}
 
@@ -359,8 +365,9 @@ public class XMLLexicon extends Lexicon {
 	@Override
 	public List<WordElement> getWordsByID(String id) {
 		List<WordElement> result = new ArrayList<WordElement>();
-		if (indexByID.containsKey(id))
-			result.add(indexByID.get(id));
+		if (indexByID.containsKey(id)) {
+			result.add(new WordElement(indexByID.get(id)));
+		}
 		return result;
 	}
 

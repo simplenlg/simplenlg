@@ -40,23 +40,23 @@ import simplenlg.realiser.english.Realiser;
 public abstract class SimpleNLG4Test extends TestCase {
 
 	/** The realiser. */
-	Realiser realiser;
+	protected Realiser realiser;
 
-	NLGFactory phraseFactory;
+	protected NLGFactory phraseFactory;
 	
-	Lexicon lexicon;
+	protected Lexicon lexicon;
 	
 	/** The pro test2. */
-	PhraseElement man, woman, dog, boy, np4, np5, np6, proTest1, proTest2;
+	protected PhraseElement man, woman, dog, boy, np4, np5, np6, proTest1, proTest2;
 
 	/** The salacious. */
-	PhraseElement beautiful, stunning, salacious;
+	protected PhraseElement beautiful, stunning, salacious;
 
 	/** The under the table. */
-	PhraseElement onTheRock, behindTheCurtain, inTheRoom, underTheTable;
+	protected PhraseElement onTheRock, behindTheCurtain, inTheRoom, underTheTable;
 
 	/** The say. */
-	VPPhraseSpec kick, kiss, walk, talk, getUp, fallDown, give, say;
+	protected VPPhraseSpec kick, kiss, walk, talk, getUp, fallDown, give, say;
 
 	/**
 	 * Instantiates a new simplenlg test.
