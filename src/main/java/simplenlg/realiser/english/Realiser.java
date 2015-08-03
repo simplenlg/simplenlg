@@ -18,6 +18,7 @@
  */
 package simplenlg.realiser.english;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import simplenlg.format.english.TextFormatter;
@@ -217,7 +218,14 @@ public class Realiser extends NLGModule {
 
 	@Override
 	public List<NLGElement> realise(List<NLGElement> elements) {
-		return null;
+		List<NLGElement> realisedElements = new ArrayList<NLGElement>();
+		if(null != elements) {
+			for(NLGElement element : elements) {
+				NLGElement realisedElement = realise(element);
+				realisedElements.add(realisedElement);
+			}
+		}
+		return realisedElements;
 	}
 
 	@Override
