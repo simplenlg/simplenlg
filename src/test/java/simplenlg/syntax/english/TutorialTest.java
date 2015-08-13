@@ -14,14 +14,15 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell, Saad Mahamood.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, Saad Mahamood.
  */
 
 package simplenlg.syntax.english;
 
-import java.util.Arrays; // needed for Section 14
+import static org.junit.Assert.*;
 
-import org.junit.After;
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import simplenlg.features.Feature;
@@ -39,54 +40,18 @@ import simplenlg.phrasespec.VPPhraseSpec;
 import simplenlg.realiser.english.Realiser;
 
 /**
- * Tests from tutorial
+ * Tests from SimpleNLG tutorial
  * <hr>
  * 
  * <p>
  * Copyright (C) 2011, University of Aberdeen
  * </p>
  * 
- * <p>
- * This program is free software: you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- * </p>
- * 
- * <p>
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
- * </p>
- * 
- * <p>
- * You should have received a copy of the GNU Lesser General Public License in the zip
- * file. If not, see <a
- * href="http://www.gnu.org/licenses/">www.gnu.org/licenses</a>.
- * </p>
- * 
- * <p>
- * For more details on SimpleNLG visit the project website at <a
- * href="http://www.csd.abdn.ac.uk/research/simplenlg/"
- * >www.csd.abdn.ac.uk/research/simplenlg</a> or email Dr Ehud Reiter at
- * e.reiter@abdn.ac.uk
- * </p>
- * 
- * @author ereiter
+ * @author Ehud Reiter
  * 
  */
-public class TutorialTest extends SimpleNLG4Test {
+public class TutorialTest {
 
-	public TutorialTest(String name) {
-		super(name);
-	}
-
-	@Override
-	@After
-	public void tearDown() {
-		super.tearDown();
-	}
 
 	// no code in sections 1 and 2
 	
@@ -94,7 +59,7 @@ public class TutorialTest extends SimpleNLG4Test {
 	 * test section 3 code
 	 */
 	@Test
-	public void testSection3() {
+	public void section3_Test() {
 		Lexicon lexicon = Lexicon.getDefaultLexicon();                         // default simplenlg lexicon
 		NLGFactory nlgFactory = new NLGFactory(lexicon);             // factory based on lexicon
 
@@ -111,7 +76,7 @@ public class TutorialTest extends SimpleNLG4Test {
 	 * test section 5 code
 	 */
 	@Test
-	public void testSection5() {
+	public void section5_Test() {
 		Lexicon lexicon = Lexicon.getDefaultLexicon();                         // default simplenlg lexicon
 		NLGFactory nlgFactory = new NLGFactory(lexicon);             // factory based on lexicon
 		Realiser realiser = new Realiser(lexicon);
@@ -129,7 +94,7 @@ public class TutorialTest extends SimpleNLG4Test {
 	 * test section 6 code
 	 */
 	@Test
-	public void testSection6() {
+	public void section6_Test() {
 		Lexicon lexicon = Lexicon.getDefaultLexicon();                         // default simplenlg lexicon
 		NLGFactory nlgFactory = new NLGFactory(lexicon);             // factory based on lexicon
 		Realiser realiser = new Realiser(lexicon);
@@ -179,7 +144,7 @@ public class TutorialTest extends SimpleNLG4Test {
 	 * test ability to use variant words
 	 */
 	@Test
-	public void testVariants() {
+	public void variantsTest() {
 		Lexicon lexicon = Lexicon.getDefaultLexicon();                         // default simplenlg lexicon
 		NLGFactory nlgFactory = new NLGFactory(lexicon);             // factory based on lexicon
 		Realiser realiser = new Realiser(lexicon);
@@ -234,109 +199,109 @@ public class TutorialTest extends SimpleNLG4Test {
 	 * test section 5 to match simplenlg tutorial version 4's code
 	 */
 	@Test
-		public void testSection5A( ) { 
-			Lexicon lexicon = Lexicon.getDefaultLexicon( ) ;      // default simplenlg lexicon
-			NLGFactory nlgFactory = new NLGFactory( lexicon ) ;  // factory based on lexicon
-			Realiser realiser = new Realiser( lexicon ) ;
+		public void section5A_Test() { 
+			Lexicon lexicon = Lexicon.getDefaultLexicon();      // default simplenlg lexicon
+			NLGFactory nlgFactory = new NLGFactory( lexicon );  // factory based on lexicon
+			Realiser realiser = new Realiser( lexicon );
 			
-			SPhraseSpec p = nlgFactory.createClause( ) ;
-			p.setSubject( "Mary" ) ;
-			p.setVerb( "chase" ) ;
-			p.setObject( "the monkey" ) ;
+			SPhraseSpec p = nlgFactory.createClause();
+			p.setSubject( "Mary" );
+			p.setVerb( "chase" );
+			p.setObject( "the monkey" );
 			
-			String output = realiser.realiseSentence( p ) ;
-			assertEquals( "Mary chases the monkey.", output ) ;
+			String output = realiser.realiseSentence( p );
+			assertEquals( "Mary chases the monkey.", output );
 		 } // testSection5A
 	
 	/**
 	 * test section 6 to match simplenlg tutorial version 4' code
 	 */
 	@Test
-	public void testSection6A( ) { 
-		Lexicon lexicon = Lexicon.getDefaultLexicon( ) ;    // default simplenlg lexicon
-		NLGFactory nlgFactory = new NLGFactory( lexicon ) ;  // factory based on lexicon
-		Realiser realiser = new Realiser( lexicon ) ;
+	public void section6A_Test() { 
+		Lexicon lexicon = Lexicon.getDefaultLexicon();    // default simplenlg lexicon
+		NLGFactory nlgFactory = new NLGFactory( lexicon );  // factory based on lexicon
+		Realiser realiser = new Realiser( lexicon );
 	
-		SPhraseSpec p = nlgFactory.createClause( ) ;
-		p.setSubject( "Mary" ) ;
-		p.setVerb( "chase" ) ;
-		p.setObject( "the monkey" ) ;
+		SPhraseSpec p = nlgFactory.createClause();
+		p.setSubject( "Mary" );
+		p.setVerb( "chase" );
+		p.setObject( "the monkey" );
 	
-		p.setFeature( Feature.TENSE, Tense.PAST ) ; 
-		String output = realiser.realiseSentence( p ) ;
-		assertEquals( "Mary chased the monkey.", output ) ;
+		p.setFeature( Feature.TENSE, Tense.PAST ); 
+		String output = realiser.realiseSentence( p );
+		assertEquals( "Mary chased the monkey.", output );
 
-		p.setFeature( Feature.TENSE, Tense.FUTURE ) ; 
-		output = realiser.realiseSentence( p ) ;
-		assertEquals( "Mary will chase the monkey.", output ) ;
+		p.setFeature( Feature.TENSE, Tense.FUTURE ); 
+		output = realiser.realiseSentence( p );
+		assertEquals( "Mary will chase the monkey.", output );
 
-		p.setFeature( Feature.NEGATED, true ) ; 
-		output = realiser.realiseSentence( p ) ;
-		assertEquals( "Mary will not chase the monkey.", output ) ;
+		p.setFeature( Feature.NEGATED, true ); 
+		output = realiser.realiseSentence( p );
+		assertEquals( "Mary will not chase the monkey.", output );
 
-		p = nlgFactory.createClause( ) ;
-		p.setSubject( "Mary" ) ;
-		p.setVerb( "chase" ) ;
-		p.setObject( "the monkey" ) ;
+		p = nlgFactory.createClause();
+		p.setSubject( "Mary" );
+		p.setVerb( "chase" );
+		p.setObject( "the monkey" );
 
-		p.setFeature( Feature.INTERROGATIVE_TYPE, InterrogativeType.YES_NO ) ;
-		output = realiser.realiseSentence( p ) ;
-		assertEquals( "Does Mary chase the monkey?", output ) ;
+		p.setFeature( Feature.INTERROGATIVE_TYPE, InterrogativeType.YES_NO );
+		output = realiser.realiseSentence( p );
+		assertEquals( "Does Mary chase the monkey?", output );
 
-		p.setSubject( "Mary" ) ;
-		p.setVerb( "chase" ) ;
-		p.setFeature( Feature.INTERROGATIVE_TYPE, InterrogativeType.WHO_OBJECT ) ;
-		output = realiser.realiseSentence( p ) ;
-		assertEquals( "Who does Mary chase?", output ) ;
-	} // textSection6A
+		p.setSubject( "Mary" );
+		p.setVerb( "chase" );
+		p.setFeature( Feature.INTERROGATIVE_TYPE, InterrogativeType.WHO_OBJECT );
+		output = realiser.realiseSentence( p );
+		assertEquals( "Who does Mary chase?", output );
+	} 
 	
 	/**
 	 * test section 7 code
 	 */
 	@Test
-		public void testSection7( ) { 
-			Lexicon lexicon = Lexicon.getDefaultLexicon( ) ;      // default simplenlg lexicon
-			NLGFactory nlgFactory = new NLGFactory( lexicon ) ;  // factory based on lexicon
-			Realiser realiser = new Realiser( lexicon ) ;
-			
-			SPhraseSpec p = nlgFactory.createClause( ) ;
-			p.setSubject( "Mary" ) ;
-			p.setVerb( "chase" ) ;
-			p.setObject( "the monkey" ) ;
-			p.addComplement( "very quickly" ) ;
-			p.addComplement( "despite her exhaustion" ) ;
-			
-			String output = realiser.realiseSentence( p ) ;
-			assertEquals( "Mary chases the monkey very quickly despite her exhaustion.", output ) ;
-		 } // testSection7
+	public void section7_Test() { 
+		Lexicon lexicon = Lexicon.getDefaultLexicon();      // default simplenlg lexicon
+		NLGFactory nlgFactory = new NLGFactory( lexicon );  // factory based on lexicon
+		Realiser realiser = new Realiser( lexicon );
+		
+		SPhraseSpec p = nlgFactory.createClause();
+		p.setSubject( "Mary" );
+		p.setVerb( "chase" );
+		p.setObject( "the monkey" );
+		p.addComplement( "very quickly" );
+		p.addComplement( "despite her exhaustion" );
+		
+		String output = realiser.realiseSentence( p );
+		assertEquals( "Mary chases the monkey very quickly despite her exhaustion.", output );
+	 }
 	
 	/**
 	 * test section 8 code
 	 */
 	@Test
-		public void testSection8( ) { 
-			Lexicon lexicon = Lexicon.getDefaultLexicon( ) ;      // default simplenlg lexicon
-			NLGFactory nlgFactory = new NLGFactory( lexicon ) ;  // factory based on lexicon
-			Realiser realiser = new Realiser( lexicon ) ;
-			
-			NPPhraseSpec subject = nlgFactory.createNounPhrase( "Mary" ) ;
-			NPPhraseSpec object = nlgFactory.createNounPhrase( "the monkey" ) ;
-			VPPhraseSpec verb = nlgFactory.createVerbPhrase( "chase" ) ; ;
-			subject.addModifier( "fast" ) ;
-			
-			SPhraseSpec p = nlgFactory.createClause( ) ;
-			p.setSubject( subject ) ;
-			p.setVerb( verb ) ;
-			p.setObject( object ) ;
-			
-			String outputA = realiser.realiseSentence( p ) ;
-			assertEquals( "Fast Mary chases the monkey.", outputA ) ;
-			
-			verb.addModifier( "quickly" ) ;
-			
-			String outputB = realiser.realiseSentence( p ) ;
-			assertEquals( "Fast Mary quickly chases the monkey.", outputB ) ;
-		 } // testSection8
+	public void section8_Test() { 
+		Lexicon lexicon = Lexicon.getDefaultLexicon();      // default simplenlg lexicon
+		NLGFactory nlgFactory = new NLGFactory( lexicon );  // factory based on lexicon
+		Realiser realiser = new Realiser( lexicon );
+		
+		NPPhraseSpec subject = nlgFactory.createNounPhrase( "Mary" );
+		NPPhraseSpec object = nlgFactory.createNounPhrase( "the monkey" );
+		VPPhraseSpec verb = nlgFactory.createVerbPhrase( "chase" );;
+		subject.addModifier( "fast" );
+		
+		SPhraseSpec p = nlgFactory.createClause();
+		p.setSubject( subject );
+		p.setVerb( verb );
+		p.setObject( object );
+		
+		String outputA = realiser.realiseSentence( p );
+		assertEquals( "Fast Mary chases the monkey.", outputA );
+		
+		verb.addModifier( "quickly" );
+		
+		String outputB = realiser.realiseSentence( p );
+		assertEquals( "Fast Mary quickly chases the monkey.", outputB );
+	 } 
 	
 	// there is no code specified in section 9
 	
@@ -344,79 +309,79 @@ public class TutorialTest extends SimpleNLG4Test {
 	 * test section 10 code
 	 */
 	@Test
-		public void testSection10( ) { 
-			Lexicon lexicon = Lexicon.getDefaultLexicon( ) ;      // default simplenlg lexicon
-			NLGFactory nlgFactory = new NLGFactory( lexicon ) ;  // factory based on lexicon
-			Realiser realiser = new Realiser( lexicon ) ;
-			
-			NPPhraseSpec subject1 = nlgFactory.createNounPhrase( "Mary" ) ;
-			NPPhraseSpec subject2 = nlgFactory.createNounPhrase( "your", "giraffe" ) ;
-			
-			// next line is not correct ~ should be nlgFactory.createCoordinatedPhrase ~ may be corrected in the API
-			CoordinatedPhraseElement subj = nlgFactory.createCoordinatedPhrase( subject1, subject2 ) ;
-			
-			VPPhraseSpec verb = nlgFactory.createVerbPhrase( "chase" ) ; ;
+	public void section10_Test() { 
+		Lexicon lexicon = Lexicon.getDefaultLexicon();      // default simplenlg lexicon
+		NLGFactory nlgFactory = new NLGFactory( lexicon );  // factory based on lexicon
+		Realiser realiser = new Realiser( lexicon );
+		
+		NPPhraseSpec subject1 = nlgFactory.createNounPhrase( "Mary" );
+		NPPhraseSpec subject2 = nlgFactory.createNounPhrase( "your", "giraffe" );
+		
+		// next line is not correct ~ should be nlgFactory.createCoordinatedPhrase ~ may be corrected in the API
+		CoordinatedPhraseElement subj = nlgFactory.createCoordinatedPhrase( subject1, subject2 );
+		
+		VPPhraseSpec verb = nlgFactory.createVerbPhrase( "chase" );;
 
-			SPhraseSpec p = nlgFactory.createClause( ) ;
-			p.setSubject( subj ) ;
-			p.setVerb( verb ) ;
-			p.setObject( "the monkey" ) ;
-			
-			String outputA = realiser.realiseSentence( p ) ;
-			assertEquals( "Mary and your giraffe chase the monkey.", outputA ) ;
-			
-			NPPhraseSpec object1 = nlgFactory.createNounPhrase( "the monkey" ) ;
-			NPPhraseSpec object2 = nlgFactory.createNounPhrase( "George" ) ;
-			
-			// next line is not correct ~ should be nlgFactory.createCoordinatedPhrase ~ may be corrected in the API
-			CoordinatedPhraseElement obj = nlgFactory.createCoordinatedPhrase( object1, object2 ) ;
-			obj.addCoordinate( "Martha" ) ;
-			p.setObject( obj ) ;
-			
-			String outputB = realiser.realiseSentence( p ) ;
-			assertEquals( "Mary and your giraffe chase the monkey, George and Martha.", outputB ) ;
+		SPhraseSpec p = nlgFactory.createClause();
+		p.setSubject( subj );
+		p.setVerb( verb );
+		p.setObject( "the monkey" );
+		
+		String outputA = realiser.realiseSentence( p );
+		assertEquals( "Mary and your giraffe chase the monkey.", outputA );
+		
+		NPPhraseSpec object1 = nlgFactory.createNounPhrase( "the monkey" );
+		NPPhraseSpec object2 = nlgFactory.createNounPhrase( "George" );
+		
+		// next line is not correct ~ should be nlgFactory.createCoordinatedPhrase ~ may be corrected in the API
+		CoordinatedPhraseElement obj = nlgFactory.createCoordinatedPhrase( object1, object2 );
+		obj.addCoordinate( "Martha" );
+		p.setObject( obj );
+		
+		String outputB = realiser.realiseSentence( p );
+		assertEquals( "Mary and your giraffe chase the monkey, George and Martha.", outputB );
 
-			obj.setFeature( Feature.CONJUNCTION, "or" ) ;
-			
-			String outputC = realiser.realiseSentence( p ) ;
-			assertEquals( "Mary and your giraffe chase the monkey, George or Martha.", outputC ) ;
-	} // testSection10
+		obj.setFeature( Feature.CONJUNCTION, "or" );
+		
+		String outputC = realiser.realiseSentence( p );
+		assertEquals( "Mary and your giraffe chase the monkey, George or Martha.", outputC );
+	}
 	
 	/**
 	 * test section 11 code
 	 */
 	@Test
-	public void testSection11( ) {
-		Lexicon lexicon = Lexicon.getDefaultLexicon( ) ;     // default simplenlg lexicon
-		NLGFactory nlgFactory = new NLGFactory( lexicon ) ;  // factory based on lexicon
+	public void section11_Test() {
+		Lexicon lexicon = Lexicon.getDefaultLexicon();     // default simplenlg lexicon
+		NLGFactory nlgFactory = new NLGFactory( lexicon );  // factory based on lexicon
 
-		Realiser realiser = new Realiser( lexicon ) ;
+		Realiser realiser = new Realiser( lexicon );
 		
-		SPhraseSpec pA = nlgFactory.createClause( "Mary", "chase", "the monkey" ) ;
-		pA.addComplement( "in the park" ) ;
+		SPhraseSpec pA = nlgFactory.createClause( "Mary", "chase", "the monkey" );
+		pA.addComplement( "in the park" );
 		
-		String outputA = realiser.realiseSentence( pA ) ;		
-		assertEquals( "Mary chases the monkey in the park.", outputA ) ;
+		String outputA = realiser.realiseSentence( pA );		
+		assertEquals( "Mary chases the monkey in the park.", outputA );
 		
 		// alternative build paradigm
-		NPPhraseSpec place = nlgFactory.createNounPhrase( "park" ) ;
-		SPhraseSpec pB = nlgFactory.createClause( "Mary", "chase", "the monkey" ) ;
+		NPPhraseSpec place = nlgFactory.createNounPhrase( "park" );
+		SPhraseSpec pB = nlgFactory.createClause( "Mary", "chase", "the monkey" );
 		
 		// next line is depreciated ~ may be corrected in the API
-		place.setDeterminer( "the" ) ;
-		PPPhraseSpec pp = nlgFactory.createPrepositionPhrase( ) ;
-		pp.addComplement( place ) ;
-		pp.setPreposition( "in" ) ;
+		place.setDeterminer( "the" );
+		PPPhraseSpec pp = nlgFactory.createPrepositionPhrase();
+		pp.addComplement( place );
+		pp.setPreposition( "in" );
 		
-		pB.addComplement( pp ) ;
+		pB.addComplement( pp );
 		
-		String outputB = realiser.realiseSentence( pB ) ;		
-		assertEquals( "Mary chases the monkey in the park.", outputB ) ;
+		String outputB = realiser.realiseSentence( pB );		
+		assertEquals( "Mary chases the monkey in the park.", outputB );
 		
-		place.addPreModifier( "leafy" ) ;
+		place.addPreModifier( "leafy" );
 		
-		String outputC = realiser.realiseSentence( pB ) ;		
-		assertEquals( "Mary chases the monkey in the leafy park.", outputC ) ;
+		String outputC = realiser.realiseSentence( pB );		
+		assertEquals( "Mary chases the monkey in the leafy park.", outputC );
 	 } // testSection11
 
 	// section12 only has a code table as illustration
@@ -425,63 +390,61 @@ public class TutorialTest extends SimpleNLG4Test {
 	 * test section 13 code
 	 */
 	@Test
-	public void testSection13( ) {
-		Lexicon lexicon = Lexicon.getDefaultLexicon( ) ;     // default simplenlg lexicon
-		NLGFactory nlgFactory = new NLGFactory( lexicon ) ;  // factory based on lexicon
+	public void section13_Test() {
+		Lexicon lexicon = Lexicon.getDefaultLexicon();     // default simplenlg lexicon
+		NLGFactory nlgFactory = new NLGFactory( lexicon );  // factory based on lexicon
 
-		Realiser realiser = new Realiser( lexicon ) ;
+		Realiser realiser = new Realiser( lexicon );
 	
-		SPhraseSpec s1 = nlgFactory.createClause( "my cat",   "like", "fish"  ) ;
-		SPhraseSpec s2 = nlgFactory.createClause( "my dog",  "like",  "big bones" ) ;
-		SPhraseSpec s3 = nlgFactory.createClause( "my horse", "like", "grass" ) ;		
+		SPhraseSpec s1 = nlgFactory.createClause( "my cat",   "like", "fish"  );
+		SPhraseSpec s2 = nlgFactory.createClause( "my dog",  "like",  "big bones" );
+		SPhraseSpec s3 = nlgFactory.createClause( "my horse", "like", "grass" );		
 		
-		CoordinatedPhraseElement c = nlgFactory.createCoordinatedPhrase( ) ;
-		c.addCoordinate( s1 ) ;
-		c.addCoordinate( s2 ) ; // gives the wrong result ~ should be 'bones' but get 'bone' !
-		c.addCoordinate( s3 ) ;
+		CoordinatedPhraseElement c = nlgFactory.createCoordinatedPhrase();
+		c.addCoordinate( s1 );
+		c.addCoordinate( s2 ); 
+		c.addCoordinate( s3 );
 		
-		String outputA = realiser.realiseSentence( c ) ;
-		assertEquals( "My cat likes fish, my dog likes big bones and my horse likes grass.", outputA ) ;
+		String outputA = realiser.realiseSentence( c );
+		assertEquals( "My cat likes fish, my dog likes big bones and my horse likes grass.", outputA );
 		
-		SPhraseSpec p = nlgFactory.createClause( "I", "be",  "happy" ) ;
-		SPhraseSpec q = nlgFactory.createClause( "I", "eat", "fish" ) ;
-		q.setFeature( Feature.COMPLEMENTISER, "because" ) ;
-		q.setFeature( Feature.TENSE, Tense.PAST ) ;
-		p.addComplement( q ) ;
+		SPhraseSpec p = nlgFactory.createClause( "I", "be",  "happy" );
+		SPhraseSpec q = nlgFactory.createClause( "I", "eat", "fish" );
+		q.setFeature( Feature.COMPLEMENTISER, "because" );
+		q.setFeature( Feature.TENSE, Tense.PAST );
+		p.addComplement( q );
 		
-		String outputB = realiser.realiseSentence( p ) ;
-		assertEquals( "I am happy because I ate fish.", outputB ) ;
-	} // testSection13
+		String outputB = realiser.realiseSentence( p );
+		assertEquals( "I am happy because I ate fish.", outputB );
+	} 
 	
 	/**
 	 * test section 14 code
 	 */
 	@Test
-	public void testSection14( ) {
-		Lexicon lexicon = Lexicon.getDefaultLexicon( ) ;     // default simplenlg lexicon
-		NLGFactory nlgFactory = new NLGFactory( lexicon ) ;  // factory based on lexicon
+	public void section14_Test() {
+		Lexicon lexicon = Lexicon.getDefaultLexicon();     // default simplenlg lexicon
+		NLGFactory nlgFactory = new NLGFactory( lexicon );  // factory based on lexicon
 
-		Realiser realiser = new Realiser( lexicon ) ;
+		Realiser realiser = new Realiser( lexicon );
 	
-		SPhraseSpec p1 = nlgFactory.createClause( "Mary", "chase", "the monkey" ) ;
-		SPhraseSpec p2 = nlgFactory.createClause( "The monkey", "fight back" ) ;
-		SPhraseSpec p3 = nlgFactory.createClause( "Mary", "be", "nervous" ) ;
+		SPhraseSpec p1 = nlgFactory.createClause( "Mary", "chase", "the monkey" );
+		SPhraseSpec p2 = nlgFactory.createClause( "The monkey", "fight back" );
+		SPhraseSpec p3 = nlgFactory.createClause( "Mary", "be", "nervous" );
 		
-		DocumentElement s1 = nlgFactory.createSentence( p1 ) ;
-		DocumentElement s2 = nlgFactory.createSentence( p2 ) ;
-		DocumentElement s3 = nlgFactory.createSentence( p3 ) ;
+		DocumentElement s1 = nlgFactory.createSentence( p1 );
+		DocumentElement s2 = nlgFactory.createSentence( p2 );
+		DocumentElement s3 = nlgFactory.createSentence( p3 );
 		
-		DocumentElement par1 = nlgFactory.createParagraph( Arrays.asList( s1, s2, s3 ) ) ;
+		DocumentElement par1 = nlgFactory.createParagraph( Arrays.asList( s1, s2, s3 ) );
 		
-		String output14a = realiser.realise( par1 ).getRealisation() ;
-		assertEquals( "Mary chases the monkey. The monkey fights back. Mary is nervous.\n\n", output14a ) ;
-		//   actual output ~  Mary chases the monkey. The monkey fights back. Mary is nervous.
-		// So what exactly is JUnit not happy about?
+		String output14a = realiser.realise( par1 ).getRealisation();
+		assertEquals( "Mary chases the monkey. The monkey fights back. Mary is nervous.\n\n", output14a );
  
-		DocumentElement section = nlgFactory.createSection( "The Trials and Tribulation of Mary and the Monkey" ) ;
-        section.addComponent( par1 ) ;
-        String output14b = realiser.realise( section ).getRealisation() ;
-        assertEquals( "The Trials and Tribulation of Mary and the Monkey\nMary chases the monkey. The monkey fights back. Mary is nervous.\n\n", output14b ) ;
-	} // testSection14
+		DocumentElement section = nlgFactory.createSection( "The Trials and Tribulation of Mary and the Monkey" );
+        section.addComponent( par1 );
+        String output14b = realiser.realise( section ).getRealisation();
+        assertEquals( "The Trials and Tribulation of Mary and the Monkey\nMary chases the monkey. The monkey fights back. Mary is nervous.\n\n", output14b );
+	}
 
-} // class
+} 

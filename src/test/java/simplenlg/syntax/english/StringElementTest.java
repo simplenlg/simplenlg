@@ -19,13 +19,21 @@
 
 package simplenlg.syntax.english;
 
+import static org.junit.Assert.*;
+
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
+import simplenlg.framework.CoordinatedPhraseElement;
 import simplenlg.framework.DocumentElement;
 import simplenlg.framework.LexicalCategory;
+import simplenlg.framework.NLGFactory;
+import simplenlg.framework.StringElement;
+import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
+import simplenlg.realiser.english.Realiser;
 
 /**
  * Tests for string elements as parts of larger phrases
@@ -33,24 +41,31 @@ import simplenlg.phrasespec.SPhraseSpec;
  * @author bertugatt
  * 
  */
-public class StringElementTests extends SimpleNLG4Test {
+public class StringElementTest {
 
-	public StringElementTests(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+	private Lexicon lexicon = null;
+	private NLGFactory phraseFactory = null;
+	private Realiser realiser = null;
+	
+	@Before
+	public void setup() {
+		lexicon = Lexicon.getDefaultLexicon();
+		phraseFactory = new NLGFactory(lexicon);
+		realiser = new Realiser(lexicon);
 	}
 	
-	@Override
 	@After
 	public void tearDown() {
-		super.tearDown();
+		lexicon = null;
+		phraseFactory = null;
+		realiser = null;
 	}
 
 	/**
 	 * Test that string elements can be used as heads of NP
 	 */
 	@Test
-	public void testStringElementAsHead() {
+	public void stringElementAsHeadTest() {
 		NPPhraseSpec np = this.phraseFactory.createNounPhrase();
 		np.setHead(phraseFactory.createStringElement("dogs and cats"));
 		np.setSpecifier(phraseFactory.createWord("the",
@@ -63,7 +78,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * Sentences whose VP is a canned string
 	 */
 	@Test
-	public void testStringElementAsVP() {
+	public void stringElementAsVPTest() {
 		SPhraseSpec s = this.phraseFactory.createClause();
 		s.setVerbPhrase(this.phraseFactory.createStringElement("eats and drinks"));
 		s.setSubject(this.phraseFactory.createStringElement("the big fat man"));
@@ -76,7 +91,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * "Mary loves NP[the cow]."
 	 */
 	@Test
-	public void testTailNPStringElement() {
+	public void tailNPStringElementTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		senSpec.addComplement((this.phraseFactory.createStringElement("mary loves")));
 		NPPhraseSpec np = this.phraseFactory.createNounPhrase();
@@ -92,7 +107,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * Test for a NP followed by a canned text: "NP[A cat] loves a dog".
 	 */
 	@Test
-	public void testFrontNPStringElement() {
+	public void frontNPStringElementTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		NPPhraseSpec np = this.phraseFactory.createNounPhrase();
 		np.setHead("cat");
@@ -110,7 +125,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * "The world loves NP[ABBA] but not a sore loser."
 	 */
 	@Test
-	public void testMulitpleStringElements() {
+	public void mulitpleStringElementsTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		senSpec.addComplement(this.phraseFactory.createStringElement("the world loves"));
 		NPPhraseSpec np = this.phraseFactory.createNounPhrase();
@@ -127,7 +142,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * "NP[John is] a trier NP[for cheese]."
 	 */
 	@Test
-	public void testMulitpleNPElements() {
+	public void mulitpleNPElementsTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		NPPhraseSpec frontNoun = this.phraseFactory.createNounPhrase();
 		frontNoun.setHead("john");
@@ -151,7 +166,7 @@ public class StringElementTests extends SimpleNLG4Test {
      * NP[first quarter results].
 	 */
 	@Test
-	public void testWhiteSpaceNP() {
+	public void whiteSpaceNPTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		NPPhraseSpec firstNoun = this.phraseFactory.createNounPhrase();
 		firstNoun.setDeterminer("the");
@@ -188,7 +203,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * "NP[Yahya] was sleeping his own and dreaming etc."
 	 */
 	
-	public void testPointAbsorption() {
+	public void pointAbsorptionTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		NPPhraseSpec firstNoun = this.phraseFactory.createNounPhrase();
 		firstNoun.setNoun("yaha");
@@ -206,7 +221,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * Point absorption test: As above, but with trailing white space.
 	 * "NP[Yaha] was sleeping his own and dreaming etc.      "
 	 */
-	public void testPointAbsorptionTrailingWhiteSpace() {
+	public void pointAbsorptionTrailingWhiteSpaceTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		NPPhraseSpec firstNoun = this.phraseFactory.createNounPhrase();
 		firstNoun.setNoun("yaha");
@@ -224,7 +239,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * "NP[Yahya] and friends etc. went to NP[the park] to play."
 	 */
 	@Test
-	public void testMiddleAbbreviation() {
+	public void middleAbbreviationTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		NPPhraseSpec firstNoun = this.phraseFactory.createNounPhrase();
 		firstNoun.setNoun("yahya");
@@ -247,7 +262,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * "I see an NP[elephant]" 
 	 */
 	@Test
-	public void testStringIndefiniteArticleInflectionVowel() {
+	public void stringIndefiniteArticleInflectionVowelTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		senSpec.addComplement(this.phraseFactory.createStringElement("I see a"));
 		NPPhraseSpec firstNoun = this.phraseFactory.createNounPhrase("elephant");
@@ -264,7 +279,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * "I see NP[a elephant]" --> 
 	 */
 	@Test
-	public void testNPIndefiniteArticleInflectionVowel() {
+	public void NPIndefiniteArticleInflectionVowelTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		senSpec.addComplement(this.phraseFactory.createStringElement("I see"));
 		NPPhraseSpec firstNoun = this.phraseFactory.createNounPhrase("elephant");
@@ -283,7 +298,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * "I see an NP[cow]" 
 	 */
 	@Test
-	public void testStringIndefiniteArticleInflectionConsonant() {
+	public void stringIndefiniteArticleInflectionConsonantTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		senSpec.addComplement(this.phraseFactory.createStringElement("I see an"));
 		NPPhraseSpec firstNoun = this.phraseFactory.createNounPhrase("cow");
@@ -300,7 +315,7 @@ public class StringElementTests extends SimpleNLG4Test {
 	 * "I see NP[an cow]" --> 
 	 */
 	@Test
-	public void testNPIndefiniteArticleInflectionConsonant() {
+	public void NPIndefiniteArticleInflectionConsonantTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		senSpec.addComplement(this.phraseFactory.createStringElement("I see"));
 		NPPhraseSpec firstNoun = this.phraseFactory.createNounPhrase("cow");
@@ -311,6 +326,23 @@ public class StringElementTests extends SimpleNLG4Test {
 		// Do not attempt "an" -> "a"
 		assertEquals("I see an cow.", 
 				this.realiser.realise(completeSen).getRealisation());
+	}
+	
+	
+	/**
+	 * aggregationStringElementTest: Test to see if we can aggregate two StringElements in a CoordinatedPhraseElement.
+	 */
+	@Test
+	public void aggregationStringElementTest() {
+		
+		CoordinatedPhraseElement coordinate = 
+				phraseFactory.createCoordinatedPhrase(new StringElement("John is going to Tesco"), 
+						                              new StringElement("Mary is going to Sainsburys")); 
+	    SPhraseSpec sentence = phraseFactory.createClause();
+	    sentence.addComplement(coordinate);
+	    
+	    assertEquals("John is going to Tesco and Mary is going to Sainsburys.", 
+				realiser.realiseSentence(sentence));
 	}
 	
 }

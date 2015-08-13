@@ -38,7 +38,6 @@ import simplenlg.framework.WordElement;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.phrasespec.VPPhraseSpec;
 
-// TODO: Auto-generated Javadoc
 /**
  * These are tests for the verb phrase and coordinate VP classes.
  * @author agatt
