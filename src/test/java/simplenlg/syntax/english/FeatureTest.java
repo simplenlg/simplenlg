@@ -62,10 +62,10 @@ public class FeatureTest extends SimpleNLG4Test {
 	}
 
 	/**
-	 * Basic tests.
+	 * Tests use of the Possessive Feature.
 	 */
 	@Test
-	public void testHerLover() {
+	public void testPossessiveFeature_PastTense() {
 		this.phraseFactory.setLexicon(this.lexicon);
 		this.realiser.setLexicon(this.lexicon);
 		
@@ -102,9 +102,7 @@ public class FeatureTest extends SimpleNLG4Test {
 
 		// Realise the sentence
 		NLGElement realised = this.realiser.realise(sentence1);
-
-		// Retrieve the realisation and dump it to the console
-//		System.out.println(realised.getRealisation()); 		
+ 		
 		Assert.assertEquals("After two weeks, he was her lover for a fortnight.",
 				realised.getRealisation());
 	}
@@ -113,7 +111,7 @@ public class FeatureTest extends SimpleNLG4Test {
 	 * Basic tests.
 	 */
 	@Test
-	public void testHerLovers() {
+	public void testTwoPossessiveFeature_PastTense() {
 		this.phraseFactory.setLexicon(this.lexicon);
 
 		// Create the pronoun 'she'
@@ -156,18 +154,15 @@ public class FeatureTest extends SimpleNLG4Test {
 		// Realise the sentence
 		NLGElement realised = this.realiser.realise(sentence1);
 
-		// Retrieve the realisation and dump it to the console
-//		System.out.println(realised.getRealisation()); 
-
 		Assert.assertEquals("After two weeks, they were her lovers for a fortnight.", //$NON-NLS-1$
 				realised.getRealisation());
 	}
 
 	/**
-	 * combine two S's using cue phrase and gerund.
+	 * Test use of the Complementiser feature by combining two S's using cue phrase and gerund.
 	 */
 	@Test
-	public void testDavesHouse() {
+	public void testComplementiserFeature_PastTense() {
 		this.phraseFactory.setLexicon(this.lexicon);
 
 		PhraseElement born = phraseFactory.createClause("Dave Bus", "be", "born");
@@ -181,7 +176,6 @@ public class FeatureTest extends SimpleNLG4Test {
 		PhraseElement clause = phraseFactory.createClause(theHouse, "be", phraseFactory.createPrepositionPhrase("in", "Edinburgh"));
 		DocumentElement sentence = docFactory.createSentence(clause);
 		NLGElement realised = realiser.realise(sentence);
-//		System.out.println(realised.getRealisation()); 
 
 		// Retrieve the realisation and dump it to the console
 		Assert.assertEquals("The house which Dave Bus was born in is in Edinburgh.",
@@ -189,10 +183,10 @@ public class FeatureTest extends SimpleNLG4Test {
 	}
 
 	/**
-	 * combine two S's using cue phrase and gerund.
+	 * Test use of the Complementiser feature in a {@link CoordinatedPhraseElement} by combine two S's using cue phrase and gerund.
 	 */
 	@Test
-	public void testDaveAndAlbertsHouse() {
+	public void testComplementiserFeatureInACoordinatePhrase_PastTense() {
 		this.phraseFactory.setLexicon(this.lexicon);
 
 		NLGElement dave = phraseFactory.createWord("Dave Bus", LexicalCategory.NOUN);
@@ -213,16 +207,17 @@ public class FeatureTest extends SimpleNLG4Test {
 		DocumentElement sentence = docFactory.createSentence(clause);
 		
 		NLGElement realised = realiser.realise(sentence);
-//		System.out.println(realised.getRealisation()); 
 
 		// Retrieve the realisation and dump it to the console
 		Assert.assertEquals("The house which Dave Bus and Albert were born in is in Edinburgh.",
 				realised.getRealisation());
 	}
 
-	
+	/**
+	 * Test the use of the Progressive and Complementiser Features in future tense.
+	 */
 	@Test
-	public void testEngineerHolidays() {
+	public void testProgressiveAndComplementiserFeatures_FutureTense() {
 		this.phraseFactory.setLexicon(this.lexicon);
 
 		// Inner clause is 'I' 'make' 'sentence' 'for'.
@@ -250,7 +245,6 @@ public class FeatureTest extends SimpleNLG4Test {
 		outer.addPostModifier("tomorrow");
 		DocumentElement sentence = docFactory.createSentence(outer);
 		NLGElement realised = realiser.realise(sentence);
-//		System.out.println(realised.getRealisation()); 
 
 		// Retrieve the realisation and dump it to the console
 		Assert.assertEquals("The engineer whom I am making sentence for will be going to holidays tomorrow.",
@@ -258,8 +252,11 @@ public class FeatureTest extends SimpleNLG4Test {
 	}
 
 	
+	/**
+	 * Tests the use of the Complementiser, Passive, Perfect features in past tense.
+	 */
 	@Test
-	public void testHousePoker() {
+	public void testComplementiserPassivePerfectFeatures_PastTense() {
 		setUp();
 		this.realiser.setLexicon(this.lexicon);
 		
@@ -278,17 +275,18 @@ public class FeatureTest extends SimpleNLG4Test {
 		outer.setFeature(Feature.PERFECT, true);
 		
 		DocumentElement sentence = docFactory.createSentence(outer);
-		NLGElement realised = realiser.realise(sentence);
-//		System.out.println(realised.getRealisation()); 
+		NLGElement realised = realiser.realise(sentence); 
 
 		// Retrieve the realisation and dump it to the console
 		Assert.assertEquals("The house where I played poker has been abandoned since 1986.",
 				realised.getRealisation());
 	}
 	
-	
+	/**
+	 * Tests the user of the progressive and complementiser featuers in past tense.
+	 */
 	@Test
-	public void testMayonnaise() {
+	public void testProgressiveComplementiserFeatures_PastTense() {
 		this.phraseFactory.setLexicon(this.lexicon);
 
 		NLGElement sandwich = phraseFactory.createNounPhrase(LexicalCategory.NOUN, "sandwich");
@@ -308,11 +306,25 @@ public class FeatureTest extends SimpleNLG4Test {
 		
 		DocumentElement sentence = docFactory.createSentence(first);
 		NLGElement realised = realiser.realise(sentence);
-//		System.out.println(realised.getRealisation()); 
 
 		// Retrieve the realisation and dump it to the console
 		Assert.assertEquals("I was making sandwiches when the mayonnaise ran out.",
 				realised.getRealisation());
+	}
+	
+   /**
+	* Test the use of Passive in creating a Passive sentence structure: <Object> + [be] + <verb> + [by] + [Subject].
+	*/
+	@Test
+	public void testPassiveFeature() {
+		this.realiser.setLexicon(this.lexicon);
+	
+		PhraseElement phrase = phraseFactory.createClause("recession", "affect", "value");
+		phrase.setFeature(Feature.PASSIVE, true);
+		DocumentElement sentence = docFactory.createSentence(phrase);
+		NLGElement realised = realiser.realise(sentence);
+	
+		Assert.assertEquals("Value is affected by recession.", realised.getRealisation());
 	}
 	
 	
