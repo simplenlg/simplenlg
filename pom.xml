@@ -1,111 +1,120 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
   
 	
-	<groupId>uk.ac.abdn</groupId>
-	<artifactId>SimpleNLG</artifactId>
-	<version>4.4.7-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <groupId>uk.ac.abdn</groupId>
+    <artifactId>SimpleNLG</artifactId>
+    <version>4.4.7-SNAPSHOT</version>
+    <packaging>jar</packaging>
 	
-  	<name>SimpleNLG</name>
-  	<description>Java API for Natural Language Generation</description>
-	<url>https://github.com/simplenlg/simplenlg</url>
+    <name>SimpleNLG</name>
+    <description>Java API for Natural Language Generation</description>
+    <url>https://github.com/simplenlg/simplenlg</url>
   
-	<licenses>
-	  <license>
-	    <name>Mozilla Public License, Version 1.1</name>
-	    <url>https://www.mozilla.org/MPL/1.1/</url>
-	    <distribution>repo</distribution>
-	  </license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>Mozilla Public License, Version 1.1</name>
+            <url>https://www.mozilla.org/MPL/1.1/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
 
-  	<properties>
-    	 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
   
-	<dependencies>
-  		<dependency>
-    		<groupId>junit</groupId>
-     		<artifactId>junit</artifactId>
-			<version>4.4</version>
-        	<scope>system</scope>
-			<systemPath>${basedir}/lib/junit-4.4.jar</systemPath>
-		</dependency>
-  		<dependency>
-   			<groupId>gov.nih.nlm.nls.lexAccess.Api</groupId>
-    		<artifactId>LexAccess2011dist</artifactId>
-    		<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/lexAccess2011dist.jar</systemPath>
-  		</dependency>
-		<dependency>
-		      <groupId>org.apache.maven.plugins</groupId>
-		      <artifactId>maven-antrun-plugin</artifactId>
-		      <version>1.8</version>
-		</dependency>    
-		
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.googlecode.jaxb-namespaceprefixmapper-interfaces</groupId>
+            <artifactId>JAXBNamespacePrefixMapper</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>gov.nih.nlm.nls</groupId>
+            <artifactId>LexAccess2011dist</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+        </dependency> 
+    </dependencies>
 	
 	
-	<distributionManagement>
-	  <snapshotRepository>
-	    <id>ossrh</id>
-	    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-	  </snapshotRepository>
-	  <repository>
-	    <id>ossrh</id>
-	    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-	  </repository>
-	</distributionManagement>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
   	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
-			    <executions>
-			    	<execution>
-						<id>unzip</id>
-			        	<phase>process-test-resources</phase>
-			            <configuration>
-			            	<tasks>
-								<echo message="**** Unziping NIH Lexicon..."/>
-								<unzip src="${basedir}/src/test/resources/NIHLexicon/lexAccess2011.data.zip" dest="${basedir}/src/test/resources/NIHLexicon/" overwrite="true"/>
-			                    </tasks>
-			                </configuration>
-				            <goals>
-				            	<goal>run</goal>
-				            </goals>
-			            </execution>
-				    	<execution>
-							<id>delete</id>
-				        	<phase>clean</phase>
-				            <configuration>
-				            	<tasks>
-									<echo message="**** Deleting NIH Lexicon..."/>
-									<delete file="${basedir}/src/test/resources/NIHLexicon/lexAccess2011.data"/>
-				                    </tasks>
-				                </configuration>
-					            <goals>
-					            	<goal>run</goal>
-					            </goals>
-				            </execution>
-			        </executions>
-			</plugin>
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.5</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>unzip</id>
+                        <phase>process-test-resources</phase>
+                        <configuration>
+                            <tasks>
+                                <echo message="**** Unziping NIH Lexicon..."/>
+                                <unzip src="${basedir}/src/test/resources/NIHLexicon/lexAccess2011.data.zip" dest="${basedir}/src/test/resources/NIHLexicon/" overwrite="true"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>delete</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <tasks>
+                                <echo message="**** Deleting NIH Lexicon..."/>
+                                <delete file="${basedir}/src/test/resources/NIHLexicon/lexAccess2011.data"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.5</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 	
 
 </project>
