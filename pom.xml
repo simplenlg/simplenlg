@@ -72,7 +72,7 @@
 			        	<phase>process-test-resources</phase>
 			            <configuration>
 			            	<tasks>
-								<echo message="**** Unziping NIH Lexicon..."/>
+								<echo message="***** Unziping NIH Lexicon..."/>
 								<unzip src="${basedir}/src/test/resources/NIHLexicon/lexAccess2011.data.zip" dest="${basedir}/src/test/resources/NIHLexicon/" overwrite="true"/>
 			                    </tasks>
 			                </configuration>
@@ -85,7 +85,7 @@
 				        	<phase>clean</phase>
 				            <configuration>
 				            	<tasks>
-									<echo message="**** Deleting NIH Lexicon..."/>
+									<echo message="***** Deleting NIH Lexicon..."/>
 									<delete file="${basedir}/src/test/resources/NIHLexicon/lexAccess2011.data"/>
 				                    </tasks>
 				                </configuration>
