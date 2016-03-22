@@ -29,9 +29,12 @@ import org.junit.Test;
 
 import simplenlg.features.Feature;
 import simplenlg.features.Form;
+import simplenlg.features.LexicalFeature;
+import simplenlg.features.Gender;
 import simplenlg.framework.DocumentElement;
 import simplenlg.framework.NLGElement;
 import simplenlg.framework.NLGFactory;
+import simplenlg.framework.LexicalCategory;
 import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.PPPhraseSpec;
@@ -140,5 +143,31 @@ public class RealiserTest {
 		
 	}
 	
+	/**
+	 * Tests the correct pluralization with possessives (GitHub issue #9)
+	 */
+	@Test
+	public void correctPluralizationWithPossessives() {
+                NPPhraseSpec sisterNP = nlgFactory.createNounPhrase("sister");
+                NLGElement word = nlgFactory.createInflectedWord("Albert Einstein",
+                                                                 LexicalCategory.NOUN);
+                word.setFeature(LexicalFeature.PROPER, true);
+                NPPhraseSpec possNP = nlgFactory.createNounPhrase(word);
+                possNP.setFeature(Feature.POSSESSIVE, true);
+                sisterNP.setSpecifier(possNP);
+                Assert.assertEquals("Albert Einstein's sister",
+                                    realiser.realise(sisterNP).getRealisation());
+                sisterNP.setPlural(true);
+                Assert.assertEquals("Albert Einstein's sisters",
+                                    realiser.realise(sisterNP).getRealisation());
+                sisterNP.setPlural(false);
+                possNP.setFeature(LexicalFeature.GENDER, Gender.MASCULINE);
+                possNP.setFeature(Feature.PRONOMINAL, true);
+                Assert.assertEquals("his sister",
+                                    realiser.realise(sisterNP).getRealisation());
+                sisterNP.setPlural(true);
+                Assert.assertEquals("his sisters",
+                                    realiser.realise(sisterNP).getRealisation());
+	}
 
 }
