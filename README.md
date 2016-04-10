@@ -14,7 +14,7 @@ SimpleNLG is intended to function as a "[realisation engine](http://en.wikipedia
 
 Current release (English)
 -------------------------
-The current release of SimpleNLG is V4.4.3 ([API](https://cdn.rawgit.com/simplenlg/simplenlg/master/docs/javadoc/index.html)). The "official" version of SimpleNLG only produces texts in English. However, versions for other languages are under development, see the Papers and Publications page and [SimpleNLG discussion list](https://groups.google.com/forum/#!forum/simplenlg) for details.
+The current release of SimpleNLG is V4.4.8 ([API](https://cdn.rawgit.com/simplenlg/simplenlg/master/docs/javadoc/index.html)). The "official" version of SimpleNLG only produces texts in English. However, versions for other languages are under development, see the Papers and Publications page and [SimpleNLG discussion list](https://groups.google.com/forum/#!forum/simplenlg) for details.
 
 Please note that earlier versions of SimpleNLG have different licensing, in particular versions before V4.0 cannot be used commercially.
 
