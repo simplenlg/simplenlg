@@ -52,6 +52,17 @@ public class PhraseSpecTest extends SimpleNLG4Test {
 	}
 	
 	/**
+	 * Check that empty phrases are not realised as "null"
+	 */
+	@Test
+	public void emptyPhraseRealisationTest() {
+		SPhraseSpec emptyClause = this.phraseFactory.createClause();
+		Assert.assertEquals("", this.realiser.realise(emptyClause)
+				.getRealisation());
+	}
+	
+	
+	/**
 	 * Test SPhraseSpec
 	 */
 	@Test

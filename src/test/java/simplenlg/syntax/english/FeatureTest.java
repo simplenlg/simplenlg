@@ -31,7 +31,10 @@ import simplenlg.framework.LexicalCategory;
 import simplenlg.framework.NLGElement;
 import simplenlg.framework.NLGFactory;
 import simplenlg.framework.PhraseElement;
+import simplenlg.phrasespec.AdvPhraseSpec;
+import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
+import simplenlg.phrasespec.VPPhraseSpec;
 
 /**
  * Tests that check that realization of different Features against NLGElements.
@@ -327,6 +330,39 @@ public class FeatureTest extends SimpleNLG4Test {
 		Assert.assertEquals("Value is affected by recession.", realised.getRealisation());
 	}
 	
+	
+	/**
+	 * Test for repetition of the future auxiliary "will", courtesy of Luxor
+	 * Vlonjati
+	 */
+	@Test
+	public void testFutureTense() {
+		SPhraseSpec test = this.phraseFactory.createClause();
+
+		NPPhraseSpec subj = this.phraseFactory.createNounPhrase("I");
+
+		VPPhraseSpec verb = this.phraseFactory.createVerbPhrase("go");
+
+		AdvPhraseSpec adverb = this.phraseFactory
+				.createAdverbPhrase("tomorrow");
+
+		test.setSubject(subj);
+		test.setVerbPhrase(verb);
+		test.setFeature(Feature.TENSE, Tense.FUTURE);
+		test.addPostModifier(adverb);
+		String sentence = realiser.realiseSentence(test);
+		Assert.assertEquals("I will go tomorrow.", sentence);
+		
+		SPhraseSpec test2 = this.phraseFactory.createClause();
+		NLGElement vb = this.phraseFactory.createWord("go", LexicalCategory.VERB);
+		test2.setSubject(subj);
+		test2.setVerb(vb);
+		test2.setFeature(Feature.TENSE, Tense.FUTURE);
+		test2.addPostModifier(adverb);
+		String sentence2 = realiser.realiseSentence(test);
+		Assert.assertEquals("I will go tomorrow.", sentence2);
+
+	}
 	
 	
 }

@@ -34,8 +34,11 @@ import simplenlg.framework.LexicalCategory;
 import simplenlg.framework.NLGElement;
 import simplenlg.framework.NLGFactory;
 import simplenlg.framework.PhraseElement;
+import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.NPPhraseSpec;
+import simplenlg.phrasespec.PPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
+import simplenlg.realiser.english.Realiser;
 
 /**
  * JUnit test case for interrogatives.
@@ -67,16 +70,7 @@ public class InterrogativeTest extends SimpleNLG4Test {
 	@Before
 	protected void setUp() {
 		super.setUp();
-
-		// the woman kissed the man behind the curtain
-
-		// // there is the dog on the rock
-		// this.s2 = new SPhraseSpec();
-		// this.s2.setSubject("there");
-		// this.s2.setHead("be");
-		// this.s2.setComplement(this.dog);
-		// this.s2.addModifier(SModifierPosition.POST_VERB, this.onTheRock);
-		//
+		
 		// // the man gives the woman John's flower
 		PhraseElement john = this.phraseFactory.createNounPhrase("John"); //$NON-NLS-1$
 		john.setFeature(Feature.POSSESSIVE, true);
@@ -788,7 +782,7 @@ public class InterrogativeTest extends SimpleNLG4Test {
 
 	}
 
-	/*
+	/**
 	 * Test a simple "how" question, based on query from Albi Oxa
 	 */
 	@Test
@@ -808,5 +802,35 @@ public class InterrogativeTest extends SimpleNLG4Test {
 		String result = realiser.realiseSentence(test);
 		Assert.assertEquals("How are you?", result);
 
+	}
+	
+	/**
+	 * Case 1 checks that "What do you think about John?" can be generated.
+	 * 
+	 * Case 2 checks that the same clause is generated, even when an object is
+	 * declared.
+	 */
+	@Test
+	public void testWhatObjectInterrogative() {
+		Lexicon lexicon = Lexicon.getDefaultLexicon();
+		NLGFactory nlg = new NLGFactory(lexicon);
+		Realiser realiser = new Realiser(lexicon);
+
+		// Case 1, no object is explicitly given:
+		SPhraseSpec clause = nlg.createClause("you", "think");
+		PPPhraseSpec aboutJohn = nlg.createPrepositionPhrase("about", "John");
+		clause.addPostModifier(aboutJohn);
+		clause.setFeature(Feature.INTERROGATIVE_TYPE,
+				InterrogativeType.WHAT_OBJECT);
+		String realisation = realiser.realiseSentence(clause);
+		System.out.println(realisation);
+		Assert.assertEquals("What do you think about John?", realisation);
+		
+		// Case 2:
+		// Add "bad things" as the object so the object doesn't remain null:
+		clause.setObject("bad things");
+		realisation = realiser.realiseSentence(clause);
+		System.out.println(realiser.realiseSentence(clause));
+		Assert.assertEquals("What do you think about John?", realisation);
 	}
 }

@@ -55,7 +55,7 @@ import simplenlg.realiser.english.Realiser;
  * @author ereiter
  * 
  */
-public class External1Test {
+public class ExternalTest {
 
 	
 	private Lexicon lexicon = null;

@@ -50,6 +50,23 @@ public class CoordinationTest extends SimpleNLG4Test {
 	public void tearDown() {
 		super.tearDown();
 	}
+	
+	
+	/**
+	 * Check that empty coordinate phrases are not realised as "null"
+	 */
+	@Test
+	public void emptyCoordinationTest() {
+		// first a simple phrase with no coordinates
+		CoordinatedPhraseElement coord = this.phraseFactory
+				.createCoordinatedPhrase();
+		Assert.assertEquals("", this.realiser.realise(coord).getRealisation());
+
+		// now one with a premodifier and nothing else
+		coord.addPreModifier(this.phraseFactory.createAdjectivePhrase("nice"));
+		Assert.assertEquals("nice", this.realiser.realise(coord)
+				.getRealisation());
+	}
 
 	/**
 	 * Test pre and post-modification of coordinate VPs inside a sentence.
