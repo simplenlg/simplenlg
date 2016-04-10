@@ -3,6 +3,7 @@ simplenlg.features
 simplenlg.format.english
 simplenlg.framework
 simplenlg.lexicon
+simplenlg.lexicon.util
 simplenlg.morphology.english
 simplenlg.orthography.english
 simplenlg.phrasespec
