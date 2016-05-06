@@ -927,7 +927,25 @@ public abstract class MorphologyRules {
 				
 				}
 			}
-		
+
+			if (determiner.getRealisation().equals("this")) { //$NON-NLS-1$
+
+				if (determiner.isPlural()) {
+
+					determiner.setRealisation("these"); //$NON-NLS-1$
+
+				}
+			}
+
+			if (determiner.getRealisation().equals("that")) { //$NON-NLS-1$
+
+				if (determiner.isPlural()) {
+
+					determiner.setRealisation("those"); //$NON-NLS-1$
+
+				}
+			}
+
 //		if(determiner.getRealisation().equals("an") && !DeterminerAgrHelper.requiresAn(realisation)){
 //			
 //			determiner.setRealisation("a");
