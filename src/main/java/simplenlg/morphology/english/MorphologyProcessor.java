@@ -226,20 +226,15 @@ public class MorphologyProcessor extends NLGModule {
 								//AG: need to check if child is a coordinate
 								if(firstChild instanceof CoordinatedPhraseElement) {
 									MorphologyRules.doDeterminerMorphology(determiner,
-									                                       firstChild.getChildren().get(0).getRealisation(),
-									                                       this.lexicon);
+									                                       firstChild.getChildren().get(0).getRealisation());
 								} else {
-									MorphologyRules.doDeterminerMorphology(determiner,
-									                                       firstChild.getRealisation(),
-									                                       this.lexicon);
+									MorphologyRules.doDeterminerMorphology(determiner, firstChild.getRealisation());
 								}
 							}
 
 						} else {
 							// everything else: ensure det matches realisation
-							MorphologyRules.doDeterminerMorphology(determiner,
-							                                       currentElement.getRealisation(),
-							                                       this.lexicon);
+							MorphologyRules.doDeterminerMorphology(determiner, currentElement.getRealisation());
 						}
 
 						determiner = null;

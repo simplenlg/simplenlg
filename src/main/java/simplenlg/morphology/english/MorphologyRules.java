@@ -20,7 +20,6 @@ package simplenlg.morphology.english;
 
 import simplenlg.features.*;
 import simplenlg.framework.*;
-import simplenlg.lexicon.Lexicon;
 
 /**
  * <p>
@@ -842,27 +841,35 @@ public abstract class MorphologyRules extends NLGModule {
 	 * @param realisation
 	 *            the current realisation of the determiner.
 	 */
-	public static void doDeterminerMorphology(NLGElement determiner, String realisation, Lexicon lexicon) {
+	public static void doDeterminerMorphology(NLGElement determiner, String realisation) {
 
 		if(realisation != null) {
 
-			if(!(determiner.getRealisation().equals("a")) && determiner.isPlural() && null != lexicon) {
-				WordElement lexicalEntry = lexicon.getWord(determiner.getRealisation(), LexicalCategory.DETERMINER);
-				if(null != lexicalEntry && null != lexicalEntry.getFeatureAsString("plural")) {
-					determiner.setRealisation(lexicalEntry.getFeatureAsString("plural"));
+			if(!(determiner.getRealisation().equals("a"))) {
+				if(determiner.isPlural()) {
+					// Use default inflection rules:
+					if("that".equals(determiner.getRealisation())) {
+						determiner.setRealisation("those");
+					} else if("this".equals(determiner.getRealisation())) {
+						determiner.setRealisation("these");
+					}
+				} else if(!determiner.isPlural()) {
+					// Use default push back to base form rules:
+					if("those".equals(determiner.getRealisation())) {
+						determiner.setRealisation("that");
+					} else if("these".equals(determiner.getRealisation())) {
+						determiner.setRealisation("this");
+					}
+
 				}
 			}
 
+			// Special "a" determiner and perform a/an agreement:
 			if(determiner.getRealisation().equals("a")) { //$NON-NLS-1$
-
 				if(determiner.isPlural()) {
-
 					determiner.setRealisation("some");
-
 				} else if(DeterminerAgrHelper.requiresAn(realisation)) {
-
 					determiner.setRealisation("an");
-
 				}
 			}
 

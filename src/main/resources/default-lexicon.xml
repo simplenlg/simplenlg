@@ -33850,6 +33850,11 @@
         <sentence_modifier/>
     </word>
     <word>
+        <base>these</base>
+        <category>determiner</category>
+        <id>E0060613</id>
+    </word>
+    <word>
         <base>thesis</base>
         <category>noun</category>
         <id>E0060615</id>
@@ -33941,6 +33946,11 @@
         <id>E0060726</id>
         <intensifier/>
         <verb_modifier/>
+    </word>
+    <word>
+        <base>those</base>
+        <category>determiner</category>
+        <id>E0060728</id>
     </word>
     <word>
         <base>though</base>

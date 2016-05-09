@@ -25,6 +25,7 @@ import org.junit.Before;
 import org.junit.Test;
 import simplenlg.framework.NLGFactory;
 import simplenlg.lexicon.Lexicon;
+import simplenlg.lexicon.NIHDBLexicon;
 import simplenlg.lexicon.XMLLexicon;
 import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
@@ -39,11 +40,13 @@ import simplenlg.realiser.english.Realiser;
 public class DeterminerTest {
 
 	/** The realiser. */
-	protected Realiser realiser;
+	private Realiser realiser;
 
-	protected NLGFactory phraseFactory;
+	private NLGFactory phraseFactory;
 
-	protected Lexicon lexicon;
+	private Lexicon lexicon;
+
+	private final String DB_FILENAME = "src/test/resources/NIHLexicon/lexAccess2011.data";
 
 	/**
 	 * Set up the variables we'll need for this simplenlg.test to run (Called
@@ -235,6 +238,38 @@ public class DeterminerTest {
 	}
 
 	/**
+	 * testSingularThoseDeterminerNPObject - Test for "those" when used in the singular form as a determiner in a NP Object
+	 */
+	@Test
+	public void testSingularThoseDeterminerNPObject() {
+		SPhraseSpec sentence_1 = this.phraseFactory.createClause();
+
+		NPPhraseSpec nounPhrase_1 = this.phraseFactory.createNounPhrase("monkey");
+		nounPhrase_1.setPlural(false);
+		nounPhrase_1.setDeterminer("those");
+		sentence_1.setObject(nounPhrase_1);
+
+		Assert.assertEquals("That monkey.", this.realiser.realiseSentence(sentence_1));
+
+	}
+
+	/**
+	 * testSingularTheseDeterminerNPObject - Test for "these" when used in the singular form as a determiner in a NP Object
+	 */
+	@Test
+	public void testSingularTheseDeterminerNPObject() {
+		SPhraseSpec sentence_1 = this.phraseFactory.createClause();
+
+		NPPhraseSpec nounPhrase_1 = this.phraseFactory.createNounPhrase("monkey");
+		nounPhrase_1.setPlural(false);
+		nounPhrase_1.setDeterminer("these");
+		sentence_1.setObject(nounPhrase_1);
+
+		Assert.assertEquals("This monkey.", this.realiser.realiseSentence(sentence_1));
+
+	}
+
+	/**
 	 * testPluralThoseDeterminerNPObject - Test for "those" when used in the plural form as a determiner in a NP Object
 	 */
 	@Test
@@ -260,6 +295,90 @@ public class DeterminerTest {
 		NPPhraseSpec nounPhrase_1 = this.phraseFactory.createNounPhrase("monkey");
 		nounPhrase_1.setPlural(true);
 		nounPhrase_1.setDeterminer("these");
+		sentence_1.setObject(nounPhrase_1);
+
+		Assert.assertEquals("These monkeys.", this.realiser.realiseSentence(sentence_1));
+
+	}
+
+	/**
+	 * testSingularTheseDeterminerNPObject - Test for "these" when used in the singular form as a determiner in a NP Object
+	 *                                       using the NIHDB Lexicon.
+	 */
+	@Test
+	public void testSingularTheseDeterminerNPObject_NIHDBLexicon() {
+		this.lexicon = new NIHDBLexicon(DB_FILENAME);
+		this.phraseFactory = new NLGFactory(this.lexicon);
+		this.realiser = new Realiser(this.lexicon);
+
+		SPhraseSpec sentence_1 = this.phraseFactory.createClause();
+
+		NPPhraseSpec nounPhrase_1 = this.phraseFactory.createNounPhrase("monkey");
+		nounPhrase_1.setPlural(false);
+		nounPhrase_1.setDeterminer("these");
+		sentence_1.setObject(nounPhrase_1);
+
+		Assert.assertEquals("This monkey.", this.realiser.realiseSentence(sentence_1));
+
+	}
+
+	/**
+	 * testSingularThoseDeterminerNPObject - Test for "those" when used in the singular form as a determiner in a NP Object
+	 *                                       using the NIHDB Lexicon
+	 */
+	@Test
+	public void testSingularThoseDeterminerNPObject_NIHDBLexicon() {
+		this.lexicon = new NIHDBLexicon(DB_FILENAME);
+		this.phraseFactory = new NLGFactory(this.lexicon);
+		this.realiser = new Realiser(this.lexicon);
+
+		SPhraseSpec sentence_1 = this.phraseFactory.createClause();
+
+		NPPhraseSpec nounPhrase_1 = this.phraseFactory.createNounPhrase("monkey");
+		nounPhrase_1.setPlural(false);
+		nounPhrase_1.setDeterminer("those");
+		sentence_1.setObject(nounPhrase_1);
+
+		Assert.assertEquals("That monkey.", this.realiser.realiseSentence(sentence_1));
+
+	}
+
+	/**
+	 * testPluralThatDeterminerNPObject - Test for "that" when used in the plural form as a determiner in a NP Object
+	 *                                    using the NIHDB Lexicon.
+	 */
+	@Test
+	public void testPluralThatDeterminerNPObject_NIHDBLexicon() {
+		this.lexicon = new NIHDBLexicon(DB_FILENAME);
+		this.phraseFactory = new NLGFactory(this.lexicon);
+		this.realiser = new Realiser(this.lexicon);
+
+		SPhraseSpec sentence_1 = this.phraseFactory.createClause();
+
+		NPPhraseSpec nounPhrase_1 = this.phraseFactory.createNounPhrase("monkey");
+		nounPhrase_1.setPlural(true);
+		nounPhrase_1.setDeterminer("that");
+		sentence_1.setObject(nounPhrase_1);
+
+		Assert.assertEquals("Those monkeys.", this.realiser.realiseSentence(sentence_1));
+
+	}
+
+	/**
+	 * testPluralThisDeterminerNPObject - Test for "this" when used in the plural form as a determiner in a NP Object
+	 *                                    using the NIHDBLexicon.
+	 */
+	@Test
+	public void testPluralThisDeterminerNPObject_NIHDBLexicon() {
+		this.lexicon = new NIHDBLexicon(DB_FILENAME);
+		this.phraseFactory = new NLGFactory(this.lexicon);
+		this.realiser = new Realiser(this.lexicon);
+
+		SPhraseSpec sentence_1 = this.phraseFactory.createClause();
+
+		NPPhraseSpec nounPhrase_1 = this.phraseFactory.createNounPhrase("monkey");
+		nounPhrase_1.setPlural(true);
+		nounPhrase_1.setDeterminer("this");
 		sentence_1.setObject(nounPhrase_1);
 
 		Assert.assertEquals("These monkeys.", this.realiser.realiseSentence(sentence_1));
