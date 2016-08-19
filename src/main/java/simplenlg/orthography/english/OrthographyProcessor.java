@@ -196,10 +196,7 @@ public class OrthographyProcessor extends NLGModule {
 						if(postmod.getFeatureAsBoolean(Feature.APPOSITIVE)) {
 							buffer.append(", ");
 							buffer.append(realise(postmod));
-
-							if(i < len - 1) {
-								buffer.append(", ");
-							}
+							buffer.append(", ");
 						} else {
 							buffer.append(realise(postmod));
 							if(postmod instanceof ListElement

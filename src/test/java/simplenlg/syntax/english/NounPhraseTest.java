@@ -612,6 +612,6 @@ public class NounPhraseTest extends SimpleNLG4Test {
 		_rott.setFeature(Feature.APPOSITIVE, true);
 		_dog.addPostModifier(_rott);
 		SPhraseSpec _sent = this.phraseFactory.createClause(_dog, "ran");		
-		Assert.assertEquals("The dog, a rottweiler runs.", this.realiser.realiseSentence(_sent));
+		Assert.assertEquals("The dog, a rottweiler, runs.", this.realiser.realiseSentence(_sent));
 	}
 }
