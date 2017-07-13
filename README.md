@@ -4,7 +4,7 @@
 SimpleNLG
 =========
 
-SimpleNLG is a simple Java API designed to facilitate the generation of Natural Language. It was originally developed at the [University of Aberdeen's Department of Computing Science](http://www.abdn.ac.uk/ncs/departments/computing-science/index.php). The [discussion list for SimpleNLG is on Google Groups](https://groups.google.com/forum/#!forum/simplenlg).
+SimpleNLG is a simple Java API designed to facilitate the generation of Natural Language. It was originally developed by Ehud Reiter, Professor at the [University of Aberdeen's Department of Computing Science](http://www.abdn.ac.uk/ncs/departments/computing-science/index.php) and co-founder of [Arria NLG](https://www.arria.com). The [discussion list for SimpleNLG is on Google Groups](https://groups.google.com/forum/#!forum/simplenlg).
 
 SimpleNLG is intended to function as a "[realisation engine](http://en.wikipedia.org/wiki/Realization_(linguistics))" for [Natural Language Generation](http://en.wikipedia.org/wiki/Natural_language_generation) architectures, and has been used successfully in a number of projects, both academic and commercial. It handles the following:
 
@@ -22,15 +22,15 @@ Getting started
 ---------------
 For information on how to use SimpleNLG, please see the [tutorial](https://github.com/simplenlg/simplenlg/wiki/Section-0-–-SimpleNLG-Tutorial) and [API](https://cdn.rawgit.com/simplenlg/simplenlg/master/docs/javadoc/index.html).
 
-If you have a technical question about using SimpleNLG, please check the SimpleNLG discussion list.
+If you have a technical question about using SimpleNLG, please check the [SimpleNLG discussion list](https://groups.google.com/forum/#!forum/simplenlg).
 
-If you wish to be informed about SimpleNLG updates and events, please subscribe to the SimpleNLG announcement list.
+If you wish to be informed about SimpleNLG updates and events, please subscribe to the [SimpleNLG announcement list](https://groups.google.com/forum/#!forum/simplenlg-announce).
 
 If you wish to cite SimpleNLG in an academic publication, please cite the following paper:
 
 * A Gatt and E Reiter (2009). [SimpleNLG: A realisation engine for practical applications](http://aclweb.org/anthology/W/W09/W09-0613.pdf). Proceedings of ENLG-2009
 
-If you have other questions about SimpleNLG, please contact Ehud Reiter (University of Aberdeen); you can find his email via Google.
+If you have other questions about SimpleNLG, please contact Professor Ehud Reiter via email: [ehud.reiter@arria.com](mailto:ehud.reiter@arria.com)
 
 SimpleNLG for other languages
 -----------------------------
