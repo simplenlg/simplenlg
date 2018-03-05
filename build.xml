@@ -18,60 +18,71 @@ Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C
 Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, Saad Mahamood.
 -->
 <project name="simplenlg" basedir="." default="main">
-    
+
     <presetdef name="javac">
         <javac includeantruntime="false" />
     </presetdef>
-    
+
     <property name="src.dir"     value="src/main/java"/>
     <property name="testsrc.dir" value="src/test/java"/>
-    <property name="res.dir"     value="src/test/resources" />
-    
+    <property name="res.dir"     value="src/main/resources" />
+    <property name="testres.dir"     value="src/test/resources" />
 
-    <property name="build.dir"   value="build"/>
-    <property name="classes.dir" value="${build.dir}/classes"/>
-    <property name="jar.dir"     value="${build.dir}/jar"/>
-    <property name="report.dir"  value="${build.dir}/junitreport"/>
-    <property name="lexicon.dir" value="${res.dir}/NIHLexicon" />
+
+    <property name="build.dir"    value="build"/>
+    <property name="classes.dir"  value="${build.dir}/classes"/>
+    <property name="jar.dir"      value="${build.dir}/jar"/>
+    <property name="report.dir"   value="${build.dir}/junitreport"/>
+    <property name="lexicon.dir"  value="${testres.dir}/NIHLexicon" />
+    <property name="lib.dir"      value="${build.dir}/lib"/>
+    <property name="test.lib.dir" value="${build.dir}/test/lib"/>
 
     <property name="main-class"  value="simplenlg.server.SimpleServer"/>
-    
-    <property name="lib.dir"     value="lib"/>
+
 
     <!-- Compiles to Java 1.6 -->
     <property name="ant.build.javac.source" value="1.6"/>
     <property name="ant.build.javac.target" value="1.6"/>
-    
-    <!-- Includes all of JARs in lib.dir. No longer used.
+
     <path id="classpath">
-        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
     </path>
-    -->
-    <!-- Selective Libraries included on the classpath -->
-    <path id="classpath">
-        <pathelement path="${lib.dir}/junit-4.4.jar" />
-        <pathelement path="${lib.dir}/lexAccess2013dist.jar" />
-        <pathelement path="${lib.dir}/lvg2011api.jar" />
+    <path id="test-classpath">
+        <fileset dir="${test.lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
     </path>
-    
+
+
     <path id="application" location="${jar.dir}/${ant.project.name}.jar"/>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
     </target>
 
+    <target name="download-deps">
+        <mkdir dir="${lib.dir}"/>
+        <get dest="${lib.dir}" src="http://clojars.org/repo/gov/nih/nlm/nls/lexaccess/lexaccess-dist/2013/lexaccess-dist-2013.jar"/>
+
+        <mkdir dir="${test.lib.dir}"/>
+        <get dest="${test.lib.dir}" src="http://central.maven.org/maven2/junit/junit/4.12/junit-4.12.jar"/>
+        <get dest="${test.lib.dir}" src="http://central.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+    </target>
+
     <!-- Compiles SimpleNLG and includes the lexicon.properties file -->
-    <target name="compile">
+    <target name="compile" depends="download-deps">
         <mkdir dir="${classes.dir}"/>
         <javac target="1.6" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
-	   <!-- Someone is using internal Sun/Oracle classes... -->
-	   <compilerarg value="-XDignore.symbol.file" />
-	</javac>
+            <!-- Someone is using internal Sun/Oracle classes... -->
+            <compilerarg value="-XDignore.symbol.file" />
+        </javac>
         <copy todir="${classes.dir}">
             <fileset dir="${res.dir}" includes="*.properties"/>
         </copy>
         <copy todir="${classes.dir}/simplenlg/lexicon">
-        	<fileset dir="${res.dir}" includes="default-lexicon.xml" />
+            <fileset dir="${res.dir}" includes="default-lexicon.xml" />
         </copy>
     </target>
 
@@ -79,9 +90,9 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     <target name="compile-noproperties">
         <mkdir dir="${classes.dir}"/>
         <javac target="1.6" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
-       <!-- Someone is using internal Sun/Oracle classes... -->
-       <compilerarg value="-XDignore.symbol.file" />
-    </javac>
+            <!-- Someone is using internal Sun/Oracle classes... -->
+            <compilerarg value="-XDignore.symbol.file" />
+        </javac>
         <copy todir="${classes.dir}/simplenlg/lexicon">
             <fileset dir="${res.dir}" includes="default-lexicon.xml" />
         </copy>
@@ -100,19 +111,19 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
-            
+
             <!--Copies all the jar files into the package-->
             <fileset dir="${classes.dir}" includes="**/*.class" />
             <fileset dir="${src.dir}" includes="**/*.java" />
             <zipgroupfileset dir="${lib.dir}" includes="**/*.jar">
-	        <exclude name="lexAccess2013dis.jar"/>
+                <exclude name="lexaccess-dist-2013.jar"/>
             </zipgroupfileset>
         </jar>
     </target>
 
     <!-- Builds a SimpleNLG Library JAR without bundling third-party libraries -->
     <target name="jar-nodeps" depends="compile-noproperties">
-       <mkdir dir="${jar.dir}"/>
+        <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
@@ -120,14 +131,14 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
             <fileset dir="${classes.dir}" excludes="**/*.properties" />
             <fileset dir="${classes.dir}" includes="**/*.class" />
             <fileset dir="${src.dir}" includes="**/*.java" />
-        </jar> 
+        </jar>
     </target>
 
     <!-- Runs the SimpleNLG SimpleServer -->
     <target name="run" depends="jar">
-      <unzip src="${lexicon.dir}/lexAccess2013.data.zip" dest="${lexicon.dir}" />
-	  <echo message="**** Starting the SimpleNLG Simple Server"/>
-	  <echo message="**** Waiting for clients. Type 'exit' and press enter to quit. "/>
+        <unzip src="${lexicon.dir}/lexAccess2013.data.zip" dest="${lexicon.dir}" />
+        <echo message="**** Starting the SimpleNLG Simple Server"/>
+        <echo message="**** Waiting for clients. Type 'exit' and press enter to quit. "/>
         <java fork="true" classname="${main-class}">
             <classpath>
                 <path refid="classpath"/>
@@ -135,47 +146,48 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
             </classpath>
             <jvmarg line="-Xmx512m"/>
         </java>
-	<delete file="${lexicon.dir}/lexAccess2013.data" />
+        <delete file="${lexicon.dir}/lexAccess2013.data" />
     </target>
 
     <!-- Standard JUnit that excludes test that require platform 
          specific enviroment variables -->
     <target name="junit" depends="compile.test,jar">
-    <mkdir dir="${report.dir}"/>
-	<unzip src="${lexicon.dir}/lexAccess2013.data.zip" dest="${lexicon.dir}"/>
+        <mkdir dir="${report.dir}"/>
+        <unzip src="${lexicon.dir}/lexAccess2013.data.zip" dest="${lexicon.dir}"/>
         <junit fork="true" printsummary="yes">
             <classpath>
                 <path refid="classpath"/>
+                <path refid="test-classpath"/>
                 <path refid="application"/>
             </classpath>
-            
+
             <jvmarg line="-Xmx512m"/>
-            
+
             <formatter type="xml"/>
-            
+
             <batchtest todir="${report.dir}">
                 <fileset dir="${testsrc.dir}">
                     <!-- the following files are excluded as they are not actual
                     tests. Usually, just a superclass with the test setup. -->
-                        <exclude name="**/SyntaxTests.*" />
-                        <exclude name="**/SharedLexiconTests.*" />
-                        <exclude name="**/SimpleNLG4Test.*" />
-                        <exclude name="**/StandAloneExample*" />
-                        <exclude name="**/ClauseAggregationTest2*"/>
+                    <exclude name="**/SyntaxTests.*" />
+                    <exclude name="**/SharedLexiconTests.*" />
+                    <exclude name="**/SimpleNLG4Test.*" />
+                    <exclude name="**/StandAloneExample*" />
+                    <exclude name="**/ClauseAggregationTest2*"/>
                 </fileset>
             </batchtest>
         </junit>
-		<delete file="${lexicon.dir}/lexAccess2013.data"/>
+        <delete file="${lexicon.dir}/lexAccess2013.data"/>
     </target>
-    
+
     <!-- Runs the JUnit Report -->
-	<target name="junitreport">
+    <target name="junitreport">
         <junitreport todir="${report.dir}">
             <fileset dir="${report.dir}" includes="TEST-*.xml"/>
             <report todir="${report.dir}"/>
         </junitreport>
     </target>
-    
+
     <!-- Cleans the build directory and builds a JAR with third party libs -->
     <target name="clean-build" depends="clean,jar"/>
 
