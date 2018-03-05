@@ -50,7 +50,7 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     <!-- Selective Libraries included on the classpath -->
     <path id="classpath">
         <pathelement path="${lib.dir}/junit-4.4.jar" />
-        <pathelement path="${lib.dir}/lexAccess2011dist.jar" />
+        <pathelement path="${lib.dir}/lexAccess2013dist.jar" />
         <pathelement path="${lib.dir}/lvg2011api.jar" />
     </path>
     
@@ -125,7 +125,7 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
 
     <!-- Runs the SimpleNLG SimpleServer -->
     <target name="run" depends="jar">
-      <unzip src="${lexicon.dir}/lexAccess2011.data.zip" dest="${lexicon.dir}" />
+      <unzip src="${lexicon.dir}/lexAccess2013.data.zip" dest="${lexicon.dir}" />
 	  <echo message="**** Starting the SimpleNLG Simple Server"/>
 	  <echo message="**** Waiting for clients. Type 'exit' and press enter to quit. "/>
         <java fork="true" classname="${main-class}">
@@ -135,14 +135,14 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
             </classpath>
             <jvmarg line="-Xmx512m"/>
         </java>
-	<delete file="${lexicon.dir}/lexAccess2011.data" />
+	<delete file="${lexicon.dir}/lexAccess2013.data" />
     </target>
 
     <!-- Standard JUnit that excludes test that require platform 
          specific enviroment variables -->
     <target name="junit" depends="compile.test,jar">
     <mkdir dir="${report.dir}"/>
-	<unzip src="${lexicon.dir}/lexAccess2011.data.zip" dest="${lexicon.dir}"/>
+	<unzip src="${lexicon.dir}/lexAccess2013.data.zip" dest="${lexicon.dir}"/>
         <junit fork="true" printsummary="yes">
             <classpath>
                 <path refid="classpath"/>
@@ -165,7 +165,7 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
                 </fileset>
             </batchtest>
         </junit>
-		<delete file="${lexicon.dir}/lexAccess2011.data"/>
+		<delete file="${lexicon.dir}/lexAccess2013.data"/>
     </target>
     
     <!-- Runs the JUnit Report -->

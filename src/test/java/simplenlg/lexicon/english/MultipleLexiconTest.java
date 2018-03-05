@@ -41,7 +41,7 @@ import simplenlg.lexicon.XMLLexicon;
 public class MultipleLexiconTest {
 
 	// NIH, XML lexicon location
-	static String DB_FILENAME = "src/test/resources/NIHLexicon/lexAccess2011.data";
+	static String DB_FILENAME = "src/test/resources/NIHLexicon/lexAccess2013.data";
 	static String XML_FILENAME = "src/main/resources/default-lexicon.xml";
 	
 	// multi lexicon

@@ -92,7 +92,7 @@
 			            <configuration>
 			            	<tasks>
 								<echo message="***** Unziping NIH Lexicon..."/>
-								<unzip src="${basedir}/src/test/resources/NIHLexicon/lexAccess2011.data.zip" dest="${basedir}/src/test/resources/NIHLexicon/" overwrite="true"/>
+								<unzip src="${basedir}/src/test/resources/NIHLexicon/lexAccess2013.data.zip" dest="${basedir}/src/test/resources/NIHLexicon/" overwrite="true"/>
 			                    </tasks>
 			                </configuration>
 				            <goals>
@@ -105,7 +105,7 @@
 				            <configuration>
 				            	<tasks>
 									<echo message="***** Deleting NIH Lexicon..."/>
-									<delete file="${basedir}/src/test/resources/NIHLexicon/lexAccess2011.data"/>
+									<delete file="${basedir}/src/test/resources/NIHLexicon/lexAccess2013.data"/>
 				                    </tasks>
 				                </configuration>
 					            <goals>
@@ -117,6 +117,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
