@@ -39,23 +39,27 @@
   	<properties>
     	 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   	</properties>
-  
+
+    <repositories>
+        <repository>
+            <id>clojars.org</id>
+            <url>https://repo.clojars.org</url>
+        </repository>
+    </repositories>
+
 	<dependencies>
-  		<dependency>
-    		<groupId>junit</groupId>
-     		<artifactId>junit</artifactId>
-			<version>4.4</version>
-        	<scope>system</scope>
-			<systemPath>${basedir}/lib/junit-4.4.jar</systemPath>
-		</dependency>
-  		<dependency>
-   			<groupId>gov.nih.nlm.nls.lexAccess.Api</groupId>
-    		<artifactId>LexAccess2011dist</artifactId>
-    		<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/lexAccess2011dist.jar</systemPath>
-  		</dependency>
-		<dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>gov.nih.nlm.nls.lexaccess</groupId>
+            <artifactId>lexaccess-dist</artifactId>
+            <version>2013</version>
+        </dependency>
+        <dependency>
 		      <groupId>org.apache.maven.plugins</groupId>
 		      <artifactId>maven-antrun-plugin</artifactId>
 		      <version>1.8</version>
@@ -109,18 +113,6 @@
 					            </goals>
 				            </execution>
 			        </executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
