@@ -90,10 +90,10 @@
 						<id>unzip</id>
 			        	<phase>process-test-resources</phase>
 			            <configuration>
-			            	<tasks>
+			            	<target>
 								<echo message="***** Unziping NIH Lexicon..."/>
 								<unzip src="${basedir}/src/test/resources/NIHLexicon/lexAccess2013.data.zip" dest="${basedir}/src/test/resources/NIHLexicon/" overwrite="true"/>
-			                    </tasks>
+                            </target>
 			                </configuration>
 				            <goals>
 				            	<goal>run</goal>
@@ -103,10 +103,10 @@
 							<id>delete</id>
 				        	<phase>clean</phase>
 				            <configuration>
-				            	<tasks>
+				            	<target>
 									<echo message="***** Deleting NIH Lexicon..."/>
 									<delete file="${basedir}/src/test/resources/NIHLexicon/lexAccess2013.data"/>
-				                    </tasks>
+                                </target>
 				                </configuration>
 					            <goals>
 					            	<goal>run</goal>
