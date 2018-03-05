@@ -21,7 +21,7 @@ public class XMLRealiserParameterizedTests {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		String lexDB = "res/NIHLexicon/lexAccess2011.data";
+		String lexDB = "res/NIHLexicon/lexAccess2013.data";
 		LexiconType lexType = LexiconType.NIHDB; // Some tests require this.
 		XMLRealiser.setLexicon(lexType, lexDB);
 	}

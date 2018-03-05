@@ -46,7 +46,7 @@ public class DeterminerTest {
 
 	private Lexicon lexicon;
 
-	private final String DB_FILENAME = "src/test/resources/NIHLexicon/lexAccess2011.data";
+	private final String DB_FILENAME = "src/test/resources/NIHLexicon/lexAccess2013.data";
 
 	/**
 	 * Set up the variables we'll need for this simplenlg.test to run (Called

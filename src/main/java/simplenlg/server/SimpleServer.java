@@ -67,7 +67,7 @@ public class SimpleServer implements Runnable {
      * will be searched for the lexicon file. Otherwise, the path below will
      * be used.
      */
-    String lexiconPath = "src/main/resources/NIHLexicon/lexAccess2011.data";
+    String lexiconPath = "src/main/resources/NIHLexicon/lexAccess2013.data";
 
     // control the run loop
     private boolean isActive = true;
