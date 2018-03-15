@@ -3,5 +3,4 @@ script: mvn test
 after_script: mvn clean
 jdk:
   - oraclejdk8
-  - oraclejdk7
-  - openjdk6
+  - openjdk7

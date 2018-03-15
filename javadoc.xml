@@ -30,6 +30,6 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
 	
 	<!-- Creates the Javadoc for SimpleNLG -->	
     <target name="javadoc">
-        <javadoc access="public" author="true" classpath="lib/lexAccess2011dist.jar;lib/junit-4.4.jar;lvg2011api.jar" destdir="${javadoc.dir}" doctitle="SimpleNLG v4.4.8" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="simplenlg.*" source="1.6" sourcepath="src" splitindex="true" use="true" version="true"/>
+        <javadoc access="public" author="true" classpath="lib/lexAccess2013dist.jar;lib/junit-4.4.jar;lvg2011api.jar" destdir="${javadoc.dir}" doctitle="SimpleNLG v4.4.8" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="simplenlg.*" source="1.6" sourcepath="src" splitindex="true" use="true" version="true"/>
     </target>
 </project>

@@ -21,7 +21,7 @@ public class XMLRealiserParameterizedTests {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		String lexDB = "res/NIHLexicon/lexAccess2011.data";
+		String lexDB = "src/test/resources/NIHLexicon/lexAccess2013.data";
 		LexiconType lexType = LexiconType.NIHDB; // Some tests require this.
 		XMLRealiser.setLexicon(lexType, lexDB);
 	}
@@ -120,7 +120,7 @@ public class XMLRealiserParameterizedTests {
 			"          </vp>\r\n" + 
 			"        </child>\r\n" + 
 			"      </Document>\r\n" + 
-			"      <Realisation>An angioplasty balloon catheter, the D701000000992 was deployed.</Realisation>\r\n" + 
+			"      <Realisation>An angioplasty balloon catheter, the D701000000992, was deployed.</Realisation>\r\n" +
 			"    </Record>\r\n" + 
 			"  </Recording>\r\n" + 
 			"</NLGSpec>\r\n" + 
@@ -1098,7 +1098,7 @@ public class XMLRealiserParameterizedTests {
 			"          </vp>\r\n" + 
 			"        </child>\r\n" + 
 			"      </Document>\r\n" + 
-			"      <Realisation>A device, a Howell's Roto-Rootor was deployed by the doctor.\r\n" + 
+			"      <Realisation>A device, a Howell's Roto-Rootor, was deployed by the doctor.\r\n" +
 			"\r\n" + 
 			"</Realisation>\r\n" + 
 			"    </Record>\r\n" + 
@@ -1133,7 +1133,7 @@ public class XMLRealiserParameterizedTests {
 			"          </vp>\r\n" + 
 			"        </child>\r\n" + 
 			"      </Document>\r\n" + 
-			"      <Realisation>A device, a Howell's Roto-Rootor was deployed by the doctor on this shift.\r\n" + 
+			"      <Realisation>A device, a Howell's Roto-Rootor, was deployed by the doctor on this shift.\r\n" +
 			"\r\n" + 
 			"</Realisation>\r\n" + 
 			"    </Record>\r\n" + 
