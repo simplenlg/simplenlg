@@ -1,2 +1,11 @@
 src/test/resources/NIHLexicon/lexAccess2013.data
 build
+bin
+*.iml
+.idea
+target
+*.class
+.DS_Store
+.classpath
+.project
+.settings
