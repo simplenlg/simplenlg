@@ -68,7 +68,7 @@ public class AdjectivePhraseTest extends SimpleNLG4Test {
 		Assert.assertEquals("incredibly salacious", this.realiser //$NON-NLS-1$
 				.realise(this.salacious).getRealisation());
 
-		// form the adjphrase "incredibly beautiful"
+		// form the adjphrase "amazingly beautiful"
 		this.beautiful.addPreModifier("amazingly"); //$NON-NLS-1$
 		Assert.assertEquals("amazingly beautiful", this.realiser //$NON-NLS-1$
 				.realise(this.beautiful).getRealisation());
