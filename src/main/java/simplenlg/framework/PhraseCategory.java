@@ -73,7 +73,7 @@ public enum PhraseCategory implements ElementCategory {
 		boolean match = false;
 
 		if (checkObject != null) {
-			if (checkObject instanceof DocumentCategory) {
+			if (checkObject instanceof PhraseCategory) {
 				match = this.equals(checkObject);
 			} else {
 				match = this.toString()

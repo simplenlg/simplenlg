@@ -88,7 +88,7 @@ public enum LexicalCategory implements ElementCategory {
 		boolean match = false;
 
 		if (checkObject != null) {
-			if (checkObject instanceof DocumentCategory) {
+			if (checkObject instanceof LexicalCategory) {
 				match = this.equals(checkObject);
 			} else {
 				match = this.toString()
