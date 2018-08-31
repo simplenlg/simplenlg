@@ -43,7 +43,7 @@ Spanish: The *Spanish* version of SimpleNLG is avaliable from [this page](https:
 
 German: *Marcel Bollman* has been working on an adaptation of SimpleNLG version 3 to German. This is available from [this page](http://www.linguistics.rub.de/~bollmann/simplenlg-ger.html). Please remember that SimpleNLG version 3 is not licensed for commercial use.
 
-C# implementations of SimpleNLG are avaliable [here](https://github.com/gjdv/simplenlg) and [here](https://github.com/nickhodge/SharpSimpleNLG).
+C# implementations of SimpleNLG are also avaliable. One by *Gert-Jan de Vries* [here](https://github.com/gjdv/simplenlg) and a second by *Nick Hodge* [here](https://github.com/nickhodge/SharpSimpleNLG).
 
 SimpleNLG License 
 -----------------------------
