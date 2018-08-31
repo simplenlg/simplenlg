@@ -39,7 +39,7 @@ French: A version of SimpleNLG for *French* is avaliable from [this page](http:/
 
 Italian: The *Italian* version of SimpleNLG 4 is avaliable from [this page](https://github.com/alexmazzei/SimpleNLG-IT).
 
-Spanish: The *Spanish* version of SimpleNLG is avaliable from [this page](https://github.com/citiususc/SimpleNLG-ES). 
+Spanish: The *Spanish* version of SimpleNLG 4 is avaliable from [this page](https://github.com/citiususc/SimpleNLG-ES). 
 
 German: *Marcel Bollman* has been working on an adaptation of SimpleNLG version 3 to German. This is available from [this page](http://www.linguistics.rub.de/~bollmann/simplenlg-ger.html). Please remember that SimpleNLG version 3 is not licensed for commercial use.
 
