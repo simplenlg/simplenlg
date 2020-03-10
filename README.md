@@ -34,9 +34,16 @@ If you have other questions about SimpleNLG, please contact Professor Ehud Reite
 
 SimpleNLG for other languages
 -----------------------------
-A version of SimpleNLG has now been developed for *French* by *Pierre-Luc Vaudry* at the Université de Montreal. This is a development based on the version 4 architecture. It is current being distributed separately from [this page](http://www-etud.iro.umontreal.ca/~vaudrypl/snlgbil/snlgEnFr_english.html).
 
-*Marcel Bollman* has been working on an adaptation of SimpleNLG version 3 to German. This is available from [this page](http://www.linguistics.rub.de/~bollmann/simplenlg-ger.html). Please remember that SimpleNLG version 3 is not licensed for commercial use
+French: A version of SimpleNLG for *French* is avaliable from [this page](http://www-etud.iro.umontreal.ca/~vaudrypl/snlgbil/snlgEnFr_english.html).
+
+Italian: The *Italian* version of SimpleNLG 4 is avaliable from [this page](https://github.com/alexmazzei/SimpleNLG-IT).
+
+Spanish: The *Spanish* version of SimpleNLG 4 is avaliable from [this page](https://github.com/citiususc/SimpleNLG-ES). 
+
+German: *Marcel Bollman* has been working on an adaptation of SimpleNLG version 3 to German. This is available from [this page](http://www.linguistics.rub.de/~bollmann/simplenlg-ger.html). Please remember that SimpleNLG version 3 is not licensed for commercial use.
+
+C# implementations of SimpleNLG are also avaliable. One by *Gert-Jan de Vries* [here](https://github.com/gjdv/simplenlg) and a second by *Nick Hodge* [here](https://github.com/nickhodge/SharpSimpleNLG).
 
 SimpleNLG License 
 -----------------------------
