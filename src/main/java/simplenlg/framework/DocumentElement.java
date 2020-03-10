@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.framework;
 
@@ -39,17 +39,20 @@ import java.util.List;
  * Instances of this class can be created through the static create methods in
  * the <code>OrthographyProcessor</code>.
  * </p>
- * 
- * 
+ *
  * @author D. Westwater, University of Aberdeen.
  * @version 4.0
  */
 public class DocumentElement extends NLGElement {
 
-	/** The feature relating to the title or heading of this element. */
+	/**
+	 * The feature relating to the title or heading of this element.
+	 */
 	private static final String FEATURE_TITLE = "textTitle"; //$NON-NLS-1$
 
-	/** The feature relating to the components (or child nodes) of this element. */
+	/**
+	 * The feature relating to the components (or child nodes) of this element.
+	 */
 	private static final String FEATURE_COMPONENTS = "textComponents"; //$NON-NLS-1$
 
 	/**
@@ -62,12 +65,10 @@ public class DocumentElement extends NLGElement {
 
 	/**
 	 * Creates a new DocumentElement with the given category and title.
-	 * 
-	 * @param category
-	 *            the category for this element.
-	 * @param textTitle
-	 *            the title of this element, predominantly used with DOCUMENT
-	 *            and SECTION types.
+	 *
+	 * @param category the category for this element.
+	 * @param textTitle the title of this element, predominantly used with DOCUMENT
+	 * 		and SECTION types.
 	 */
 	public DocumentElement(DocumentCategory category, String textTitle) {
 		this.setCategory(category);
@@ -77,9 +78,8 @@ public class DocumentElement extends NLGElement {
 	/**
 	 * Sets the title of this element. Titles are specifically used with
 	 * documents (the document name) and sections (headings).
-	 * 
-	 * @param textTitle
-	 *            the new title for this element.
+	 *
+	 * @param textTitle the new title for this element.
 	 */
 	public void setTitle(String textTitle) {
 		this.setFeature(FEATURE_TITLE, textTitle);
@@ -87,7 +87,7 @@ public class DocumentElement extends NLGElement {
 
 	/**
 	 * Retrieves the title of this element.
-	 * 
+	 *
 	 * @return the title of this element as a string.
 	 */
 	public String getTitle() {
@@ -96,9 +96,9 @@ public class DocumentElement extends NLGElement {
 
 	/**
 	 * Retrieves the child components of this element.
-	 * 
+	 *
 	 * @return a <code>List</code> of <code>NLGElement</code>s representing the
-	 *         child components.
+	 * 		child components.
 	 */
 	public List<NLGElement> getComponents() {
 		return this.getFeatureAsElementList(FEATURE_COMPONENTS);
@@ -117,25 +117,23 @@ public class DocumentElement extends NLGElement {
 	 * See <code>
 	 * DocumentCategory</code> for further information.
 	 * </p>
-	 * 
-	 * @param element
-	 *            the <code>NLGElement</code> to be added. If this is
-	 *            <code>NULL</code> the method does nothing.
+	 *
+	 * @param element the <code>NLGElement</code> to be added. If this is
+	 * 		<code>NULL</code> the method does nothing.
 	 */
 	public void addComponent(NLGElement element) {
-		if (element != null) {
+		if(element != null) {
 			ElementCategory thisCategory = this.getCategory();
 			ElementCategory category = element.getCategory();
-			if (category != null && thisCategory instanceof DocumentCategory) {
-				if (((DocumentCategory) thisCategory).hasSubPart(category)) {
+			if(category != null && thisCategory instanceof DocumentCategory) {
+				if(((DocumentCategory) thisCategory).hasSubPart(category)) {
 					addElementToComponents(element);
-				}
-				else {
+				} else {
 					NLGElement promotedElement = promote(element);
-					if (promotedElement != null)
-						addElementToComponents (promotedElement);
+					if(promotedElement != null)
+						addElementToComponents(promotedElement);
 					else // error condition - add original element so something is visible
-						addElementToComponents (element);
+						addElementToComponents(element);
 				}
 			} else {
 				addElementToComponents(element);
@@ -143,8 +141,8 @@ public class DocumentElement extends NLGElement {
 		}
 	}
 
-	/** add an element to a components list
-	 * @param element
+	/**
+	 * add an element to a components list
 	 */
 	private void addElementToComponents(NLGElement element) {
 		List<NLGElement> components = getComponents();
@@ -152,32 +150,30 @@ public class DocumentElement extends NLGElement {
 		element.setParent(this);
 		setComponents(components);
 	}
-	
 
-	/** promote an NLGElement so that it is at the right level to be added to a DocumentElement/
+	/**
+	 * promote an NLGElement so that it is at the right level to be added to a DocumentElement/
 	 * Promotion means adding surrounding nodes at higher doc levels
-	 * @param element
-	 * @return
 	 */
 	private NLGElement promote(NLGElement element) {
 		// check if promotion needed
-		if (((DocumentCategory) this.getCategory()).hasSubPart(element.getCategory())) {
+		if(((DocumentCategory) this.getCategory()).hasSubPart(element.getCategory())) {
 			return element;
 		}
 		// if element is not a DocumentElement, embed it in a sentence and recurse
-		if (!(element instanceof DocumentElement)) {
+		if(!(element instanceof DocumentElement)) {
 			DocumentElement sentence = new DocumentElement(DocumentCategory.SENTENCE, null);
 			sentence.addElementToComponents(element);
 			return promote(sentence);
 		}
-		
+
 		// if element is a Sentence, promote it to a paragraph
-		if (element.getCategory() == DocumentCategory.SENTENCE) {
+		if(element.getCategory() == DocumentCategory.SENTENCE) {
 			DocumentElement paragraph = new DocumentElement(DocumentCategory.PARAGRAPH, null);
 			paragraph.addElementToComponents(element);
-			return promote(paragraph);			
+			return promote(paragraph);
 		}
-		
+
 		// otherwise can't do anything
 		return null;
 	}
@@ -192,33 +188,30 @@ public class DocumentElement extends NLGElement {
 	 * As with <code>addComponents(...)</code> only legitimate child types are
 	 * added to the list.
 	 * </p>
-	 * 
-	 * @param textComponents
-	 *            the <code>List</code> of <code>NLGElement</code>s to be added.
-	 *            If this is <code>NULL</code> the method does nothing.
+	 *
+	 * @param textComponents the <code>List</code> of <code>NLGElement</code>s to be added.
+	 * 		If this is <code>NULL</code> the method does nothing.
 	 */
 	public void addComponents(List<?> textComponents) {
-		if (textComponents != null) {
+		if(textComponents != null) {
 			ElementCategory thisCategory = this.getCategory();
 			ArrayList<NLGElement> elementsToAdd = new ArrayList<NLGElement>();
 			ElementCategory category = null;
 
-			for (Object eachElement : textComponents) {
-				if (eachElement instanceof NLGElement) {
+			for(Object eachElement : textComponents) {
+				if(eachElement instanceof NLGElement) {
 					category = ((NLGElement) eachElement).getCategory();
-					if (category != null
-							&& thisCategory instanceof DocumentCategory) {
-						if (((DocumentCategory) thisCategory)
-								.hasSubPart(category)) {
+					if(category != null && thisCategory instanceof DocumentCategory) {
+						if(((DocumentCategory) thisCategory).hasSubPart(category)) {
 							elementsToAdd.add((NLGElement) eachElement);
 							((NLGElement) eachElement).setParent(this);
 						}
 					}
 				}
 			}
-			if (elementsToAdd.size() > 0) {
+			if(elementsToAdd.size() > 0) {
 				List<NLGElement> components = getComponents();
-				if (components == null) {
+				if(components == null) {
 					components = new ArrayList<NLGElement>();
 				}
 				components.addAll(elementsToAdd);
@@ -229,20 +222,19 @@ public class DocumentElement extends NLGElement {
 
 	/**
 	 * Removes the specified component from the list of child components.
-	 * 
-	 * @param textComponent
-	 *            the component to be removed.
+	 *
+	 * @param textComponent the component to be removed.
 	 * @return <code>true</code> if the element was removed, or
-	 *         <code>false</code> if the element did not exist, there is no
-	 *         component list or the the given component to remove is
-	 *         <code>NULL</code>.
+	 * 		<code>false</code> if the element did not exist, there is no
+	 * 		component list or the the given component to remove is
+	 * 		<code>NULL</code>.
 	 */
 	public boolean removeComponent(NLGElement textComponent) {
 		boolean removed = false;
 
-		if (textComponent != null) {
+		if(textComponent != null) {
 			List<NLGElement> components = getComponents();
-			if (components != null) {
+			if(components != null) {
 				removed = components.remove(textComponent);
 			}
 		}
@@ -254,7 +246,7 @@ public class DocumentElement extends NLGElement {
 	 */
 	public void clearComponents() {
 		List<NLGElement> components = getComponents();
-		if (components != null) {
+		if(components != null) {
 			components.clear();
 		}
 	}
@@ -275,8 +267,6 @@ public class DocumentElement extends NLGElement {
 	 *     clearComponents();
 	 *     addComponents(components);
 	 * </pre></code>
-	 * 
-	 * @param components
 	 */
 	public void setComponents(List<NLGElement> components) {
 		this.setFeature(FEATURE_COMPONENTS, components);
@@ -290,10 +280,10 @@ public class DocumentElement extends NLGElement {
 		String lastChildIndent = indent == null ? "   " : indent + "   "; //$NON-NLS-1$ //$NON-NLS-2$
 		StringBuffer print = new StringBuffer();
 		print.append("DocumentElement: category=").append( //$NON-NLS-1$ 
-				getCategory().toString());
+		                                                   getCategory().toString());
 
 		String realisation = getRealisation();
-		if (realisation != null) {
+		if(realisation != null) {
 			print.append(" realisation=").append(realisation); //$NON-NLS-1$
 		}
 		print.append('\n');
@@ -302,13 +292,11 @@ public class DocumentElement extends NLGElement {
 		int length = children.size() - 1;
 		int index = 0;
 
-		if (children.size() > 0) {
-			for (index = 0; index < length; index++) {
-				print.append(thisIndent).append(
-						children.get(index).printTree(childIndent));
+		if(children.size() > 0) {
+			for(index = 0; index < length; index++) {
+				print.append(thisIndent).append(children.get(index).printTree(childIndent));
 			}
-			print.append(lastIndent).append(
-					children.get(index).printTree(lastChildIndent));
+			print.append(lastIndent).append(children.get(index).printTree(lastChildIndent));
 		}
 		return print.toString();
 	}

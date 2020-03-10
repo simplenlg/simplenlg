@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,9 +14,8 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell, Saad Mahamood.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
-
 package simplenlg.syntax.english;
 
 import junit.framework.Assert;
@@ -35,11 +34,12 @@ import simplenlg.realiser.english.Realiser;
  * Some determiner tests -- in particular for indefinite articles like "a" or "an".
  *
  * @author Saad Mahamood, Data2Text Limited.
- *
  */
 public class DeterminerTest {
 
-	/** The realiser. */
+	/**
+	 * The realiser.
+	 */
 	private Realiser realiser;
 
 	private NLGFactory phraseFactory;
@@ -134,7 +134,7 @@ public class DeterminerTest {
 	}
 
 	/**
-	 * testNumericA - Test for "a" specifier with a numeric subject 
+	 * testNumericA - Test for "a" specifier with a numeric subject
 	 */
 	@Test
 	public void testNumericA() {
@@ -149,7 +149,7 @@ public class DeterminerTest {
 	}
 
 	/**
-	 * testNumericAn - Test for "an" specifier with a numeric subject 
+	 * testNumericAn - Test for "an" specifier with a numeric subject
 	 */
 	@Test
 	public void testNumericAn() {
@@ -165,7 +165,7 @@ public class DeterminerTest {
 
 	/**
 	 * testIrregularSubjects - Test irregular subjects that don't conform to the
-	 * vowel vs. constant divide. 
+	 * vowel vs. constant divide.
 	 */
 	@Test
 	public void testIrregularSubjects() {
@@ -303,7 +303,7 @@ public class DeterminerTest {
 
 	/**
 	 * testSingularTheseDeterminerNPObject - Test for "these" when used in the singular form as a determiner in a NP Object
-	 *                                       using the NIHDB Lexicon.
+	 * using the NIHDB Lexicon.
 	 */
 	@Test
 	public void testSingularTheseDeterminerNPObject_NIHDBLexicon() {
@@ -324,7 +324,7 @@ public class DeterminerTest {
 
 	/**
 	 * testSingularThoseDeterminerNPObject - Test for "those" when used in the singular form as a determiner in a NP Object
-	 *                                       using the NIHDB Lexicon
+	 * using the NIHDB Lexicon
 	 */
 	@Test
 	public void testSingularThoseDeterminerNPObject_NIHDBLexicon() {
@@ -345,7 +345,7 @@ public class DeterminerTest {
 
 	/**
 	 * testPluralThatDeterminerNPObject - Test for "that" when used in the plural form as a determiner in a NP Object
-	 *                                    using the NIHDB Lexicon.
+	 * using the NIHDB Lexicon.
 	 */
 	@Test
 	public void testPluralThatDeterminerNPObject_NIHDBLexicon() {
@@ -366,7 +366,7 @@ public class DeterminerTest {
 
 	/**
 	 * testPluralThisDeterminerNPObject - Test for "this" when used in the plural form as a determiner in a NP Object
-	 *                                    using the NIHDBLexicon.
+	 * using the NIHDBLexicon.
 	 */
 	@Test
 	public void testPluralThisDeterminerNPObject_NIHDBLexicon() {

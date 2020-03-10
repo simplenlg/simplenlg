@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,9 +14,8 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell, Saad Mahamood.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
-
 package simplenlg.lexicon.english;
 
 import java.util.List;
@@ -26,16 +25,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import junit.framework.Assert;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import simplenlg.features.Feature;
-import simplenlg.features.LexicalFeature;
-import simplenlg.features.NumberAgreement;
-import simplenlg.features.Person;
-import simplenlg.features.Tense;
+import simplenlg.features.*;
 import simplenlg.framework.InflectedWordElement;
 import simplenlg.framework.LexicalCategory;
 import simplenlg.framework.NLGElement;
@@ -45,7 +38,7 @@ import simplenlg.realiser.english.Realiser;
 
 /**
  * Tests for NIHDBLexicon
- * 
+ *
  * @author Ehud Reiter, Albert Gatt
  */
 public class NIHDBLexiconTest {
@@ -59,21 +52,20 @@ public class NIHDBLexiconTest {
 	@Before
 	/*
 	 * * Sets up the accessor and runs it -- takes ca. 26 sec
-	 */
-	public void setUp() {
-        // use property file for the lexicon
-        try {
-            Properties prop = new Properties();
-            prop.load(getClass().getClassLoader().
-                      getResourceAsStream("lexicon.properties"));
+	 */ public void setUp() {
+		// use property file for the lexicon
+		try {
+			Properties prop = new Properties();
+			prop.load(getClass().getClassLoader().
+					getResourceAsStream("lexicon.properties"));
 
-            String lexiconPath = prop.getProperty("DB_FILENAME");
-            
-            if (null != lexiconPath)
-                this.lexicon = new NIHDBLexicon(lexiconPath);
-        } catch (Exception e) {
-            this.lexicon = new NIHDBLexicon(DB_FILENAME);
-        }
+			String lexiconPath = prop.getProperty("DB_FILENAME");
+
+			if(null != lexiconPath)
+				this.lexicon = new NIHDBLexicon(lexiconPath);
+		} catch(Exception e) {
+			this.lexicon = new NIHDBLexicon(DB_FILENAME);
+		}
 	}
 
 	/**
@@ -81,7 +73,7 @@ public class NIHDBLexiconTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		if (lexicon != null)
+		if(lexicon != null)
 			lexicon.close();
 	}
 
@@ -101,71 +93,71 @@ public class NIHDBLexiconTest {
 		Realiser r = new Realiser();
 		WordElement word = lexicon.getWord("be", LexicalCategory.VERB);
 		InflectedWordElement inflWord = new InflectedWordElement(word);
-		
+
 		//1st person sg past
 		inflWord.setFeature(Feature.PERSON, Person.FIRST);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
 		Assert.assertEquals("was", r.realise(inflWord).toString());
-		
+
 		//2nd person sg past
 		inflWord.setFeature(Feature.PERSON, Person.SECOND);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
 		Assert.assertEquals("were", r.realise(inflWord).toString());
-		
+
 		//3rd person sg past
 		inflWord.setFeature(Feature.PERSON, Person.THIRD);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
 		Assert.assertEquals("was", r.realise(inflWord).toString());
-		
+
 		//1st person sg present
 		inflWord.setFeature(Feature.PERSON, Person.FIRST);
-		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);		
+		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);
 		Assert.assertEquals("am", r.realise(inflWord).toString());
-		
+
 		//2nd person sg present
 		inflWord.setFeature(Feature.PERSON, Person.SECOND);
 		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);
 		Assert.assertEquals("are", r.realise(inflWord).toString());
-		
+
 		//3rd person sg present
 		inflWord.setFeature(Feature.PERSON, Person.THIRD);
 		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);
 		Assert.assertEquals("is", r.realise(inflWord).toString());
-		
+
 		inflWord.setFeature(Feature.NUMBER, NumberAgreement.PLURAL);
-		
+
 		//1st person pl past
 		inflWord.setFeature(Feature.PERSON, Person.FIRST);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
 		Assert.assertEquals("were", r.realise(inflWord).toString());
-		
+
 		//2nd person pl past
 		inflWord.setFeature(Feature.PERSON, Person.SECOND);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
 		Assert.assertEquals("were", r.realise(inflWord).toString());
-		
+
 		//3rd person pl past
 		inflWord.setFeature(Feature.PERSON, Person.THIRD);
 		inflWord.setFeature(Feature.TENSE, Tense.PAST);
 		Assert.assertEquals("were", r.realise(inflWord).toString());
-		
+
 		//1st person pl present
 		inflWord.setFeature(Feature.PERSON, Person.FIRST);
-		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);		
+		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);
 		Assert.assertEquals("are", r.realise(inflWord).toString());
-		
+
 		//2nd person pl present
 		inflWord.setFeature(Feature.PERSON, Person.SECOND);
 		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);
 		Assert.assertEquals("are", r.realise(inflWord).toString());
-		
+
 		//3rd person pl present
 		inflWord.setFeature(Feature.PERSON, Person.THIRD);
 		inflWord.setFeature(Feature.TENSE, Tense.PRESENT);
 		Assert.assertEquals("are", r.realise(inflWord).toString());
-		
+
 	}
-	
+
 	/**
 	 * Tests the lexicon for recall of Acryonms.
 	 */
@@ -173,8 +165,7 @@ public class NIHDBLexiconTest {
 	public void acronymsTests() {
 		WordElement uk = lexicon.getWord("UK");
 		WordElement unitedKingdom = lexicon.getWord("United Kingdom");
-		List<NLGElement> fullForms = uk
-				.getFeatureAsElementList(LexicalFeature.ACRONYM_OF);
+		List<NLGElement> fullForms = uk.getFeatureAsElementList(LexicalFeature.ACRONYM_OF);
 
 		// "uk" is an acronym of 3 full forms
 		Assert.assertEquals(3, fullForms.size());
@@ -182,7 +173,7 @@ public class NIHDBLexiconTest {
 	}
 
 	/**
-	 * Tests the lexicon for recall of baseforms with their standard inflected forms. 
+	 * Tests the lexicon for recall of baseforms with their standard inflected forms.
 	 */
 	@Test
 	public void standardInflectionsTest() {
@@ -191,14 +182,11 @@ public class NIHDBLexiconTest {
 
 		lexicon.setKeepStandardInflections(true);
 		WordElement dog = lexicon.getWord("dog", LexicalCategory.NOUN);
-		Assert.assertEquals("dogs", dog
-				.getFeatureAsString(LexicalFeature.PLURAL));
+		Assert.assertEquals("dogs", dog.getFeatureAsString(LexicalFeature.PLURAL));
 
 		lexicon.setKeepStandardInflections(false);
 		WordElement cat = lexicon.getWord("cat", LexicalCategory.NOUN);
-		Assert
-				.assertEquals(null, cat
-						.getFeatureAsString(LexicalFeature.PLURAL));
+		Assert.assertEquals(null, cat.getFeatureAsString(LexicalFeature.PLURAL));
 
 		// restore flag to original state
 		lexicon.setKeepStandardInflections(keepInflectionsFlag);
@@ -221,7 +209,7 @@ public class NIHDBLexiconTest {
 
 		try {
 			Thread.currentThread().sleep(500);
-		} catch (InterruptedException ie) {
+		} catch(InterruptedException ie) {
 			;// do nothing
 		}
 
@@ -236,8 +224,9 @@ public class NIHDBLexiconTest {
 	 * Class that implements a thread from which a lexical item can be retrieved
 	 */
 	private class LexThread extends Thread {
+
 		WordElement word;
-		String base;
+		String      base;
 
 		public LexThread(String base) {
 			this.base = base;

@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 
 package simplenlg.features;
@@ -25,16 +25,14 @@ package simplenlg.features;
  * number agreement is recorded in the {@code Feature.NUMBER} feature and
  * applies to nouns and verbs, and their associated phrases.
  * </p>
- * 
- * 
+ *
  * @author A. Gatt and D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 public enum NumberAgreement {
-	
+
 	/**
-	 * This represents words that have the same form regardless of whether they 
+	 * This represents words that have the same form regardless of whether they
 	 * are singular or plural. For example, <em>sheep</em>, <em>fish</em>.
 	 */
 	BOTH,

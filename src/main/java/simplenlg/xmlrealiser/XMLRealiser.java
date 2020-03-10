@@ -1,5 +1,20 @@
-/**
- * 
+/*
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * https://www.mozilla.org/en-US/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ *
+ * The Original Code is "Simplenlg".
+ *
+ * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
+ * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
+ *
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.xmlrealiser;
 
@@ -16,27 +31,34 @@ import simplenlg.realiser.english.Realiser;
 
 /**
  * The Class XMLRealiser.
- * 
+ *
  * @author Christopher Howell Agfa Healthcare Corporation
  * @author Albert Gatt, University of Malta
  */
 public class XMLRealiser {
 
-	/** The lex db. */
+	/**
+	 * The lex db.
+	 */
 	static String lexDB = null;
 
-	/** The lexicon. */
+	/**
+	 * The lexicon.
+	 */
 	static Lexicon lexicon = null;
 
-	/** The lexicon type. */
+	/**
+	 * The lexicon type.
+	 */
 	static LexiconType lexiconType = null;
 
-	/** The record. */
+	/**
+	 * The record.
+	 */
 	static Recording record = null;
 
 	/**
 	 * The Enum OpCode.
-	 * 
 	 */
 	/*
 	 * The arg[0] is the op code. op codes are "realise", "setLexicon",
@@ -48,15 +70,25 @@ public class XMLRealiser {
 	 */
 	public enum OpCode {
 
-		/** The noop. */
+		/**
+		 * The noop.
+		 */
 		noop,
-		/** The realise. */
+		/**
+		 * The realise.
+		 */
 		realise,
-		/** The set lexicon. */
+		/**
+		 * The set lexicon.
+		 */
 		setLexicon,
-		/** The start recording. */
+		/**
+		 * The start recording.
+		 */
 		startRecording,
-		/** The stop recording. */
+		/**
+		 * The stop recording.
+		 */
 		stopRecording
 	}
 
@@ -65,26 +97,30 @@ public class XMLRealiser {
 	 */
 	public enum LexiconType {
 
-		/** The DEFAULT. */
+		/**
+		 * The DEFAULT.
+		 */
 		DEFAULT,
-		/** The XML. */
+		/**
+		 * The XML.
+		 */
 		XML,
-		/** The NIHDB. */
+		/**
+		 * The NIHDB.
+		 */
 		NIHDB
 	}
 
 	/**
 	 * The main method to perform realisation.
-	 * 
-	 * @param args
-	 *            the args
+	 *
+	 * @param args the args
 	 * @return the string
-	 * @throws XMLRealiserException
-	 *             the xML realiser exception
+	 * @throws XMLRealiserException the xML realiser exception
 	 */
 	public static String main(Object[] args) throws XMLRealiserException {
 
-		if (args == null || args.length == 0) {
+		if(args == null || args.length == 0) {
 			throw new XMLRealiserException("invalid args");
 		}
 		int argx = 0;
@@ -94,12 +130,12 @@ public class XMLRealiser {
 		OpCode opCode;
 		try {
 			opCode = Enum.valueOf(OpCode.class, opCodeStr);
-		} catch (IllegalArgumentException ex) {
+		} catch(IllegalArgumentException ex) {
 			throw new XMLRealiserException("invalid args");
 		}
-		switch (opCode) {
+		switch(opCode){
 		case realise:
-			if (args.length <= argx) {
+			if(args.length <= argx) {
 				throw new XMLRealiserException("invalid args");
 			}
 			input = (String) args[argx++];
@@ -108,8 +144,8 @@ public class XMLRealiser {
 			output = realise(request.getDocument());
 
 			break;
-		case setLexicon: {
-			if (args.length <= argx + 1) {
+		case setLexicon:{
+			if(args.length <= argx + 1) {
 				throw new XMLRealiserException("invalid setLexicon args");
 			}
 			String lexTypeStr = (String) args[argx++];
@@ -118,15 +154,15 @@ public class XMLRealiser {
 
 			try {
 				lexType = Enum.valueOf(LexiconType.class, lexTypeStr);
-			} catch (IllegalArgumentException ex) {
+			} catch(IllegalArgumentException ex) {
 				throw new XMLRealiserException("invalid args");
 			}
 
 			setLexicon(lexType, lexFile);
 			break;
 		}
-		case startRecording: {
-			if (args.length <= argx) {
+		case startRecording:{
+			if(args.length <= argx) {
 				throw new XMLRealiserException("invalid args");
 			}
 			String path = (String) args[argx++];
@@ -134,13 +170,12 @@ public class XMLRealiser {
 			break;
 		}
 		case stopRecording:
-			if (record != null) {
+			if(record != null) {
 				output = record.GetRecordingFile();
 				try {
 					record.finish();
-				} catch (Exception e) {
-					throw new XMLRealiserException("xml writing error "
-							+ e.getMessage());
+				} catch(Exception e) {
+					throw new XMLRealiserException("xml writing error " + e.getMessage());
 				}
 			}
 			break;
@@ -150,7 +185,7 @@ public class XMLRealiser {
 			throw new XMLRealiserException("invalid op code " + opCodeStr);
 		}
 
-		if (opCode == OpCode.realise) {
+		if(opCode == OpCode.realise) {
 		}
 
 		return output;
@@ -158,28 +193,26 @@ public class XMLRealiser {
 
 	/**
 	 * Sets the lexicon.
-	 * 
-	 * @param lexType
-	 *            the lex type
-	 * @param lexFile
-	 *            the lex file
+	 *
+	 * @param lexType the lex type
+	 * @param lexFile the lex file
 	 */
 	public static void setLexicon(LexiconType lexType, String lexFile) {
-		if (lexiconType != null && lexicon != null && lexType == lexiconType) {
+		if(lexiconType != null && lexicon != null && lexType == lexiconType) {
 			return; // done already
 		}
 
-		if (lexicon != null) {
+		if(lexicon != null) {
 			lexicon.close();
 			lexicon = null;
 			lexiconType = null;
 		}
 
-		if (lexType == LexiconType.XML) {
+		if(lexType == LexiconType.XML) {
 			lexicon = new XMLLexicon(lexFile);
-		} else if (lexType == LexiconType.NIHDB) {
+		} else if(lexType == LexiconType.NIHDB) {
 			lexicon = new NIHDBLexicon(lexFile);
-		} else if (lexType == LexiconType.DEFAULT) {
+		} else if(lexType == LexiconType.DEFAULT) {
 			lexicon = Lexicon.getDefaultLexicon();
 		}
 
@@ -188,19 +221,15 @@ public class XMLRealiser {
 
 	/**
 	 * Gets the request.
-	 * 
-	 * @param input
-	 *            the input
+	 *
+	 * @param input the input
 	 * @return the request
-	 * @throws XMLRealiserException
-	 *             the xML realiser exception
+	 * @throws XMLRealiserException the xML realiser exception
 	 */
-	public static simplenlg.xmlrealiser.wrapper.RequestType getRequest(
-			Reader input) throws XMLRealiserException {
-		simplenlg.xmlrealiser.wrapper.NLGSpec spec = UnWrapper
-				.getNLGSpec(input);
+	public static simplenlg.xmlrealiser.wrapper.RequestType getRequest(Reader input) throws XMLRealiserException {
+		simplenlg.xmlrealiser.wrapper.NLGSpec spec = UnWrapper.getNLGSpec(input);
 		simplenlg.xmlrealiser.wrapper.RequestType request = spec.getRequest();
-		if (request == null) {
+		if(request == null) {
 			throw new XMLRealiserException("Must have Request element");
 		}
 
@@ -209,19 +238,15 @@ public class XMLRealiser {
 
 	/**
 	 * Gets the recording.
-	 * 
-	 * @param input
-	 *            the input
+	 *
+	 * @param input the input
 	 * @return the recording
-	 * @throws XMLRealiserException
-	 *             the xML realiser exception
+	 * @throws XMLRealiserException the xML realiser exception
 	 */
-	public static simplenlg.xmlrealiser.wrapper.RecordSet getRecording(
-			Reader input) throws XMLRealiserException {
-		simplenlg.xmlrealiser.wrapper.NLGSpec spec = UnWrapper
-				.getNLGSpec(input);
+	public static simplenlg.xmlrealiser.wrapper.RecordSet getRecording(Reader input) throws XMLRealiserException {
+		simplenlg.xmlrealiser.wrapper.NLGSpec spec = UnWrapper.getNLGSpec(input);
 		simplenlg.xmlrealiser.wrapper.RecordSet recording = spec.getRecording();
-		if (recording == null) {
+		if(recording == null) {
 			throw new XMLRealiserException("Must have Recording element");
 		}
 
@@ -231,34 +256,30 @@ public class XMLRealiser {
 
 	/**
 	 * Realise.
-	 * 
-	 * @param wt
-	 *            the wt
+	 *
+	 * @param wt the wt
 	 * @return the string
-	 * @throws XMLRealiserException
-	 *             the xML realiser exception
+	 * @throws XMLRealiserException the xML realiser exception
 	 */
-	public static String realise(
-			simplenlg.xmlrealiser.wrapper.XmlDocumentElement wt)
-			throws XMLRealiserException {
+	public static String realise(simplenlg.xmlrealiser.wrapper.XmlDocumentElement wt) throws XMLRealiserException {
 		String output = "";
-		if (wt != null) {
+		if(wt != null) {
 			try {
-				if (lexicon == null) {
+				if(lexicon == null) {
 					lexicon = Lexicon.getDefaultLexicon();
 				}
 				UnWrapper w = new UnWrapper(lexicon);
 				DocumentElement t = w.UnwrapDocumentElement(wt);
-				if (t != null) {
+				if(t != null) {
 					Realiser r = new Realiser(lexicon);
-					r.initialise();
+					//r.initialise();
 
 					NLGElement tr = r.realise(t);
 
 					output = tr.getRealisation();
 				}
 
-			} catch (Exception e) {
+			} catch(Exception e) {
 				throw new XMLRealiserException("NLG XMLRealiser Error", e);
 			}
 		}
@@ -268,42 +289,39 @@ public class XMLRealiser {
 
 	/**
 	 * Start recording.
-	 * 
-	 * @param path
-	 *            the path
-	 * @throws XMLRealiserException
-	 *             the xML realiser exception
+	 *
+	 * @param path the path
+	 * @throws XMLRealiserException the xML realiser exception
 	 */
 	public static void startRecording(String path) throws XMLRealiserException {
-		if (record != null) {
+		if(record != null) {
 			try {
 				record.finish();
-			} catch (Exception e) {
+			} catch(Exception e) {
 				throw new XMLRealiserException("NLG XMLRealiser Error", e);
 			}
 		}
 		record = new Recording(path);
 		try {
 			record.start();
-		} catch (IOException e) {
+		} catch(IOException e) {
 			throw new XMLRealiserException("NLG XMLRealiser Error", e);
 		}
 	}
 
 	/**
 	 * Stop recording.
-	 * 
+	 *
 	 * @return the string
-	 * @throws XMLRealiserException
-	 *             the xML realiser exception
+	 * @throws XMLRealiserException the xML realiser exception
 	 */
 	public static String stopRecording() throws XMLRealiserException {
 		String file = "";
-		if (record != null) {
+		if(record != null) {
 			file = record.GetRecordingFile();
 			try {
 				record.finish();
-			} catch (Exception e) {
+			} catch(Exception e) {
 				throw new XMLRealiserException("NLG XMLRealiser Error", e);
 			}
 		}

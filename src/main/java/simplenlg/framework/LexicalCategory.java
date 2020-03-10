@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.framework;
 
@@ -25,51 +25,75 @@ package simplenlg.framework;
  * <em>dog</em> is a noun, <em>chase</em> is a verb, <em>the</em> is a
  * determiner, and so on.
  * </p>
- * 
- * 
+ *
  * @author A. Gatt and D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 public enum LexicalCategory implements ElementCategory {
 
-	/** A default value, indicating an unspecified category. */
+	/**
+	 * A default value, indicating an unspecified category.
+	 */
 	ANY,
 
-	/** The element represents a symbol. */
+	/**
+	 * The element represents a symbol.
+	 */
 	SYMBOL,
 
-	/** A noun element. */
+	/**
+	 * A noun element.
+	 */
 	NOUN,
 
-	/** An adjective element. */
+	/**
+	 * An adjective element.
+	 */
 	ADJECTIVE,
 
-	/** An adverb element. */
+	/**
+	 * An adverb element.
+	 */
 	ADVERB,
 
-	/** A verb element. */
+	/**
+	 * A verb element.
+	 */
 	VERB,
 
-	/** A determiner element often referred to as a specifier. */
+	/**
+	 * A determiner element often referred to as a specifier.
+	 */
 	DETERMINER,
 
-	/** A pronoun element. */
+	/**
+	 * A pronoun element.
+	 */
 	PRONOUN,
 
-	/** A conjunction element. */
+	/**
+	 * A conjunction element.
+	 */
 	CONJUNCTION,
 
-	/** A preposition element. */
+	/**
+	 * A preposition element.
+	 */
 	PREPOSITION,
 
-	/** A complementiser element. */
+	/**
+	 * A complementiser element.
+	 */
 	COMPLEMENTISER,
 
-	/** A modal element. */
+	/**
+	 * A modal element.
+	 */
 	MODAL,
 
-	/** An auxiliary verb element. */
+	/**
+	 * An auxiliary verb element.
+	 */
 	AUXILIARY;
 
 	/**
@@ -87,12 +111,11 @@ public enum LexicalCategory implements ElementCategory {
 	public boolean equalTo(Object checkObject) {
 		boolean match = false;
 
-		if (checkObject != null) {
-			if (checkObject instanceof DocumentCategory) {
+		if(checkObject != null) {
+			if(checkObject instanceof DocumentCategory) {
 				match = this.equals(checkObject);
 			} else {
-				match = this.toString()
-						.equalsIgnoreCase(checkObject.toString());
+				match = this.toString().equalsIgnoreCase(checkObject.toString());
 			}
 		}
 		return match;

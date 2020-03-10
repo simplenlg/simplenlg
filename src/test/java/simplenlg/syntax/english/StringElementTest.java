@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,24 +14,19 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell, Saad Mahamood.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 
 package simplenlg.syntax.english;
 
-import static org.junit.Assert.*;
-import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import simplenlg.framework.CoordinatedPhraseElement;
-import simplenlg.framework.DocumentElement;
-import simplenlg.framework.LexicalCategory;
-import simplenlg.framework.NLGElement;
-import simplenlg.framework.NLGFactory;
-import simplenlg.framework.StringElement;
+import simplenlg.framework.*;
 import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
@@ -39,23 +34,22 @@ import simplenlg.realiser.english.Realiser;
 
 /**
  * Tests for string elements as parts of larger phrases
- * 
+ *
  * @author bertugatt
- * 
  */
 public class StringElementTest {
 
-	private Lexicon lexicon = null;
+	private Lexicon    lexicon       = null;
 	private NLGFactory phraseFactory = null;
-	private Realiser realiser = null;
-	
+	private Realiser   realiser      = null;
+
 	@Before
 	public void setup() {
 		lexicon = Lexicon.getDefaultLexicon();
 		phraseFactory = new NLGFactory(lexicon);
 		realiser = new Realiser(lexicon);
 	}
-	
+
 	@After
 	public void tearDown() {
 		lexicon = null;
@@ -70,10 +64,8 @@ public class StringElementTest {
 	public void stringElementAsHeadTest() {
 		NPPhraseSpec np = this.phraseFactory.createNounPhrase();
 		np.setHead(phraseFactory.createStringElement("dogs and cats"));
-		np.setSpecifier(phraseFactory.createWord("the",
-				LexicalCategory.DETERMINER));
-		assertEquals("the dogs and cats", this.realiser.realise(np)
-				.getRealisation());
+		np.setSpecifier(phraseFactory.createWord("the", LexicalCategory.DETERMINER));
+		assertEquals("the dogs and cats", this.realiser.realise(np).getRealisation());
 	}
 
 	/**
@@ -84,10 +76,9 @@ public class StringElementTest {
 		SPhraseSpec s = this.phraseFactory.createClause();
 		s.setVerbPhrase(this.phraseFactory.createStringElement("eats and drinks"));
 		s.setSubject(this.phraseFactory.createStringElement("the big fat man"));
-		assertEquals("the big fat man eats and drinks", this.realiser
-				.realise(s).getRealisation());
+		assertEquals("the big fat man eats and drinks", this.realiser.realise(s).getRealisation());
 	}
-	
+
 	/**
 	 * Test for when the SPhraseSpec has a NPSpec added directly after it:
 	 * "Mary loves NP[the cow]."
@@ -104,7 +95,7 @@ public class StringElementTest {
 		completeSen.addComponent(senSpec);
 		assertEquals("Mary loves the cow.", this.realiser.realise(completeSen).getRealisation());
 	}
-	
+
 	/**
 	 * Test for a NP followed by a canned text: "NP[A cat] loves a dog".
 	 */
@@ -118,10 +109,9 @@ public class StringElementTest {
 		senSpec.addComplement(this.phraseFactory.createStringElement("loves a dog"));
 		DocumentElement completeSen = this.phraseFactory.createSentence();
 		completeSen.addComponent(senSpec);
-		assertEquals("The cat loves a dog.", this.realiser.realise(completeSen).getRealisation());	
+		assertEquals("The cat loves a dog.", this.realiser.realise(completeSen).getRealisation());
 	}
-	
-	
+
 	/**
 	 * Test for a StringElement followed by a NP followed by a StringElement
 	 * "The world loves NP[ABBA] but not a sore loser."
@@ -136,9 +126,9 @@ public class StringElementTest {
 		senSpec.addComplement(this.phraseFactory.createStringElement("but not a sore loser"));
 		DocumentElement completeSen = this.phraseFactory.createSentence();
 		completeSen.addComponent(senSpec);
-		assertEquals("The world loves ABBA but not a sore loser.", this.realiser.realise(completeSen).getRealisation());	
+		assertEquals("The world loves ABBA but not a sore loser.", this.realiser.realise(completeSen).getRealisation());
 	}
-	
+
 	/**
 	 * Test for multiple NP phrases with a single StringElement phrase:
 	 * "NP[John is] a trier NP[for cheese]."
@@ -157,15 +147,14 @@ public class StringElementTest {
 		DocumentElement completeSen = this.phraseFactory.createSentence();
 		completeSen.addComponent(senSpec);
 		assertEquals("John is a trier for cheese.", this.realiser.realise(completeSen).getRealisation());
-		
+
 	}
-	
-	
+
 	/**
-	 * White space check: Test to see how SNLG deals with additional whitespaces: 
-	 * 
-	 * NP[The Nasdaq] rose steadily during NP[early trading], however it plummeted due to NP[a shock] after NP[IBM] announced poor 
-     * NP[first quarter results].
+	 * White space check: Test to see how SNLG deals with additional whitespaces:
+	 * <p>
+	 * NP[The Nasdaq] rose steadily during NP[early trading], however it plummeted due to NP[a shock] after NP[IBM] announced poor
+	 * NP[first quarter results].
 	 */
 	@Test
 	public void whiteSpaceNPTest() {
@@ -196,15 +185,16 @@ public class StringElementTest {
 		senSpec.addComplement(fifthNoun);
 		DocumentElement completeSen = this.phraseFactory.createSentence();
 		completeSen.addComponent(senSpec);
-		assertEquals("The Nasdaq rose steadily during early trading, however it plummeted due to a shock after IBM announced poor first quarter results.", 
+		assertEquals(
+				"The Nasdaq rose steadily during early trading, however it plummeted due to a shock after IBM announced poor first quarter results.",
 				this.realiser.realise(completeSen).getRealisation());
 	}
-	
+
 	/**
 	 * Point absorption test: Check to see if SNLG respects abbreviations at the end of a sentence.
 	 * "NP[Yahya] was sleeping his own and dreaming etc."
 	 */
-	
+
 	public void pointAbsorptionTest() {
 		SPhraseSpec senSpec = this.phraseFactory.createClause();
 		NPPhraseSpec firstNoun = this.phraseFactory.createNounPhrase();
@@ -213,12 +203,11 @@ public class StringElementTest {
 		senSpec.addComplement("was sleeping on his own and dreaming etc.");
 		DocumentElement completeSen = this.phraseFactory.createSentence();
 		completeSen.addComponent(senSpec);
-		assertEquals("Yaha was sleeping on his own and dreaming etc.", 
-				this.realiser.realise(completeSen).getRealisation());
-		
-		
+		assertEquals("Yaha was sleeping on his own and dreaming etc.",
+		             this.realiser.realise(completeSen).getRealisation());
+
 	}
-	
+
 	/**
 	 * Point absorption test: As above, but with trailing white space.
 	 * "NP[Yaha] was sleeping his own and dreaming etc.      "
@@ -231,13 +220,13 @@ public class StringElementTest {
 		senSpec.addComplement("was sleeping on his own and dreaming etc.      ");
 		DocumentElement completeSen = this.phraseFactory.createSentence();
 		completeSen.addComponent(senSpec);
-		assertEquals("Yaha was sleeping on his own and dreaming etc.", 
-				this.realiser.realise(completeSen).getRealisation());
+		assertEquals("Yaha was sleeping on his own and dreaming etc.",
+		             this.realiser.realise(completeSen).getRealisation());
 	}
-	
+
 	/**
 	 * Abbreviation test: Check to see how SNLG deals with abbreviations in the middle of a sentence.
-	 * 
+	 * <p>
 	 * "NP[Yahya] and friends etc. went to NP[the park] to play."
 	 */
 	@Test
@@ -254,14 +243,13 @@ public class StringElementTest {
 		senSpec.addComplement("to play");
 		DocumentElement completeSen = this.phraseFactory.createSentence();
 		completeSen.addComponent(senSpec);
-		assertEquals("Yahya and friends etc. went to the park to play.", 
-				this.realiser.realise(completeSen).getRealisation());
+		assertEquals("Yahya and friends etc. went to the park to play.",
+		             this.realiser.realise(completeSen).getRealisation());
 	}
 
-	
 	/**
 	 * Indefinite Article Inflection: StringElement to test how SNLG handles a/an situations.
-	 * "I see an NP[elephant]" 
+	 * "I see an NP[elephant]"
 	 */
 	@Test
 	public void stringIndefiniteArticleInflectionVowelTest() {
@@ -271,14 +259,13 @@ public class StringElementTest {
 		senSpec.addComplement(firstNoun);
 		DocumentElement completeSen = this.phraseFactory.createSentence();
 		completeSen.addComponent(senSpec);
-		assertEquals("I see an elephant.", 
-				this.realiser.realise(completeSen).getRealisation());
-		
+		assertEquals("I see an elephant.", this.realiser.realise(completeSen).getRealisation());
+
 	}
-	
+
 	/**
 	 * Indefinite Article Inflection: StringElement to test how SNLG handles a/an situations.
-	 * "I see NP[a elephant]" --> 
+	 * "I see NP[a elephant]" -->
 	 */
 	@Test
 	public void NPIndefiniteArticleInflectionVowelTest() {
@@ -289,15 +276,13 @@ public class StringElementTest {
 		senSpec.addComplement(firstNoun);
 		DocumentElement completeSen = this.phraseFactory.createSentence();
 		completeSen.addComponent(senSpec);
-		assertEquals("I see an elephant.", 
-				this.realiser.realise(completeSen).getRealisation());
-		
+		assertEquals("I see an elephant.", this.realiser.realise(completeSen).getRealisation());
+
 	}
-	
-	
+
 	/**
 	 * Indefinite Article Inflection: StringElement to test how SNLG handles a/an situations.
-	 * "I see an NP[cow]" 
+	 * "I see an NP[cow]"
 	 */
 	@Test
 	public void stringIndefiniteArticleInflectionConsonantTest() {
@@ -308,13 +293,12 @@ public class StringElementTest {
 		DocumentElement completeSen = this.phraseFactory.createSentence();
 		completeSen.addComponent(senSpec);
 		// Do not attempt "an" -> "a"
-		assertNotSame("I see an cow.", 
-				this.realiser.realise(completeSen).getRealisation());
+		assertNotSame("I see an cow.", this.realiser.realise(completeSen).getRealisation());
 	}
-	
+
 	/**
 	 * Indefinite Article Inflection: StringElement to test how SNLG handles a/an situations.
-	 * "I see NP[an cow]" --> 
+	 * "I see NP[an cow]" -->
 	 */
 	@Test
 	public void NPIndefiniteArticleInflectionConsonantTest() {
@@ -326,28 +310,23 @@ public class StringElementTest {
 		DocumentElement completeSen = this.phraseFactory.createSentence();
 		completeSen.addComponent(senSpec);
 		// Do not attempt "an" -> "a"
-		assertEquals("I see an cow.", 
-				this.realiser.realise(completeSen).getRealisation());
+		assertEquals("I see an cow.", this.realiser.realise(completeSen).getRealisation());
 	}
-	
-	
+
 	/**
 	 * aggregationStringElementTest: Test to see if we can aggregate two StringElements in a CoordinatedPhraseElement.
 	 */
 	@Test
 	public void aggregationStringElementTest() {
-		
-		CoordinatedPhraseElement coordinate = 
-				phraseFactory.createCoordinatedPhrase(new StringElement("John is going to Tesco"), 
-						                              new StringElement("Mary is going to Sainsburys")); 
-	    SPhraseSpec sentence = phraseFactory.createClause();
-	    sentence.addComplement(coordinate);
-	    
-	    assertEquals("John is going to Tesco and Mary is going to Sainsburys.", 
-				realiser.realiseSentence(sentence));
+
+		CoordinatedPhraseElement coordinate = phraseFactory.createCoordinatedPhrase(new StringElement(
+				"John is going to Tesco"), new StringElement("Mary is going to Sainsburys"));
+		SPhraseSpec sentence = phraseFactory.createClause();
+		sentence.addComplement(coordinate);
+
+		assertEquals("John is going to Tesco and Mary is going to Sainsburys.", realiser.realiseSentence(sentence));
 	}
-	
-	
+
 	/**
 	 * Tests that no empty space is added when a StringElement is instantiated with an empty string
 	 * or null object.
@@ -403,5 +382,5 @@ public class StringElementTest {
 		                    realiser.realiseSentence(test4));
 
 	}
-	
+
 }

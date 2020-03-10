@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.lexicon;
 
@@ -24,27 +24,27 @@ import java.util.List;
 import simplenlg.framework.LexicalCategory;
 import simplenlg.framework.WordElement;
 
-/** This class contains a set of lexicons, which are searched in
+/**
+ * This class contains a set of lexicons, which are searched in
  * order for the specified word
- * 
- * @author ereiter
  *
+ * @author ereiter
  */
 public class MultipleLexicon extends Lexicon {
-	
+
 	/* if this flag is true, all lexicons are searched for
 	 * this word, even after a match is found
 	 * it is false by default
 	 * */
 	private boolean alwaysSearchAll = false;
-	
+
 	/* list of lexicons, in order in which they are searched */
 	private List<Lexicon> lexiconList = null;
 
 	/**********************************************************************/
 	// constructors
 	/**********************************************************************/
-	
+
 	/**
 	 * create an empty multi lexicon
 	 */
@@ -53,29 +53,29 @@ public class MultipleLexicon extends Lexicon {
 		lexiconList = new ArrayList<Lexicon>();
 		alwaysSearchAll = false;
 	}
-	
-	/** create a multi lexicon with the specified lexicons
-	 * @param lexicons
+
+	/**
+	 * create a multi lexicon with the specified lexicons
 	 */
 	public MultipleLexicon(Lexicon... lexicons) {
 		this();
-		for (Lexicon lex: lexicons)
+		for(Lexicon lex : lexicons)
 			lexiconList.add(lex);
 	}
-	
+
 	/**********************************************************************/
 	// routines to add more lexicons, change flags
 	/**********************************************************************/
 
-	/** add lexicon at beginning of list (is searched first)
-	 * @param lex
+	/**
+	 * add lexicon at beginning of list (is searched first)
 	 */
 	public void addInitialLexicon(Lexicon lex) {
 		lexiconList.add(0, lex);
 	}
 
-	/** add lexicon at end of list (is searched last)
-	 * @param lex
+	/**
+	 * add lexicon at end of list (is searched last)
 	 */
 	public void addFinalLexicon(Lexicon lex) {
 		lexiconList.add(0, lex);
@@ -97,6 +97,7 @@ public class MultipleLexicon extends Lexicon {
 
 	/**********************************************************************/
 	// main methods
+
 	/**********************************************************************/
 
 	/* (non-Javadoc)
@@ -105,11 +106,11 @@ public class MultipleLexicon extends Lexicon {
 	@Override
 	public List<WordElement> getWords(String baseForm, LexicalCategory category) {
 		List<WordElement> result = new ArrayList<WordElement>();
-		for (Lexicon lex: lexiconList) {
+		for(Lexicon lex : lexiconList) {
 			List<WordElement> lexResult = lex.getWords(baseForm, category);
-			if (lexResult != null && !lexResult.isEmpty()) {
+			if(lexResult != null && !lexResult.isEmpty()) {
 				result.addAll(lexResult);
-				if (!alwaysSearchAll)
+				if(!alwaysSearchAll)
 					return result;
 			}
 		}
@@ -122,11 +123,11 @@ public class MultipleLexicon extends Lexicon {
 	@Override
 	public List<WordElement> getWordsByID(String id) {
 		List<WordElement> result = new ArrayList<WordElement>();
-		for (Lexicon lex: lexiconList) {
+		for(Lexicon lex : lexiconList) {
 			List<WordElement> lexResult = lex.getWordsByID(id);
-			if (lexResult != null && !lexResult.isEmpty()) {
+			if(lexResult != null && !lexResult.isEmpty()) {
 				result.addAll(lexResult);
-				if (!alwaysSearchAll)
+				if(!alwaysSearchAll)
 					return result;
 			}
 		}
@@ -139,20 +140,20 @@ public class MultipleLexicon extends Lexicon {
 	@Override
 	public List<WordElement> getWordsFromVariant(String variant, LexicalCategory category) {
 		List<WordElement> result = new ArrayList<WordElement>();
-		for (Lexicon lex: lexiconList) {
+		for(Lexicon lex : lexiconList) {
 			List<WordElement> lexResult = lex.getWordsFromVariant(variant, category);
-			if (lexResult != null && !lexResult.isEmpty()) {
+			if(lexResult != null && !lexResult.isEmpty()) {
 				result.addAll(lexResult);
-				if (!alwaysSearchAll)
+				if(!alwaysSearchAll)
 					return result;
 			}
 		}
 		return result;
 	}
 
-
 	/**********************************************************************/
 	// other methods
+
 	/**********************************************************************/
 
 	/* (non-Javadoc)
@@ -161,9 +162,8 @@ public class MultipleLexicon extends Lexicon {
 	@Override
 	public void close() {
 		// close component lexicons
-		for (Lexicon lex: lexiconList)
+		for(Lexicon lex : lexiconList)
 			lex.close();
 	}
-
 
 }

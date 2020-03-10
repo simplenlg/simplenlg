@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.realiser.english;
 
@@ -33,7 +33,6 @@ import simplenlg.syntax.english.SyntaxProcessor;
 
 /**
  * @author D. Westwater, Data2Text Ltd
- * 
  */
 public class Realiser extends NLGModule {
 
@@ -54,8 +53,6 @@ public class Realiser extends NLGModule {
 	/**
 	 * Create a realiser with a lexicon (should match lexicon used for
 	 * NLGFactory)
-	 * 
-	 * @param lexicon
 	 */
 	public Realiser(Lexicon lexicon) {
 		this();
@@ -64,14 +61,14 @@ public class Realiser extends NLGModule {
 
 	/**
 	 * Check whether this processor separates premodifiers using a comma.
-	 * 
+	 * <p>
 	 * <br/>
 	 * <strong>Implementation note:</strong> this method checks whether the
 	 * {@link simplenlg.orthography.english.OrthographyProcessor} has the
 	 * parameter set.
-	 * 
+	 *
 	 * @return <code>true</code> if premodifiers in the noun phrase are
-	 *         comma-separated.
+	 * 		comma-separated.
 	 */
 	public boolean isCommaSepPremodifiers() {
 		return this.orthography == null ? false : this.orthography.isCommaSepPremodifiers();
@@ -84,9 +81,8 @@ public class Realiser extends NLGModule {
 	 * <strong>Implementation note:</strong>: this method sets the relevant
 	 * parameter in the
 	 * {@link simplenlg.orthography.english.OrthographyProcessor}.
-	 * 
-	 * @param commaSepPremodifiers
-	 *            the commaSepPremodifiers to set
+	 *
+	 * @param commaSepPremodifiers the commaSepPremodifiers to set
 	 */
 	public void setCommaSepPremodifiers(boolean commaSepPremodifiers) {
 		if(this.orthography != null) {
@@ -96,12 +92,12 @@ public class Realiser extends NLGModule {
 
 	/**
 	 * Check whether this processor separates cue phrases from the matrix clause using a comma.
-	 * 
+	 * <p>
 	 * <br/>
 	 * <strong>Implementation note:</strong> this method checks whether the
 	 * {@link simplenlg.orthography.english.OrthographyProcessor} has the
 	 * parameter set.
-	 * 
+	 *
 	 * @return <code>true</code> if cue phrases have a comma before the remainder of the host phrase
 	 */
 	public boolean isCommaSepCuephrase() {
@@ -115,8 +111,6 @@ public class Realiser extends NLGModule {
 	 * <strong>Implementation note:</strong>: this method sets the relevant
 	 * parameter in the
 	 * {@link simplenlg.orthography.english.OrthographyProcessor}.
-	 * 
-	 * @param commaSepcuephrase
 	 */
 	public void setCommaSepCuephrase(boolean commaSepCuephrase) {
 		if(this.orthography != null) {
@@ -196,8 +190,7 @@ public class Realiser extends NLGModule {
 
 	/**
 	 * Convenience class to realise any NLGElement as a sentence
-	 * 
-	 * @param element
+	 *
 	 * @return String realisation of the NLGElement
 	 */
 	public String realiseSentence(NLGElement element) {

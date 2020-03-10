@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.framework;
 
@@ -30,19 +30,16 @@ import simplenlg.features.Feature;
  * SimpleNLG library. Once assigned a value, the string element should not be
  * changed by any other processors.
  * </p>
- * 
- * 
+ *
  * @author D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 public class StringElement extends NLGElement {
 
 	/**
 	 * Constructs a new string element representing some canned text.
-	 * 
-	 * @param value
-	 *            the text for this string element.
+	 *
+	 * @param value the text for this string element.
 	 */
 	public StringElement(String value) {
 		setCategory(PhraseCategory.CANNED_TEXT);
@@ -74,21 +71,19 @@ public class StringElement extends NLGElement {
 	}
 
 	private boolean realisationsMatch(StringElement o) {
-		if  (getRealisation() == null) {
+		if(getRealisation() == null) {
 			return o.getRealisation() == null;
-		}
-		else
+		} else
 			return getRealisation().equals(o.getRealisation());
 	}
 
 	@Override
 	public String printTree(String indent) {
 		StringBuffer print = new StringBuffer();
-		print
-				.append("StringElement: content=\"").append(getRealisation()).append('\"'); //$NON-NLS-1$
+		print.append("StringElement: content=\"").append(getRealisation()).append('\"'); //$NON-NLS-1$
 		Map<String, Object> features = this.getAllFeatures();
 
-		if (features != null) {
+		if(features != null) {
 			print.append(", features=").append(features.toString()); //$NON-NLS-1$
 		}
 		print.append('\n');

@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 
 package simplenlg.features;
@@ -25,10 +25,9 @@ package simplenlg.features;
  * questions that SimpleNLG can realise. The interrogative type is recorded in
  * the {@code Feature.INTERROGATIVE_TYPE} feature and applies to clauses.
  * </p>
- * 
+ *
  * @author A. Gatt and D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 
 public enum InterrogativeType {
@@ -40,17 +39,17 @@ public enum InterrogativeType {
 	 * Mary?</em>
 	 */
 	HOW,
-	
+
 	/**
-	 * A how question related to a predicative sentence, such as <i>John is fine</i>, which becomes <i>How is John?</i> 
+	 * A how question related to a predicative sentence, such as <i>John is fine</i>, which becomes <i>How is John?</i>
 	 */
 	HOW_PREDICATE,
 
 	/**
 	 * This type of interrogative is a question pertaining to the object of a
-	 * phrase. For example, <em>John bought a horse</em> becomes <em>what did 
+	 * phrase. For example, <em>John bought a horse</em> becomes <em>what did
 	 * John buy?</em> while <em>John gave Mary a flower</em> becomes
-	 * <em>What did 
+	 * <em>What did
 	 * John give Mary?</em>
 	 */
 	WHAT_OBJECT,
@@ -116,11 +115,10 @@ public enum InterrogativeType {
 	/**
 	 * A method to determine if the {@code InterrogativeType} is a question
 	 * concerning an element with the discourse function of an object.
-	 * 
-	 * @param type
-	 *            the interrogative type to be checked
+	 *
+	 * @param type the interrogative type to be checked
 	 * @return <code>true</code> if the type concerns an object,
-	 *         <code>false</code> otherwise.
+	 * 		<code>false</code> otherwise.
 	 */
 	public static boolean isObject(Object type) {
 		return WHO_OBJECT.equals(type) || WHAT_OBJECT.equals(type);
@@ -129,11 +127,10 @@ public enum InterrogativeType {
 	/**
 	 * A method to determine if the {@code InterrogativeType} is a question
 	 * concerning an element with the discourse function of an indirect object.
-	 * 
-	 * @param type
-	 *            the interrogative type to be checked
+	 *
+	 * @param type the interrogative type to be checked
 	 * @return <code>true</code> if the type concerns an indirect object,
-	 *         <code>false</code> otherwise.
+	 * 		<code>false</code> otherwise.
 	 */
 	public static boolean isIndirectObject(Object type) {
 		return WHO_INDIRECT_OBJECT.equals(type);
@@ -144,13 +141,13 @@ public enum InterrogativeType {
 	 * word. Useful, since the types in this enum aren't all simply convertible
 	 * to strings (e.g. <code>WHO_SUBJCT</code> and <code>WHO_OBJECT</code> both
 	 * correspond to String <i>Who</i>)
-	 * 
+	 *
 	 * @return the string corresponding to the question word
 	 */
 	public String getString() {
 		String s = "";
 
-		switch (this) {
+		switch(this){
 		case HOW:
 		case HOW_PREDICATE:
 			s = "how";

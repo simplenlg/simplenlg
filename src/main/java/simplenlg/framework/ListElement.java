@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.framework;
 
@@ -35,20 +35,17 @@ import simplenlg.features.InternalFeature;
  * inflected words. Using the list element helps to keep the inflected word
  * elements together.
  * </p>
- * 
+ *
  * <p>
  * There is no sorting within the list element and components are added in the
  * order they are given.
  * </p>
- * 
- * 
+ *
  * @author D. Westwater, University of Aberdeen.
  * @version 4.0
  */
 public class ListElement extends NLGElement {
 
-	
-	
 	/**
 	 * Creates a new list element with no components.
 	 */
@@ -58,9 +55,8 @@ public class ListElement extends NLGElement {
 
 	/**
 	 * Creates a new list element containing the given components.
-	 * 
-	 * @param components
-	 *            the initial components for this list element.
+	 *
+	 * @param components the initial components for this list element.
 	 */
 	public ListElement(List<NLGElement> components) {
 		this();
@@ -74,9 +70,8 @@ public class ListElement extends NLGElement {
 
 	/**
 	 * Creates a new list element containing the given component.
-	 * 
-	 * @param newComponent
-	 *            the initial component for this list element.
+	 *
+	 * @param newComponent the initial component for this list element.
 	 */
 	public ListElement(NLGElement newComponent) {
 		this();
@@ -85,13 +80,12 @@ public class ListElement extends NLGElement {
 
 	/**
 	 * Adds the given component to the list element.
-	 * 
-	 * @param newComponent
-	 *            the <code>NLGElement</code> component to be added.
+	 *
+	 * @param newComponent the <code>NLGElement</code> component to be added.
 	 */
 	public void addComponent(NLGElement newComponent) {
 		List<NLGElement> components = getFeatureAsElementList(InternalFeature.COMPONENTS);
-		if (components == null) {
+		if(components == null) {
 			components = new ArrayList<NLGElement>();
 		}
 		setFeature(InternalFeature.COMPONENTS, components);
@@ -100,13 +94,12 @@ public class ListElement extends NLGElement {
 
 	/**
 	 * Adds the given components to the list element.
-	 * 
-	 * @param newComponents
-	 *            a <code>List</code> of <code>NLGElement</code>s to be added.
+	 *
+	 * @param newComponents a <code>List</code> of <code>NLGElement</code>s to be added.
 	 */
 	public void addComponents(List<NLGElement> newComponents) {
 		List<NLGElement> components = getFeatureAsElementList(InternalFeature.COMPONENTS);
-		if (components == null) {
+		if(components == null) {
 			components = new ArrayList<NLGElement>();
 		}
 		setFeature(InternalFeature.COMPONENTS, components);
@@ -115,10 +108,9 @@ public class ListElement extends NLGElement {
 
 	/**
 	 * Replaces the current components in the list element with the given list.
-	 * 
-	 * @param newComponents
-	 *            a <code>List</code> of <code>NLGElement</code>s to be used as
-	 *            the components.
+	 *
+	 * @param newComponents a <code>List</code> of <code>NLGElement</code>s to be used as
+	 * 		the components.
 	 */
 	public void setComponents(List<NLGElement> newComponents) {
 		setFeature(InternalFeature.COMPONENTS, newComponents);
@@ -139,9 +131,8 @@ public class ListElement extends NLGElement {
 		print.append("ListElement: features={"); //$NON-NLS-1$
 
 		Map<String, Object> features = getAllFeatures();
-		for (String eachFeature : features.keySet()) {
-			print.append(eachFeature).append('=').append(
-					features.get(eachFeature).toString()).append(' ');
+		for(String eachFeature : features.keySet()) {
+			print.append(eachFeature).append('=').append(features.get(eachFeature).toString()).append(' ');
 		}
 		print.append("}\n"); //$NON-NLS-1$
 
@@ -149,19 +140,18 @@ public class ListElement extends NLGElement {
 		int length = children.size() - 1;
 		int index = 0;
 
-		for (index = 0; index < length; index++) {
-			print.append(thisIndent).append(
-					children.get(index).printTree(childIndent));
+		for(index = 0; index < length; index++) {
+			print.append(thisIndent).append(children.get(index).printTree(childIndent));
 		}
-		if (length >= 0) {
-			print.append(lastIndent).append(
-					children.get(length).printTree(lastChildIndent));
+		if(length >= 0) {
+			print.append(lastIndent).append(children.get(length).printTree(lastChildIndent));
 		}
 		return print.toString();
 	}
 
 	/**
 	 * Retrieves the number of components in this list element.
+	 *
 	 * @return the number of components.
 	 */
 	public int size() {
@@ -170,6 +160,7 @@ public class ListElement extends NLGElement {
 
 	/**
 	 * Retrieves the first component in the list.
+	 *
 	 * @return the <code>NLGElement</code> at the top of the list.
 	 */
 	public NLGElement getFirst() {

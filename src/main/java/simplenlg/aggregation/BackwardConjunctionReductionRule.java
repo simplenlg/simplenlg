@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.aggregation;
 
@@ -30,28 +30,27 @@ import simplenlg.framework.PhraseCategory;
  * <I>form-identical</I> to a constituent with the same function in
  * <code>s2</code>, that is, the two constituents are essentially identical in
  * their final, realised, form.
- * 
- * <P>
+ *
+ * <p>
  * The current implementation is loosely based on the algorithm in Harbusch and
  * Kempen (2009), which is described here:
- * 
+ *
  * <a href="http://aclweb.org/anthology-new/W/W09/W09-0624.pdf">
  * http://aclweb.org/anthology-new/W/W09/W09-0624.pdf</a>
  * </P>
- * 
- * <P>
+ *
+ * <p>
  * <strong>Implementation note:</strong> The current implementation only applies
  * ellipsis to phrasal constituents (i.e. not to their component lexical items).
  * </P>
- * 
+ * <p>
  * *
- * <P>
+ * <p>
  * <STRONG>Note:</STRONG>: this rule can be used in conjunction with the
  * {@link ForwardConjunctionReductionRule} in {@link Aggregator}.
  * </P>
- * 
+ *
  * @author Albert Gatt, University of Malta and University of Aberdeen
- * 
  */
 public class BackwardConjunctionReductionRule extends AggregationRule {
 
@@ -69,35 +68,30 @@ public class BackwardConjunctionReductionRule extends AggregationRule {
 	 * Applies backward conjunction reduction to two NLGElements e1 and e2,
 	 * succeeding only if they are clauses (that is, e1.getCategory() ==
 	 * e2.getCategory == {@link simplenlg.framework.PhraseCategory#CLAUSE}).
-	 * 
-	 * @param previous
-	 *            the first phrase
-	 * @param next
-	 *            the second phrase
+	 *
+	 * @param previous the first phrase
+	 * @param next the second phrase
 	 * @return a coordinate phrase if aggregation is successful,
-	 *         <code>null</code> otherwise
+	 * 		<code>null</code> otherwise
 	 */
 	@Override
 	public NLGElement apply(NLGElement previous, NLGElement next) {
 		boolean success = false;
 
-		if (previous.getCategory() == PhraseCategory.CLAUSE
-				&& next.getCategory() == PhraseCategory.CLAUSE
-				&& PhraseChecker.nonePassive(previous, next)) {
-			
-			List<PhraseSet> rightPeriphery = PhraseChecker.rightPeriphery(
-					previous, next);
+		if(previous.getCategory() == PhraseCategory.CLAUSE && next.getCategory() == PhraseCategory.CLAUSE
+		   && PhraseChecker.nonePassive(previous, next)) {
 
-			for (PhraseSet pair : rightPeriphery) {
-				if (pair.lemmaIdentical()) {
+			List<PhraseSet> rightPeriphery = PhraseChecker.rightPeriphery(previous, next);
+
+			for(PhraseSet pair : rightPeriphery) {
+				if(pair.lemmaIdentical()) {
 					pair.elideLeftmost();
 					success = true;
 				}
 			}
 		}
 
-		return success ? this.factory.createCoordinatedPhrase(previous, next)
-				: null;
+		return success ? this.factory.createCoordinatedPhrase(previous, next) : null;
 	}
 
 }

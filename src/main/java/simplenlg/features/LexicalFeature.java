@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 
 package simplenlg.features;
@@ -35,7 +35,7 @@ import simplenlg.framework.PhraseCategory;
  * <LI> <code>InternalFeature</code>: features typically used internally by
  * SimpleNLG
  * </UL>
- * 
+ * <p>
  * Elements in the system can, in theory, take any kind of feature. Some
  * features will only be expected by certain processors, however. Developers can
  * define their own features but should choose names that do not conflict with
@@ -78,10 +78,9 @@ import simplenlg.framework.PhraseCategory;
  * </tr>
  * <tr>
  * </table>
- * 
+ *
  * @author E. Reiter and D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 
 @SuppressWarnings("nls")
@@ -309,7 +308,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String BASE_FORM = "base_form";
+	public static final String BASE_FORM    = "base_form";
 	/**
 	 * <p>
 	 * This feature is used for determining the position of adjectives. Setting
@@ -343,7 +342,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String CLASSIFYING = "classifying";
+	public static final String CLASSIFYING  = "classifying";
 	/**
 	 * <p>
 	 * This feature is used for determining the position of adjectives. Setting
@@ -377,7 +376,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String COLOUR = "colour";
+	public static final String COLOUR       = "colour";
 	/**
 	 * <p>
 	 * This feature gives the comparative form for adjectives and adverbs. For
@@ -414,7 +413,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String COMPARATIVE = "comparative";
+	public static final String COMPARATIVE  = "comparative";
 	/**
 	 * <p>
 	 * This feature determines if a verb is ditransitive, meaning that it can
@@ -490,7 +489,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String GENDER = "gender";
+	public static final String GENDER       = "gender";
 	/**
 	 * <p>
 	 * This flag determines if an adverb is an intensifier, such as
@@ -523,7 +522,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String INTENSIFIER = "intensifier";
+	public static final String INTENSIFIER  = "intensifier";
 	/**
 	 * <p>
 	 * This flag highlights a verb that can only take a subject and no objects.
@@ -606,7 +605,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String PAST = "past";
+	public static final String PAST               = "past";
 	/**
 	 * <p>
 	 * This feature gives the past participle tense form of a verb. For many
@@ -648,7 +647,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String PAST_PARTICIPLE = "pastParticiple";
+	public static final String PAST_PARTICIPLE    = "pastParticiple";
 	/**
 	 * <p>
 	 * This feature gives the plural form of a noun. For example, the plural of
@@ -685,7 +684,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String PLURAL = "plural";
+	public static final String PLURAL             = "plural";
 	/**
 	 * <p>
 	 * This flag is set on adjectives that can also be used as a predicate. For
@@ -718,7 +717,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String PREDICATIVE = "predicative";
+	public static final String PREDICATIVE        = "predicative";
 	/**
 	 * <p>
 	 * This feature gives the present participle form of a verb. For example,
@@ -794,7 +793,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String PRESENT3S = "present3s";
+	public static final String PRESENT3S          = "present3s";
 	/**
 	 * <p>
 	 * This flag is used to determine whether a noun is a proper noun, such as a
@@ -827,7 +826,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String PROPER = "proper";
+	public static final String PROPER             = "proper";
 	/**
 	 * <p>
 	 * This feature is used for determining the position of adjectives. Setting
@@ -861,7 +860,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String QUALITATIVE = "qualitative";
+	public static final String QUALITATIVE        = "qualitative";
 	/**
 	 * <p>
 	 * This flag is set if a pronoun is written in the reflexive form. For
@@ -895,7 +894,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String REFLEXIVE = "reflexive";
+	public static final String REFLEXIVE          = "reflexive";
 	/**
 	 * <p>
 	 * This feature is used to define whether an adverb can be used as a clause
@@ -929,7 +928,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String SENTENCE_MODIFIER = "sentence_modifier";
+	public static final String SENTENCE_MODIFIER  = "sentence_modifier";
 	/**
 	 * <p>
 	 * This feature gives the superlative form for adjectives and adverbs. For
@@ -965,7 +964,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String SUPERLATIVE = "superlative";
+	public static final String SUPERLATIVE        = "superlative";
 	/**
 	 * <p>
 	 * This flag highlights a verb that can only take a subject and an object.
@@ -997,7 +996,7 @@ public abstract class LexicalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String TRANSITIVE = "transitive";
+	public static final String TRANSITIVE         = "transitive";
 
 	/**
 	 * <p>
@@ -1083,22 +1082,17 @@ public abstract class LexicalFeature {
 	 * category, that is, the constants for
 	 * <code>PAST, PAST_PARTICIPLE, PLURAl, PRESENT_PARTICIPLE, PRESENT3S, COMPARATIVE</code>
 	 * or <code>SUPERLATIVE</code>.
-	 * 
-	 * @param cat
-	 *            the category
+	 *
+	 * @param cat the category
 	 * @return the inflectional feature names
 	 */
 	public static String[] getInflectionalFeatures(ElementCategory cat) {
-		if (PhraseCategory.NOUN_PHRASE.equals(cat)
-				|| LexicalCategory.NOUN.equals(cat))
-			return new String[] { PLURAL };
-		else if (PhraseCategory.VERB_PHRASE.equals(cat)
-				|| LexicalCategory.VERB.equals(cat))
-			return new String[] { PAST, PAST_PARTICIPLE, PRESENT_PARTICIPLE,
-					PRESENT3S };
-		else if (PhraseCategory.ADJECTIVE_PHRASE.equals(cat)
-				|| LexicalCategory.ADJECTIVE.equals(cat))
-			return new String[] { COMPARATIVE, SUPERLATIVE };
+		if(PhraseCategory.NOUN_PHRASE.equals(cat) || LexicalCategory.NOUN.equals(cat))
+			return new String[]{PLURAL};
+		else if(PhraseCategory.VERB_PHRASE.equals(cat) || LexicalCategory.VERB.equals(cat))
+			return new String[]{PAST, PAST_PARTICIPLE, PRESENT_PARTICIPLE, PRESENT3S};
+		else if(PhraseCategory.ADJECTIVE_PHRASE.equals(cat) || LexicalCategory.ADJECTIVE.equals(cat))
+			return new String[]{COMPARATIVE, SUPERLATIVE};
 		else
 			return null;
 

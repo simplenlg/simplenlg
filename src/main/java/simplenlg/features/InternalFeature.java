@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.features;
 
@@ -22,15 +22,15 @@ package simplenlg.features;
  * <p>
  * This class defines a list of features internally used within the SimpleNLG
  * system.
- *  Note that there are three feature classes in SimpleNLG.
+ * Note that there are three feature classes in SimpleNLG.
  * <UL>
  * <LI> <code>Feature</code>: features typically set up developers invoking SimpleNLG
  * <LI> <code>LexicalFeature</code>: features typically set up the SimpleNLG lexicon
  * <LI> <code>InternalFeature</code>: features typically used internally by SimpleNLG
  * </UL>
- * 
+ * <p>
  * Elements in the system can, in theory, take any kind of feature. Some
- * features will only be expected by certain processors, however. 
+ * features will only be expected by certain processors, however.
  * Developers can define their own features but should
  * choose names that do not conflict with those presented here.
  * </p>
@@ -71,10 +71,9 @@ package simplenlg.features;
  * </tr>
  * <tr>
  * </table>
- * 
+ *
  * @author E. Reiter and D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 
 @SuppressWarnings("nls")
@@ -113,7 +112,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String ACRONYM = "acronym";
+	public static final String ACRONYM            = "acronym";
 	/**
 	 * <p>
 	 * This feature is used to reference the base word element as created by the
@@ -150,7 +149,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String BASE_WORD = "base_word";
+	public static final String BASE_WORD          = "base_word";
 	/**
 	 * <p>
 	 * This feature determines the status of a sentence.
@@ -184,7 +183,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String CLAUSE_STATUS = "clause_status";
+	public static final String CLAUSE_STATUS      = "clause_status";
 	/**
 	 * <p>
 	 * This feature refers to the list of complements for the phrase.
@@ -219,7 +218,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String COMPLEMENTS = "complements";
+	public static final String COMPLEMENTS        = "complements";
 	/**
 	 * <p>
 	 * This feature refers to the list of components in a
@@ -255,7 +254,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String COMPONENTS = "components";
+	public static final String COMPONENTS         = "components";
 	/**
 	 * <p>
 	 * This feature is the list of coordinated phrases in a
@@ -290,7 +289,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String COORDINATES = "coordinates";
+	public static final String COORDINATES        = "coordinates";
 	/**
 	 * <p>
 	 * This feature defines the role each element plays in the structure of the
@@ -328,8 +327,8 @@ public abstract class InternalFeature {
 	 * </table>
 	 */
 	public static final String DISCOURSE_FUNCTION = "discourse_function";
-	
-	public static final String NON_MORPH = "non_morph";
+
+	public static final String NON_MORPH         = "non_morph";
 	/**
 	 * <p>
 	 * This feature tracks any front modifiers in sentences. Front modifiers are
@@ -363,7 +362,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String FRONT_MODIFIERS = "front_modifiers";
+	public static final String FRONT_MODIFIERS   = "front_modifiers";
 	/**
 	 * <p>
 	 * This feature points to the head element in a phrase. The head element is
@@ -402,7 +401,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String HEAD = "head";
+	public static final String HEAD              = "head";
 	/**
 	 * <p>
 	 * This flag is used to determine if the modal should be included in the
@@ -436,7 +435,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String IGNORE_MODAL = "ignore_modal";
+	public static final String IGNORE_MODAL      = "ignore_modal";
 	/**
 	 * <p>
 	 * This flag determines if the sentence is interrogative or not.
@@ -470,7 +469,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String INTERROGATIVE = "interrogative";
+	public static final String INTERROGATIVE     = "interrogative";
 	/**
 	 * <p>
 	 * This feature represents the list of post-modifier elements.
@@ -505,7 +504,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String POSTMODIFIERS = "postmodifiers";
+	public static final String POSTMODIFIERS     = "postmodifiers";
 	/**
 	 * <p>
 	 * This feature represents the list of premodifier elements. Premodifiers
@@ -540,7 +539,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String PREMODIFIERS = "premodifiers";
+	public static final String PREMODIFIERS      = "premodifiers";
 	/**
 	 * <p>
 	 * This flag is used to define whether a noun phrase has had its specifier
@@ -575,7 +574,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String RAISED = "raised";
+	public static final String RAISED            = "raised";
 	/**
 	 * <p>
 	 * This flag determines if auxiliary verbs should be realised in coordinated
@@ -646,7 +645,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String SPECIFIER = "specifier";
+	public static final String SPECIFIER         = "specifier";
 	/**
 	 * <p>
 	 * This feature represents the list of subjects in a clause.
@@ -678,7 +677,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String SUBJECTS = "subjects";
+	public static final String SUBJECTS          = "subjects";
 	/**
 	 * <p>
 	 * This feature represents the verb phrase in a clause.
@@ -711,7 +710,7 @@ public abstract class InternalFeature {
 	 * </tr>
 	 * </table>
 	 */
-	public static final String VERB_PHRASE = "verb_phrase";
+	public static final String VERB_PHRASE       = "verb_phrase";
 
 	/**
 	 * The constructor is never needed.

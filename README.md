@@ -40,4 +40,4 @@ A version of SimpleNLG has now been developed for *French* by *Pierre-Luc Vaudry
 
 SimpleNLG License 
 -----------------------------
-SimpleNLG is licensed under the terms and conditions of the [Mozilla Public Licence (MPL)](http://www.mozilla.org/MPL/).
+SimpleNLG is licensed under the terms and conditions of the [Mozilla Public Licence (MPL)](https://www.mozilla.org/en-US/MPL/) version 2.0.

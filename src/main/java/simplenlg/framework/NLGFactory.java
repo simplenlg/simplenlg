@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,40 +14,28 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.framework;
 
 import java.util.Arrays;
 import java.util.List;
 
-import simplenlg.features.Feature;
-import simplenlg.features.Gender;
-import simplenlg.features.InternalFeature;
-import simplenlg.features.LexicalFeature;
-import simplenlg.features.NumberAgreement;
-import simplenlg.features.Person;
+import simplenlg.features.*;
 import simplenlg.lexicon.Lexicon;
-import simplenlg.phrasespec.AdjPhraseSpec;
-import simplenlg.phrasespec.AdvPhraseSpec;
-import simplenlg.phrasespec.NPPhraseSpec;
-import simplenlg.phrasespec.PPPhraseSpec;
-import simplenlg.phrasespec.SPhraseSpec;
-import simplenlg.phrasespec.VPPhraseSpec;
+import simplenlg.phrasespec.*;
 
 /**
  * <p>
  * This class contains methods for creating syntactic phrases. These methods
  * should be used instead of directly invoking new on SPhraseSpec, etc.
- * 
+ * <p>
  * The phrase factory should be linked to s lexicon if possible (although it
  * will work without one)
  * </p>
- * 
- * 
+ *
  * @author D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 public class NLGFactory {
 
@@ -56,142 +44,162 @@ public class NLGFactory {
 	 * realisation of the phrase in the BASE_FORM feature. This was just for
 	 * debugging purposes (note BASE_FORM on a WordElement is meaningful), I've
 	 * zapped this as it was makig things too complex
-	 * 
+	 *
 	 * This version of phraseFactory replicates WordElements (instead of reusing
 	 * them). I think this is because elemente are linked to their parent
 	 * phrases, via the parent data member. May be good to check if this is
 	 * actually necessary
-	 * 
+	 *
 	 * The explicit list of pronouns below should be replaced by a reference to
 	 * the lexicon
-	 * 
+	 *
 	 * Things to sort out at some point...
-	 * 
+	 *
 	 */
-	/** The lexicon to be used with this factory. */
-	private Lexicon                   lexicon;
+	/**
+	 * The lexicon to be used with this factory.
+	 */
+	private Lexicon lexicon;
 
-	/** The list of English pronouns. */
+	/**
+	 * The list of English pronouns.
+	 */
 	@SuppressWarnings("nls")
-	private static final List<String> PRONOUNS               = Arrays.asList("I",
-	                                                                         "you",
-	                                                                         "he",
-	                                                                         "she",
-	                                                                         "it",
-	                                                                         "me",
-	                                                                         "you",
-	                                                                         "him",
-	                                                                         "her",
-	                                                                         "it",
-	                                                                         "myself",
-	                                                                         "yourself",
-	                                                                         "himself",
-	                                                                         "herself",
-	                                                                         "itself",
-	                                                                         "mine",
-	                                                                         "yours",
-	                                                                         "his",
-	                                                                         "hers",
-	                                                                         "its",
-	                                                                         "we",
-	                                                                         "you",
-	                                                                         "they",
-	                                                                         "they",
-	                                                                         "they",
-	                                                                         "us",
-	                                                                         "you",
-	                                                                         "them",
-	                                                                         "them",
-	                                                                         "them",
-	                                                                         "ourselves",
-	                                                                         "yourselves",
-	                                                                         "themselves",
-	                                                                         "themselves",
-	                                                                         "themselves",
-	                                                                         "ours",
-	                                                                         "yours",
-	                                                                         "theirs",
-	                                                                         "theirs",
-	                                                                         "theirs",
-	                                                                         "there");
+	private static final List<String> PRONOUNS = Arrays.asList("I",
+	                                                           "you",
+	                                                           "he",
+	                                                           "she",
+	                                                           "it",
+	                                                           "me",
+	                                                           "you",
+	                                                           "him",
+	                                                           "her",
+	                                                           "it",
+	                                                           "myself",
+	                                                           "yourself",
+	                                                           "himself",
+	                                                           "herself",
+	                                                           "itself",
+	                                                           "mine",
+	                                                           "yours",
+	                                                           "his",
+	                                                           "hers",
+	                                                           "its",
+	                                                           "we",
+	                                                           "you",
+	                                                           "they",
+	                                                           "they",
+	                                                           "they",
+	                                                           "us",
+	                                                           "you",
+	                                                           "them",
+	                                                           "them",
+	                                                           "them",
+	                                                           "ourselves",
+	                                                           "yourselves",
+	                                                           "themselves",
+	                                                           "themselves",
+	                                                           "themselves",
+	                                                           "ours",
+	                                                           "yours",
+	                                                           "theirs",
+	                                                           "theirs",
+	                                                           "theirs",
+	                                                           "there");
 
-	/** The list of first-person English pronouns. */
+	/**
+	 * The list of first-person English pronouns.
+	 */
 	@SuppressWarnings("nls")
-	private static final List<String> FIRST_PRONOUNS         = Arrays.asList("I",
-	                                                                         "me",
-	                                                                         "myself",
-	                                                                         "we",
-	                                                                         "us",
-	                                                                         "ourselves",
-	                                                                         "mine",
-	                                                                         "my",
-	                                                                         "ours",
-	                                                                         "our");
+	private static final List<String> FIRST_PRONOUNS = Arrays.asList("I",
+	                                                                 "me",
+	                                                                 "myself",
+	                                                                 "we",
+	                                                                 "us",
+	                                                                 "ourselves",
+	                                                                 "mine",
+	                                                                 "my",
+	                                                                 "ours",
+	                                                                 "our");
 
-	/** The list of second person English pronouns. */
+	/**
+	 * The list of second person English pronouns.
+	 */
 	@SuppressWarnings("nls")
-	private static final List<String> SECOND_PRONOUNS        = Arrays.asList("you",
-	                                                                         "yourself",
-	                                                                         "yourselves",
-	                                                                         "yours",
-	                                                                         "your");
+	private static final List<String> SECOND_PRONOUNS = Arrays.asList("you", "yourself", "yourselves", "yours", "your");
 
-	/** The list of reflexive English pronouns. */
+	/**
+	 * The list of reflexive English pronouns.
+	 */
 	@SuppressWarnings("nls")
-	private static final List<String> REFLEXIVE_PRONOUNS     = Arrays.asList("myself",
-	                                                                         "yourself",
-	                                                                         "himself",
-	                                                                         "herself",
-	                                                                         "itself",
-	                                                                         "ourselves",
-	                                                                         "yourselves",
-	                                                                         "themselves");
+	private static final List<String> REFLEXIVE_PRONOUNS = Arrays.asList("myself",
+	                                                                     "yourself",
+	                                                                     "himself",
+	                                                                     "herself",
+	                                                                     "itself",
+	                                                                     "ourselves",
+	                                                                     "yourselves",
+	                                                                     "themselves");
 
-	/** The list of masculine English pronouns. */
+	/**
+	 * The list of masculine English pronouns.
+	 */
 	@SuppressWarnings("nls")
-	private static final List<String> MASCULINE_PRONOUNS     = Arrays.asList("he", "him", "himself", "his");
+	private static final List<String> MASCULINE_PRONOUNS = Arrays.asList("he", "him", "himself", "his");
 
-	/** The list of feminine English pronouns. */
+	/**
+	 * The list of feminine English pronouns.
+	 */
 	@SuppressWarnings("nls")
-	private static final List<String> FEMININE_PRONOUNS      = Arrays.asList("she", "her", "herself", "hers");
+	private static final List<String> FEMININE_PRONOUNS = Arrays.asList("she", "her", "herself", "hers");
 
-	/** The list of possessive English pronouns. */
+	/**
+	 * The list of possessive English pronouns.
+	 */
 	@SuppressWarnings("nls")
-	private static final List<String> POSSESSIVE_PRONOUNS    = Arrays.asList("mine",
-	                                                                         "ours",
-	                                                                         "yours",
-	                                                                         "his",
-	                                                                         "hers",
-	                                                                         "its",
-	                                                                         "theirs",
-	                                                                         "my",
-	                                                                         "our",
-	                                                                         "your",
-	                                                                         "her",
-	                                                                         "their");
+	private static final List<String> POSSESSIVE_PRONOUNS = Arrays.asList("mine",
+	                                                                      "ours",
+	                                                                      "yours",
+	                                                                      "his",
+	                                                                      "hers",
+	                                                                      "its",
+	                                                                      "theirs",
+	                                                                      "my",
+	                                                                      "our",
+	                                                                      "your",
+	                                                                      "her",
+	                                                                      "their");
 
-	/** The list of plural English pronouns. */
+	/**
+	 * The list of plural English pronouns.
+	 */
 	@SuppressWarnings("nls")
-	private static final List<String> PLURAL_PRONOUNS        = Arrays.asList("we",
-	                                                                         "us",
-	                                                                         "ourselves",
-	                                                                         "ours",
-	                                                                         "our",
-	                                                                         "they",
-	                                                                         "them",
-	                                                                         "theirs",
-	                                                                         "their");
+	private static final List<String> PLURAL_PRONOUNS = Arrays.asList("we",
+	                                                                  "us",
+	                                                                  "ourselves",
+	                                                                  "ours",
+	                                                                  "our",
+	                                                                  "they",
+	                                                                  "them",
+	                                                                  "theirs",
+	                                                                  "their");
 
-	/** The list of English pronouns that can be singular or plural. */
+	/**
+	 * The list of English pronouns that can be singular or plural.
+	 */
 	@SuppressWarnings("nls")
 	private static final List<String> EITHER_NUMBER_PRONOUNS = Arrays.asList("there");
 
-	/** The list of expletive English pronouns. */
+	/**
+	 * The list of expletive English pronouns.
+	 */
 	@SuppressWarnings("nls")
-	private static final List<String> EXPLETIVE_PRONOUNS     = Arrays.asList("there");
+	private static final List<String> EXPLETIVE_PRONOUNS = Arrays.asList("there");
 
-	/** regex for determining if a string is a single word or not **/
-	private static final String       WORD_REGEX             = "\\w*";
+	/**
+	 * regex for determining if a string is a single word or not
+	 **/
+	private static final String WORD_REGEX = "\\w*";
 
 	/**
 	 * Creates a new phrase factory with no associated lexicon.
@@ -202,9 +210,8 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new phrase factory with the associated lexicon.
-	 * 
-	 * @param newLexicon
-	 *            the <code>Lexicon</code> to be used with this factory.
+	 *
+	 * @param newLexicon the <code>Lexicon</code> to be used with this factory.
 	 */
 	public NLGFactory(Lexicon newLexicon) {
 		setLexicon(newLexicon);
@@ -213,9 +220,8 @@ public class NLGFactory {
 	/**
 	 * Sets the lexicon to be used by this factory. Passing a parameter of
 	 * <code>null</code> will remove any existing lexicon from the factory.
-	 * 
-	 * @param newLexicon
-	 *            the new <code>Lexicon</code> to be used.
+	 *
+	 * @param newLexicon the new <code>Lexicon</code> to be used.
 	 */
 	public void setLexicon(Lexicon newLexicon) {
 		this.lexicon = newLexicon;
@@ -227,15 +233,12 @@ public class NLGFactory {
 	 * <code>String</code> is passed as the word then the factory will look up
 	 * the <code>Lexicon</code> if one exists and use the details found to
 	 * create a new <code>WordElement</code>.
-	 * 
-	 * @param word
-	 *            the base word for the new element. This can be a
-	 *            <code>NLGElement</code>, which is returned unchanged, or a
-	 *            <code>String</code>, which is used to construct a new
-	 *            <code>WordElement</code>.
-	 * @param category
-	 *            the <code>LexicalCategory</code> for the word.
-	 * 
+	 *
+	 * @param word the base word for the new element. This can be a
+	 * 		<code>NLGElement</code>, which is returned unchanged, or a
+	 * 		<code>String</code>, which is used to construct a new
+	 * 		<code>WordElement</code>.
+	 * @param category the <code>LexicalCategory</code> for the word.
 	 * @return an <code>NLGElement</code> representing the word.
 	 */
 	public NLGElement createWord(Object word, LexicalCategory category) {
@@ -268,10 +271,10 @@ public class NLGFactory {
 	 * using <code>WordElement</code>s, and features are set on phrases, it is
 	 * sometimes desirable to set features directly on words (for example, when
 	 * one wants to elide a specific word, but not its parent phrase).
-	 * 
-	 * <P>
+	 *
+	 * <p>
 	 * If the object passed is already a <code>WordElement</code>, then a new
-	 * 
+	 *
 	 * <code>InflectedWordElement<code> is returned which wraps this <code>WordElement</code>
 	 * . If the object is a <code>String</code>, then the
 	 * <code>WordElement</code> representing this <code>String</code> is looked
@@ -280,13 +283,11 @@ public class NLGFactory {
 	 * is found, the element returned is an <code>InflectedWordElement</code>
 	 * with the supplied string as baseform and no base <code>WordElement</code>
 	 * . If an <code>NLGElement</code> is passed, this is returned unchanged.
-	 * 
-	 * @param word
-	 *            the word
-	 * @param category
-	 *            the category
+	 *
+	 * @param word the word
+	 * @param category the category
 	 * @return an <code>InflectedWordElement</code>, or the original supplied
-	 *         object if it is an <code>NLGElement</code>.
+	 * 		object if it is an <code>NLGElement</code>.
 	 */
 	public NLGElement createInflectedWord(Object word, LexicalCategory category) {
 		// first get the word element
@@ -314,11 +315,9 @@ public class NLGFactory {
 
 	/**
 	 * A helper method to set the features on newly created pronoun words.
-	 * 
-	 * @param wordElement
-	 *            the created element representing the pronoun.
-	 * @param word
-	 *            the base word for the pronoun.
+	 *
+	 * @param wordElement the created element representing the pronoun.
+	 * @param word the base word for the pronoun.
 	 */
 	private void setPronounFeatures(NLGElement wordElement, String word) {
 		wordElement.setCategory(LexicalCategory.PRONOUN);
@@ -370,13 +369,10 @@ public class NLGFactory {
 
 	/**
 	 * A helper method to look up the lexicon for the given word.
-	 * 
-	 * @param category
-	 *            the <code>LexicalCategory</code> of the word.
-	 * @param word
-	 *            the base form of the word.
-	 * @param wordElement
-	 *            the created element representing the word.
+	 *
+	 * @param category the <code>LexicalCategory</code> of the word.
+	 * @param word the base form of the word.
+	 * @param wordElement the created element representing the word.
 	 */
 	@SuppressWarnings("unused")
 	private void doLexiconLookUp(LexicalCategory category, String word, NLGElement wordElement) {
@@ -400,7 +396,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a blank preposition phrase with no preposition or complements.
-	 * 
+	 *
 	 * @return a <code>PPPhraseSpec</code> representing this phrase.
 	 */
 	public PPPhraseSpec createPrepositionPhrase() {
@@ -409,9 +405,8 @@ public class NLGFactory {
 
 	/**
 	 * Creates a preposition phrase with the given preposition.
-	 * 
-	 * @param preposition
-	 *            the preposition to be used.
+	 *
+	 * @param preposition the preposition to be used.
 	 * @return a <code>PPPhraseSpec</code> representing this phrase.
 	 */
 	public PPPhraseSpec createPrepositionPhrase(Object preposition) {
@@ -423,11 +418,9 @@ public class NLGFactory {
 	 * An <code>NLGElement</code> representing the preposition is added as the
 	 * head feature of this phrase while the complement is added as a normal
 	 * phrase complement.
-	 * 
-	 * @param preposition
-	 *            the preposition to be used.
-	 * @param complement
-	 *            the complement of the phrase.
+	 *
+	 * @param preposition the preposition to be used.
+	 * @param complement the complement of the phrase.
 	 * @return a <code>PPPhraseSpec</code> representing this phrase.
 	 */
 	public PPPhraseSpec createPrepositionPhrase(Object preposition, Object complement) {
@@ -445,11 +438,9 @@ public class NLGFactory {
 
 	/**
 	 * A helper method for setting the complement of a phrase.
-	 * 
-	 * @param phraseElement
-	 *            the created element representing this phrase.
-	 * @param complement
-	 *            the complement to be added.
+	 *
+	 * @param phraseElement the created element representing this phrase.
+	 * @param complement the complement to be added.
 	 */
 	private void setComplement(PhraseElement phraseElement, Object complement) {
 		NLGElement complementElement = createNLGElement(complement);
@@ -464,23 +455,21 @@ public class NLGFactory {
 	 * the relevant WordElement is returned If it is a different String, a
 	 * wordElement is created if the string is a single word Otherwise a
 	 * StringElement is returned Otherwise throw an exception
-	 * 
-	 * @param element
-	 *            - object to look up
-	 * @param category
-	 *            - default lexical category of object
+	 *
+	 * @param element - object to look up
+	 * @param category - default lexical category of object
 	 * @return NLGelement
 	 */
 	public NLGElement createNLGElement(Object element, LexicalCategory category) {
 		if(element == null)
 			return null;
 
-		// InflectedWordElement - return underlying word
+			// InflectedWordElement - return underlying word
 		else if(element instanceof InflectedWordElement)
 			return ((InflectedWordElement) element).getBaseWord();
 
-		// StringElement - look up in lexicon if it is a word
-		// otherwise return element
+			// StringElement - look up in lexicon if it is a word
+			// otherwise return element
 		else if(element instanceof StringElement) {
 			if(stringIsWord(((StringElement) element).getRealisation(), category))
 				return createWord(((StringElement) element).getRealisation(), category);
@@ -492,7 +481,7 @@ public class NLGFactory {
 		else if(element instanceof NLGElement)
 			return (NLGElement) element;
 
-		// String - look up in lexicon if a word, otherwise return StringElement
+			// String - look up in lexicon if a word, otherwise return StringElement
 		else if(element instanceof String) {
 			if(stringIsWord((String) element, category))
 				return createWord(element, category);
@@ -505,20 +494,15 @@ public class NLGFactory {
 
 	/**
 	 * return true if string is a word
-	 * 
-	 * @param string
-	 * @param category
-	 * @return
 	 */
 	private boolean stringIsWord(String string, LexicalCategory category) {
-		return lexicon != null
-		       && (lexicon.hasWord(string, category) || PRONOUNS.contains(string) || (string.matches(WORD_REGEX)));
+		return lexicon != null && (lexicon.hasWord(string, category) || PRONOUNS.contains(string) || (string.matches(
+				WORD_REGEX)));
 	}
 
 	/**
 	 * create an NLGElement from the element, no default lexical category
-	 * 
-	 * @param element
+	 *
 	 * @return NLGelement
 	 */
 	public NLGElement createNLGElement(Object element) {
@@ -527,7 +511,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a blank noun phrase with no subject or specifier.
-	 * 
+	 *
 	 * @return a <code>NPPhraseSpec</code> representing this phrase.
 	 */
 	public NPPhraseSpec createNounPhrase() {
@@ -536,9 +520,8 @@ public class NLGFactory {
 
 	/**
 	 * Creates a noun phrase with the given subject but no specifier.
-	 * 
-	 * @param noun
-	 *            the subject of the phrase.
+	 *
+	 * @param noun the subject of the phrase.
 	 * @return a <code>NPPhraseSpec</code> representing this phrase.
 	 */
 	public NPPhraseSpec createNounPhrase(Object noun) {
@@ -550,11 +533,9 @@ public class NLGFactory {
 
 	/**
 	 * Creates a noun phrase with the given specifier and subject.
-	 * 
-	 * @param specifier
-	 *            the specifier or determiner for the noun phrase.
-	 * @param noun
-	 *            the subject of the phrase.
+	 *
+	 * @param specifier the specifier or determiner for the noun phrase.
+	 * @param noun the subject of the phrase.
 	 * @return a <code>NPPhraseSpec</code> representing this phrase.
 	 */
 	public NPPhraseSpec createNounPhrase(Object specifier, Object noun) {
@@ -573,11 +554,9 @@ public class NLGFactory {
 
 	/**
 	 * A helper method to set the head feature of the phrase.
-	 * 
-	 * @param phraseElement
-	 *            the phrase element.
-	 * @param headElement
-	 *            the head element.
+	 *
+	 * @param phraseElement the phrase element.
+	 * @param headElement the head element.
 	 */
 	private void setPhraseHead(PhraseElement phraseElement, NLGElement headElement) {
 		if(headElement != null) {
@@ -588,7 +567,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a blank adjective phrase with no base adjective set.
-	 * 
+	 *
 	 * @return a <code>AdjPhraseSpec</code> representing this phrase.
 	 */
 	public AdjPhraseSpec createAdjectivePhrase() {
@@ -597,9 +576,8 @@ public class NLGFactory {
 
 	/**
 	 * Creates an adjective phrase wrapping the given adjective.
-	 * 
-	 * @param adjective
-	 *            the main adjective for this phrase.
+	 *
+	 * @param adjective the main adjective for this phrase.
 	 * @return a <code>AdjPhraseSpec</code> representing this phrase.
 	 */
 	public AdjPhraseSpec createAdjectivePhrase(Object adjective) {
@@ -613,7 +591,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a blank verb phrase with no main verb.
-	 * 
+	 *
 	 * @return a <code>VPPhraseSpec</code> representing this phrase.
 	 */
 	public VPPhraseSpec createVerbPhrase() {
@@ -626,9 +604,8 @@ public class NLGFactory {
 	 * verb contains a particle, for example <em>fall down</em>. The first word
 	 * is taken to be the verb while all other words are assumed to form the
 	 * particle.
-	 * 
-	 * @param verb
-	 *            the verb to be wrapped.
+	 *
+	 * @param verb the verb to be wrapped.
 	 * @return a <code>VPPhraseSpec</code> representing this phrase.
 	 */
 	public VPPhraseSpec createVerbPhrase(Object verb) {
@@ -640,7 +617,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a blank adverb phrase that has no adverb.
-	 * 
+	 *
 	 * @return a <code>AdvPhraseSpec</code> representing this phrase.
 	 */
 	public AdvPhraseSpec createAdverbPhrase() {
@@ -649,9 +626,8 @@ public class NLGFactory {
 
 	/**
 	 * Creates an adverb phrase wrapping the given adverb.
-	 * 
-	 * @param adverb
-	 *            the adverb for this phrase.
+	 *
+	 * @param adverb the adverb for this phrase.
 	 * @return a <code>AdvPhraseSpec</code> representing this phrase.
 	 */
 	public AdvPhraseSpec createAdverbPhrase(String adverb) {
@@ -664,7 +640,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a blank clause with no subject, verb or objects.
-	 * 
+	 *
 	 * @return a <code>SPhraseSpec</code> representing this phrase.
 	 */
 	public SPhraseSpec createClause() {
@@ -673,13 +649,11 @@ public class NLGFactory {
 
 	/**
 	 * Creates a clause with the given subject and verb but no objects.
-	 * 
-	 * @param subject
-	 *            the subject for the clause as a <code>NLGElement</code> or
-	 *            <code>String</code>. This forms a noun phrase.
-	 * @param verb
-	 *            the verb for the clause as a <code>NLGElement</code> or
-	 *            <code>String</code>. This forms a verb phrase.
+	 *
+	 * @param subject the subject for the clause as a <code>NLGElement</code> or
+	 * 		<code>String</code>. This forms a noun phrase.
+	 * @param verb the verb for the clause as a <code>NLGElement</code> or
+	 * 		<code>String</code>. This forms a verb phrase.
 	 * @return a <code>SPhraseSpec</code> representing this phrase.
 	 */
 	public SPhraseSpec createClause(Object subject, Object verb) {
@@ -689,17 +663,14 @@ public class NLGFactory {
 	/**
 	 * Creates a clause with the given subject, verb or verb phrase and direct
 	 * object but no indirect object.
-	 * 
-	 * @param subject
-	 *            the subject for the clause as a <code>NLGElement</code> or
-	 *            <code>String</code>. This forms a noun phrase.
-	 * @param verb
-	 *            the verb for the clause as a <code>NLGElement</code> or
-	 *            <code>String</code>. This forms a verb phrase.
-	 * @param directObject
-	 *            the direct object for the clause as a <code>NLGElement</code>
-	 *            or <code>String</code>. This forms a complement for the
-	 *            clause.
+	 *
+	 * @param subject the subject for the clause as a <code>NLGElement</code> or
+	 * 		<code>String</code>. This forms a noun phrase.
+	 * @param verb the verb for the clause as a <code>NLGElement</code> or
+	 * 		<code>String</code>. This forms a verb phrase.
+	 * @param directObject the direct object for the clause as a <code>NLGElement</code>
+	 * 		or <code>String</code>. This forms a complement for the
+	 * 		clause.
 	 * @return a <code>SPhraseSpec</code> representing this phrase.
 	 */
 	public SPhraseSpec createClause(Object subject, Object verb, Object directObject) {
@@ -726,15 +697,15 @@ public class NLGFactory {
 	}
 
 	/*	*//**
-	      * A helper method to set the verb phrase for a clause.
-	      * 
-	      * @param baseForm
-	      *            the base form of the clause.
-	      * @param verbPhrase
-	      *            the verb phrase to be used in the clause.
-	      * @param phraseElement
-	      *            the current representation of the clause.
-	      */
+	 * A helper method to set the verb phrase for a clause.
+	 *
+	 * @param baseForm
+	 *            the base form of the clause.
+	 * @param verbPhrase
+	 *            the verb phrase to be used in the clause.
+	 * @param phraseElement
+	 *            the current representation of the clause.
+	 */
 	/*
 	 * private void setVerbPhrase(StringBuffer baseForm, NLGElement verbPhrase,
 	 * PhraseElement phraseElement) { if (baseForm.length() > 0) {
@@ -754,17 +725,17 @@ public class NLGFactory {
 	 * verbPhrase.setFeature(Feature.PERSON, phraseElement
 	 * .getFeature(Feature.PERSON)); } }
 	 *//**
-	   * A helper method to add the direct object to the clause.
-	   * 
-	   * @param baseForm
-	   *            the base form for the clause.
-	   * @param directObject
-	   *            the direct object to be added.
-	   * @param phraseElement
-	   *            the current representation of this clause.
-	   * @param function
-	   *            the discourse function for this object.
-	   */
+	 * A helper method to add the direct object to the clause.
+	 *
+	 * @param baseForm
+	 *            the base form for the clause.
+	 * @param directObject
+	 *            the direct object to be added.
+	 * @param phraseElement
+	 *            the current representation of this clause.
+	 * @param function
+	 *            the discourse function for this object.
+	 */
 	/*
 	 * private void setObject(StringBuffer baseForm, Object object,
 	 * PhraseElement phraseElement, DiscourseFunction function) { if
@@ -772,9 +743,9 @@ public class NLGFactory {
 	 * NLGElement) { phraseElement.addComplement((NLGElement) object);
 	 * baseForm.append(((NLGElement) object)
 	 * .getFeatureAsString(Feature.BASE_FORM));
-	 * 
+	 *
 	 * ((NLGElement) object).setFeature(Feature.DISCOURSE_FUNCTION, function);
-	 * 
+	 *
 	 * if (((NLGElement) object).hasFeature(Feature.NUMBER)) {
 	 * phraseElement.setFeature(Feature.NUMBER, ((NLGElement) object)
 	 * .getFeature(Feature.NUMBER)); } } else if (object instanceof String) {
@@ -784,15 +755,15 @@ public class NLGFactory {
 	 * baseForm.append((String) object); } }
 	 */
 	/*	*//**
-	      * A helper method that sets the subjects on a clause.
-	      * 
-	      * @param phraseElement
-	      *            the element representing the clause.
-	      * @param subjectPhrase
-	      *            the subject phrase for the clause.
-	      * @param baseForm
-	      *            the base form for the clause.
-	      */
+	 * A helper method that sets the subjects on a clause.
+	 *
+	 * @param phraseElement
+	 *            the element representing the clause.
+	 * @param subjectPhrase
+	 *            the subject phrase for the clause.
+	 * @param baseForm
+	 *            the base form for the clause.
+	 */
 	/*
 	 * private void setPhraseSubjects(PhraseElement phraseElement, NLGElement
 	 * subjectPhrase, StringBuffer baseForm) {
@@ -802,21 +773,22 @@ public class NLGFactory {
 	 * baseForm.append(subjectPhrase.getFeatureAsString(Feature.BASE_FORM));
 	 * subjectPhrase.setFeature(Feature.DISCOURSE_FUNCTION,
 	 * DiscourseFunction.SUBJECT);
-	 * 
+	 *
 	 * if (subjectPhrase.hasFeature(Feature.GENDER)) {
 	 * phraseElement.setFeature(Feature.GENDER, subjectPhrase
 	 * .getFeature(Feature.GENDER)); } if
 	 * (subjectPhrase.hasFeature(Feature.NUMBER)) {
 	 * phraseElement.setFeature(Feature.NUMBER, subjectPhrase
 	 * .getFeature(Feature.NUMBER));
-	 * 
+	 *
 	 * } if (subjectPhrase.hasFeature(Feature.PERSON)) {
 	 * phraseElement.setFeature(Feature.PERSON, subjectPhrase
 	 * .getFeature(Feature.PERSON)); } }
 	 */
+
 	/**
 	 * Creates a blank canned text phrase with no text.
-	 * 
+	 *
 	 * @return a <code>PhraseElement</code> representing this phrase.
 	 */
 	public NLGElement createStringElement() {
@@ -825,9 +797,8 @@ public class NLGFactory {
 
 	/**
 	 * Creates a canned text phrase with the given text.
-	 * 
-	 * @param text
-	 *            the canned text.
+	 *
+	 * @param text the canned text.
 	 * @return a <code>PhraseElement</code> representing this phrase.
 	 */
 	public NLGElement createStringElement(String text) {
@@ -836,7 +807,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new (empty) coordinated phrase
-	 * 
+	 *
 	 * @return empty <code>CoordinatedPhraseElement</code>
 	 */
 	public CoordinatedPhraseElement createCoordinatedPhrase() {
@@ -845,11 +816,9 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new coordinated phrase with two elements (initially)
-	 * 
-	 * @param coord1
-	 *            - first phrase to be coordinated
-	 * @param coord2
-	 *            = second phrase to be coordinated
+	 *
+	 * @param coord1 - first phrase to be coordinated
+	 * @param coord2 = second phrase to be coordinated
 	 * @return <code>CoordinatedPhraseElement</code> for the two given elements
 	 */
 	public CoordinatedPhraseElement createCoordinatedPhrase(Object coord1, Object coord2) {
@@ -862,7 +831,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new document element with no title.
-	 * 
+	 *
 	 * @return a <code>DocumentElement</code>
 	 */
 	public DocumentElement createDocument() {
@@ -871,9 +840,8 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new document element with the given title.
-	 * 
-	 * @param title
-	 *            the title for this element.
+	 *
+	 * @param title the title for this element.
 	 * @return a <code>DocumentElement</code>.
 	 */
 	public DocumentElement createDocument(String title) {
@@ -883,12 +851,10 @@ public class NLGFactory {
 	/**
 	 * Creates a new document element with the given title and adds all of the
 	 * given components in the list
-	 * 
-	 * @param title
-	 *            the title of this element.
-	 * @param components
-	 *            a <code>List</code> of <code>NLGElement</code>s that form the
-	 *            components of this element.
+	 *
+	 * @param title the title of this element.
+	 * @param components a <code>List</code> of <code>NLGElement</code>s that form the
+	 * 		components of this element.
 	 * @return a <code>DocumentElement</code>
 	 */
 	public DocumentElement createDocument(String title, List<DocumentElement> components) {
@@ -903,12 +869,10 @@ public class NLGFactory {
 	/**
 	 * Creates a new document element with the given title and adds the given
 	 * component.
-	 * 
-	 * @param title
-	 *            the title for this element.
-	 * @param component
-	 *            an <code>NLGElement</code> that becomes the first component of
-	 *            this document element.
+	 *
+	 * @param title the title for this element.
+	 * @param component an <code>NLGElement</code> that becomes the first component of
+	 * 		this document element.
 	 * @return a <code>DocumentElement</code>
 	 */
 	public DocumentElement createDocument(String title, NLGElement component) {
@@ -922,7 +886,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new list element with no components.
-	 * 
+	 *
 	 * @return a <code>DocumentElement</code> representing the list.
 	 */
 	public DocumentElement createList() {
@@ -932,10 +896,9 @@ public class NLGFactory {
 	/**
 	 * Creates a new list element and adds all of the given components in the
 	 * list
-	 * 
-	 * @param textComponents
-	 *            a <code>List</code> of <code>NLGElement</code>s that form the
-	 *            components of this element.
+	 *
+	 * @param textComponents a <code>List</code> of <code>NLGElement</code>s that form the
+	 * 		components of this element.
 	 * @return a <code>DocumentElement</code> representing the list.
 	 */
 	public DocumentElement createList(List<DocumentElement> textComponents) {
@@ -947,10 +910,9 @@ public class NLGFactory {
 	/**
 	 * Creates a new section element with the given title and adds the given
 	 * component.
-	 * 
-	 * @param component
-	 *            an <code>NLGElement</code> that becomes the first component of
-	 *            this document element.
+	 *
+	 * @param component an <code>NLGElement</code> that becomes the first component of
+	 * 		this document element.
 	 * @return a <code>DocumentElement</code> representing the section.
 	 */
 	public DocumentElement createList(NLGElement component) {
@@ -961,9 +923,8 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new enumerated list element with no components.
-	 * 
+	 *
 	 * @return a <code>DocumentElement</code> representing the list.
-	 * @author Rodrigo de Oliveira - Data2Text Ltd
 	 */
 	public DocumentElement createEnumeratedList() {
 		return new DocumentElement(DocumentCategory.ENUMERATED_LIST, null);
@@ -972,12 +933,10 @@ public class NLGFactory {
 	/**
 	 * Creates a new enumerated list element and adds all of the given components in the
 	 * list
-	 * 
-	 * @param textComponents
-	 *            a <code>List</code> of <code>NLGElement</code>s that form the
-	 *            components of this element.
+	 *
+	 * @param textComponents a <code>List</code> of <code>NLGElement</code>s that form the
+	 * 		components of this element.
 	 * @return a <code>DocumentElement</code> representing the list.
-	 * @author Rodrigo de Oliveira - Data2Text Ltd
 	 */
 	public DocumentElement createEnumeratedList(List<DocumentElement> textComponents) {
 		DocumentElement list = new DocumentElement(DocumentCategory.ENUMERATED_LIST, null);
@@ -988,12 +947,10 @@ public class NLGFactory {
 	/**
 	 * Creates a new section element with the given title and adds the given
 	 * component.
-	 * 
-	 * @param component
-	 *            an <code>NLGElement</code> that becomes the first component of
-	 *            this document element.
+	 *
+	 * @param component an <code>NLGElement</code> that becomes the first component of
+	 * 		this document element.
 	 * @return a <code>DocumentElement</code> representing the section.
-	 * @author Rodrigo de Oliveira - Data2Text Ltd
 	 */
 	public DocumentElement createEnumeratedList(NLGElement component) {
 		DocumentElement list = new DocumentElement(DocumentCategory.ENUMERATED_LIST, null);
@@ -1003,7 +960,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a list item for adding to a list element.
-	 * 
+	 *
 	 * @return a <code>DocumentElement</code> representing the list item.
 	 */
 	public DocumentElement createListItem() {
@@ -1013,7 +970,7 @@ public class NLGFactory {
 	/**
 	 * Creates a list item for adding to a list element. The list item has the
 	 * given component.
-	 * 
+	 *
 	 * @return a <code>DocumentElement</code> representing the list item.
 	 */
 	public DocumentElement createListItem(NLGElement component) {
@@ -1024,7 +981,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new paragraph element with no components.
-	 * 
+	 *
 	 * @return a <code>DocumentElement</code> representing this paragraph
 	 */
 	public DocumentElement createParagraph() {
@@ -1034,10 +991,9 @@ public class NLGFactory {
 	/**
 	 * Creates a new paragraph element and adds all of the given components in
 	 * the list
-	 * 
-	 * @param components
-	 *            a <code>List</code> of <code>NLGElement</code>s that form the
-	 *            components of this element.
+	 *
+	 * @param components a <code>List</code> of <code>NLGElement</code>s that form the
+	 * 		components of this element.
 	 * @return a <code>DocumentElement</code> representing this paragraph
 	 */
 	public DocumentElement createParagraph(List<DocumentElement> components) {
@@ -1050,10 +1006,9 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new paragraph element and adds the given component
-	 * 
-	 * @param component
-	 *            an <code>NLGElement</code> that becomes the first component of
-	 *            this document element.
+	 *
+	 * @param component an <code>NLGElement</code> that becomes the first component of
+	 * 		this document element.
 	 * @return a <code>DocumentElement</code> representing this paragraph
 	 */
 	public DocumentElement createParagraph(NLGElement component) {
@@ -1066,7 +1021,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new section element.
-	 * 
+	 *
 	 * @return a <code>DocumentElement</code> representing the section.
 	 */
 	public DocumentElement createSection() {
@@ -1075,9 +1030,8 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new section element with the given title.
-	 * 
-	 * @param title
-	 *            the title of the section.
+	 *
+	 * @param title the title of the section.
 	 * @return a <code>DocumentElement</code> representing the section.
 	 */
 	public DocumentElement createSection(String title) {
@@ -1087,12 +1041,10 @@ public class NLGFactory {
 	/**
 	 * Creates a new section element with the given title and adds all of the
 	 * given components in the list
-	 * 
-	 * @param title
-	 *            the title of this element.
-	 * @param components
-	 *            a <code>List</code> of <code>NLGElement</code>s that form the
-	 *            components of this element.
+	 *
+	 * @param title the title of this element.
+	 * @param components a <code>List</code> of <code>NLGElement</code>s that form the
+	 * 		components of this element.
 	 * @return a <code>DocumentElement</code> representing the section.
 	 */
 	public DocumentElement createSection(String title, List<DocumentElement> components) {
@@ -1107,12 +1059,10 @@ public class NLGFactory {
 	/**
 	 * Creates a new section element with the given title and adds the given
 	 * component.
-	 * 
-	 * @param title
-	 *            the title for this element.
-	 * @param component
-	 *            an <code>NLGElement</code> that becomes the first component of
-	 *            this document element.
+	 *
+	 * @param title the title for this element.
+	 * @param component an <code>NLGElement</code> that becomes the first component of
+	 * 		this document element.
 	 * @return a <code>DocumentElement</code> representing the section.
 	 */
 	public DocumentElement createSection(String title, NLGElement component) {
@@ -1125,7 +1075,7 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new sentence element with no components.
-	 * 
+	 *
 	 * @return a <code>DocumentElement</code> representing this sentence
 	 */
 	public DocumentElement createSentence() {
@@ -1134,10 +1084,9 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new sentence element and adds all of the given components.
-	 * 
-	 * @param components
-	 *            a <code>List</code> of <code>NLGElement</code>s that form the
-	 *            components of this element.
+	 *
+	 * @param components a <code>List</code> of <code>NLGElement</code>s that form the
+	 * 		components of this element.
 	 * @return a <code>DocumentElement</code> representing this sentence
 	 */
 	public DocumentElement createSentence(List<NLGElement> components) {
@@ -1148,10 +1097,9 @@ public class NLGFactory {
 
 	/**
 	 * Creates a new sentence element
-	 * 
-	 * @param components
-	 *            an <code>NLGElement</code> that becomes the first component of
-	 *            this document element.
+	 *
+	 * @param components an <code>NLGElement</code> that becomes the first component of
+	 * 		this document element.
 	 * @return a <code>DocumentElement</code> representing this sentence
 	 */
 	public DocumentElement createSentence(NLGElement components) {
@@ -1164,11 +1112,9 @@ public class NLGFactory {
 	 * Creates a sentence with the given subject and verb. The phrase factory is
 	 * used to construct a clause that then forms the components of the
 	 * sentence.
-	 * 
-	 * @param subject
-	 *            the subject of the sentence.
-	 * @param verb
-	 *            the verb of the sentence.
+	 *
+	 * @param subject the subject of the sentence.
+	 * @param verb the verb of the sentence.
 	 * @return a <code>DocumentElement</code> representing this sentence
 	 */
 	public DocumentElement createSentence(Object subject, Object verb) {
@@ -1179,13 +1125,10 @@ public class NLGFactory {
 	 * Creates a sentence with the given subject, verb and direct object. The
 	 * phrase factory is used to construct a clause that then forms the
 	 * components of the sentence.
-	 * 
-	 * @param subject
-	 *            the subject of the sentence.
-	 * @param verb
-	 *            the verb of the sentence.
-	 * @param complement
-	 *            the object of the sentence.
+	 *
+	 * @param subject the subject of the sentence.
+	 * @param verb the verb of the sentence.
+	 * @param complement the object of the sentence.
 	 * @return a <code>DocumentElement</code> representing this sentence
 	 */
 	public DocumentElement createSentence(Object subject, Object verb, Object complement) {
@@ -1199,9 +1142,8 @@ public class NLGFactory {
 	 * Creates a new sentence with the given canned text. The canned text is
 	 * used to form a canned phrase (from the phrase factory) which is then
 	 * added as the component to sentence element.
-	 * 
-	 * @param cannedSentence
-	 *            the canned text as a <code>String</code>.
+	 *
+	 * @param cannedSentence the canned text as a <code>String</code>.
 	 * @return a <code>DocumentElement</code> representing this sentence
 	 */
 	public DocumentElement createSentence(String cannedSentence) {

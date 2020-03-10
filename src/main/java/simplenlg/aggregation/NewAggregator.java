@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,22 +14,19 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.aggregation;
 
 import java.util.List;
 
-import simplenlg.framework.NLGElement;
-import simplenlg.framework.NLGFactory;
-import simplenlg.framework.NLGModule;
-import simplenlg.framework.PhraseCategory;
-import simplenlg.framework.PhraseElement;
+import simplenlg.framework.*;
 import simplenlg.syntax.english.SyntaxProcessor;
 
 public class NewAggregator extends NLGModule {
+
 	private SyntaxProcessor _syntax;
-	private NLGFactory _factory;
+	private NLGFactory      _factory;
 
 	public NewAggregator() {
 
@@ -55,13 +52,11 @@ public class NewAggregator extends NLGModule {
 	public NLGElement realise(NLGElement phrase1, NLGElement phrase2) {
 		NLGElement result = null;
 
-		if (phrase1 instanceof PhraseElement
-				&& phrase2 instanceof PhraseElement
-				&& phrase1.getCategory() == PhraseCategory.CLAUSE
-				&& phrase2.getCategory() == PhraseCategory.CLAUSE) {
+		if(phrase1 instanceof PhraseElement && phrase2 instanceof PhraseElement
+		   && phrase1.getCategory() == PhraseCategory.CLAUSE && phrase2.getCategory() == PhraseCategory.CLAUSE) {
 
-			List<FunctionalSet> funcSets = AggregationHelper
-					.collectFunctionalPairs(this._syntax.realise(phrase1),this._syntax.realise(phrase2));
+			List<FunctionalSet> funcSets = AggregationHelper.collectFunctionalPairs(this._syntax.realise(phrase1),
+			                                                                        this._syntax.realise(phrase2));
 
 			applyForwardConjunctionReduction(funcSets);
 			applyBackwardConjunctionReduction(funcSets);
@@ -77,8 +72,8 @@ public class NewAggregator extends NLGModule {
 
 	private void applyForwardConjunctionReduction(List<FunctionalSet> funcSets) {
 
-		for (FunctionalSet pair : funcSets) {
-			if (pair.getPeriphery() == Periphery.LEFT && pair.formIdentical()) {
+		for(FunctionalSet pair : funcSets) {
+			if(pair.getPeriphery() == Periphery.LEFT && pair.formIdentical()) {
 				pair.elideRightMost();
 			}
 		}
@@ -86,8 +81,8 @@ public class NewAggregator extends NLGModule {
 	}
 
 	private void applyBackwardConjunctionReduction(List<FunctionalSet> funcSets) {
-		for (FunctionalSet pair : funcSets) {
-			if (pair.getPeriphery() == Periphery.RIGHT && pair.formIdentical()) {
+		for(FunctionalSet pair : funcSets) {
+			if(pair.getPeriphery() == Periphery.RIGHT && pair.formIdentical()) {
 				pair.elideLeftMost();
 			}
 		}

@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,24 +14,14 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
-
 package simplenlg.syntax.english;
 
 import junit.framework.Assert;
-
 import org.junit.After;
 import org.junit.Test;
-
-import simplenlg.features.DiscourseFunction;
-import simplenlg.features.Feature;
-import simplenlg.features.Tense;
-import simplenlg.features.Gender;
-import simplenlg.features.InternalFeature;
-import simplenlg.features.LexicalFeature;
-import simplenlg.features.NumberAgreement;
-import simplenlg.features.Person;
+import simplenlg.features.*;
 import simplenlg.framework.CoordinatedPhraseElement;
 import simplenlg.framework.LexicalCategory;
 import simplenlg.framework.NLGElement;
@@ -41,16 +31,15 @@ import simplenlg.phrasespec.SPhraseSpec;
 
 /**
  * Tests for the NPPhraseSpec and CoordinateNPPhraseSpec classes.
- * 
+ *
  * @author agatt
  */
 public class NounPhraseTest extends SimpleNLG4Test {
 
 	/**
 	 * Instantiates a new nP test.
-	 * 
-	 * @param name
-	 *            the name
+	 *
+	 * @param name the name
 	 */
 	public NounPhraseTest(String name) {
 		super(name);
@@ -61,33 +50,24 @@ public class NounPhraseTest extends SimpleNLG4Test {
 	public void tearDown() {
 		super.tearDown();
 	}
-	
-	
+
 	/**
 	 * Test the setPlural() method in noun phrases.
 	 */
 	@Test
 	public void testPlural() {
 		this.np4.setFeature(Feature.NUMBER, NumberAgreement.PLURAL);
-		Assert.assertEquals(
-				"the rocks", this.realiser.realise(this.np4).getRealisation()); //$NON-NLS-1$
+		Assert.assertEquals("the rocks", this.realiser.realise(this.np4).getRealisation()); //$NON-NLS-1$
 
 		this.np5.setFeature(Feature.NUMBER, NumberAgreement.PLURAL);
-		Assert
-				.assertEquals(
-						"the curtains", this.realiser.realise(this.np5).getRealisation()); //$NON-NLS-1$
+		Assert.assertEquals("the curtains", this.realiser.realise(this.np5).getRealisation()); //$NON-NLS-1$
 
 		this.np5.setFeature(Feature.NUMBER, NumberAgreement.SINGULAR);
-		Assert.assertEquals(NumberAgreement.SINGULAR, this.np5
-				.getFeature(Feature.NUMBER));
-		Assert
-				.assertEquals(
-						"the curtain", this.realiser.realise(this.np5).getRealisation()); //$NON-NLS-1$
+		Assert.assertEquals(NumberAgreement.SINGULAR, this.np5.getFeature(Feature.NUMBER));
+		Assert.assertEquals("the curtain", this.realiser.realise(this.np5).getRealisation()); //$NON-NLS-1$
 
 		this.np5.setFeature(Feature.NUMBER, NumberAgreement.PLURAL);
-		Assert
-				.assertEquals(
-						"the curtains", this.realiser.realise(this.np5).getRealisation()); //$NON-NLS-1$
+		Assert.assertEquals("the curtains", this.realiser.realise(this.np5).getRealisation()); //$NON-NLS-1$
 	}
 
 	/**
@@ -98,25 +78,20 @@ public class NounPhraseTest extends SimpleNLG4Test {
 		// sing
 		this.proTest1.setFeature(LexicalFeature.GENDER, Gender.FEMININE);
 		this.proTest1.setFeature(Feature.PRONOMINAL, true);
-		Assert.assertEquals(
-				"she", this.realiser.realise(this.proTest1).getRealisation()); //$NON-NLS-1$
+		Assert.assertEquals("she", this.realiser.realise(this.proTest1).getRealisation()); //$NON-NLS-1$
 
 		// sing, possessive
 		this.proTest1.setFeature(Feature.POSSESSIVE, true);
-		Assert.assertEquals(
-				"her", this.realiser.realise(this.proTest1).getRealisation()); //$NON-NLS-1$
+		Assert.assertEquals("her", this.realiser.realise(this.proTest1).getRealisation()); //$NON-NLS-1$
 
 		// plural pronoun
 		this.proTest2.setFeature(Feature.NUMBER, NumberAgreement.PLURAL);
 		this.proTest2.setFeature(Feature.PRONOMINAL, true);
-		Assert.assertEquals(
-				"they", this.realiser.realise(this.proTest2).getRealisation()); //$NON-NLS-1$
+		Assert.assertEquals("they", this.realiser.realise(this.proTest2).getRealisation()); //$NON-NLS-1$
 
 		// accusative: "them"
-		this.proTest2.setFeature(InternalFeature.DISCOURSE_FUNCTION,
-				DiscourseFunction.OBJECT);
-		Assert.assertEquals(
-				"them", this.realiser.realise(this.proTest2).getRealisation()); //$NON-NLS-1$
+		this.proTest2.setFeature(InternalFeature.DISCOURSE_FUNCTION, DiscourseFunction.OBJECT);
+		Assert.assertEquals("them", this.realiser.realise(this.proTest2).getRealisation()); //$NON-NLS-1$
 	}
 
 	/**
@@ -129,40 +104,34 @@ public class NounPhraseTest extends SimpleNLG4Test {
 		pro.setFeature(Feature.PRONOMINAL, true);
 		pro.setFeature(Feature.PERSON, Person.FIRST);
 		SPhraseSpec sent = phraseFactory.createClause(pro, "like", "John");
-		Assert
-				.assertEquals("I like John.", this.realiser
-						.realiseSentence(sent));
+		Assert.assertEquals("I like John.", this.realiser.realiseSentence(sent));
 
 		pro = phraseFactory.createNounPhrase("Mary");
 		pro.setFeature(Feature.PRONOMINAL, true);
 		pro.setFeature(Feature.PERSON, Person.SECOND);
 		sent = phraseFactory.createClause(pro, "like", "John");
-		Assert.assertEquals("You like John.", this.realiser
-				.realiseSentence(sent));
+		Assert.assertEquals("You like John.", this.realiser.realiseSentence(sent));
 
 		pro = phraseFactory.createNounPhrase("Mary");
 		pro.setFeature(Feature.PRONOMINAL, true);
 		pro.setFeature(Feature.PERSON, Person.THIRD);
 		pro.setFeature(LexicalFeature.GENDER, Gender.FEMININE);
 		sent = phraseFactory.createClause(pro, "like", "John");
-		Assert.assertEquals("She likes John.", this.realiser
-				.realiseSentence(sent));
+		Assert.assertEquals("She likes John.", this.realiser.realiseSentence(sent));
 
 		pro = phraseFactory.createNounPhrase("Mary");
 		pro.setFeature(Feature.PRONOMINAL, true);
 		pro.setFeature(Feature.PERSON, Person.FIRST);
 		pro.setPlural(true);
 		sent = phraseFactory.createClause(pro, "like", "John");
-		Assert.assertEquals("We like John.", this.realiser
-				.realiseSentence(sent));
+		Assert.assertEquals("We like John.", this.realiser.realiseSentence(sent));
 
 		pro = phraseFactory.createNounPhrase("Mary");
 		pro.setFeature(Feature.PRONOMINAL, true);
 		pro.setFeature(Feature.PERSON, Person.SECOND);
 		pro.setPlural(true);
 		sent = phraseFactory.createClause(pro, "like", "John");
-		Assert.assertEquals("You like John.", this.realiser
-				.realiseSentence(sent));
+		Assert.assertEquals("You like John.", this.realiser.realiseSentence(sent));
 
 		pro = phraseFactory.createNounPhrase("Mary");
 		pro.setFeature(Feature.PRONOMINAL, true);
@@ -170,46 +139,40 @@ public class NounPhraseTest extends SimpleNLG4Test {
 		pro.setPlural(true);
 		pro.setFeature(LexicalFeature.GENDER, Gender.FEMININE);
 		sent = phraseFactory.createClause(pro, "like", "John");
-		Assert.assertEquals("They like John.", this.realiser
-				.realiseSentence(sent));
+		Assert.assertEquals("They like John.", this.realiser.realiseSentence(sent));
 
 		pro = phraseFactory.createNounPhrase("John");
 		pro.setFeature(Feature.PRONOMINAL, true);
 		pro.setFeature(Feature.PERSON, Person.FIRST);
 		sent = phraseFactory.createClause("Mary", "like", pro);
-		Assert.assertEquals("Mary likes me.", this.realiser
-				.realiseSentence(sent));
+		Assert.assertEquals("Mary likes me.", this.realiser.realiseSentence(sent));
 
 		pro = phraseFactory.createNounPhrase("John");
 		pro.setFeature(Feature.PRONOMINAL, true);
 		pro.setFeature(Feature.PERSON, Person.SECOND);
 		sent = phraseFactory.createClause("Mary", "like", pro);
-		Assert.assertEquals("Mary likes you.", this.realiser
-				.realiseSentence(sent));
+		Assert.assertEquals("Mary likes you.", this.realiser.realiseSentence(sent));
 
 		pro = phraseFactory.createNounPhrase("John");
 		pro.setFeature(Feature.PRONOMINAL, true);
 		pro.setFeature(Feature.PERSON, Person.THIRD);
 		pro.setFeature(LexicalFeature.GENDER, Gender.MASCULINE);
 		sent = phraseFactory.createClause("Mary", "like", pro);
-		Assert.assertEquals("Mary likes him.", this.realiser
-				.realiseSentence(sent));
+		Assert.assertEquals("Mary likes him.", this.realiser.realiseSentence(sent));
 
 		pro = phraseFactory.createNounPhrase("John");
 		pro.setFeature(Feature.PRONOMINAL, true);
 		pro.setFeature(Feature.PERSON, Person.FIRST);
 		pro.setPlural(true);
 		sent = phraseFactory.createClause("Mary", "like", pro);
-		Assert.assertEquals("Mary likes us.", this.realiser
-				.realiseSentence(sent));
+		Assert.assertEquals("Mary likes us.", this.realiser.realiseSentence(sent));
 
 		pro = phraseFactory.createNounPhrase("John");
 		pro.setFeature(Feature.PRONOMINAL, true);
 		pro.setFeature(Feature.PERSON, Person.SECOND);
 		pro.setPlural(true);
 		sent = phraseFactory.createClause("Mary", "like", pro);
-		Assert.assertEquals("Mary likes you.", this.realiser
-				.realiseSentence(sent));
+		Assert.assertEquals("Mary likes you.", this.realiser.realiseSentence(sent));
 
 		pro = phraseFactory.createNounPhrase("John");
 		pro.setFeature(Feature.PRONOMINAL, true);
@@ -217,8 +180,7 @@ public class NounPhraseTest extends SimpleNLG4Test {
 		pro.setFeature(LexicalFeature.GENDER, Gender.MASCULINE);
 		pro.setPlural(true);
 		sent = phraseFactory.createClause("Mary", "like", pro);
-		Assert.assertEquals("Mary likes them.", this.realiser
-				.realiseSentence(sent));
+		Assert.assertEquals("Mary likes them.", this.realiser.realiseSentence(sent));
 	}
 
 	/**
@@ -232,15 +194,14 @@ public class NounPhraseTest extends SimpleNLG4Test {
 
 		this.woman.addPreModifier(this.beautiful);
 		Assert.assertEquals("the beautiful woman", this.realiser.realise( //$NON-NLS-1$
-				this.woman).getRealisation());
+		                                                                  this.woman).getRealisation());
 
 		this.dog.addPreModifier(this.stunning);
 		Assert.assertEquals("the stunning dog", this.realiser.realise(this.dog) //$NON-NLS-1$
 				.getRealisation());
 
 		// premodification with a WordElement
-		this.man.setPreModifier(this.phraseFactory.createWord("idiotic",
-				LexicalCategory.ADJECTIVE));
+		this.man.setPreModifier(this.phraseFactory.createWord("idiotic", LexicalCategory.ADJECTIVE));
 		Assert.assertEquals("the idiotic man", this.realiser //$NON-NLS-1$
 				.realise(this.man).getRealisation());
 
@@ -253,17 +214,16 @@ public class NounPhraseTest extends SimpleNLG4Test {
 	public void testPostmodification() {
 		this.man.addPostModifier(this.onTheRock);
 		Assert.assertEquals("the man on the rock", this.realiser.realise( //$NON-NLS-1$
-				this.man).getRealisation());
+		                                                                  this.man).getRealisation());
 
 		this.woman.addPostModifier(this.behindTheCurtain);
 		Assert.assertEquals("the woman behind the curtain", this.realiser //$NON-NLS-1$
 				.realise(this.woman).getRealisation());
 
 		// postmodification with a WordElement
-		this.man.setPostModifier(this.phraseFactory.createWord("jack",
-				LexicalCategory.NOUN));
+		this.man.setPostModifier(this.phraseFactory.createWord("jack", LexicalCategory.NOUN));
 		Assert.assertEquals("the man jack", this.realiser.realise( //$NON-NLS-1$
-				this.man).getRealisation());
+		                                                           this.man).getRealisation());
 	}
 
 	/**
@@ -272,10 +232,9 @@ public class NounPhraseTest extends SimpleNLG4Test {
 	@Test
 	public void testComplementation() {
 		// complementation with a WordElement
-		this.man.setComplement(this.phraseFactory.createWord("jack",
-				LexicalCategory.NOUN));
+		this.man.setComplement(this.phraseFactory.createWord("jack", LexicalCategory.NOUN));
 		Assert.assertEquals("the man jack", this.realiser.realise( //$NON-NLS-1$
-				this.man).getRealisation());
+		                                                           this.man).getRealisation());
 
 		this.woman.addComplement(this.behindTheCurtain);
 		Assert.assertEquals("the woman behind the curtain", this.realiser //$NON-NLS-1$
@@ -323,8 +282,7 @@ public class NounPhraseTest extends SimpleNLG4Test {
 	@Test
 	public void testCoordination() {
 
-		CoordinatedPhraseElement cnp1 = new CoordinatedPhraseElement(this.dog,
-				this.woman);
+		CoordinatedPhraseElement cnp1 = new CoordinatedPhraseElement(this.dog, this.woman);
 		// simple coordination
 		Assert.assertEquals("the dog and the woman", this.realiser //$NON-NLS-1$
 				.realise(cnp1).getRealisation());
@@ -332,7 +290,7 @@ public class NounPhraseTest extends SimpleNLG4Test {
 		// simple coordination with complementation of entire coordinate NP
 		cnp1.addComplement(this.behindTheCurtain);
 		Assert.assertEquals("the dog and the woman behind the curtain", //$NON-NLS-1$
-				this.realiser.realise(cnp1).getRealisation());
+		                    this.realiser.realise(cnp1).getRealisation());
 
 		// raise the specifier in this cnp
 		// Assert.assertEquals(true, cnp1.raiseSpecifier()); // should return
@@ -352,8 +310,7 @@ public class NounPhraseTest extends SimpleNLG4Test {
 		this.dog.clearComplements();
 		this.woman.clearComplements();
 
-		CoordinatedPhraseElement cnp1 = new CoordinatedPhraseElement(this.dog,
-				this.woman);
+		CoordinatedPhraseElement cnp1 = new CoordinatedPhraseElement(this.dog, this.woman);
 		cnp1.setFeature(Feature.RAISE_SPECIFIER, true);
 		NLGElement realised = this.realiser.realise(cnp1);
 		Assert.assertEquals("the dog and woman", realised.getRealisation());
@@ -361,44 +318,36 @@ public class NounPhraseTest extends SimpleNLG4Test {
 		this.dog.addComplement(this.onTheRock);
 		this.woman.addComplement(this.behindTheCurtain);
 
-		CoordinatedPhraseElement cnp2 = new CoordinatedPhraseElement(this.dog,
-				this.woman);
+		CoordinatedPhraseElement cnp2 = new CoordinatedPhraseElement(this.dog, this.woman);
 
 		this.woman.setFeature(InternalFeature.RAISED, false);
-		Assert.assertEquals(
-				"the dog on the rock and the woman behind the curtain", //$NON-NLS-1$
-				this.realiser.realise(cnp2).getRealisation());
+		Assert.assertEquals("the dog on the rock and the woman behind the curtain", //$NON-NLS-1$
+		                    this.realiser.realise(cnp2).getRealisation());
 
 		// complementised coordinates + outer pp modifier
 		cnp2.addPostModifier(this.inTheRoom);
-		Assert
-				.assertEquals(
-						"the dog on the rock and the woman behind the curtain in the room", //$NON-NLS-1$
-						this.realiser.realise(cnp2).getRealisation());
+		Assert.assertEquals("the dog on the rock and the woman behind the curtain in the room", //$NON-NLS-1$
+		                    this.realiser.realise(cnp2).getRealisation());
 
 		// set the specifier for this cnp; should unset specifiers for all inner
 		// coordinates
-		NLGElement every = this.phraseFactory.createWord(
-				"every", LexicalCategory.DETERMINER); //$NON-NLS-1$
+		NLGElement every = this.phraseFactory.createWord("every", LexicalCategory.DETERMINER); //$NON-NLS-1$
 
 		cnp2.setFeature(InternalFeature.SPECIFIER, every);
 
-		Assert
-				.assertEquals(
-						"every dog on the rock and every woman behind the curtain in the room", //$NON-NLS-1$
-						this.realiser.realise(cnp2).getRealisation());
+		Assert.assertEquals("every dog on the rock and every woman behind the curtain in the room", //$NON-NLS-1$
+		                    this.realiser.realise(cnp2).getRealisation());
 
 		// pronominalise one of the constituents
 		this.dog.setFeature(Feature.PRONOMINAL, true); // ="it"
-		this.dog.setFeature(InternalFeature.SPECIFIER, this.phraseFactory
-				.createWord("the", LexicalCategory.DETERMINER));
+		this.dog.setFeature(InternalFeature.SPECIFIER,
+		                    this.phraseFactory.createWord("the", LexicalCategory.DETERMINER));
 		// raising spec still returns true as spec has been set
 		cnp2.setFeature(Feature.RAISE_SPECIFIER, true);
 
 		// CNP should be realised with pronominal internal const
-		Assert.assertEquals(
-				"it and every woman behind the curtain in the room", //$NON-NLS-1$
-				this.realiser.realise(cnp2).getRealisation());
+		Assert.assertEquals("it and every woman behind the curtain in the room", //$NON-NLS-1$
+		                    this.realiser.realise(cnp2).getRealisation());
 	}
 
 	/**
@@ -407,15 +356,14 @@ public class NounPhraseTest extends SimpleNLG4Test {
 	@Test
 	public void testPossessiveCoordinate() {
 		// simple coordination
-		CoordinatedPhraseElement cnp2 = new CoordinatedPhraseElement(this.dog,
-				this.woman);
+		CoordinatedPhraseElement cnp2 = new CoordinatedPhraseElement(this.dog, this.woman);
 		Assert.assertEquals("the dog and the woman", this.realiser //$NON-NLS-1$
 				.realise(cnp2).getRealisation());
 
 		// set possessive -- wide-scope by default
 		cnp2.setFeature(Feature.POSSESSIVE, true);
 		Assert.assertEquals("the dog and the woman's", this.realiser.realise( //$NON-NLS-1$
-				cnp2).getRealisation());
+		                                                                      cnp2).getRealisation());
 
 		// set possessive with pronoun
 		this.dog.setFeature(Feature.PRONOMINAL, true);
@@ -440,8 +388,7 @@ public class NounPhraseTest extends SimpleNLG4Test {
 		Assert.assertEquals("an enormous dog", this.realiser.realise(_dog) //$NON-NLS-1$
 				.getRealisation());
 
-		PhraseElement elephant = this.phraseFactory.createNounPhrase(
-				"a", "elephant"); //$NON-NLS-1$ //$NON-NLS-2$
+		PhraseElement elephant = this.phraseFactory.createNounPhrase("a", "elephant"); //$NON-NLS-1$ //$NON-NLS-2$
 		Assert.assertEquals("an elephant", this.realiser.realise(elephant) //$NON-NLS-1$
 				.getRealisation());
 
@@ -461,8 +408,7 @@ public class NounPhraseTest extends SimpleNLG4Test {
 	 */
 	public void testAAnCoord() {
 		NPPhraseSpec _dog = this.phraseFactory.createNounPhrase("a", "dog");
-		_dog.addPreModifier(this.phraseFactory.createCoordinatedPhrase(
-				"enormous", "black"));
+		_dog.addPreModifier(this.phraseFactory.createCoordinatedPhrase("enormous", "black"));
 		String realisation = this.realiser.realise(_dog).getRealisation();
 		Assert.assertEquals("an enormous and black dog", realisation);
 	}
@@ -554,53 +500,52 @@ public class NounPhraseTest extends SimpleNLG4Test {
 
 		_dog.addPostModifier("in the park"); //$NON-NLS-1$
 		Assert.assertEquals("an angry dog in the park", this.realiser.realise( //$NON-NLS-1$
-				_dog).getRealisation());
+		                                                                       _dog).getRealisation());
 
 		PhraseElement cat = this.phraseFactory.createNounPhrase("a", "cat"); //$NON-NLS-1$ //$NON-NLS-2$
 		cat.addPreModifier(this.phraseFactory.createAdjectivePhrase("angry")); //$NON-NLS-1$
 		Assert.assertEquals("an angry cat", this.realiser.realise(cat) //$NON-NLS-1$
 				.getRealisation());
 
-		cat.addPostModifier(this.phraseFactory.createPrepositionPhrase(
-				"in", "the park")); //$NON-NLS-1$ //$NON-NLS-2$
+		cat.addPostModifier(this.phraseFactory.createPrepositionPhrase("in", "the park")); //$NON-NLS-1$ //$NON-NLS-2$
 		Assert.assertEquals("an angry cat in the park", this.realiser.realise( //$NON-NLS-1$
-				cat).getRealisation());
+		                                                                       cat).getRealisation());
 
 	}
-	 @Test
-  public void testPluralNounsBelongingToASingular() {
 
-    SPhraseSpec sent = this.phraseFactory.createClause("I", "count up");
-    sent.setFeature(Feature.TENSE, Tense.PAST);
-    NPPhraseSpec obj = this.phraseFactory.createNounPhrase("digit"); 
-    obj.setPlural(true);
-    NPPhraseSpec possessor = this.phraseFactory.createNounPhrase("the", "box");
-    possessor.setPlural(false);
-    possessor.setFeature(Feature.POSSESSIVE, true);
-    obj.setSpecifier(possessor);
-    sent.setObject(obj);
+	@Test
+	public void testPluralNounsBelongingToASingular() {
 
-    Assert.assertEquals("I counted up the box's digits", this.realiser.realise(sent) //$NON-NLS-1$
-        .getRealisation());
-  }
+		SPhraseSpec sent = this.phraseFactory.createClause("I", "count up");
+		sent.setFeature(Feature.TENSE, Tense.PAST);
+		NPPhraseSpec obj = this.phraseFactory.createNounPhrase("digit");
+		obj.setPlural(true);
+		NPPhraseSpec possessor = this.phraseFactory.createNounPhrase("the", "box");
+		possessor.setPlural(false);
+		possessor.setFeature(Feature.POSSESSIVE, true);
+		obj.setSpecifier(possessor);
+		sent.setObject(obj);
 
+		Assert.assertEquals("I counted up the box's digits", this.realiser.realise(sent) //$NON-NLS-1$
+				.getRealisation());
+	}
 
-	 @Test
-  public void testSingularNounsBelongingToAPlural() {
+	@Test
+	public void testSingularNounsBelongingToAPlural() {
 
-    SPhraseSpec sent = this.phraseFactory.createClause("I", "clean");
-    sent.setFeature(Feature.TENSE, Tense.PAST);
-    NPPhraseSpec obj = this.phraseFactory.createNounPhrase("car"); 
-    obj.setPlural(false);
-    NPPhraseSpec possessor = this.phraseFactory.createNounPhrase("the", "parent");
-    possessor.setPlural(true);
-    possessor.setFeature(Feature.POSSESSIVE, true);
-    obj.setSpecifier(possessor);
-    sent.setObject(obj);
+		SPhraseSpec sent = this.phraseFactory.createClause("I", "clean");
+		sent.setFeature(Feature.TENSE, Tense.PAST);
+		NPPhraseSpec obj = this.phraseFactory.createNounPhrase("car");
+		obj.setPlural(false);
+		NPPhraseSpec possessor = this.phraseFactory.createNounPhrase("the", "parent");
+		possessor.setPlural(true);
+		possessor.setFeature(Feature.POSSESSIVE, true);
+		obj.setSpecifier(possessor);
+		sent.setObject(obj);
 
-    Assert.assertEquals("I cleaned the parents' car", this.realiser.realise(sent) //$NON-NLS-1$
-        .getRealisation());
-  }
+		Assert.assertEquals("I cleaned the parents' car", this.realiser.realise(sent) //$NON-NLS-1$
+				.getRealisation());
+	}
 
 	/**
 	 * Test for appositive postmodifiers
@@ -611,7 +556,7 @@ public class NounPhraseTest extends SimpleNLG4Test {
 		PhraseElement _rott = this.phraseFactory.createNounPhrase("a", "rottweiler");
 		_rott.setFeature(Feature.APPOSITIVE, true);
 		_dog.addPostModifier(_rott);
-		SPhraseSpec _sent = this.phraseFactory.createClause(_dog, "ran");		
+		SPhraseSpec _sent = this.phraseFactory.createClause(_dog, "ran");
 		Assert.assertEquals("The dog, a rottweiler, runs.", this.realiser.realiseSentence(_sent));
 	}
 }

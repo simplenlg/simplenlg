@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,9 +14,8 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
-
 package simplenlg.framework;
 
 import java.util.ArrayList;
@@ -33,28 +32,30 @@ import simplenlg.features.NumberAgreement;
  * involves the linking of phrases together through the use of key words such as
  * <em>and</em> or <em>but</em>.
  * </p>
- * 
+ *
  * <p>
  * The class does not perform any ordering on the coordinates and when realised
  * they appear in the same order they were added to the coordination.
  * </p>
- * 
+ *
  * <p>
  * As this class appears similar to the <code>PhraseElement</code> class from an
  * API point of view, it could have extended from the <code>PhraseElement</code>
  * class. However, they are fundamentally different in their nature and thus
  * form two distinct classes with similar APIs.
  * </p>
+ *
  * @author D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 public class CoordinatedPhraseElement extends NLGElement {
 
-	/** Coordinators which make the coordinate plural (eg, "and" but not "or")*/
+	/**
+	 * Coordinators which make the coordinate plural (eg, "and" but not "or")
+	 */
 	@SuppressWarnings("nls")
 	private static final List<String> PLURAL_COORDINATORS = Arrays.asList("and");
-	
+
 	/**
 	 * Creates a blank coordinated phrase ready for new coordinates to be added.
 	 * The default conjunction used is <em>and</em>.
@@ -67,11 +68,9 @@ public class CoordinatedPhraseElement extends NLGElement {
 	/**
 	 * Creates a coordinated phrase linking the two phrase together. The default
 	 * conjunction used is <em>and</em>.
-	 * 
-	 * @param coordinate1
-	 *            the first coordinate.
-	 * @param coordinate2
-	 *            the second coordinate.
+	 *
+	 * @param coordinate1 the first coordinate.
+	 * @param coordinate2 the second coordinate.
 	 */
 	public CoordinatedPhraseElement(Object coordinate1, Object coordinate2) {
 
@@ -88,27 +87,24 @@ public class CoordinatedPhraseElement extends NLGElement {
 	 * will have their complementisers suppressed by default. In the case of
 	 * clauses, complementisers will be suppressed if the clause is not the
 	 * first element in the coordination.
-	 * 
-	 * @param newCoordinate
-	 *            the new coordinate to be added.
+	 *
+	 * @param newCoordinate the new coordinate to be added.
 	 */
 	public void addCoordinate(Object newCoordinate) {
 		List<NLGElement> coordinates = getFeatureAsElementList(InternalFeature.COORDINATES);
-		if (coordinates == null) {
+		if(coordinates == null) {
 			coordinates = new ArrayList<NLGElement>();
 			setFeature(InternalFeature.COORDINATES, coordinates);
-		} else if (coordinates.size() == 0) {
+		} else if(coordinates.size() == 0) {
 			setFeature(InternalFeature.COORDINATES, coordinates);
 		}
-		if (newCoordinate instanceof NLGElement) {
-			if (((NLGElement) newCoordinate).isA(PhraseCategory.CLAUSE)
-					&& coordinates.size() > 0) {
+		if(newCoordinate instanceof NLGElement) {
+			if(((NLGElement) newCoordinate).isA(PhraseCategory.CLAUSE) && coordinates.size() > 0) {
 
-				((NLGElement) newCoordinate).setFeature(
-						Feature.SUPRESSED_COMPLEMENTISER, true);
+				((NLGElement) newCoordinate).setFeature(Feature.SUPRESSED_COMPLEMENTISER, true);
 			}
 			coordinates.add((NLGElement) newCoordinate);
-		} else if (newCoordinate instanceof String) {
+		} else if(newCoordinate instanceof String) {
 			NLGElement coordElement = new StringElement((String) newCoordinate);
 			coordElement.setFeature(Feature.SUPRESSED_COMPLEMENTISER, true);
 			coordinates.add(coordElement);
@@ -132,13 +128,12 @@ public class CoordinatedPhraseElement extends NLGElement {
 	/**
 	 * Adds a new pre-modifier to the phrase element. Pre-modifiers will be
 	 * realised in the syntax before the coordinates.
-	 * 
-	 * @param newPreModifier
-	 *            the new pre-modifier as an <code>NLGElement</code>.
+	 *
+	 * @param newPreModifier the new pre-modifier as an <code>NLGElement</code>.
 	 */
 	public void addPreModifier(NLGElement newPreModifier) {
 		List<NLGElement> preModifiers = getFeatureAsElementList(InternalFeature.PREMODIFIERS);
-		if (preModifiers == null) {
+		if(preModifiers == null) {
 			preModifiers = new ArrayList<NLGElement>();
 		}
 		preModifiers.add(newPreModifier);
@@ -148,14 +143,13 @@ public class CoordinatedPhraseElement extends NLGElement {
 	/**
 	 * Adds a new pre-modifier to the phrase element. Pre-modifiers will be
 	 * realised in the syntax before the coordinates.
-	 * 
-	 * @param newPreModifier
-	 *            the new pre-modifier as a <code>String</code>. It is used to
-	 *            create a <code>StringElement</code>.
+	 *
+	 * @param newPreModifier the new pre-modifier as a <code>String</code>. It is used to
+	 * 		create a <code>StringElement</code>.
 	 */
 	public void addPreModifier(String newPreModifier) {
 		List<NLGElement> preModifiers = getFeatureAsElementList(InternalFeature.PREMODIFIERS);
-		if (preModifiers == null) {
+		if(preModifiers == null) {
 			preModifiers = new ArrayList<NLGElement>();
 		}
 		preModifiers.add(new StringElement(newPreModifier));
@@ -165,7 +159,7 @@ public class CoordinatedPhraseElement extends NLGElement {
 	/**
 	 * Retrieves the list of pre-modifiers currently associated with this
 	 * coordination.
-	 * 
+	 *
 	 * @return a <code>List</code> of <code>NLGElement</code>s.
 	 */
 	public List<NLGElement> getPreModifiers() {
@@ -175,7 +169,7 @@ public class CoordinatedPhraseElement extends NLGElement {
 	/**
 	 * Retrieves the list of complements currently associated with this
 	 * coordination.
-	 * 
+	 *
 	 * @return a <code>List</code> of <code>NLGElement</code>s.
 	 */
 	public List<NLGElement> getComplements() {
@@ -185,13 +179,12 @@ public class CoordinatedPhraseElement extends NLGElement {
 	/**
 	 * Adds a new post-modifier to the phrase element. Post-modifiers will be
 	 * realised in the syntax after the coordinates.
-	 * 
-	 * @param newPostModifier
-	 *            the new post-modifier as an <code>NLGElement</code>.
+	 *
+	 * @param newPostModifier the new post-modifier as an <code>NLGElement</code>.
 	 */
 	public void addPostModifier(NLGElement newPostModifier) {
 		List<NLGElement> postModifiers = getFeatureAsElementList(InternalFeature.POSTMODIFIERS);
-		if (postModifiers == null) {
+		if(postModifiers == null) {
 			postModifiers = new ArrayList<NLGElement>();
 		}
 		postModifiers.add(newPostModifier);
@@ -201,14 +194,13 @@ public class CoordinatedPhraseElement extends NLGElement {
 	/**
 	 * Adds a new post-modifier to the phrase element. Post-modifiers will be
 	 * realised in the syntax after the coordinates.
-	 * 
-	 * @param newPostModifier
-	 *            the new post-modifier as a <code>String</code>. It is used to
-	 *            create a <code>StringElement</code>.
+	 *
+	 * @param newPostModifier the new post-modifier as a <code>String</code>. It is used to
+	 * 		create a <code>StringElement</code>.
 	 */
 	public void addPostModifier(String newPostModifier) {
 		List<NLGElement> postModifiers = getFeatureAsElementList(InternalFeature.POSTMODIFIERS);
-		if (postModifiers == null) {
+		if(postModifiers == null) {
 			postModifiers = new ArrayList<NLGElement>();
 		}
 		postModifiers.add(new StringElement(newPostModifier));
@@ -218,7 +210,7 @@ public class CoordinatedPhraseElement extends NLGElement {
 	/**
 	 * Retrieves the list of post-modifiers currently associated with this
 	 * coordination.
-	 * 
+	 *
 	 * @return a <code>List</code> of <code>NLGElement</code>s.
 	 */
 	public List<NLGElement> getPostModifiers() {
@@ -238,13 +230,11 @@ public class CoordinatedPhraseElement extends NLGElement {
 		int length = children.size() - 1;
 		int index = 0;
 
-		for (index = 0; index < length; index++) {
-			print.append(thisIndent).append(
-					children.get(index).printTree(childIndent));
+		for(index = 0; index < length; index++) {
+			print.append(thisIndent).append(children.get(index).printTree(childIndent));
 		}
-		if (length >= 0) {
-			print.append(lastIndent).append(
-					children.get(length).printTree(lastChildIndent));
+		if(length >= 0) {
+			print.append(lastIndent).append(children.get(length).printTree(lastChildIndent));
 		}
 		return print.toString();
 	}
@@ -254,13 +244,12 @@ public class CoordinatedPhraseElement extends NLGElement {
 	 * in the syntax after the coordinates. Complements differ from
 	 * post-modifiers in that complements are crucial to the understanding of a
 	 * phrase whereas post-modifiers are optional.
-	 * 
-	 * @param newComplement
-	 *            the new complement as an <code>NLGElement</code>.
+	 *
+	 * @param newComplement the new complement as an <code>NLGElement</code>.
 	 */
 	public void addComplement(NLGElement newComplement) {
 		List<NLGElement> complements = getFeatureAsElementList(InternalFeature.COMPLEMENTS);
-		if (complements == null) {
+		if(complements == null) {
 			complements = new ArrayList<NLGElement>();
 		}
 		complements.add(newComplement);
@@ -272,14 +261,13 @@ public class CoordinatedPhraseElement extends NLGElement {
 	 * in the syntax after the coordinates. Complements differ from
 	 * post-modifiers in that complements are crucial to the understanding of a
 	 * phrase whereas post-modifiers are optional.
-	 * 
-	 * @param newComplement
-	 *            the new complement as a <code>String</code>. It is used to
-	 *            create a <code>StringElement</code>.
+	 *
+	 * @param newComplement the new complement as a <code>String</code>. It is used to
+	 * 		create a <code>StringElement</code>.
 	 */
 	public void addComplement(String newComplement) {
 		List<NLGElement> complements = getFeatureAsElementList(InternalFeature.COMPLEMENTS);
-		if (complements == null) {
+		if(complements == null) {
 			complements = new ArrayList<NLGElement>();
 		}
 		complements.add(new StringElement(newComplement));
@@ -289,36 +277,35 @@ public class CoordinatedPhraseElement extends NLGElement {
 	/**
 	 * A convenience method for retrieving the last coordinate in this
 	 * coordination.
-	 * 
+	 *
 	 * @return the last coordinate as represented by a <code>NLGElement</code>
 	 */
 	public NLGElement getLastCoordinate() {
 		List<NLGElement> children = getChildren();
-		return children != null && children.size() > 0 ? children.get(children
-				.size() - 1) : null;
+		return children != null && children.size() > 0 ? children.get(children.size() - 1) : null;
 	}
-	
-	/** set the conjunction to be used in a coordinatedphraseelement
-	 * @param conjunction
+
+	/**
+	 * set the conjunction to be used in a coordinatedphraseelement
 	 */
 	public void setConjunction(String conjunction) {
 		setFeature(Feature.CONJUNCTION, conjunction);
 	}
-	
+
 	/**
-	 * @return  conjunction used in coordinatedPhraseElement
+	 * @return conjunction used in coordinatedPhraseElement
 	 */
 	public String getConjunction() {
 		return getFeatureAsString(Feature.CONJUNCTION);
 	}
-	
+
 	/**
 	 * @return true if this coordinate is plural in a syntactic sense
 	 */
 	public boolean checkIfPlural() {
 		// doing this right is quite complex, take simple approach for now
 		int size = getChildren().size();
-		if (size == 1)
+		if(size == 1)
 			return (NumberAgreement.PLURAL.equals(getLastCoordinate().getFeature(Feature.NUMBER)));
 		else
 			return PLURAL_COORDINATORS.contains(getConjunction());

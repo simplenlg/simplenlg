@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.aggregation;
 
@@ -30,18 +30,19 @@ import simplenlg.framework.NLGElement;
 
 public class FunctionalSet {
 
-	private List<NLGElement> components;
+	private List<NLGElement>  components;
 	private DiscourseFunction function;
-	private ElementCategory category;
-	private Periphery periphery;
+	private ElementCategory   category;
+	private Periphery         periphery;
 
 	public static FunctionalSet newInstance(DiscourseFunction func,
-			ElementCategory category, Periphery periphery,
-			NLGElement... components) {
+	                                        ElementCategory category,
+	                                        Periphery periphery,
+	                                        NLGElement... components) {
 
 		FunctionalSet pair = null;
 
-		if (components.length >= 2) {
+		if(components.length >= 2) {
 			pair = new FunctionalSet(func, category, periphery, components);
 		}
 
@@ -49,8 +50,7 @@ public class FunctionalSet {
 
 	}
 
-	FunctionalSet(DiscourseFunction func, ElementCategory category,
-			Periphery periphery, NLGElement... components) {
+	FunctionalSet(DiscourseFunction func, ElementCategory category, Periphery periphery, NLGElement... components) {
 		this.function = func;
 		this.category = category;
 		this.periphery = periphery;
@@ -61,7 +61,7 @@ public class FunctionalSet {
 		boolean ident = true;
 		NLGElement firstElement = this.components.get(0);
 
-		for (int i = 1; i < this.components.size() && ident; i++) {
+		for(int i = 1; i < this.components.size() && ident; i++) {
 			ident = firstElement.equals(components.get(i));
 		}
 
@@ -73,21 +73,21 @@ public class FunctionalSet {
 	}
 
 	public void elideLeftMost() {
-		for(int i = 0; i < this.components.size()-1; i++) {
-			recursiveElide(components.get(i));		
+		for(int i = 0; i < this.components.size() - 1; i++) {
+			recursiveElide(components.get(i));
 		}
 	}
 
 	public void elideRightMost() {
-		for(int i = this.components.size()-1; i > 0; i--) {
-			recursiveElide( components.get(i) );
-			
+		for(int i = this.components.size() - 1; i > 0; i--) {
+			recursiveElide(components.get(i));
+
 		}
 	}
-	
+
 	private void recursiveElide(NLGElement component) {
 		if(component instanceof ListElement) {
-			for(NLGElement subcomponent: component.getFeatureAsElementList(InternalFeature.COMPONENTS)) {
+			for(NLGElement subcomponent : component.getFeatureAsElementList(InternalFeature.COMPONENTS)) {
 				recursiveElide(subcomponent);
 			}
 		} else {
@@ -106,19 +106,19 @@ public class FunctionalSet {
 	public Periphery getPeriphery() {
 		return periphery;
 	}
-	
+
 	public List<NLGElement> getComponents() {
 		return this.components;
 	}
 
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
-		
-		for(NLGElement elem: this.components) {
+
+		for(NLGElement elem : this.components) {
 			buffer.append("ELEMENT: ").append(elem.toString()).append("\n");
 		}
-		
+
 		return buffer.toString();
 	}
-	
+
 }

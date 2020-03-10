@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,9 +14,8 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
-
 package simplenlg.features;
 
 /**
@@ -31,7 +30,7 @@ package simplenlg.features;
  * <LI> <code>InternalFeature</code>: features typically used internally by
  * SimpleNLG
  * </UL>
- * 
+ * <p>
  * Elements in the system can, in theory, take any kind of feature. Some
  * features will only be expected by certain processors, however. Developers can
  * define their own features but should choose names that do not conflict with
@@ -74,10 +73,9 @@ package simplenlg.features;
  * </tr>
  * <tr>
  * </table>
- * 
+ *
  * @author E. Reiter and D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 
 @SuppressWarnings("nls")
@@ -186,7 +184,7 @@ abstract public class Feature {
 	 * </tr>
 	 * <tr>
 	 * <td><b>Created by</b></td>
-	 * <td>The default is created by the <code>PhraseFactory<code> when creating 
+	 * <td>The default is created by the <code>PhraseFactory<code> when creating
 	 * clauses.</td>
 	 * </tr>
 	 * <tr>
@@ -325,7 +323,7 @@ abstract public class Feature {
 	 * This feature represents the cue phrase of a sentence. Cue phrases
 	 * sometimes appear at the start of sentences. In the following example,
 	 * <em>however</em> forms the cue phrase:<br>
-	 * <em><b>However</b>, John 
+	 * <em><b>However</b>, John
 	 * played football instead.</em>
 	 * </p>
 	 * <table border="1">
@@ -905,7 +903,7 @@ abstract public class Feature {
 	/**
 	 * <p>
 	 * This flag determines if the verb phrase should be constructed in the
-	 * progressive form. For example, the progressive form of <em>John kisses 
+	 * progressive form. For example, the progressive form of <em>John kisses
 	 * Mary</em> is <em>John is kissing Mary</em>.
 	 * </p>
 	 * <table border="1">

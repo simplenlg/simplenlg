@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.morphology.english;
 
@@ -47,7 +47,6 @@ import simplenlg.framework.*;
  * class.
  * </p>
  *
- *
  * @author D. Westwater, University of Aberdeen.
  * @version 4.0 16-Mar-2011 modified to use correct base form (ER)
  */
@@ -78,13 +77,11 @@ public abstract class MorphologyRules extends NLGModule {
 	/**
 	 * This method performs the morphology for nouns.
 	 *
-	 * @param element
-	 *            the <code>InflectedWordElement</code>.
-	 * @param baseWord
-	 *            the <code>WordElement</code> as created from the lexicon
-	 *            entry.
+	 * @param element the <code>InflectedWordElement</code>.
+	 * @param baseWord the <code>WordElement</code> as created from the lexicon
+	 * 		entry.
 	 * @return a <code>StringElement</code> representing the word after
-	 *         inflection.
+	 * 		inflection.
 	 */
 	protected static StringElement doNounMorphology(InflectedWordElement element, WordElement baseWord) {
 		StringBuffer realised = new StringBuffer();
@@ -155,8 +152,7 @@ public abstract class MorphologyRules extends NLGModule {
 	 * <em>dog</em> becomes <em>dogs</em>.</li>
 	 * </ul>
 	 *
-	 * @param baseForm
-	 *            the base form of the word.
+	 * @param baseForm the base form of the word.
 	 * @return the inflected word.
 	 */
 	private static String buildRegularPluralNoun(String baseForm) {
@@ -200,8 +196,7 @@ public abstract class MorphologyRules extends NLGModule {
 	 * example, <em>matrix</em> becomes <em>matrices</em>.</li>
 	 * </ul>
 	 *
-	 * @param baseForm
-	 *            the base form of the word.
+	 * @param baseForm the base form of the word.
 	 * @return the inflected word.
 	 */
 	private static String buildGrecoLatinPluralNoun(String baseForm) {
@@ -235,13 +230,11 @@ public abstract class MorphologyRules extends NLGModule {
 	/**
 	 * This method performs the morphology for verbs.
 	 *
-	 * @param element
-	 *            the <code>InflectedWordElement</code>.
-	 * @param baseWord
-	 *            the <code>WordElement</code> as created from the lexicon
-	 *            entry.
+	 * @param element the <code>InflectedWordElement</code>.
+	 * @param baseWord the <code>WordElement</code> as created from the lexicon
+	 * 		entry.
 	 * @return a <code>StringElement</code> representing the word after
-	 *         inflection.
+	 * 		inflection.
 	 */
 	protected static NLGElement doVerbMorphology(InflectedWordElement element, WordElement baseWord) {
 
@@ -351,10 +344,6 @@ public abstract class MorphologyRules extends NLGModule {
 
 	/**
 	 * return the base form of a word
-	 *
-	 * @param element
-	 * @param baseWord
-	 * @return
 	 */
 	private static String getBaseForm(InflectedWordElement element, WordElement baseWord) {
 		// unclear what the right behaviour should be
@@ -400,10 +389,8 @@ public abstract class MorphologyRules extends NLGModule {
 	 * <em>-s</em> become <em>-s'</em> while every other noun has <em>-'s</em> appended to
 	 * the end.
 	 *
-	 * @param element
-	 *            the <code>InflectedWordElement</code>
-	 * @param realised
-	 *            the realisation of the word.
+	 * @param element the <code>InflectedWordElement</code>
+	 * @param realised the realisation of the word.
 	 */
 	private static void checkPossessive(InflectedWordElement element, StringBuffer realised) {
 
@@ -430,8 +417,7 @@ public abstract class MorphologyRules extends NLGModule {
 	 * <li>For every other verb, <em>-s</em> is added to the end of the word.</li>
 	 * </ul>
 	 *
-	 * @param baseForm
-	 *            the base form of the word.
+	 * @param baseForm the base form of the word.
 	 * @return the inflected word.
 	 */
 	private static String buildPresent3SVerb(String baseForm) {
@@ -466,12 +452,9 @@ public abstract class MorphologyRules extends NLGModule {
 	 * <li>For every other verb, <em>-ed</em> is added to the end of the word.</li>
 	 * </ul>
 	 *
-	 * @param baseForm
-	 *            the base form of the word.
-	 * @param number
-	 *            the number agreement for the word.
-	 * @param person
-	 *            the person
+	 * @param baseForm the base form of the word.
+	 * @param number the number agreement for the word.
+	 * @param person the person
 	 * @return the inflected word.
 	 */
 	private static String buildRegularPastVerb(String baseForm, Object number, Object person) {
@@ -504,8 +487,7 @@ public abstract class MorphologyRules extends NLGModule {
 	 * last consonant. <em>-ed</em> is added to the end after the last consonant
 	 * is doubled. For example, <em>tug</em> becomes <em>tugged</em>.
 	 *
-	 * @param baseForm
-	 *            the base form of the word.
+	 * @param baseForm the base form of the word.
 	 * @return the inflected word.
 	 */
 	private static String buildDoublePastVerb(String baseForm) {
@@ -532,8 +514,7 @@ public abstract class MorphologyRules extends NLGModule {
 	 * <em>dry</em> becomes <em>drying</em>.</li>
 	 * </ul>
 	 *
-	 * @param baseForm
-	 *            the base form of the word.
+	 * @param baseForm the base form of the word.
 	 * @return the inflected word.
 	 */
 	private static String buildRegularPresPartVerb(String baseForm) {
@@ -558,8 +539,7 @@ public abstract class MorphologyRules extends NLGModule {
 	 * last consonant is doubled. For example, <em>tug</em> becomes
 	 * <em>tugging</em>.
 	 *
-	 * @param baseForm
-	 *            the base form of the word.
+	 * @param baseForm the base form of the word.
 	 * @return the inflected word.
 	 */
 	private static String buildDoublePresPartVerb(String baseForm) {
@@ -573,13 +553,11 @@ public abstract class MorphologyRules extends NLGModule {
 	/**
 	 * This method performs the morphology for adjectives.
 	 *
-	 * @param element
-	 *            the <code>InflectedWordElement</code>.
-	 * @param baseWord
-	 *            the <code>WordElement</code> as created from the lexicon
-	 *            entry.
+	 * @param element the <code>InflectedWordElement</code>.
+	 * @param baseWord the <code>WordElement</code> as created from the lexicon
+	 * 		entry.
 	 * @return a <code>StringElement</code> representing the word after
-	 *         inflection.
+	 * 		inflection.
 	 */
 	public static NLGElement doAdjectiveMorphology(InflectedWordElement element, WordElement baseWord) {
 
@@ -630,8 +608,7 @@ public abstract class MorphologyRules extends NLGModule {
 	 * of the last consonant. <em>-er</em> is added to the end after the last
 	 * consonant is doubled. For example, <em>fat</em> becomes <em>fatter</em>.
 	 *
-	 * @param baseForm
-	 *            the base form of the word.
+	 * @param baseForm the base form of the word.
 	 * @return the inflected word.
 	 */
 	private static String buildDoubleCompAdjective(String baseForm) {
@@ -655,8 +632,7 @@ public abstract class MorphologyRules extends NLGModule {
 	 * example, <em>clear</em> becomes <em>clearer</em>.</li>
 	 * </ul>
 	 *
-	 * @param baseForm
-	 *            the base form of the word.
+	 * @param baseForm the base form of the word.
 	 * @return the inflected word.
 	 */
 	private static String buildRegularComparative(String baseForm) {
@@ -678,8 +654,7 @@ public abstract class MorphologyRules extends NLGModule {
 	 * of the last consonant. <em>-est</em> is added to the end after the last
 	 * consonant is doubled. For example, <em>fat</em> becomes <em>fattest</em>.
 	 *
-	 * @param baseForm
-	 *            the base form of the word.
+	 * @param baseForm the base form of the word.
 	 * @return the inflected word.
 	 */
 	private static String buildDoubleSuperAdjective(String baseForm) {
@@ -703,8 +678,7 @@ public abstract class MorphologyRules extends NLGModule {
 	 * <em>clear</em> becomes <em>clearest</em>.</li>
 	 * </ul>
 	 *
-	 * @param baseForm
-	 *            the base form of the word.
+	 * @param baseForm the base form of the word.
 	 * @return the inflected word.
 	 */
 	private static String buildRegularSuperlative(String baseForm) {
@@ -724,13 +698,11 @@ public abstract class MorphologyRules extends NLGModule {
 	/**
 	 * This method performs the morphology for adverbs.
 	 *
-	 * @param element
-	 *            the <code>InflectedWordElement</code>.
-	 * @param baseWord
-	 *            the <code>WordElement</code> as created from the lexicon
-	 *            entry.
+	 * @param element the <code>InflectedWordElement</code>.
+	 * @param baseWord the <code>WordElement</code> as created from the lexicon
+	 * 		entry.
 	 * @return a <code>StringElement</code> representing the word after
-	 *         inflection.
+	 * 		inflection.
 	 */
 	public static NLGElement doAdverbMorphology(InflectedWordElement element, WordElement baseWord) {
 
@@ -770,10 +742,9 @@ public abstract class MorphologyRules extends NLGModule {
 	/**
 	 * This method performs the morphology for pronouns.
 	 *
-	 * @param element
-	 *            the <code>InflectedWordElement</code>.
+	 * @param element the <code>InflectedWordElement</code>.
 	 * @return a <code>StringElement</code> representing the word after
-	 *         inflection.
+	 * 		inflection.
 	 */
 	public static NLGElement doPronounMorphology(InflectedWordElement element) {
 		String realised = null;
@@ -803,7 +774,8 @@ public abstract class MorphologyRules extends NLGModule {
 				}
 			} else {
 				positionIndex = (DiscourseFunction.SUBJECT.equals(discourseValue) && !element.getFeatureAsBoolean(
-						Feature.PASSIVE).booleanValue()) || (DiscourseFunction.OBJECT.equals(discourseValue) && element.getFeatureAsBoolean(Feature.PASSIVE).booleanValue())
+						Feature.PASSIVE).booleanValue()) || (DiscourseFunction.OBJECT.equals(discourseValue)
+				                                             && element.getFeatureAsBoolean(Feature.PASSIVE).booleanValue())
 				                || DiscourseFunction.SPECIFIER.equals(discourseValue) || (
 						                DiscourseFunction.COMPLEMENT.equals(discourseValue)
 						                && element.getFeatureAsBoolean(Feature.PASSIVE).booleanValue()) ? 0 : 1;
@@ -836,10 +808,8 @@ public abstract class MorphologyRules extends NLGModule {
 	/**
 	 * This method performs the morphology for determiners.
 	 *
-	 * @param determiner
-	 *            the <code>InflectedWordElement</code>.
-	 * @param realisation
-	 *            the current realisation of the determiner.
+	 * @param determiner the <code>InflectedWordElement</code>.
+	 * @param realisation the current realisation of the determiner.
 	 */
 	public static void doDeterminerMorphology(NLGElement determiner, String realisation) {
 

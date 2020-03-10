@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.framework;
 
@@ -31,10 +31,9 @@ import simplenlg.features.LexicalFeature;
  * <em>eat</em>) and for setting and retrieving the base word. The base word is
  * a <code>WordElement</code> constructed by the lexicon.
  * </p>
- * 
+ *
  * @author D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 public class InflectedWordElement extends NLGElement {
 
@@ -42,11 +41,9 @@ public class InflectedWordElement extends NLGElement {
 	 * Constructs a new inflected word using the giving word as the base form.
 	 * Constructing the word also requires a lexical category (such as noun,
 	 * verb).
-	 * 
-	 * @param word
-	 *            the base form for this inflected word.
-	 * @param category
-	 *            the lexical category for the word.
+	 *
+	 * @param word the base form for this inflected word.
+	 * @param category the lexical category for the word.
 	 */
 	public InflectedWordElement(String word, LexicalCategory category) {
 		super();
@@ -56,9 +53,8 @@ public class InflectedWordElement extends NLGElement {
 
 	/**
 	 * Constructs a new inflected word from a WordElement
-	 * 
-	 * @param word
-	 *            underlying wordelement
+	 *
+	 * @param word underlying wordelement
 	 */
 	public InflectedWordElement(WordElement word) {
 		super();
@@ -81,7 +77,7 @@ public class InflectedWordElement extends NLGElement {
 	@Override
 	public String toString() {
 		return "InflectedWordElement[" + getBaseForm() + ':' //$NON-NLS-1$
-				+ getCategory().toString() + ']';
+		       + getCategory().toString() + ']';
 	}
 
 	@Override
@@ -89,14 +85,15 @@ public class InflectedWordElement extends NLGElement {
 		StringBuffer print = new StringBuffer();
 		print.append("InflectedWordElement: base=").append(getBaseForm()) //$NON-NLS-1$
 				.append(", category=").append(getCategory().toString()).append( //$NON-NLS-1$
-						", ").append(super.toString()).append('\n'); //$NON-NLS-1$
+				                                                                ", ").append(super.toString()).append(
+				'\n'); //$NON-NLS-1$
 		return print.toString();
 	}
 
 	/**
 	 * Retrieves the base form for this element. The base form is the originally
 	 * supplied word.
-	 * 
+	 *
 	 * @return a <code>String</code> forming the base form of the element.
 	 */
 	public String getBaseForm() {
@@ -105,10 +102,9 @@ public class InflectedWordElement extends NLGElement {
 
 	/**
 	 * Sets the base word for this element.
-	 * 
-	 * @param word
-	 *            the <code>WordElement</code> representing the base word as
-	 *            read from the lexicon.
+	 *
+	 * @param word the <code>WordElement</code> representing the base word as
+	 * 		read from the lexicon.
 	 */
 	public void setBaseWord(WordElement word) {
 		setFeature(InternalFeature.BASE_WORD, word);
@@ -116,13 +112,12 @@ public class InflectedWordElement extends NLGElement {
 
 	/**
 	 * Retrieves the base word for this element.
-	 * 
+	 *
 	 * @return the <code>WordElement</code> representing the base word as read
-	 *         from the lexicon.
+	 * 		from the lexicon.
 	 */
 	public WordElement getBaseWord() {
-		NLGElement baseWord = this
-				.getFeatureAsElement(InternalFeature.BASE_WORD);
+		NLGElement baseWord = this.getFeatureAsElement(InternalFeature.BASE_WORD);
 		return baseWord instanceof WordElement ? (WordElement) baseWord : null;
 	}
 }

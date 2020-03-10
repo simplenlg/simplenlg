@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.orthography.english;
 
@@ -24,14 +24,7 @@ import java.util.List;
 import simplenlg.features.DiscourseFunction;
 import simplenlg.features.Feature;
 import simplenlg.features.InternalFeature;
-import simplenlg.framework.CoordinatedPhraseElement;
-import simplenlg.framework.DocumentCategory;
-import simplenlg.framework.DocumentElement;
-import simplenlg.framework.ElementCategory;
-import simplenlg.framework.ListElement;
-import simplenlg.framework.NLGElement;
-import simplenlg.framework.NLGModule;
-import simplenlg.framework.StringElement;
+import simplenlg.framework.*;
 
 /**
  * <p>
@@ -46,20 +39,18 @@ import simplenlg.framework.StringElement;
  * <em>John and Peter and Simon</em> becomes <em>John, Peter and Simon</em>.</li>
  * </ul>
  * </p>
- * 
- * 
+ *
  * @author D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 public class OrthographyProcessor extends NLGModule {
 
 	private boolean commaSepPremodifiers; // set whether to separate
-	                                      // premodifiers using commas
+	// premodifiers using commas
 
 	private boolean commaSepCuephrase;   // set whether to include a comma after a
-	                                      // cue phrase (if marked by the
-	                                      // CUE_PHRASE=true) feature.
+	// cue phrase (if marked by the
+	// CUE_PHRASE=true) feature.
 
 	@Override
 	public void initialise() {
@@ -69,9 +60,9 @@ public class OrthographyProcessor extends NLGModule {
 
 	/**
 	 * Check whether this processor separates premodifiers using a comma.
-	 * 
+	 *
 	 * @return <code>true</code> if premodifiers in the noun phrase are
-	 *         comma-separated.
+	 * 		comma-separated.
 	 */
 	public boolean isCommaSepPremodifiers() {
 		return commaSepPremodifiers;
@@ -81,9 +72,8 @@ public class OrthographyProcessor extends NLGModule {
 	 * Set whether to separate premodifiers using a comma. If <code>true</code>,
 	 * premodifiers will be comma-separated, as in <i>the long, dark road</i>.
 	 * If <code>false</code>, they won't.
-	 * 
-	 * @param commaSepPremodifiers
-	 *            the commaSepPremodifiers to set
+	 *
+	 * @param commaSepPremodifiers the commaSepPremodifiers to set
 	 */
 	public void setCommaSepPremodifiers(boolean commaSepPremodifiers) {
 		this.commaSepPremodifiers = commaSepPremodifiers;
@@ -92,7 +82,7 @@ public class OrthographyProcessor extends NLGModule {
 	/**
 	 * Check whether this processor separates cue phrases from a matrix phrase
 	 * using a comma.
-	 * 
+	 *
 	 * @return <code>true</code> if this parameter is set.
 	 */
 	public boolean isCommaSepCuephrase() {
@@ -105,9 +95,8 @@ public class OrthographyProcessor extends NLGModule {
 	 * sentence (e.g. <i><u>However</u>, John left early</i>). This will only
 	 * apply to phrases with the feature
 	 * {@link simplenlg.features.DiscourseFunction#CUE_PHRASE} or {@link simplenlg.features.DiscourseFunction#FRONT_MODIFIER}.
-	 * 
-	 * @param commaSepCuephrase
-	 *            whether to separate cue phrases using a comma
+	 *
+	 * @param commaSepCuephrase whether to separate cue phrases using a comma
 	 */
 	public void setCommaSepCuephrase(boolean commaSepCuephrase) {
 		this.commaSepCuephrase = commaSepCuephrase;
@@ -139,11 +128,11 @@ public class OrthographyProcessor extends NLGModule {
 
 				switch((DocumentCategory) category){
 
-				case SENTENCE :
+				case SENTENCE:
 					realisedElement = realiseSentence(components, element);
 					break;
 
-				case LIST_ITEM :
+				case LIST_ITEM:
 					if(components != null && components.size() > 0) {
 						// recursively realise whatever is in the list item
 						// NB: this will realise embedded lists within list
@@ -153,7 +142,7 @@ public class OrthographyProcessor extends NLGModule {
 					}
 					break;
 
-				default :
+				default:
 					((DocumentElement) element).setComponents(realise(components));
 					realisedElement = element;
 				}
@@ -168,26 +157,26 @@ public class OrthographyProcessor extends NLGModule {
 				if(DiscourseFunction.PRE_MODIFIER.equals(function)) {
 
 					boolean all_appositives = true;
-					for(NLGElement child : element.getChildren()){
+					for(NLGElement child : element.getChildren()) {
 						all_appositives = all_appositives && child.getFeatureAsBoolean(Feature.APPOSITIVE);
 					}
 
 					// TODO: unless this is the end of the sentence
-					if(all_appositives){
+					if(all_appositives) {
 						buffer.append(", ");
 					}
 					realiseList(buffer, element.getChildren(), this.commaSepPremodifiers ? "," : "");
-					if(all_appositives){
+					if(all_appositives) {
 						buffer.append(", ");
 					}
 				} else if(DiscourseFunction.POST_MODIFIER.equals(function)) {// &&
-					                                                         // appositive)
-					                                                         // {
+					// appositive)
+					// {
 					List<NLGElement> postmods = element.getChildren();
 					// bug fix due to Owen Bennett
 					int len = postmods.size();
 
-					for(int i = 0; i < len; i++ ) {
+					for(int i = 0; i < len; i++) {
 						// for(NLGElement postmod: element.getChildren()) {
 						NLGElement postmod = postmods.get(i);
 
@@ -199,15 +188,15 @@ public class OrthographyProcessor extends NLGModule {
 							buffer.append(", ");
 						} else {
 							buffer.append(realise(postmod));
-							if(postmod instanceof ListElement
-							   || (postmod.getRealisation() != null && !postmod.getRealisation().equals(""))) {
+							if(postmod instanceof ListElement || (postmod.getRealisation() != null
+							                                      && !postmod.getRealisation().equals(""))) {
 								buffer.append(" ");
 							}
 						}
 					}
 
-				} else if((DiscourseFunction.CUE_PHRASE.equals(function) || DiscourseFunction.FRONT_MODIFIER.equals(function))
-			   && this.commaSepCuephrase){
+				} else if((DiscourseFunction.CUE_PHRASE.equals(function) || DiscourseFunction.FRONT_MODIFIER.equals(
+						function)) && this.commaSepCuephrase) {
 					realiseList(buffer, element.getChildren(), this.commaSepCuephrase ? "," : "");
 
 				} else {
@@ -249,8 +238,6 @@ public class OrthographyProcessor extends NLGModule {
 
 	/**
 	 * removes extra spaces preceding punctuation from a realised element
-	 * 
-	 * @param realisedElement
 	 */
 	private void removePunctSpace(NLGElement realisedElement) {
 
@@ -270,12 +257,10 @@ public class OrthographyProcessor extends NLGModule {
 	/**
 	 * Performs the realisation on a sentence. This includes adding the
 	 * terminator and capitalising the first letter.
-	 * 
-	 * @param components
-	 *            the <code>List</code> of <code>NLGElement</code>s representing
-	 *            the components that make up the sentence.
-	 * @param element
-	 *            the <code>NLGElement</code> representing the sentence.
+	 *
+	 * @param components the <code>List</code> of <code>NLGElement</code>s representing
+	 * 		the components that make up the sentence.
+	 * @param element the <code>NLGElement</code> representing the sentence.
 	 * @return the realised element as an <code>NLGElement</code>.
 	 */
 	private NLGElement realiseSentence(List<NLGElement> components, NLGElement element) {
@@ -301,13 +286,11 @@ public class OrthographyProcessor extends NLGModule {
 	/**
 	 * Adds the sentence terminator to the sentence. This is a period ('.') for
 	 * normal sentences or a question mark ('?') for interrogatives.
-	 * 
-	 * @param realisation
-	 *            the <code>StringBuffer<code> containing the current 
-	 * realisation of the sentence.
-	 * @param interrogative
-	 *            a <code>boolean</code> flag showing <code>true</code> if the
-	 *            sentence is an interrogative, <code>false</code> otherwise.
+	 *
+	 * @param realisation the <code>StringBuffer<code> containing the current
+	 * 		realisation of the sentence.
+	 * @param interrogative a <code>boolean</code> flag showing <code>true</code> if the
+	 * 		sentence is an interrogative, <code>false</code> otherwise.
 	 */
 	private void terminateSentence(StringBuffer realisation, boolean interrogative) {
 		char character = realisation.charAt(realisation.length() - 1);
@@ -321,12 +304,11 @@ public class OrthographyProcessor extends NLGModule {
 	}
 
 	/**
-	 * Remove recursively any leading spaces or commas at the start 
+	 * Remove recursively any leading spaces or commas at the start
 	 * of a sentence.
-	 * 
-	 * @param realisation
-	 *            the <code>StringBuffer<code> containing the current 
-	 * realisation of the sentence.
+	 *
+	 * @param realisation the <code>StringBuffer<code> containing the current
+	 * 		realisation of the sentence.
 	 */
 	private void stripLeadingCommas(StringBuffer realisation) {
 		char character = realisation.charAt(0);
@@ -336,14 +318,12 @@ public class OrthographyProcessor extends NLGModule {
 		}
 	}
 
-
 	/**
 	 * Capitalises the first character of a sentence if it is a lower case
 	 * letter.
-	 * 
-	 * @param realisation
-	 *            the <code>StringBuffer<code> containing the current 
-	 * realisation of the sentence.
+	 *
+	 * @param realisation the <code>StringBuffer<code> containing the current
+	 * 		realisation of the sentence.
 	 */
 	private void capitaliseFirstLetter(StringBuffer realisation) {
 		char character = realisation.charAt(0);
@@ -372,22 +352,19 @@ public class OrthographyProcessor extends NLGModule {
 	/**
 	 * Realises a list of elements appending the result to the on-going
 	 * realisation.
-	 * 
-	 * @param realisation
-	 *            the <code>StringBuffer<code> containing the current 
-	 * 			  realisation of the sentence.
-	 * @param components
-	 *            the <code>List</code> of <code>NLGElement</code>s representing
-	 *            the components that make up the sentence.
-	 * @param listSeparator
-	 *            the string to use to separate elements of the list, empty if
-	 *            no separator needed
+	 *
+	 * @param realisation the <code>StringBuffer<code> containing the current
+	 * 		realisation of the sentence.
+	 * @param components the <code>List</code> of <code>NLGElement</code>s representing
+	 * 		the components that make up the sentence.
+	 * @param listSeparator the string to use to separate elements of the list, empty if
+	 * 		no separator needed
 	 */
 	private void realiseList(StringBuffer realisation, List<NLGElement> components, String listSeparator) {
 
 		NLGElement realisedChild = null;
 
-		for(int i = 0; i < components.size(); i++ ) {
+		for(int i = 0; i < components.size(); i++) {
 			NLGElement thisElement = components.get(i);
 			realisedChild = realise(thisElement);
 			String childRealisation = realisedChild.getRealisation();
@@ -414,10 +391,9 @@ public class OrthographyProcessor extends NLGModule {
 	 * then a comma replaces the conjunction word between all the coordinates
 	 * save the last two. For example, <em>John and Peter and Simon</em> becomes
 	 * <em>John, Peter and Simon</em>.
-	 * 
-	 * @param components
-	 *            the <code>List</code> of <code>NLGElement</code>s representing
-	 *            the components that make up the sentence.
+	 *
+	 * @param components the <code>List</code> of <code>NLGElement</code>s representing
+	 * 		the components that make up the sentence.
 	 * @return the realised element as an <code>NLGElement</code>.
 	 */
 	private NLGElement realiseCoordinatedPhrase(List<NLGElement> components) {
@@ -426,7 +402,7 @@ public class OrthographyProcessor extends NLGModule {
 
 		int length = components.size();
 
-		for(int index = 0; index < length; index++ ) {
+		for(int index = 0; index < length; index++) {
 			realisedChild = components.get(index);
 			if(index < length - 2
 			   && DiscourseFunction.CONJUNCTION.equals(realisedChild.getFeature(InternalFeature.DISCOURSE_FUNCTION))) {

@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,23 +14,14 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell, Saad Mahamood.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
-// package simplenlg.format.english;
-
 package simplenlg.format.english;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import simplenlg.framework.CoordinatedPhraseElement;
-import simplenlg.framework.DocumentCategory;
-import simplenlg.framework.DocumentElement;
-import simplenlg.framework.ElementCategory;
-import simplenlg.framework.ListElement;
-import simplenlg.framework.NLGElement;
-import simplenlg.framework.NLGModule;
-import simplenlg.framework.StringElement;
+import simplenlg.framework.*;
 
 /**
  * <p>
@@ -43,11 +34,10 @@ import simplenlg.framework.StringElement;
  * <li>Indenting list items with ' * '.</li>
  * </ul>
  * </p>
- * 
- * @author D. Westwater, University of Aberdeen ~ for the TextFormatter; 
- * 		   <br />J Christie, University of Aberdeen ~ for HTMLFormatter 
+ *
+ * @author D. Westwater, University of Aberdeen ~ for the TextFormatter;
+ * 		<br />J Christie, University of Aberdeen ~ for HTMLFormatter
  * @version 4.0 original TextFormatter Version; <br />version 0.0 HTMLFormatter
- * 
  */
 
 //public class TextFormatter extends NLGModule {
@@ -80,7 +70,7 @@ public class HTMLFormatter extends NLGModule {
 
 				switch((DocumentCategory) category){
 
-				case DOCUMENT :
+				case DOCUMENT:
 					String title = element instanceof DocumentElement ? ((DocumentElement) element).getTitle() : null;
 					realisation.append("<h1>" + title + "</h1>");
 
@@ -93,7 +83,7 @@ public class HTMLFormatter extends NLGModule {
 
 					break;
 
-				case SECTION :
+				case SECTION:
 					title = element instanceof DocumentElement ? ((DocumentElement) element).getTitle() : null;
 
 					if(title != null) {
@@ -109,7 +99,7 @@ public class HTMLFormatter extends NLGModule {
 					}
 					break;
 
-				case LIST :
+				case LIST:
 					realisation.append("<ul>");
 					for(NLGElement eachComponent : components) {
 						realisedComponent = realise(eachComponent);
@@ -120,7 +110,7 @@ public class HTMLFormatter extends NLGModule {
 					realisation.append("</ul>");
 					break;
 
-				case ENUMERATED_LIST :
+				case ENUMERATED_LIST:
 					realisation.append("<ol>");
 					for(NLGElement eachComponent : components) {
 						realisedComponent = realise(eachComponent);
@@ -131,14 +121,14 @@ public class HTMLFormatter extends NLGModule {
 					realisation.append("</ol>");
 					break;
 
-				case PARAGRAPH :
+				case PARAGRAPH:
 					if(null != components && 0 < components.size()) {
 						realisedComponent = realise(components.get(0));
 						if(realisedComponent != null) {
 							realisation.append("<p>");
 							realisation.append(realisedComponent.getRealisation());
 						}
-						for(int i = 1; i < components.size(); i++ ) {
+						for(int i = 1; i < components.size(); i++) {
 							if(realisedComponent != null) {
 								realisation.append(" ");
 							}
@@ -152,11 +142,11 @@ public class HTMLFormatter extends NLGModule {
 
 					break;
 
-				case SENTENCE :
+				case SENTENCE:
 					realisation.append(element.getRealisation());
 					break;
 
-				case LIST_ITEM :
+				case LIST_ITEM:
 					realisation.append("<li>");
 
 					for(NLGElement eachComponent : components) {

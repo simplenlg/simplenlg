@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,28 +14,14 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.syntax.english;
 
 import java.util.List;
 
-import simplenlg.features.ClauseStatus;
-import simplenlg.features.DiscourseFunction;
-import simplenlg.features.Feature;
-import simplenlg.features.Form;
-import simplenlg.features.InternalFeature;
-import simplenlg.features.InterrogativeType;
-import simplenlg.features.NumberAgreement;
-import simplenlg.features.Person;
-import simplenlg.features.Tense;
-import simplenlg.framework.CoordinatedPhraseElement;
-import simplenlg.framework.LexicalCategory;
-import simplenlg.framework.ListElement;
-import simplenlg.framework.NLGElement;
-import simplenlg.framework.NLGFactory;
-import simplenlg.framework.PhraseCategory;
-import simplenlg.framework.PhraseElement;
+import simplenlg.features.*;
+import simplenlg.framework.*;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.phrasespec.VPPhraseSpec;
 
@@ -44,21 +30,18 @@ import simplenlg.phrasespec.VPPhraseSpec;
  * This is a helper class containing the main methods for realising the syntax
  * of clauses. It is used exclusively by the <code>SyntaxProcessor</code>.
  * </p>
- * 
+ *
  * @author D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 abstract class ClauseHelper {
 
 	/**
 	 * The main method for controlling the syntax realisation of clauses.
-	 * 
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that called this
-	 *            method.
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representation of the clause.
+	 *
+	 * @param parent the parent <code>SyntaxProcessor</code> that called this
+	 * 		method.
+	 * @param phrase the <code>PhraseElement</code> representation of the clause.
 	 * @return the <code>NLGElement</code> representing the realised clause.
 	 */
 	static NLGElement realise(SyntaxProcessor parent, PhraseElement phrase) {
@@ -83,8 +66,7 @@ abstract class ClauseHelper {
 
 			if(phrase.hasFeature(Feature.INTERROGATIVE_TYPE)) {
 				Object inter = phrase.getFeature(Feature.INTERROGATIVE_TYPE);
-				interrogObj = (InterrogativeType.WHAT_OBJECT.equals(inter)
-				               || InterrogativeType.WHO_OBJECT.equals(inter)
+				interrogObj = (InterrogativeType.WHAT_OBJECT.equals(inter) || InterrogativeType.WHO_OBJECT.equals(inter)
 				               || InterrogativeType.HOW_PREDICATE.equals(inter) || InterrogativeType.HOW.equals(inter)
 				               || InterrogativeType.WHY.equals(inter) || InterrogativeType.WHERE.equals(inter));
 				splitVerb = realiseInterrogative(phrase, parent, realisedElement, phraseFactory, verbElement);
@@ -118,16 +100,12 @@ abstract class ClauseHelper {
 	/**
 	 * Adds <em>to</em> to the end of interrogatives concerning indirect
 	 * objects. For example, <em>who did John give the flower <b>to</b></em>.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
-	 * @param phraseFactory
-	 *            the phrase factory to be used.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
+	 * @param phraseFactory the phrase factory to be used.
 	 */
 	private static void addEndingTo(PhraseElement phrase,
 	                                SyntaxProcessor parent,
@@ -143,14 +121,11 @@ abstract class ClauseHelper {
 	/**
 	 * Adds the front modifiers to the end of the clause when dealing with
 	 * interrogatives.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
 	 */
 	private static void addInterrogativeFrontModifiers(PhraseElement phrase,
 	                                                   SyntaxProcessor parent,
@@ -170,16 +145,12 @@ abstract class ClauseHelper {
 
 	/**
 	 * Realises the subjects of a passive clause.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
-	 * @param phraseFactory
-	 *            the phrase factory to be used.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
+	 * @param phraseFactory the phrase factory to be used.
 	 */
 	private static void addPassiveSubjects(PhraseElement phrase,
 	                                       SyntaxProcessor parent,
@@ -210,22 +181,16 @@ abstract class ClauseHelper {
 
 	/**
 	 * Realises the verb part of the clause.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
-	 * @param splitVerb
-	 *            an <code>NLGElement</code> representing the subjects that
-	 *            should split the verb
-	 * @param verbElement
-	 *            the <code>NLGElement</code> representing the verb phrase for
-	 *            this clause.
-	 * @param whObj
-	 *            whether the VP is part of an object WH-interrogative
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
+	 * @param splitVerb an <code>NLGElement</code> representing the subjects that
+	 * 		should split the verb
+	 * @param verbElement the <code>NLGElement</code> representing the verb phrase for
+	 * 		this clause.
+	 * @param whObj whether the VP is part of an object WH-interrogative
 	 */
 	private static void realiseVerb(PhraseElement phrase,
 	                                SyntaxProcessor parent,
@@ -251,7 +216,7 @@ abstract class ClauseHelper {
 					realisedElement.addComponent(currentElement);
 					realisedElement.addComponent(splitVerb);
 
-					for(int eachChild = 1; eachChild < children.size(); eachChild++ ) {
+					for(int eachChild = 1; eachChild < children.size(); eachChild++) {
 						currentElement = children.get(eachChild);
 						currentElement.setFeature(InternalFeature.DISCOURSE_FUNCTION, DiscourseFunction.VERB_PHRASE);
 						realisedElement.addComponent(currentElement);
@@ -273,12 +238,10 @@ abstract class ClauseHelper {
 
 	/**
 	 * Ensures that the verb inherits the features from the clause.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param verbElement
-	 *            the <code>NLGElement</code> representing the verb phrase for
-	 *            this clause.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param verbElement the <code>NLGElement</code> representing the verb phrase for
+	 * 		this clause.
 	 */
 	private static void setVerbFeatures(PhraseElement phrase, NLGElement verbElement) {
 		// this routine copies features from the clause to the VP.
@@ -313,17 +276,13 @@ abstract class ClauseHelper {
 	/**
 	 * Realises the complements of passive clauses; also sets number, person for
 	 * passive
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
-	 * @param verbElement
-	 *            the <code>NLGElement</code> representing the verb phrase for
-	 *            this clause.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
+	 * @param verbElement the <code>NLGElement</code> representing the verb phrase for
+	 * 		this clause.
 	 */
 	private static NLGElement addPassiveComplementsNumberPerson(PhraseElement phrase,
 	                                                            SyntaxProcessor parent,
@@ -349,7 +308,7 @@ abstract class ClauseHelper {
 				// subject.isA(PhraseCategory.NOUN_PHRASE) &&
 				if(DiscourseFunction.OBJECT.equals(subject.getFeature(InternalFeature.DISCOURSE_FUNCTION))) {
 					subject.setFeature(Feature.PASSIVE, true);
-					numComps++ ;
+					numComps++;
 					currentElement = parent.realise(subject);
 
 					if(currentElement != null) {
@@ -376,8 +335,8 @@ abstract class ClauseHelper {
 
 					if(Person.FIRST.equals(subject.getFeature(Feature.PERSON))) {
 						passivePerson = Person.FIRST;
-					} else if(Person.SECOND.equals(subject.getFeature(Feature.PERSON))
-					          && !Person.FIRST.equals(passivePerson)) {
+					} else if(Person.SECOND.equals(subject.getFeature(Feature.PERSON)) && !Person.FIRST.equals(
+							passivePerson)) {
 						passivePerson = Person.SECOND;
 					} else if(passivePerson == null) {
 						passivePerson = Person.THIRD;
@@ -413,17 +372,13 @@ abstract class ClauseHelper {
 	/**
 	 * Adds the subjects to the beginning of the clause unless the clause is
 	 * infinitive, imperative or passive, or the subjects split the verb.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
-	 * @param splitVerb
-	 *            an <code>NLGElement</code> representing the subjects that
-	 *            should split the verb
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
+	 * @param splitVerb an <code>NLGElement</code> representing the subjects that
+	 * 		should split the verb
 	 */
 	private static void addSubjectsToFront(PhraseElement phrase,
 	                                       SyntaxProcessor parent,
@@ -438,14 +393,10 @@ abstract class ClauseHelper {
 
 	/**
 	 * Realises the subjects for the clause.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
 	 */
 	private static ListElement realiseSubjects(PhraseElement phrase, SyntaxProcessor parent) {
 
@@ -477,21 +428,16 @@ abstract class ClauseHelper {
 	 * question as
 	 * <em><b>should</b> the man <b>give</b> the woman the flower</em> with the
 	 * subject <em>the man</em> splitting the verb group.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
-	 * @param phraseFactory
-	 *            the phrase factory to be used.
-	 * @param verbElement
-	 *            the <code>NLGElement</code> representing the verb phrase for
-	 *            this clause.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
+	 * @param phraseFactory the phrase factory to be used.
+	 * @param verbElement the <code>NLGElement</code> representing the verb phrase for
+	 * 		this clause.
 	 * @return an <code>NLGElement</code> representing a subject that should
-	 *         split the verb
+	 * 		split the verb
 	 */
 	private static NLGElement realiseInterrogative(PhraseElement phrase,
 	                                               SyntaxProcessor parent,
@@ -508,33 +454,34 @@ abstract class ClauseHelper {
 
 		if(type instanceof InterrogativeType) {
 			switch((InterrogativeType) type){
-			case YES_NO :
+			case YES_NO:
 				splitVerb = realiseYesNo(phrase, parent, verbElement, phraseFactory, realisedElement);
 				break;
 
-			case WHO_SUBJECT :
-			case WHAT_SUBJECT :
+			case WHO_SUBJECT:
+			case WHAT_SUBJECT:
 				realiseInterrogativeKeyWord(((InterrogativeType) type).getString(),
 				                            LexicalCategory.PRONOUN,
 				                            parent,
-				                            realisedElement, //$NON-NLS-1$
+				                            realisedElement,
+				                            //$NON-NLS-1$
 				                            phraseFactory);
 				phrase.removeFeature(InternalFeature.SUBJECTS);
 				break;
 
-			case HOW_MANY :
+			case HOW_MANY:
 				realiseInterrogativeKeyWord("how", LexicalCategory.PRONOUN, parent, realisedElement, //$NON-NLS-1$
 				                            phraseFactory);
 				realiseInterrogativeKeyWord("many", LexicalCategory.ADVERB, parent, realisedElement, //$NON-NLS-1$
 				                            phraseFactory);
 				break;
 
-			case HOW :
-			case WHY :
-			case WHERE :
-			case WHO_OBJECT :
-			case WHO_INDIRECT_OBJECT :
-			case WHAT_OBJECT :
+			case HOW:
+			case WHY:
+			case WHERE:
+			case WHO_OBJECT:
+			case WHO_INDIRECT_OBJECT:
+			case WHAT_OBJECT:
 				splitVerb = realiseObjectWHInterrogative(((InterrogativeType) type).getString(),
 				                                         phrase,
 				                                         parent,
@@ -542,11 +489,11 @@ abstract class ClauseHelper {
 				                                         phraseFactory);
 				break;
 
-			case HOW_PREDICATE :
+			case HOW_PREDICATE:
 				splitVerb = realiseObjectWHInterrogative("how", phrase, parent, realisedElement, phraseFactory);
 				break;
 
-			default :
+			default:
 				break;
 			}
 		}
@@ -566,22 +513,15 @@ abstract class ClauseHelper {
 
 	/**
 	 * Controls the realisation of <em>wh</em> object questions.
-	 * 
-	 * @param keyword
-	 *            the wh word
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
-	 * @param phraseFactory
-	 *            the phrase factory to be used.
-	 * @param subjects
-	 *            the <code>List</code> of subjects in the clause.
+	 *
+	 * @param keyword the wh word
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
+	 * @param phraseFactory the phrase factory to be used.
 	 * @return an <code>NLGElement</code> representing a subject that should
-	 *         split the verb
+	 * 		split the verb
 	 */
 	private static NLGElement realiseObjectWHInterrogative(String keyword,
 	                                                       PhraseElement phrase,
@@ -606,16 +546,12 @@ abstract class ClauseHelper {
 
 	/**
 	 * Adds a <em>do</em> verb to the realisation of this clause.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
-	 * @param phraseFactory
-	 *            the phrase factory to be used.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
+	 * @param phraseFactory the phrase factory to be used.
 	 */
 	private static void addDoAuxiliary(PhraseElement phrase,
 	                                   SyntaxProcessor parent,
@@ -632,19 +568,14 @@ abstract class ClauseHelper {
 	/**
 	 * Realises the key word of the interrogative. For example, <em>who</em>,
 	 * <em>what</em>
-	 * 
-	 * @param keyWord
-	 *            the key word of the interrogative.
-	 * @param cat
-	 *            the category (usually pronoun, but not in the case of
-	 *            "how many")
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
-	 * @param phraseFactory
-	 *            the phrase factory to be used.
+	 *
+	 * @param keyWord the key word of the interrogative.
+	 * @param cat the category (usually pronoun, but not in the case of
+	 * 		"how many")
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
+	 * @param phraseFactory the phrase factory to be used.
 	 */
 	private static void realiseInterrogativeKeyWord(String keyWord,
 	                                                LexicalCategory cat,
@@ -672,24 +603,16 @@ abstract class ClauseHelper {
 	 * question as
 	 * <em><b>should</b> the man <b>give</b> the woman the flower</em> with the
 	 * subject <em>the man</em> splitting the verb group.
-	 * 
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
-	 * @param phraseFactory
-	 *            the phrase factory to be used.
-	 * @param verbElement
-	 *            the <code>NLGElement</code> representing the verb phrase for
-	 *            this clause.
-	 * @param subjects
-	 *            the <code>List</code> of subjects in the clause.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
+	 * @param phraseFactory the phrase factory to be used.
+	 * @param verbElement the <code>NLGElement</code> representing the verb phrase for
+	 * 		this clause.
 	 * @return an <code>NLGElement</code> representing a subject that should
-	 *         split the verb
+	 * 		split the verb
 	 */
 	private static NLGElement realiseYesNo(PhraseElement phrase,
 	                                       SyntaxProcessor parent,
@@ -713,14 +636,11 @@ abstract class ClauseHelper {
 
 	/**
 	 * Realises the cue phrase for the clause if it exists.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
 	 */
 	private static void addCuePhrase(PhraseElement phrase, SyntaxProcessor parent, ListElement realisedElement) {
 
@@ -736,14 +656,11 @@ abstract class ClauseHelper {
 	 * Checks to see if this clause is a subordinate clause. If it is then the
 	 * complementiser is added as a component to the realised element
 	 * <b>unless</b> the complementiser has been suppressed.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param parent
-	 *            the parent <code>SyntaxProcessor</code> that will do the
-	 *            realisation of the complementiser.
-	 * @param realisedElement
-	 *            the current realisation of the clause.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param parent the parent <code>SyntaxProcessor</code> that will do the
+	 * 		realisation of the complementiser.
+	 * @param realisedElement the current realisation of the clause.
 	 */
 	private static void addComplementiser(PhraseElement phrase, SyntaxProcessor parent, ListElement realisedElement) {
 
@@ -763,12 +680,10 @@ abstract class ClauseHelper {
 	/**
 	 * Copies the front modifiers of the clause to the list of post-modifiers of
 	 * the verb only if the phrase has infinitive form.
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param verbElement
-	 *            the <code>NLGElement</code> representing the verb phrase for
-	 *            this clause.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param verbElement the <code>NLGElement</code> representing the verb phrase for
+	 * 		this clause.
 	 */
 	private static void copyFrontModifiers(PhraseElement phrase, NLGElement verbElement) {
 		List<NLGElement> frontModifiers = phrase.getFeatureAsElementList(InternalFeature.FRONT_MODIFIERS);
@@ -819,9 +734,9 @@ abstract class ClauseHelper {
 	/**
 	 * Checks the discourse function of the clause and alters the form of the
 	 * clause as necessary. The following algorithm is used: <br>
-	 * 
+	 *
 	 * <pre>
-	 * If the clause represents a direct or indirect object then 
+	 * If the clause represents a direct or indirect object then
 	 *      If form is currently Imperative then
 	 *           Set form to Infinitive
 	 *           Suppress the complementiser
@@ -831,16 +746,16 @@ abstract class ClauseHelper {
 	 *      Set the form to be Gerund
 	 *      Suppress the complementiser
 	 * </pre>
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
 	 */
 	private static void checkDiscourseFunction(PhraseElement phrase) {
 		List<NLGElement> subjects = phrase.getFeatureAsElementList(InternalFeature.SUBJECTS);
 		Object clauseForm = phrase.getFeature(Feature.FORM);
 		Object discourseValue = phrase.getFeature(InternalFeature.DISCOURSE_FUNCTION);
 
-		if(DiscourseFunction.OBJECT.equals(discourseValue) || DiscourseFunction.INDIRECT_OBJECT.equals(discourseValue)) {
+		if(DiscourseFunction.OBJECT.equals(discourseValue)
+		   || DiscourseFunction.INDIRECT_OBJECT.equals(discourseValue)) {
 
 			if(Form.IMPERATIVE.equals(clauseForm)) {
 				phrase.setFeature(Feature.SUPRESSED_COMPLEMENTISER, true);
@@ -858,12 +773,10 @@ abstract class ClauseHelper {
 	 * Checks the subjects of the phrase to determine if there is more than one
 	 * subject. This ensures that the verb phrase is correctly set. Also set
 	 * person correctly
-	 * 
-	 * @param phrase
-	 *            the <code>PhraseElement</code> representing this clause.
-	 * @param verbElement
-	 *            the <code>NLGElement</code> representing the verb phrase for
-	 *            this clause.
+	 *
+	 * @param phrase the <code>PhraseElement</code> representing this clause.
+	 * @param verbElement the <code>NLGElement</code> representing the verb phrase for
+	 * 		this clause.
 	 */
 	private static void checkSubjectNumberPerson(PhraseElement phrase, NLGElement verbElement) {
 		NLGElement currentElement = null;
@@ -873,10 +786,10 @@ abstract class ClauseHelper {
 
 		if(subjects != null) {
 			switch(subjects.size()){
-			case 0 :
+			case 0:
 				break;
 
-			case 1 :
+			case 1:
 				currentElement = subjects.get(0);
 				// coordinated NP with "and" are plural (not coordinated NP with
 				// "or")
@@ -885,17 +798,17 @@ abstract class ClauseHelper {
 					pluralSubjects = true;
 				else if((currentElement.getFeature(Feature.NUMBER) == NumberAgreement.PLURAL)
 				        && !(currentElement instanceof SPhraseSpec)) // ER mod-
-				                                                     // clauses
-				                                                     // are
-				                                                     // singular
-				                                                     // as
-				                                                     // NPs,
-				                                                     // even
-				                                                     // if
-				                                                     // they
-				                                                     // are
-				                                                     // plural
-				                                                     // internally
+					// clauses
+					// are
+					// singular
+					// as
+					// NPs,
+					// even
+					// if
+					// they
+					// are
+					// plural
+					// internally
 					pluralSubjects = true;
 				else if(currentElement.isA(PhraseCategory.NOUN_PHRASE)) {
 					NLGElement currentHead = currentElement.getFeatureAsElement(InternalFeature.HEAD);
@@ -919,14 +832,14 @@ abstract class ClauseHelper {
 				}
 				break;
 
-			default :
+			default:
 				pluralSubjects = true;
 				break;
 			}
 		}
 		if(verbElement != null) {
-			verbElement.setFeature(Feature.NUMBER, pluralSubjects ? NumberAgreement.PLURAL
-			        : phrase.getFeature(Feature.NUMBER));
+			verbElement.setFeature(Feature.NUMBER,
+			                       pluralSubjects ? NumberAgreement.PLURAL : phrase.getFeature(Feature.NUMBER));
 			if(person != null)
 				verbElement.setFeature(Feature.PERSON, person);
 		}

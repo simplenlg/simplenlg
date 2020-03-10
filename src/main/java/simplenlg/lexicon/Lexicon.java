@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,7 +14,7 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
 package simplenlg.lexicon;
 
@@ -33,7 +33,7 @@ import simplenlg.framework.WordElement;
  * {@link simplenlg.lexicon.XMLLexicon}). Simplenlg V4 comes with a default
  * (XML) lexicon, which is retrieved by the <code>getDefaultLexicon</code>
  * method.
- * 
+ * <p>
  * There are several ways of retrieving words. If in doubt, use
  * <code>lookupWord</code>. More control is available from the
  * <code>getXXXX</code> methods, which allow words to retrieved in several ways
@@ -52,7 +52,7 @@ import simplenlg.framework.WordElement;
  * <LI>variant and {@link simplenlg.framework.LexicalCategory}; for example
  * "universities" and <code>Noun</code>
  * </OL>
- * 
+ * <p>
  * For each type of lookup, there are three methods
  * <UL>
  * <LI> <code>getWords</code>: get all matching
@@ -70,7 +70,7 @@ import simplenlg.framework.WordElement;
  * <LI> <code>hasWord</code>: returns <code>true</code> if the Lexicon contains
  * at least one matching <code>WordElement</code>
  * </UL>
- * 
+ *
  * @author Albert Gatt (simplenlg v3 lexicon)
  * @author Ehud Reiter (simplenlg v4 lexicon)
  */
@@ -83,7 +83,7 @@ public abstract class Lexicon {
 
 	/**
 	 * returns the default built-in lexicon
-	 * 
+	 *
 	 * @return default lexicon
 	 */
 	public static Lexicon getDefaultLexicon() {
@@ -93,11 +93,9 @@ public abstract class Lexicon {
 	/**
 	 * create a default WordElement. May be overridden by specific types of
 	 * lexicon
-	 * 
-	 * @param baseForm
-	 *            - base form of word
-	 * @param category
-	 *            - category of word
+	 *
+	 * @param baseForm - base form of word
+	 * @param category - category of word
 	 * @return WordElement entry for specified info
 	 */
 	protected WordElement createWord(String baseForm, LexicalCategory category) {
@@ -109,9 +107,8 @@ public abstract class Lexicon {
 	/**
 	 * create a default WordElement. May be overridden by specific types of
 	 * lexicon
-	 * 
-	 * @param baseForm
-	 *            - base form of word
+	 *
+	 * @param baseForm - base form of word
 	 * @return WordElement entry for specified info
 	 */
 	protected WordElement createWord(String baseForm) {
@@ -131,17 +128,15 @@ public abstract class Lexicon {
 	/**
 	 * General word lookup method, tries base form, variant, ID (in this order)
 	 * Creates new word if can't find existing word
-	 * 
-	 * @param baseForm
-	 * @param category
+	 *
 	 * @return word
 	 */
 	public WordElement lookupWord(String baseForm, LexicalCategory category) {
-		if (hasWord(baseForm, category))
+		if(hasWord(baseForm, category))
 			return getWord(baseForm, category);
-		else if (hasWordFromVariant(baseForm, category))
+		else if(hasWordFromVariant(baseForm, category))
 			return getWordFromVariant(baseForm, category);
-		else if (hasWordByID(baseForm))
+		else if(hasWordByID(baseForm))
 			return getWordByID(baseForm);
 		else
 			return createWord(baseForm, category);
@@ -150,8 +145,7 @@ public abstract class Lexicon {
 	/**
 	 * General word lookup method, tries base form, variant, ID (in this order)
 	 * Creates new word if can't find existing word
-	 * 
-	 * @param baseForm
+	 *
 	 * @return word
 	 */
 	public WordElement lookupWord(String baseForm) {
@@ -167,27 +161,22 @@ public abstract class Lexicon {
 
 	/**
 	 * returns all Words which have the specified base form and category
-	 * 
-	 * @param baseForm
-	 *            - base form of word, eg "be" or "dog" (not "is" or "dogs")
-	 * @param category
-	 *            - syntactic category of word (ANY for unknown)
+	 *
+	 * @param baseForm - base form of word, eg "be" or "dog" (not "is" or "dogs")
+	 * @param category - syntactic category of word (ANY for unknown)
 	 * @return collection of all matching Words (may be empty)
 	 */
-	abstract public List<WordElement> getWords(String baseForm,
-			LexicalCategory category);
+	abstract public List<WordElement> getWords(String baseForm, LexicalCategory category);
 
 	/**
 	 * get a WordElement which has the specified base form and category
-	 * 
-	 * @param baseForm
-	 *            - base form of word, eg "be" or "dog" (not "is" or "dogs")
-	 * @param category
-	 *            - syntactic category of word (ANY for unknown)
+	 *
+	 * @param baseForm - base form of word, eg "be" or "dog" (not "is" or "dogs")
+	 * @param category - syntactic category of word (ANY for unknown)
 	 * @return if Lexicon contains such a WordElement, it is returned (the first
-	 *         match is returned if there are several matches). If the Lexicon
-	 *         does not contain such a WordElement, a new WordElement is created
-	 *         and returned
+	 * 		match is returned if there are several matches). If the Lexicon
+	 * 		does not contain such a WordElement, a new WordElement is created
+	 * 		and returned
 	 */
 	public WordElement getWord(String baseForm, LexicalCategory category) {// convenience
 		// method
@@ -196,36 +185,36 @@ public abstract class Lexicon {
 		// other
 		// methods
 		List<WordElement> wordElements = getWords(baseForm, category);
-		if (wordElements.isEmpty())
+		if(wordElements.isEmpty())
 			return createWord(baseForm, category); // return default WordElement
-		// of this baseForm,
-		// category
+			// of this baseForm,
+			// category
 		else
 			return selectMatchingWord(wordElements, baseForm);
 	}
 
-	/** choose a single WordElement from a list of WordElements.  Prefer one
+	/**
+	 * choose a single WordElement from a list of WordElements.  Prefer one
 	 * which exactly matches the baseForm
-	 * @param wordElements
-	 *           - list of WordElements retrieved from lexicon
-	 * @param baseForm
-	             - base form of word, eg "be" or "dog" (not "is" or "dogs")
+	 *
+	 * @param wordElements - list of WordElements retrieved from lexicon
+	 * @param baseForm - base form of word, eg "be" or "dog" (not "is" or "dogs")
 	 * @return single WordElement (from list)
 	 */
 	private WordElement selectMatchingWord(List<WordElement> wordElements, String baseForm) {
 		// EHUD REITER  - this method added because some DBs are case-insensitive,
 		// so a query on "man" returns both "man" and "MAN".  In such cases, the
 		// exact match (eg, "man") should be returned
-		
+
 		// below check is redundant, since caller should check this
-		if (wordElements == null || wordElements.isEmpty())
+		if(wordElements == null || wordElements.isEmpty())
 			return createWord(baseForm);
-		
+
 		// look for exact match in base form
-		for (WordElement wordElement: wordElements)
-			if (wordElement.getBaseForm().equals(baseForm))
+		for(WordElement wordElement : wordElements)
+			if(wordElement.getBaseForm().equals(baseForm))
 				return wordElement;
-		
+
 		// Roman Kutlak: I don't think it is a good idea to return a word whose
 		// case does not match because if a word appears in the lexicon
 		// as an acronym only, it will be replaced as such. For example,
@@ -234,19 +223,17 @@ public abstract class Lexicon {
 		if(wordElements.get(0).getBaseForm().equalsIgnoreCase(baseForm)) {
 			return createWord(baseForm, LexicalCategory.ANY);
 		}
-		
-    	return wordElements.get(0);
-		
+
+		return wordElements.get(0);
+
 	}
 
 	/**
 	 * return <code>true</code> if the lexicon contains a WordElement which has
 	 * the specified base form and category
-	 * 
-	 * @param baseForm
-	 *            - base form of word, eg "be" or "dog" (not "is" or "dogs")
-	 * @param category
-	 *            - syntactic category of word (ANY for unknown)
+	 *
+	 * @param baseForm - base form of word, eg "be" or "dog" (not "is" or "dogs")
+	 * @param category - syntactic category of word (ANY for unknown)
 	 * @return <code>true</code> if Lexicon contains such a WordElement
 	 */
 	public boolean hasWord(String baseForm, LexicalCategory category) {// convenience
@@ -261,9 +248,8 @@ public abstract class Lexicon {
 
 	/**
 	 * returns all Words which have the specified base form
-	 * 
-	 * @param baseForm
-	 *            - base form of word, eg "be" or "dog" (not "is" or "dogs")
+	 *
+	 * @param baseForm - base form of word, eg "be" or "dog" (not "is" or "dogs")
 	 * @return collection of all matching Words (may be empty)
 	 */
 	public List<WordElement> getWords(String baseForm) { // convenience method
@@ -274,21 +260,20 @@ public abstract class Lexicon {
 
 	/**
 	 * get a WordElement which has the specified base form (of any category)
-	 * 
-	 * @param baseForm
-	 *            - base form of word, eg "be" or "dog" (not "is" or "dogs")
+	 *
+	 * @param baseForm - base form of word, eg "be" or "dog" (not "is" or "dogs")
 	 * @return if Lexicon contains such a WordElement, it is returned (the first
-	 *         match is returned if there are several matches). If the Lexicon
-	 *         does not contain such a WordElement, a new WordElement is created
-	 *         and returned
+	 * 		match is returned if there are several matches). If the Lexicon
+	 * 		does not contain such a WordElement, a new WordElement is created
+	 * 		and returned
 	 */
 	public WordElement getWord(String baseForm) { // convenience method derived
 		// from other methods
 		List<WordElement> wordElements = getWords(baseForm);
 
-		if (wordElements.isEmpty())
+		if(wordElements.isEmpty())
 			return createWord(baseForm); // return default WordElement of this
-		// baseForm
+			// baseForm
 		else
 			return selectMatchingWord(wordElements, baseForm);
 	}
@@ -296,9 +281,8 @@ public abstract class Lexicon {
 	/**
 	 * return <code>true</code> if the lexicon contains a WordElement which has
 	 * the specified base form (in any category)
-	 * 
-	 * @param baseForm
-	 *            - base form of word, eg "be" or "dog" (not "is" or "dogs")
+	 *
+	 * @param baseForm - base form of word, eg "be" or "dog" (not "is" or "dogs")
 	 * @return <code>true</code> if Lexicon contains such a WordElement
 	 */
 	public boolean hasWord(String baseForm) {// convenience method derived from
@@ -319,27 +303,25 @@ public abstract class Lexicon {
 	 * lexicon-dependent, and should be unique. Therefore the list should
 	 * contain either zero elements (if no such word exists) or one element (if
 	 * the word is found)
-	 * 
-	 * @param id
-	 *            - internal lexicon ID for a word
+	 *
+	 * @param id - internal lexicon ID for a word
 	 * @return either empty list (if no word with this ID exists) or list
-	 *         containing the matching word
+	 * 		containing the matching word
 	 */
 	abstract public List<WordElement> getWordsByID(String id);
 
 	/**
 	 * get a WordElement with the specified ID
-	 * 
-	 * @param id
-	 *            internal lexicon ID for a word
+	 *
+	 * @param id internal lexicon ID for a word
 	 * @return WordElement with this ID if found; otherwise a new WordElement is
-	 *         created with the ID as the base form
+	 * 		created with the ID as the base form
 	 */
 	public WordElement getWordByID(String id) {
 		List<WordElement> wordElements = getWordsByID(id);
-		if (wordElements.isEmpty())
+		if(wordElements.isEmpty())
 			return createWord(id); // return WordElement based on ID; may help
-		// in debugging...
+			// in debugging...
 		else
 			return wordElements.get(0); // else return first match
 	}
@@ -347,9 +329,8 @@ public abstract class Lexicon {
 	/**
 	 * return <code>true</code> if the lexicon contains a WordElement which the
 	 * specified ID
-	 * 
-	 * @param id
-	 *            - internal lexicon ID for a word
+	 *
+	 * @param id - internal lexicon ID for a word
 	 * @return <code>true</code> if Lexicon contains such a WordElement
 	 */
 	public boolean hasWordByID(String id) {// convenience method derived from
@@ -374,36 +355,30 @@ public abstract class Lexicon {
 	 * matches the specified variant, and are in the specified category. <br>
 	 * <I>Note:</I> the returned word list may not be complete, it depends on
 	 * how it is implemented by the underlying lexicon
-	 * 
-	 * @param variant
-	 *            - base form, inflected form, or spelling variant of word
-	 * @param category
-	 *            - syntactic category of word (ANY for unknown)
+	 *
+	 * @param variant - base form, inflected form, or spelling variant of word
+	 * @param category - syntactic category of word (ANY for unknown)
 	 * @return list of all matching Words (empty list if no matching WordElement
-	 *         found)
+	 * 		found)
 	 */
-	abstract public List<WordElement> getWordsFromVariant(String variant,
-			LexicalCategory category);
+	abstract public List<WordElement> getWordsFromVariant(String variant, LexicalCategory category);
 
 	/**
 	 * returns a WordElement which has the specified inflected form and/or
 	 * spelling variant that matches the specified variant, of the specified
 	 * category
-	 * 
-	 * @param variant
-	 *            - base form, inflected form, or spelling variant of word
-	 * @param category
-	 *            - syntactic category of word (ANY for unknown)
+	 *
+	 * @param variant - base form, inflected form, or spelling variant of word
+	 * @param category - syntactic category of word (ANY for unknown)
 	 * @return a matching WordElement (if found), otherwise a new word is
-	 *         created using thie variant as the base form
+	 * 		created using thie variant as the base form
 	 */
-	public WordElement getWordFromVariant(String variant,
-			LexicalCategory category) {
+	public WordElement getWordFromVariant(String variant, LexicalCategory category) {
 		List<WordElement> wordElements = getWordsFromVariant(variant, category);
-		if (wordElements.isEmpty())
+		if(wordElements.isEmpty())
 			return createWord(variant, category); // return default WordElement
-		// using variant as base
-		// form
+			// using variant as base
+			// form
 		else
 			return selectMatchingWord(wordElements, variant);
 
@@ -412,11 +387,9 @@ public abstract class Lexicon {
 	/**
 	 * return <code>true</code> if the lexicon contains a WordElement which
 	 * matches the specified variant form and category
-	 * 
-	 * @param variant
-	 *            - base form, inflected form, or spelling variant of word
-	 * @param category
-	 *            - syntactic category of word (ANY for unknown)
+	 *
+	 * @param variant - base form, inflected form, or spelling variant of word
+	 * @param category - syntactic category of word (ANY for unknown)
 	 * @return <code>true</code> if Lexicon contains such a WordElement
 	 */
 	public boolean hasWordFromVariant(String variant, LexicalCategory category) {// convenience
@@ -434,11 +407,10 @@ public abstract class Lexicon {
 	 * matches the specified variant, of any category. <br>
 	 * <I>Note:</I> the returned word list may not be complete, it depends on
 	 * how it is implemented by the underlying lexicon
-	 * 
-	 * @param variant
-	 *            - base form, inflected form, or spelling variant of word
+	 *
+	 * @param variant - base form, inflected form, or spelling variant of word
 	 * @return list of all matching Words (empty list if no matching WordElement
-	 *         found)
+	 * 		found)
 	 */
 	public List<WordElement> getWordsFromVariant(String variant) {
 		return getWordsFromVariant(variant, LexicalCategory.ANY);
@@ -447,17 +419,16 @@ public abstract class Lexicon {
 	/**
 	 * returns a WordElement which has the specified inflected form and/or
 	 * spelling variant that matches the specified variant, of any category.
-	 * 
-	 * @param variant
-	 *            - base form, inflected form, or spelling variant of word
+	 *
+	 * @param variant - base form, inflected form, or spelling variant of word
 	 * @return a matching WordElement (if found), otherwise a new word is
-	 *         created using thie variant as the base form
+	 * 		created using thie variant as the base form
 	 */
 	public WordElement getWordFromVariant(String variant) {
 		List<WordElement> wordElements = getWordsFromVariant(variant);
-		if (wordElements.isEmpty())
+		if(wordElements.isEmpty())
 			return createWord(variant); // return default WordElement using
-		// variant as base form
+			// variant as base form
 		else
 			return wordElements.get(0); // else return first match
 	}
@@ -465,9 +436,8 @@ public abstract class Lexicon {
 	/**
 	 * return <code>true</code> if the lexicon contains a WordElement which
 	 * matches the specified variant form (in any category)
-	 * 
-	 * @param variant
-	 *            - base form, inflected form, or spelling variant of word
+	 *
+	 * @param variant - base form, inflected form, or spelling variant of word
 	 * @return <code>true</code> if Lexicon contains such a WordElement
 	 */
 	public boolean hasWordFromVariant(String variant) {// convenience method

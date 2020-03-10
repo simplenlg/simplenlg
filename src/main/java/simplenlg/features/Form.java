@@ -1,8 +1,8 @@
 /*
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.1 (the "License"); you may not use this file except in
+ * Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
+ * https://www.mozilla.org/en-US/MPL/
  *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
@@ -14,9 +14,8 @@
  * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
  * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
  *
- * Contributor(s): Ehud Reiter, Albert Gatt, Dave Wewstwater, Roman Kutlak, Margaret Mitchell.
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
  */
-
 package simplenlg.features;
 
 /**
@@ -25,17 +24,17 @@ package simplenlg.features;
  * phrase can take. The form is recorded under the {@code Feature.FORM} feature
  * and applies to verbs and verb phrases.
  * </p>
+ *
  * @author A. Gatt and D. Westwater, University of Aberdeen.
  * @version 4.0
- * 
  */
 public enum Form {
-	
+
 	/**
 	 * The bare infinitive is the base form of the verb.
 	 */
 	BARE_INFINITIVE,
-	
+
 	/**
 	 * In English, the gerund form refers to the usage of a verb as a noun. For
 	 * example, <em>I like <b>swimming</b></em>. In more general terms, gerunds
@@ -45,12 +44,12 @@ public enum Form {
 	GERUND,
 
 	/**
-	 * The imperative form of a verb is the one used when the grammatical 
-	 * mood is one of expressing a command or giving a direct request. For example, 
+	 * The imperative form of a verb is the one used when the grammatical
+	 * mood is one of expressing a command or giving a direct request. For example,
 	 * <em><b>Close</b> the door.</em>
 	 */
-	IMPERATIVE, 
-	
+	IMPERATIVE,
+
 	/**
 	 * The infinitive form represents the base form of the verb, with our
 	 * without the particle <em>to</em>. For example, <em>do</em> and
@@ -78,7 +77,7 @@ public enum Form {
 	/**
 	 * The present participle is identical in form to the gerund and is normally
 	 * used in the active voice. However, the gerund is meant to highlight a
-	 * verb being used as a noun. The present participle remains as a verb. For 
+	 * verb being used as a noun. The present participle remains as a verb. For
 	 * example, <em>Jim was <b>sleeping</b></em>.
 	 */
 	PRESENT_PARTICIPLE;

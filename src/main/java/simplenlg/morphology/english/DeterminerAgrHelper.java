@@ -1,19 +1,36 @@
+/*
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * https://www.mozilla.org/en-US/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ *
+ * The Original Code is "Simplenlg".
+ *
+ * The Initial Developer of the Original Code is Ehud Reiter, Albert Gatt and Dave Westwater.
+ * Portions created by Ehud Reiter, Albert Gatt and Dave Westwater are Copyright (C) 2010-11 The University of Aberdeen. All Rights Reserved.
+ *
+ * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
+ */
 package simplenlg.morphology.english;
-
 
 /**
  * This class is used to parse numbers that are passed as figures, to determine
  * whether they should take "a" or "an" as determiner.
- * 
+ *
  * @author bertugatt
- * 
  */
 public class DeterminerAgrHelper {
+
 	/*
 	 * An array of strings which are exceptions to the rule that "an" comes
 	 * before vowels
 	 */
-	private static final String[] AN_EXCEPTIONS = { "one", "180", "110" };
+	private static final String[] AN_EXCEPTIONS = {"one", "180", "110"};
 
 	/*
 	 * Start of string involving vowels, for use of "an"
@@ -30,25 +47,23 @@ public class DeterminerAgrHelper {
 	/**
 	 * Check whether this string starts with a number that needs "an" (e.g.
 	 * "an 18% increase")
-	 * 
-	 * @param string
-	 *            the string
+	 *
+	 * @param string the string
 	 * @return <code>true</code> if this string starts with 11, 18, or 8,
-	 *         excluding strings that start with 180 or 110
+	 * 		excluding strings that start with 180 or 110
 	 */
 	public static boolean requiresAn(String string) {
 		boolean req = false;
-		
+
 		String lowercaseInput = string.toLowerCase();
 
-		if (lowercaseInput.matches(AN_AGREEMENT) && !isAnException(lowercaseInput)) {
+		if(lowercaseInput.matches(AN_AGREEMENT) && !isAnException(lowercaseInput)) {
 			req = true;
 
 		} else {
 			String numPref = getNumericPrefix(lowercaseInput);
 
-			if (numPref != null && numPref.length() > 0
-					&& numPref.matches("^(8|11|18).*$")) {
+			if(numPref != null && numPref.length() > 0 && numPref.matches("^(8|11|18).*$")) {
 				Integer num = Integer.parseInt(numPref);
 				req = checkNum(num);
 			}
@@ -60,12 +75,12 @@ public class DeterminerAgrHelper {
 	/*
 	 * check whether a string beginning with a vowel is an exception and doesn't
 	 * take "an" (e.g. "a one percent change")
-	 * 
+	 *
 	 * @return
 	 */
 	private static boolean isAnException(String string) {
-		for (String ex : AN_EXCEPTIONS) {
-			if (string.matches("^" + ex + ".*")) {
+		for(String ex : AN_EXCEPTIONS) {
+			if(string.matches("^" + ex + ".*")) {
 				// if (string.equalsIgnoreCase(ex)) {
 				return true;
 			}
@@ -82,10 +97,10 @@ public class DeterminerAgrHelper {
 		boolean needsAn = false;
 
 		// eight, eleven, eighty and eighteen
-		if (num == 11 || num == 18 || num == 8 || (num >= 80 && num < 90)) {
+		if(num == 11 || num == 18 || num == 8 || (num >= 80 && num < 90)) {
 			needsAn = true;
 
-		} else if (num > 1000) {
+		} else if(num > 1000) {
 			num = Math.round(num / 1000);
 			needsAn = checkNum(num);
 		}
@@ -99,25 +114,25 @@ public class DeterminerAgrHelper {
 	private static String getNumericPrefix(String string) {
 		StringBuffer numeric = new StringBuffer();
 
-		if (string != null) {
+		if(string != null) {
 			string = string.trim();
 
-			if (string.length() > 0) {
+			if(string.length() > 0) {
 
 				StringBuffer buffer = new StringBuffer(string);
 				char first = buffer.charAt(0);
 
-				if (Character.isDigit(first)) {
+				if(Character.isDigit(first)) {
 					numeric.append(first);
 
-					for (int i = 1; i < buffer.length(); i++) {
+					for(int i = 1; i < buffer.length(); i++) {
 						Character next = buffer.charAt(i);
 
-						if (Character.isDigit(next)) {
+						if(Character.isDigit(next)) {
 							numeric.append(next);
 
 							// skip commas within numbers
-						} else if (next.equals(',')) {
+						} else if(next.equals(',')) {
 							continue;
 
 						} else {
@@ -131,50 +146,48 @@ public class DeterminerAgrHelper {
 		return numeric.length() == 0 ? null : numeric.toString();
 	}
 
-	
 	/**
-	 * Check to see if a string ends with the indefinite article "a" and it agrees with {@code np}. 
-	 * @param text
-	 * @param np
+	 * Check to see if a string ends with the indefinite article "a" and it agrees with {@code np}.
+	 *
 	 * @return an altered version of {@code text} to use "an" if it agrees with {@code np}, the original string otherwise.
 	 */
-	static String checkEndsWithIndefiniteArticle(String text, String np){
-		
+	static String checkEndsWithIndefiniteArticle(String text, String np) {
+
 		String[] tokens = text.split(" ");
-		
+
 		String lastToken = tokens[tokens.length - 1];
-		
-		if(lastToken.equalsIgnoreCase("a") && DeterminerAgrHelper.requiresAn(np)){
-			
+
+		if(lastToken.equalsIgnoreCase("a") && DeterminerAgrHelper.requiresAn(np)) {
+
 			tokens[tokens.length - 1] = "an";
-			
+
 			return stringArrayToString(tokens);
-			
+
 		}
-			
+
 		return text;
-		
+
 	}
-	
+
 	// Turns ["a","b","c"] into "a b c"
-	private static String stringArrayToString(String[] sArray){
-		
+	private static String stringArrayToString(String[] sArray) {
+
 		StringBuilder buf = new StringBuilder();
-		
-		for(int i = 0; i < sArray.length; i++){
-			
+
+		for(int i = 0; i < sArray.length; i++) {
+
 			buf.append(sArray[i]);
-			
-			if(i != sArray.length - 1){
-				
+
+			if(i != sArray.length - 1) {
+
 				buf.append(" ");
-				
+
 			}
-			
+
 		}
-		
+
 		return buf.toString();
-		
+
 	}
-	
+
 }
