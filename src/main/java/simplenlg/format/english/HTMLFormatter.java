@@ -72,7 +72,9 @@ public class HTMLFormatter extends NLGModule {
 
 				case DOCUMENT:
 					String title = element instanceof DocumentElement ? ((DocumentElement) element).getTitle() : null;
-					realisation.append("<h1>" + title + "</h1>");
+					if(null != title) {
+						realisation.append("<h1>" + title + "</h1>");
+					}
 
 					for(NLGElement eachComponent : components) {
 						realisedComponent = realise(eachComponent);

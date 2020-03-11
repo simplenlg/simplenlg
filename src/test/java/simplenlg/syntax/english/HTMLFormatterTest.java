@@ -101,14 +101,12 @@ public class HTMLFormatterTest extends SimpleNLG4Test {
 		element.addComponents(list);
 		document.addComponent(element);
 
-		// ... finally produce some output with HMTL tags ...
+		// ... finally produce some output with HTML tags ...
 		System.out.println("HTML realisation ~ \n=============================\n");
 
 		String output = "";
 
-		// this.realiser.setFormatter( new TextFormatter( ) ) ;
 		this.realiser.setFormatter(new HTMLFormatter());
-		// realiser.setDebugMode( true ) ; // hide after testing
 		output += realiser.realise(document).getRealisation();
 
 		System.out.println(output); // just to visually check what is being produced
@@ -123,6 +121,35 @@ public class HTMLFormatterTest extends SimpleNLG4Test {
 
 		assertEquals(expectedResults, output); // when realisation is working then complete this test
 	} // testWebPageContents
+
+	/**
+	 * Test case where there is no H1 or H2 title content.
+	 */
+	@Test
+	public void testNoHeaderTitleContent() {
+		DocumentElement document = phraseFactory.createDocument();
+
+		DocumentElement section = phraseFactory.createSection();
+
+		DocumentElement paragraph1 = phraseFactory.createParagraph();
+		DocumentElement sentence11 = phraseFactory.createSentence("This is the first sentence of paragraph 1");
+		paragraph1.addComponent(sentence11);
+
+		section.addComponent(paragraph1);
+		document.addComponent(section);
+
+		this.realiser.setFormatter(new HTMLFormatter());
+
+		String output = "";
+		output += realiser.realise(document).getRealisation();
+
+		System.out.println(output); // just to visually check what is being produced
+
+		String expectedResults = "<p>This is the first sentence of paragraph 1.</p>";
+
+		assertEquals(expectedResults, output);
+	}
+
 } // class
 
 	
