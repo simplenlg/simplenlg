@@ -41,6 +41,12 @@ Italian: The *Italian* version of SimpleNLG 4 is avaliable from [this page](http
 
 Spanish: The *Spanish* version of SimpleNLG 4 is avaliable from [this page](https://github.com/citiususc/SimpleNLG-ES). 
 
+Brazilian Portguese: The *Brazilian Portgue* version of SimpleNLG 4 is avaliable from [this page](https://github.com/rdeoliveira/simplenlg-bp).
+
+Dutch: The *Dutch* version of SimpleNLG 4 is avaliable from [this page](https://github.com/rfdj/SimpleNLG-NL).
+
+Galician: The *Galician* version of SimpleNLG 4 is avaliable from [this page](https://github.com/citiususc/SimpleNLG-GL).
+
 German: The *German* version of SimpleNLG 4 is avaliable from [this page](https://github.com/sebischair/SimpleNLG-DE). There is also an adaptation of SimpleNLG version 3.x to German. This is available from [this page](http://www.linguistics.rub.de/~bollmann/simplenlg-ger.html). Please remember that SimpleNLG version 3.x is not licensed for commercial use.
 
 C# implementations of SimpleNLG are also avaliable. One by *Gert-Jan de Vries* [here](https://github.com/gjdv/simplenlg) and a second by *Nick Hodge* [here](https://github.com/nickhodge/SharpSimpleNLG).
