@@ -3,7 +3,7 @@ SimpleNLG License
 
 SimpleNLG is licensed under the terms and conditions of Mozilla Public License 2.0. 
 
-Copyright (C) 2010-11 [The University of Aberdeen] (http://www.abdn.ac.uk).
+Copyright (C) 2010-11 [The University of Aberdeen](http://www.abdn.ac.uk).
 
 
 MOZILLA PUBLIC LICENSE  Version 2.0
