@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NLGSpec xmlns="http://simplenlg.googlecode.com/svn/trunk/res/xml"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Recording name="">
+        <Record name="">
+            <Document>
+                <child xsi:type="DocumentElement" cat="PARAGRAPH">
+                    <child xsi:type="DocumentElement" cat="SENTENCE">
+                        <child xsi:type="SPhraseSpec">
+                            <subj xsi:type="NPPhraseSpec">
+                                <head cat="ADVERB">
+                                    <base>there</base>
+                                </head>
+                            </subj>
+                            <vp xsi:type="VPPhraseSpec">
+                                <compl xsi:type="NPPhraseSpec">
+                                    <preMod xsi:type="CoordinatedPhraseElement" conj=",">
+                                        <coord xsi:type="AdjPhraseSpec">
+                                            <head cat="ADJECTIVE">
+                                                <base>eccentric</base>
+                                            </head>
+                                        </coord>
+                                        <coord xsi:type="AdjPhraseSpec">
+                                            <head cat="ADJECTIVE">
+                                                <base>tubular</base>
+                                            </head>
+                                        </coord>
+                                    </preMod>
+                                    <head cat="NOUN">
+                                        <base>stenosis</base>
+                                    </head>
+                                    <spec xsi:type="WordElement" cat="DETERMINER">
+                                        <base>a</base>
+                                    </spec>
+                                </compl>
+                                <postMod xsi:type="PPPhraseSpec">
+                                    <compl xsi:type="NPPhraseSpec">
+                                        <head cat="NOUN">
+                                            <base>third obtuse marginal branch</base>
+                                        </head>
+                                        <spec xsi:type="WordElement" cat="DETERMINER">
+                                            <base>the</base>
+                                        </spec>
+                                    </compl>
+                                    <head cat="PREPOSITION">
+                                        <base>in</base>
+                                    </head>
+                                </postMod>
+                                <head cat="VERB">
+                                    <base>be</base>
+                                </head>
+                            </vp>
+                        </child>
+                    </child>
+                    <child xsi:type="DocumentElement" cat="SENTENCE">
+                        <child xsi:type="SPhraseSpec">
+                            <subj xsi:type="NPPhraseSpec">
+                                <head cat="ADVERB">
+                                    <base>there</base>
+                                </head>
+                            </subj>
+                            <vp xsi:type="VPPhraseSpec">
+                                <compl xsi:type="NPPhraseSpec">
+                                    <preMod xsi:type="StringElement">
+                                        <val>80 %</val>
+                                    </preMod>
+                                    <head cat="NOUN">
+                                        <base>stenosis</base>
+                                    </head>
+                                    <spec xsi:type="StringElement">
+                                        <val>an</val>
+                                    </spec>
+                                </compl>
+                                <postMod xsi:type="PPPhraseSpec">
+                                    <compl xsi:type="NPPhraseSpec">
+                                        <preMod xsi:type="AdjPhraseSpec">
+                                            <head cat="ADJECTIVE">
+                                                <base>proximal</base>
+                                            </head>
+                                        </preMod>
+                                        <head cat="NOUN">
+                                            <base>right coronary artery</base>
+                                        </head>
+                                        <spec xsi:type="WordElement" cat="DETERMINER">
+                                            <base>the</base>
+                                        </spec>
+                                    </compl>
+                                    <head cat="PREPOSITION">
+                                        <base>in</base>
+                                    </head>
+                                </postMod>
+                                <head cat="VERB">
+                                    <base>be</base>
+                                </head>
+                            </vp>
+                        </child>
+                    </child>
+                </child>
+            </Document>
+            <Realisation>There is an eccentric, tubular stenosis in the third obtuse marginal branch. There is an 80 %
+                stenosis in the proximal right coronary artery.
+            </Realisation>
+        </Record>
+    </Recording>
+</NLGSpec>

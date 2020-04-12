@@ -241,7 +241,7 @@ public class XMLRealiser {
 	 *
 	 * @param input the input
 	 * @return the recording
-	 * @throws XMLRealiserException the xML realiser exception
+	 * @throws XMLRealiserException the XML realiser exception
 	 */
 	public static simplenlg.xmlrealiser.wrapper.RecordSet getRecording(Reader input) throws XMLRealiserException {
 		simplenlg.xmlrealiser.wrapper.NLGSpec spec = UnWrapper.getNLGSpec(input);

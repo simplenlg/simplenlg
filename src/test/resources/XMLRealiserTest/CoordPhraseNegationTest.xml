@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NLGSpec xmlns="http://simplenlg.googlecode.com/svn/trunk/res/xml"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Recording name="CoordinatedPhraseProperties">
+        <Record name="NegationOverride">
+            <Document cat="PARAGRAPH">
+                <child xsi:type="SPhraseSpec">
+                    <subj xsi:type="NPPhraseSpec">
+                        <head cat="NOUN">
+                            <base>patient</base>
+                        </head>
+                        <spec xsi:type="WordElement" cat="DETERMINER">
+                            <base>the</base>
+                        </spec>
+                    </subj>
+                    <vp xsi:type="CoordinatedPhraseElement" conj="and" cat="VERB_PHRASE">
+                        <coord xsi:type="VPPhraseSpec" NEGATED="true" PROGRESSIVE="true">
+                            <postMod xsi:type="PPPhraseSpec">
+                                <compl xsi:type="NPPhraseSpec">
+                                    <head cat="NOUN">
+                                        <base>hypertension</base>
+                                    </head>
+                                </compl>
+                                <head cat="PREPOSITION">
+                                    <base>from</base>
+                                </head>
+                            </postMod>
+                            <head cat="VERB">
+                                <base>suffer</base>
+                            </head>
+                        </coord>
+                        <coord xsi:type="VPPhraseSpec" TENSE="PRESENT">
+                            <compl xsi:type="NPPhraseSpec">
+                                <head cat="NOUN">
+                                    <base>normal left heart hemodynamics</base>
+                                </head>
+                            </compl>
+                            <head cat="VERB">
+                                <base>have</base>
+                            </head>
+                        </coord>
+                    </vp>
+                </child>
+            </Document>
+            <Realisation>The patient suffers from hypertension and has normal left heart hemodynamics.
+            </Realisation>
+        </Record>
+        <Record name="NegationAppied">
+            <Document cat="PARAGRAPH">
+                <child xsi:type="SPhraseSpec">
+                    <subj xsi:type="NPPhraseSpec">
+                        <head cat="NOUN">
+                            <base>patient</base>
+                        </head>
+                        <spec xsi:type="WordElement" cat="DETERMINER">
+                            <base>the</base>
+                        </spec>
+                    </subj>
+                    <vp xsi:type="CoordinatedPhraseElement" conj="and" cat="VERB_PHRASE" NEGATED="true">
+                        <coord xsi:type="VPPhraseSpec" PROGRESSIVE="true">
+                            <postMod xsi:type="PPPhraseSpec">
+                                <compl xsi:type="NPPhraseSpec">
+                                    <head cat="NOUN">
+                                        <base>hypertension</base>
+                                    </head>
+                                </compl>
+                                <head cat="PREPOSITION">
+                                    <base>from</base>
+                                </head>
+                            </postMod>
+                            <head cat="VERB">
+                                <base>suffer</base>
+                            </head>
+                        </coord>
+                        <coord xsi:type="VPPhraseSpec" TENSE="PRESENT">
+                            <compl xsi:type="NPPhraseSpec">
+                                <head cat="NOUN">
+                                    <base>normal left heart hemodynamics</base>
+                                </head>
+                            </compl>
+                            <head cat="VERB">
+                                <base>have</base>
+                            </head>
+                        </coord>
+                    </vp>
+                </child>
+            </Document>
+            <Realisation>The patient does not suffer from hypertension and does not have normal left heart hemodynamics.
+            </Realisation>
+        </Record>
+    </Recording>
+</NLGSpec>
