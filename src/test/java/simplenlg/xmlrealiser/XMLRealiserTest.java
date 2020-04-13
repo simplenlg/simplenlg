@@ -18,11 +18,13 @@
  */
 package simplenlg.xmlrealiser;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import org.junit.Assert;
@@ -50,25 +52,6 @@ public class XMLRealiserTest {
 		String lexDB = testUtility.getResourceFilePath("NIHLexicon/lexAccess2013.data");
 		LexiconType lexType = LexiconType.NIHDB; // Some tests require this.
 		XMLRealiser.setLexicon(lexType, lexDB);
-	}
-
-	/**
-	 * readXMLRealiserFile -- Utility method that reads a given XML file and returns a {@link String} object.
-	 *
-	 * @param recordingFileName -- The {@link String} resource XML file name.
-	 * @return The {@link String} object of the file contents.
-	 * @throws IOException -- Throws {@link IOException} if there is an error reading the XML file.
-	 * @throws URISyntaxException -- Throws {@link URISyntaxException} if there is decoding issue with the file path.
-	 */
-	private String readXMLRealiserFile(String recordingFileName) throws IOException, URISyntaxException {
-		String filePathURL = testUtility.getResourceFilePath(recordingFileName);
-		if(null != filePathURL && !filePathURL.isEmpty()) {
-			FileInputStream fileInputStream = new FileInputStream(filePathURL);
-			try(Scanner scanner = new Scanner(fileInputStream)) {
-				return scanner.useDelimiter("\\A").next();
-			}
-		}
-		return "";
 	}
 
 	/**
@@ -149,7 +132,7 @@ public class XMLRealiserTest {
 	 */
 	@Test
 	public void xmlAppositiveClauseTest() throws XMLRealiserException, IOException, URISyntaxException {
-		String testCase = readXMLRealiserFile("XMLRealiserTest/AppositiveTest.xml");
+		String testCase = testUtility.getResourceFileAsString("XMLRealiserTest/AppositiveTest.xml");
 		HashMap<String, ArrayList<String>> testResults = performRecordingTests(testCase);
 
 		Assert.assertArrayEquals(testResults.get("Expected").toArray(), testResults.get("Realisation").toArray());
@@ -160,7 +143,7 @@ public class XMLRealiserTest {
 	 */
 	@Test
 	public void xmlMultiSentenceTest() throws XMLRealiserException, IOException, URISyntaxException {
-		String testCase = readXMLRealiserFile("XMLRealiserTest/MultiSentenceTest.xml");
+		String testCase = testUtility.getResourceFileAsString("XMLRealiserTest/MultiSentenceTest.xml");
 		HashMap<String, ArrayList<String>> testResults = performRecordingTests(testCase);
 
 		Assert.assertArrayEquals(testResults.get("Expected").toArray(), testResults.get("Realisation").toArray());
@@ -171,7 +154,7 @@ public class XMLRealiserTest {
 	 */
 	@Test
 	public void xmlMultiClauseTest() throws XMLRealiserException, IOException, URISyntaxException {
-		String testCase = readXMLRealiserFile("XMLRealiserTest/ClauseTest.xml");
+		String testCase = testUtility.getResourceFileAsString("XMLRealiserTest/ClauseTest.xml");
 		HashMap<String, ArrayList<String>> testResults = performRecordingTests(testCase);
 
 		Assert.assertArrayEquals(testResults.get("Expected").toArray(), testResults.get("Realisation").toArray());
@@ -182,7 +165,7 @@ public class XMLRealiserTest {
 	 */
 	@Test
 	public void xmlCoordPhraseNegationTest() throws XMLRealiserException, IOException, URISyntaxException {
-		String testCase = readXMLRealiserFile("XMLRealiserTest/CoordPhraseNegationTest.xml");
+		String testCase = testUtility.getResourceFileAsString("XMLRealiserTest/CoordPhraseNegationTest.xml");
 		HashMap<String, ArrayList<String>> testResults = performRecordingTests(testCase);
 
 		Assert.assertArrayEquals(testResults.get("Expected").toArray(), testResults.get("Realisation").toArray());
@@ -193,7 +176,7 @@ public class XMLRealiserTest {
 	 */
 	@Test
 	public void xmlCoordPhraseTest() throws XMLRealiserException, IOException, URISyntaxException {
-		String testCase = readXMLRealiserFile("XMLRealiserTest/CoordPhraseTest.xml");
+		String testCase = testUtility.getResourceFileAsString("XMLRealiserTest/CoordPhraseTest.xml");
 		HashMap<String, ArrayList<String>> testResults = performRecordingTests(testCase);
 
 		Assert.assertArrayEquals(testResults.get("Expected").toArray(), testResults.get("Realisation").toArray());
@@ -204,7 +187,7 @@ public class XMLRealiserTest {
 	 */
 	@Test
 	public void xmlMultipleDocumentsTest() throws XMLRealiserException, IOException, URISyntaxException {
-		String testCase = readXMLRealiserFile("XMLRealiserTest/MultiDocumentTest.xml");
+		String testCase = testUtility.getResourceFileAsString("XMLRealiserTest/MultiDocumentTest.xml");
 		HashMap<String, ArrayList<String>> testResults = performRecordingTests(testCase);
 
 		Assert.assertArrayEquals(testResults.get("Expected").toArray(), testResults.get("Realisation").toArray());
@@ -215,7 +198,7 @@ public class XMLRealiserTest {
 	 */
 	@Test
 	public void xmlLexicalVariationTest() throws XMLRealiserException, IOException, URISyntaxException {
-		String testCase = readXMLRealiserFile("XMLRealiserTest/LexicalVariationTest.xml");
+		String testCase = testUtility.getResourceFileAsString("XMLRealiserTest/LexicalVariationTest.xml");
 		HashMap<String, ArrayList<String>> testResults = performRecordingTests(testCase);
 
 		Assert.assertArrayEquals(testResults.get("Expected").toArray(), testResults.get("Realisation").toArray());
@@ -226,7 +209,7 @@ public class XMLRealiserTest {
 	 */
 	@Test
 	public void xmlNounPhraseTest() throws XMLRealiserException, IOException, URISyntaxException {
-		String testCase = readXMLRealiserFile("XMLRealiserTest/NounPhraseTest.xml");
+		String testCase = testUtility.getResourceFileAsString("XMLRealiserTest/NounPhraseTest.xml");
 		HashMap<String, ArrayList<String>> testResults = performRecordingTests(testCase);
 
 		Assert.assertArrayEquals(testResults.get("Expected").toArray(), testResults.get("Realisation").toArray());
@@ -237,7 +220,7 @@ public class XMLRealiserTest {
 	 */
 	@Test
 	public void xmlInterrogativeTest() throws XMLRealiserException, IOException, URISyntaxException {
-		String testCase = readXMLRealiserFile("XMLRealiserTest/InterrogativeTest.xml");
+		String testCase = testUtility.getResourceFileAsString("XMLRealiserTest/InterrogativeTest.xml");
 		HashMap<String, ArrayList<String>> testResults = performRecordingTests(testCase);
 
 		Assert.assertArrayEquals(testResults.get("Expected").toArray(), testResults.get("Realisation").toArray());
@@ -248,7 +231,7 @@ public class XMLRealiserTest {
 	 */
 	@Test
 	public void xmlFormattingTest() throws XMLRealiserException, IOException, URISyntaxException {
-		String testCase = readXMLRealiserFile("XMLRealiserTest/FormattingTest.xml");
+		String testCase = testUtility.getResourceFileAsString("XMLRealiserTest/FormattingTest.xml");
 		HashMap<String, ArrayList<String>> testResults = performRecordingTests(testCase);
 
 		Assert.assertArrayEquals(testResults.get("Expected").toArray(), testResults.get("Realisation").toArray());
@@ -259,7 +242,7 @@ public class XMLRealiserTest {
 	 */
 	@Test
 	public void xmlPerfectPassiveTest() throws XMLRealiserException, IOException, URISyntaxException {
-		String testCase = readXMLRealiserFile("XMLRealiserTest/PerfectPassiveTest.xml");
+		String testCase = testUtility.getResourceFileAsString("XMLRealiserTest/PerfectPassiveTest.xml");
 		RequestType request = XMLRealiser.getRequest(new StringReader(testCase));
 		String output = XMLRealiser.realise(request.getDocument());
 

@@ -13,11 +13,11 @@
     Java classes in \simplenlg\src\simplenlg\xmlrealiser\wrapper are generated from this
     schema using xjc, the java utility., which is available in the JDK.
 	-->
-<xs:schema targetNamespace="http://simplenlg.googlecode.com/svn/trunk/res/xml"
-	elementFormDefault="qualified" attributeFormDefault="unqualified"
-	version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:nlg="http://simplenlg.googlecode.com/svn/trunk/res/xml"
-	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0">
+<xs:schema targetNamespace="https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml"
+		   elementFormDefault="qualified" attributeFormDefault="unqualified"
+		   version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:nlg="https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml"
+		   xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0">
 
 	<xs:element name="NLGSpec">
 		<xs:complexType>

@@ -25,13 +25,13 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="SPhraseSpec">
  *   &lt;complexContent>
- *     &lt;extension base="{http://simplenlg.googlecode.com/svn/trunk/res/xml}PhraseElement">
+ *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}PhraseElement">
  *       &lt;sequence>
- *         &lt;element name="cuePhrase" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement" minOccurs="0"/>
- *         &lt;element name="subj" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="vp" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement"/>
+ *         &lt;element name="cuePhrase" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" minOccurs="0"/>
+ *         &lt;element name="subj" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="vp" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement"/>
  *       &lt;/sequence>
- *       &lt;attGroup ref="{http://simplenlg.googlecode.com/svn/trunk/res/xml}sPhraseAtts"/>
+ *       &lt;attGroup ref="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}sPhraseAtts"/>
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>

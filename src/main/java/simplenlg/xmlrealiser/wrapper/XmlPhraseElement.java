@@ -25,16 +25,16 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="PhraseElement">
  *   &lt;complexContent>
- *     &lt;extension base="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement">
+ *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement">
  *       &lt;sequence>
- *         &lt;element name="frontMod" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="preMod" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="compl" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="postMod" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="head" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}WordElement" minOccurs="0"/>
+ *         &lt;element name="frontMod" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="preMod" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="compl" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="postMod" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="head" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}WordElement" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="cat" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}phraseCategory" />
- *       &lt;attribute name="discourseFunction" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}discourseFunction" />
+ *       &lt;attribute name="cat" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}phraseCategory" />
+ *       &lt;attribute name="discourseFunction" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}discourseFunction" />
  *       &lt;attribute name="appositive" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>
  *   &lt;/complexContent>

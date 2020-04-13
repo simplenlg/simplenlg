@@ -5,5 +5,5 @@
 // Generated on: 2014.02.04 at 09:14:07 AM EST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://simplenlg.googlecode.com/svn/trunk/res/xml", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package simplenlg.xmlrealiser.wrapper;

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<nlg:NLGSpec xmlns="https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml"
+             xmlns:nlg="https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <nlg:Request>
+        <Document cat="PARAGRAPH">
+            <child xsi:type="SPhraseSpec" FORM="IMPERATIVE">
+                <vp xsi:type="VPPhraseSpec">
+                    <compl xsi:type="CoordinatedPhraseElement" conj="and">
+                        <coord xsi:type="NPPhraseSpec">
+                            <head xsi:type="WordElement" cat="NOUN">
+                                <base>piano</base>
+                            </head>
+                            <spec xsi:type="WordElement" cat="DETERMINER">
+                                <base>the</base>
+                            </spec>
+                        </coord>
+                        <coord xsi:type="NPPhraseSpec">
+                            <head xsi:type="WordElement" cat="NOUN">
+                                <base>drum</base>
+                            </head>
+                            <spec xsi:type="WordElement" cat="DETERMINER">
+                                <base>the</base>
+                            </spec>
+                        </coord>
+                    </compl>
+                    <compl xsi:type="PPPhraseSpec">
+                        <compl xsi:type="NPPhraseSpec">
+                            <head xsi:type="WordElement" cat="NOUN">
+                                <base>truck</base>
+                            </head>
+                            <spec xsi:type="WordElement" cat="DETERMINER">
+                                <base>the</base>
+                            </spec>
+                        </compl>
+                        <head xsi:type="WordElement" cat="PREPOSITION">
+                            <base>into</base>
+                        </head>
+                    </compl>
+                    <head xsi:type="WordElement" cat="VERB">
+                        <base>put</base>
+                    </head>
+                </vp>
+            </child>
+        </Document>
+    </nlg:Request>
+</nlg:NLGSpec>

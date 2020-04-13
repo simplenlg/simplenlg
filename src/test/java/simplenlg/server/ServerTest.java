@@ -18,15 +18,18 @@
  */
 package simplenlg.server;
 
+import java.io.FileNotFoundException;
 import java.net.ServerSocket;
+import java.net.URISyntaxException;
 
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import simplenlg.util.TestUtility;
 
 /**
- * Tests for simplenlg server
+ * Tests for SimpleNLG Simple Server using the {@link simplenlg.xmlrealiser.XMLRealiser}
  *
  * @author Roman Kutlak
  */
@@ -35,8 +38,12 @@ public class ServerTest extends TestCase {
 	private SimpleServer serverapp;
 	private ServerSocket socket;
 
+	private TestUtility testUtility;
+
 	@Before
 	protected void setUp() {
+		testUtility = new TestUtility();
+
 		try {
 			socket = new ServerSocket(0);
 			serverapp = new SimpleServer(socket);
@@ -55,12 +62,13 @@ public class ServerTest extends TestCase {
 	}
 
 	@Test
-	public void testServer() {
+	public void testSimpleServer() throws FileNotFoundException, URISyntaxException {
 		assertNotNull(serverapp);
 
 		String expected = "Put the piano and the drum into the truck.";
 
-		SimpleClient clientApp = new SimpleClient();
+		String request = testUtility.getResourceFileAsString("XMLSimpleClient/XMLSimpleClientTest.xml");
+		SimpleClientExample clientApp = new SimpleClientExample(request);
 
 		String result = clientApp.run("localhost", socket.getLocalPort());
 

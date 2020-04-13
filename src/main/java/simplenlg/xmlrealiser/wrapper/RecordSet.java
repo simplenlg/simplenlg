@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Record" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}DocumentRealisation" maxOccurs="unbounded"/>
+ *         &lt;element name="Record" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}DocumentRealisation" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>

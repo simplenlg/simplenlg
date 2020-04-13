@@ -25,11 +25,11 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="CoordinatedPhraseElement">
  *   &lt;complexContent>
- *     &lt;extension base="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement">
+ *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement">
  *       &lt;sequence>
- *         &lt;element name="coord" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement" maxOccurs="unbounded"/>
+ *         &lt;element name="coord" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attGroup ref="{http://simplenlg.googlecode.com/svn/trunk/res/xml}CoordinatedPhraseAtts"/>
+ *       &lt;attGroup ref="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}CoordinatedPhraseAtts"/>
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>

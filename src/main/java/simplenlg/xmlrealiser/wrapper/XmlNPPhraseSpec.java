@@ -22,11 +22,11 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="NPPhraseSpec">
  *   &lt;complexContent>
- *     &lt;extension base="{http://simplenlg.googlecode.com/svn/trunk/res/xml}PhraseElement">
+ *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}PhraseElement">
  *       &lt;sequence>
- *         &lt;element name="spec" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement" minOccurs="0"/>
+ *         &lt;element name="spec" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attGroup ref="{http://simplenlg.googlecode.com/svn/trunk/res/xml}npPhraseAtts"/>
+ *       &lt;attGroup ref="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}npPhraseAtts"/>
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>

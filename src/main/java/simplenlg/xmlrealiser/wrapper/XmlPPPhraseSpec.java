@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="PPPhraseSpec">
  *   &lt;complexContent>
- *     &lt;extension base="{http://simplenlg.googlecode.com/svn/trunk/res/xml}PhraseElement">
+ *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}PhraseElement">
  *       &lt;sequence>
  *       &lt;/sequence>
  *     &lt;/extension>

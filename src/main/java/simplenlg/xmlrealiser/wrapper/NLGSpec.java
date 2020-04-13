@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;choice>
- *         &lt;element name="Request" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}RequestType"/>
- *         &lt;element name="Recording" type="{http://simplenlg.googlecode.com/svn/trunk/res/xml}RecordSet"/>
+ *         &lt;element name="Request" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}RequestType"/>
+ *         &lt;element name="Recording" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}RecordSet"/>
  *       &lt;/choice>
  *     &lt;/restriction>
  *   &lt;/complexContent>

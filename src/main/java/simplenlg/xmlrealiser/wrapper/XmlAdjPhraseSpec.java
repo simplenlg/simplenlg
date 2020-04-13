@@ -22,10 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="AdjPhraseSpec">
  *   &lt;complexContent>
- *     &lt;extension base="{http://simplenlg.googlecode.com/svn/trunk/res/xml}PhraseElement">
+ *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}PhraseElement">
  *       &lt;sequence>
  *       &lt;/sequence>
- *       &lt;attGroup ref="{http://simplenlg.googlecode.com/svn/trunk/res/xml}adjAdvPhraseAtts"/>
+ *       &lt;attGroup ref="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}adjAdvPhraseAtts"/>
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<NLGSpec xmlns="http://simplenlg.googlecode.com/svn/trunk/res/xml"
+<NLGSpec xmlns="https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Recording name="Clause tests">
         <Record name="Negation on VP">

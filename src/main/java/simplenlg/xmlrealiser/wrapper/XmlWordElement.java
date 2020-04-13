@@ -23,11 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="WordElement">
  *   &lt;complexContent>
- *     &lt;extension base="{http://simplenlg.googlecode.com/svn/trunk/res/xml}NLGElement">
+ *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement">
  *       &lt;sequence>
  *         &lt;element name="base" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
- *       &lt;attGroup ref="{http://simplenlg.googlecode.com/svn/trunk/res/xml}wordAtts"/>
+ *       &lt;attGroup ref="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}wordAtts"/>
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>

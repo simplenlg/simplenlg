@@ -19,9 +19,12 @@
 
 package simplenlg.util;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Scanner;
 
 import org.junit.Ignore;
 
@@ -32,7 +35,7 @@ import org.junit.Ignore;
 public class TestUtility {
 
 	/**
-	 * getResourceFilePath -- A utility method for returning
+	 * getResourceFilePath -- A utility method for returning the file path for a given test resource file.
 	 *
 	 * @param resourceName : The resource name to retrieve the file path for.
 	 * @return File path {@link String} or empty String.
@@ -44,6 +47,25 @@ public class TestUtility {
 			if(null != filePathURL) {
 				URI filePathURI = new URI(filePathURL.getPath());
 				return filePathURI.getPath();
+			}
+		}
+		return "";
+	}
+
+	/**
+	 * getResourceFileAsString -- A utility method that returns a test resource file as a {@link String}.
+	 *
+	 * @param resourceName : The resource name to retrieve the file path for.
+	 * @return File contents as {@link String} or empty String.
+	 * @throws URISyntaxException -- Exception if the file path contains invalid syntax.
+	 * @throws FileNotFoundException == Exception thrown if the file cannot be found.
+	 */
+	public String getResourceFileAsString(String resourceName) throws URISyntaxException, FileNotFoundException {
+		String filePathURL = this.getResourceFilePath(resourceName);
+		if(null != filePathURL && !filePathURL.isEmpty()) {
+			FileInputStream fileInputStream = new FileInputStream(filePathURL);
+			try(Scanner scanner = new Scanner(fileInputStream)) {
+				return scanner.useDelimiter("\\A").next();
 			}
 		}
 		return "";
