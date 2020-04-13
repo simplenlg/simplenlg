@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NLGSpec xmlns="http://simplenlg.googlecode.com/svn/trunk/res/xml"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Request>
+        <Document cat="SENTENCE">
+            <child xsi:type="SPhraseSpec" PASSIVE="true" TENSE="PRESENT" PERFECT="true">
+                <subj xsi:type="NPPhraseSpec">
+                    <head cat="NOUN">
+                        <base>child</base>
+                    </head>
+                    <spec xsi:type="WordElement" cat="DETERMINER">
+                        <base>the</base>
+                    </spec>
+                </subj>
+                <vp xsi:type="VPPhraseSpec" PASSIVE="true">
+                    <compl xsi:type="NPPhraseSpec">
+                        <head cat="NOUN">
+                            <base>man</base>
+                        </head>
+                        <spec xsi:type="WordElement" cat="DETERMINER">
+                            <base>the</base>
+                        </spec>
+                    </compl>
+                    <head cat="VERB">
+                        <base>upset</base>
+                    </head>
+                </vp>
+            </child>
+        </Document>
+    </Request>
+</NLGSpec>
