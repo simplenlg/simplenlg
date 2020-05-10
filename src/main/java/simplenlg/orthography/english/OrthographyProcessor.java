@@ -272,7 +272,9 @@ public class OrthographyProcessor extends NLGModule {
 
 			stripLeadingCommas(realisation);
 			capitaliseFirstLetter(realisation);
-			terminateSentence(realisation, element.getFeatureAsBoolean(InternalFeature.INTERROGATIVE).booleanValue());
+			terminateSentence(realisation,
+			                  element.getFeatureAsBoolean(InternalFeature.INTERROGATIVE).booleanValue(),
+			                  element.getFeatureAsBoolean(Feature.EXCLAMATORY).booleanValue());
 
 			((DocumentElement) element).clearComponents();
 			// realisation.append(' ');
@@ -292,11 +294,13 @@ public class OrthographyProcessor extends NLGModule {
 	 * @param interrogative a <code>boolean</code> flag showing <code>true</code> if the
 	 * 		sentence is an interrogative, <code>false</code> otherwise.
 	 */
-	private void terminateSentence(StringBuffer realisation, boolean interrogative) {
+	private void terminateSentence(StringBuffer realisation, boolean interrogative, boolean exclamatory) {
 		char character = realisation.charAt(realisation.length() - 1);
 		if(character != '.' && character != '?') {
 			if(interrogative) {
 				realisation.append('?');
+			} else if(exclamatory) {
+				realisation.append('!');
 			} else {
 				realisation.append('.');
 			}

@@ -392,6 +392,39 @@ abstract public class Feature {
 
 	/**
 	 * <p>
+	 * This features determines if the phrase should end with with a exclamatory or not.
+	 * </p>
+	 * <table border="1">
+	 * <tr>
+	 * <td><b>Feature name</b></td>
+	 * <td><em>isElided</em></td>
+	 * </tr>
+	 * <tr>
+	 * <td><b>Expected type</b></td>
+	 * <td><code>Boolean</code></td>
+	 * </tr>
+	 * <tr>
+	 * <td><b>Created by</b></td>
+	 * <td>The feature needs to be set by the user.</td>
+	 * </tr>
+	 * <tr>
+	 * <td><b>Used by</b></td>
+	 * <td>The syntax processor removes elided phrases.</td>
+	 * </tr>
+	 * <tr>
+	 * <td><b>Applies to</b></td>
+	 * <td>Sentences.</td>
+	 * </tr>
+	 * <tr>
+	 * <td><b>Default</b></td>
+	 * <td><code>Boolean.FALSE</code></td>
+	 * </tr>
+	 * </table>
+	 */
+	public static final String EXCLAMATORY = "exclamatory";
+
+	/**
+	 * <p>
 	 * This feature dictates the form that a verb takes.
 	 * </p>
 	 * <table border="1">

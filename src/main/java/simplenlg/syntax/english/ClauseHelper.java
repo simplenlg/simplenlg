@@ -70,6 +70,10 @@ abstract class ClauseHelper {
 				               || InterrogativeType.HOW_PREDICATE.equals(inter) || InterrogativeType.HOW.equals(inter)
 				               || InterrogativeType.WHY.equals(inter) || InterrogativeType.WHERE.equals(inter));
 				splitVerb = realiseInterrogative(phrase, parent, realisedElement, phraseFactory, verbElement);
+			} else if(phrase.hasFeature(Feature.EXCLAMATORY)) {
+				if(phrase.getParent() != null) {
+					phrase.getParent().setFeature(Feature.EXCLAMATORY, true);
+				}
 			} else {
 				PhraseHelper.realiseList(parent,
 				                         realisedElement,
