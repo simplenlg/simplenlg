@@ -293,7 +293,7 @@ public class ExternalTest {
 		// Data2Text tests
 		// test OK to have number at end of sentence
 		SPhraseSpec p = this.phraseFactory.createClause("the dog", "weigh", "12");
-		Assert.assertEquals("The dog weighes 12.", realiser.realiseSentence(p));
+		Assert.assertEquals("The dog weighs 12.", realiser.realiseSentence(p));
 
 		// test OK to have "there be" sentence with "there" as a StringElement
 		NLGElement dataDropout2 = this.phraseFactory.createNLGElement("data dropouts");
