@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/simplenlg/simplenlg.svg?branch=master)](https://travis-ci.org/simplenlg/simplenlg)
+[![SourceSpy Dashboard](https://sourcespy.com/shield.svg)](https://sourcespy.com/github/simplenlgsimplenlg/)
 
 
 SimpleNLG
@@ -29,6 +30,8 @@ If you wish to be informed about SimpleNLG updates and events, please subscribe 
 If you wish to cite SimpleNLG in an academic publication, please cite the following paper:
 
 * A Gatt and E Reiter (2009). [SimpleNLG: A realisation engine for practical applications](http://aclweb.org/anthology/W/W09/W09-0613.pdf). Proceedings of ENLG-2009
+
+The [sourcespy dashboard](https://sourcespy.com/github/simplenlgsimplenlg/) provides a high level overview of the repository including [class diagram](https://sourcespy.com/github/simplenlgsimplenlg/xx-omodel-.html), Ant [tasks and dependencies](https://sourcespy.com/github/simplenlgsimplenlg/xx-otasks-.html), [module dependencies](https://sourcespy.com/github/simplenlgsimplenlg/xx-omodulesc-.html), [external libraries](https://sourcespy.com/github/simplenlgsimplenlg/xx-ojavalibs-.html), and other components of the system.
 
 If you have other questions about SimpleNLG, please contact Professor Ehud Reiter via email: [ehud.reiter@arria.com](mailto:ehud.reiter@arria.com).
 
