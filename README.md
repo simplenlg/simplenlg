@@ -23,9 +23,17 @@ Getting started
 ---------------
 For information on how to use SimpleNLG, please see the [tutorial](https://github.com/simplenlg/simplenlg/wiki/Section-0-–-SimpleNLG-Tutorial) and [API](https://cdn.rawgit.com/simplenlg/simplenlg/master/docs/javadoc/index.html).
 
-If you have a technical question about using SimpleNLG, please check the [SimpleNLG discussion list](https://groups.google.com/forum/#!forum/simplenlg).
+The quickest way to use SimpleNLG is to add it as a dependency to your maven `pom.xml` file:
 
-If you wish to be informed about SimpleNLG updates and events, please subscribe to the [SimpleNLG announcement list](https://groups.google.com/forum/#!forum/simplenlg-announce).
+```
+<dependency>
+  <groupId>uk.ac.abdn</groupId>
+  <artifactId>SimpleNLG</artifactId>
+  <version>4.5.0</version>
+</dependency>
+```
+
+If you have a technical question about using SimpleNLG, please check the [SimpleNLG discussion list](https://groups.google.com/forum/#!forum/simplenlg). Or if you wish to be informed about SimpleNLG updates and events, please subscribe to the [SimpleNLG announcement list](https://groups.google.com/forum/#!forum/simplenlg-announce).
 
 If you wish to cite SimpleNLG in an academic publication, please cite the following paper:
 
