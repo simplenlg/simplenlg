@@ -60,7 +60,9 @@ public class PPPhraseSpec extends PhraseElement {
 	}
 
 	/**
-	 * sets the preposition (head) of a prepositional phrase
+	 * Sets the preposition (head) of a prepositional phrase.
+	 *
+	 * @param preposition -- Sets the preposition for this {@link PPPhraseSpec}.
 	 */
 	public void setPreposition(Object preposition) {
 		if(preposition instanceof NLGElement)
@@ -82,7 +84,9 @@ public class PPPhraseSpec extends PhraseElement {
 	}
 
 	/**
-	 * Sets the  object of a PP
+	 * Sets the  object of a Prepositional Phrase.
+	 *
+	 * @param object -- Sets the object for this {@link PPPhraseSpec}.
 	 */
 	public void setObject(Object object) {
 		PhraseElement objectPhrase = getFactory().createNounPhrase(object);

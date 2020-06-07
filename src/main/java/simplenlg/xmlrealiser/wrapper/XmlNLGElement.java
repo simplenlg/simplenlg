@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for NLGElement complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Java class for {@link simplenlg.framework.NLGElement} complex type.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
  * <pre>
  * &lt;complexType name="NLGElement">

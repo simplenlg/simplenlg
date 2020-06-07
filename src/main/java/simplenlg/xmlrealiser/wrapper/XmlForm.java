@@ -13,22 +13,22 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for form.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p>Java class for {@link simplenlg.features.Form}.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;simpleType name="form">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="BARE_INFINITIVE"/>
- *     &lt;enumeration value="GERUND"/>
- *     &lt;enumeration value="IMPERATIVE"/>
- *     &lt;enumeration value="INFINITIVE"/>
- *     &lt;enumeration value="NORMAL"/>
- *     &lt;enumeration value="PAST_PARTICIPLE"/>
- *     &lt;enumeration value="PRESENT_PARTICIPLE"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="form"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *     &lt;enumeration value="BARE_INFINITIVE"/&gt;
+ *     &lt;enumeration value="GERUND"/&gt;
+ *     &lt;enumeration value="IMPERATIVE"/&gt;
+ *     &lt;enumeration value="INFINITIVE"/&gt;
+ *     &lt;enumeration value="NORMAL"/&gt;
+ *     &lt;enumeration value="PAST_PARTICIPLE"/&gt;
+ *     &lt;enumeration value="PRESENT_PARTICIPLE"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  * 
  */

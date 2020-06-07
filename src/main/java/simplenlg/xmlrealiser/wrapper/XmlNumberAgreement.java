@@ -13,18 +13,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for numberAgreement.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p>Java class for {@link simplenlg.features.NumberAgreement}.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;simpleType name="numberAgreement">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="BOTH"/>
- *     &lt;enumeration value="PLURAL"/>
- *     &lt;enumeration value="SINGULAR"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="numberAgreement"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *     &lt;enumeration value="BOTH"/&gt;
+ *     &lt;enumeration value="PLURAL"/&gt;
+ *     &lt;enumeration value="SINGULAR"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  * 
  */

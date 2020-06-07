@@ -10,6 +10,7 @@ package simplenlg.xmlrealiser.wrapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -17,21 +18,21 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for DocumentElement complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Java class for {@link simplenlg.framework.DocumentElement} complex type.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
  * <pre>
- * &lt;complexType name="DocumentElement">
- *   &lt;complexContent>
- *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement">
- *       &lt;sequence>
- *         &lt;element name="child" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}docAtts"/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="DocumentElement"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="child" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attGroup ref="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}docAtts"/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -69,8 +70,8 @@ public class XmlDocumentElement
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link XmlNLGElement }
-     * 
-     * 
+     *
+     * @return a {@link List} of children {@link XmlNLGElement}s.
      */
     public List<XmlNLGElement> getChild() {
         if (child == null) {

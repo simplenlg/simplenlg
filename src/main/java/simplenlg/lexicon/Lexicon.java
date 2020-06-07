@@ -129,7 +129,9 @@ public abstract class Lexicon {
 	 * General word lookup method, tries base form, variant, ID (in this order)
 	 * Creates new word if can't find existing word
 	 *
-	 * @return word
+	 * @param baseForm -- The {@link String} base form word.
+	 * @param category -- The {@link LexicalCategory} lexical category for this base form.
+	 * @return the {@link WordElement} created.
 	 */
 	public WordElement lookupWord(String baseForm, LexicalCategory category) {
 		if(hasWord(baseForm, category))
@@ -146,7 +148,8 @@ public abstract class Lexicon {
 	 * General word lookup method, tries base form, variant, ID (in this order)
 	 * Creates new word if can't find existing word
 	 *
-	 * @return word
+	 * @param baseForm -- The {@link String} base form word.
+	 * @return the {@link WordElement} created.
 	 */
 	public WordElement lookupWord(String baseForm) {
 		return lookupWord(baseForm, LexicalCategory.ANY);

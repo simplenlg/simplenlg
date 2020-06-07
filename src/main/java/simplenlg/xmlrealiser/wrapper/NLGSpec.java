@@ -8,29 +8,25 @@
 
 package simplenlg.xmlrealiser.wrapper;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
- * <p>Java class for anonymous complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p>Java class for anonymous complex type.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice>
- *         &lt;element name="Request" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}RequestType"/>
- *         &lt;element name="Recording" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}RecordSet"/>
- *       &lt;/choice>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;choice&gt;
+ *         &lt;element name="Request" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}RequestType"/&gt;
+ *         &lt;element name="Recording" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}RecordSet"/&gt;
+ *       &lt;/choice&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

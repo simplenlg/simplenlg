@@ -125,7 +125,9 @@ public class NPPhraseSpec extends PhraseElement {
 	}
 
 	/**
-	 * sets the noun (head) of a noun phrase
+	 * Sets the noun (head) of a noun phrase
+	 *
+	 * @param noun -- Sets the head noun for this {@link NPPhraseSpec}.
 	 */
 	public void setNoun(Object noun) {
 		NLGElement nounElement = getFactory().createNLGElement(noun, LexicalCategory.NOUN);
@@ -150,6 +152,8 @@ public class NPPhraseSpec extends PhraseElement {
 	/**
 	 * getDeterminer - Convenience method for when a person tries to get a
 	 * determiner (e.g. "the") from a NPPhraseSpec.
+	 *
+	 * @return the determiner {@link NLGElement} for this {@link NPPhraseSpec}.
 	 */
 	public NLGElement getDeterminer() {
 		return getSpecifier();
@@ -158,6 +162,8 @@ public class NPPhraseSpec extends PhraseElement {
 	/**
 	 * sets the specifier of a noun phrase. Can be determiner (eg "the"),
 	 * possessive (eg, "John's")
+	 *
+	 * @param specifier -- Sets a specifier for this {@link NPPhraseSpec}.
 	 */
 	public void setSpecifier(Object specifier) {
 		if(specifier instanceof NLGElement) {

@@ -13,21 +13,21 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for documentCategory.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p>Java class for {@link simplenlg.framework.DocumentCategory}.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;simpleType name="documentCategory">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="DOCUMENT"/>
- *     &lt;enumeration value="SECTION"/>
- *     &lt;enumeration value="PARAGRAPH"/>
- *     &lt;enumeration value="SENTENCE"/>
- *     &lt;enumeration value="LIST"/>
- *     &lt;enumeration value="LIST_ITEM"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="documentCategory"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *     &lt;enumeration value="DOCUMENT"/&gt;
+ *     &lt;enumeration value="SECTION"/&gt;
+ *     &lt;enumeration value="PARAGRAPH"/&gt;
+ *     &lt;enumeration value="SENTENCE"/&gt;
+ *     &lt;enumeration value="LIST"/&gt;
+ *     &lt;enumeration value="LIST_ITEM"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  * 
  */

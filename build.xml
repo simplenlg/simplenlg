@@ -40,9 +40,9 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     <property name="main-class"  value="simplenlg.server.SimpleServer"/>
 
 
-    <!-- Compiles to Java 1.6 -->
-    <property name="ant.build.javac.source" value="1.6"/>
-    <property name="ant.build.javac.target" value="1.6"/>
+    <!-- Compiles to Java 1.8 -->
+    <property name="ant.build.javac.source" value="1.8"/>
+    <property name="ant.build.javac.target" value="1.8"/>
 
     <path id="classpath">
         <fileset dir="${lib.dir}">
@@ -74,7 +74,7 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     <!-- Compiles SimpleNLG and includes the lexicon.properties file -->
     <target name="compile" depends="download-deps">
         <mkdir dir="${classes.dir}"/>
-        <javac target="1.6" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
+        <javac target="1.8" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
             <!-- Someone is using internal Sun/Oracle classes... -->
             <compilerarg value="-XDignore.symbol.file" />
         </javac>
@@ -89,7 +89,7 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     <!-- Compiles SimpleNLG without including the lexicon.properties file -->
     <target name="compile-noproperties">
         <mkdir dir="${classes.dir}"/>
-        <javac target="1.6" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
+        <javac target="1.8" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath">
             <!-- Someone is using internal Sun/Oracle classes... -->
             <compilerarg value="-XDignore.symbol.file" />
         </javac>
@@ -101,7 +101,7 @@ Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret
     <!-- Check to see if the code compiles -->
     <target name="compile.test" depends="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac target="1.6" srcdir="${testsrc.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+        <javac target="1.8" srcdir="${testsrc.dir}" destdir="${classes.dir}" classpathref="classpath"/>
     </target>
 
     <!-- Builds a SimpleNLG Library JAR and bundles third-party libraries -->

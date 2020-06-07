@@ -13,28 +13,28 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for discourseFunction.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p>Java class for {@link simplenlg.features.DiscourseFunction}.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;simpleType name="discourseFunction">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="AUXILIARY"/>
- *     &lt;enumeration value="COMPLEMENT"/>
- *     &lt;enumeration value="CONJUNCTION"/>
- *     &lt;enumeration value="CUE_PHRASE"/>
- *     &lt;enumeration value="FRONT_MODIFIER"/>
- *     &lt;enumeration value="HEAD"/>
- *     &lt;enumeration value="INDIRECT_OBJECT"/>
- *     &lt;enumeration value="OBJECT"/>
- *     &lt;enumeration value="PRE_MODIFIER"/>
- *     &lt;enumeration value="POST_MODIFIER"/>
- *     &lt;enumeration value="SPECIFIER"/>
- *     &lt;enumeration value="SUBJECT"/>
- *     &lt;enumeration value="VERB_PHRASE"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="discourseFunction"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *     &lt;enumeration value="AUXILIARY"/&gt;
+ *     &lt;enumeration value="COMPLEMENT"/&gt;
+ *     &lt;enumeration value="CONJUNCTION"/&gt;
+ *     &lt;enumeration value="CUE_PHRASE"/&gt;
+ *     &lt;enumeration value="FRONT_MODIFIER"/&gt;
+ *     &lt;enumeration value="HEAD"/&gt;
+ *     &lt;enumeration value="INDIRECT_OBJECT"/&gt;
+ *     &lt;enumeration value="OBJECT"/&gt;
+ *     &lt;enumeration value="PRE_MODIFIER"/&gt;
+ *     &lt;enumeration value="POST_MODIFIER"/&gt;
+ *     &lt;enumeration value="SPECIFIER"/&gt;
+ *     &lt;enumeration value="SUBJECT"/&gt;
+ *     &lt;enumeration value="VERB_PHRASE"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  * 
  */

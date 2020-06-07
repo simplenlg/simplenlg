@@ -98,7 +98,9 @@ public class SPhraseSpec extends PhraseElement {
 	                                                     Feature.INTERROGATIVE_TYPE);
 
 	/**
-	 * create an empty clause
+	 * Create an empty {@link SPhraseSpec} clause.
+	 *
+	 * @param phraseFactory -- The {@link NLGFactory} to use to create the {@link SPhraseSpec} object.
 	 */
 	public SPhraseSpec(NLGFactory phraseFactory) {
 		super(PhraseCategory.CLAUSE);
@@ -125,6 +127,9 @@ public class SPhraseSpec extends PhraseElement {
 	 *
 	 * @see simplenlg.framework.NLGElement#setFeature(java.lang.String,
 	 *        java.lang.Object)
+	 *
+	 * @param featureName -- The {@link String} feature name.
+	 * @param featureValue -- The {@link String} feature value.
 	 */
 	@Override
 	public void setFeature(String featureName, Object featureValue) {
@@ -141,9 +146,8 @@ public class SPhraseSpec extends PhraseElement {
 	 * adds a premodifier, if possible to the underlying VP
 	 *
 	 * @see
-	 * simplenlg.framework.PhraseElement#addPreModifier(simplenlg.framework.
-	 * NLGElement)
-	 */
+	 * simplenlg.framework.PhraseElement#addPreModifier(simplenlg.framework.NLGElement)
+ 	 */
 	@Override
 	public void addPreModifier(NLGElement newPreModifier) {
 		NLGElement verbPhrase = (NLGElement) getFeatureAsElement(InternalFeature.VERB_PHRASE);
@@ -163,7 +167,7 @@ public class SPhraseSpec extends PhraseElement {
 	/*
 	 * adds a complement, if possible to the underlying VP
 	 *
-	 * @seesimplenlg.framework.PhraseElement#addComplement(simplenlg.framework.
+	 * @see simplenlg.framework.PhraseElement#addComplement(simplenlg.framework.
 	 * NLGElement)
 	 */
 	@Override
@@ -235,6 +239,8 @@ public class SPhraseSpec extends PhraseElement {
 
 	/**
 	 * Set the verb of a clause
+	 *
+	 * @param verb -- Sets the verb for this {@link SPhraseSpec}.
 	 */
 	public void setVerb(Object verb) {
 		// get verb phrase element (create if necessary)
@@ -277,6 +283,8 @@ public class SPhraseSpec extends PhraseElement {
 
 	/**
 	 * Sets the subject of a clause (assumes this is the only subject)
+	 *
+	 * @param subject -- The subject for this {@link SPhraseSpec}.
 	 */
 	public void setSubject(Object subject) {
 		NLGElement subjectPhrase;
@@ -304,6 +312,8 @@ public class SPhraseSpec extends PhraseElement {
 	/**
 	 * Sets the direct object of a clause (assumes this is the only direct
 	 * object)
+	 *
+	 * @param object -- The object for this {@link SPhraseSpec}.
 	 */
 	public void setObject(Object object) {
 
@@ -332,6 +342,8 @@ public class SPhraseSpec extends PhraseElement {
 	/**
 	 * Set the indirect object of a clause (assumes this is the only direct
 	 * indirect object)
+	 *
+	 * @param indirectObject -- The indirect object for this {@link SPhraseSpec}.
 	 */
 	public void setIndirectObject(Object indirectObject) {
 
@@ -363,6 +375,8 @@ public class SPhraseSpec extends PhraseElement {
 
 	/**
 	 * Add a modifier to a clause Use heuristics to decide where it goes
+	 *
+	 * @param modifier -- Adds a modifier to this {@link SPhraseSpec}.
 	 */
 	@Override
 	public void addModifier(Object modifier) {

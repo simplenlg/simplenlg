@@ -10,35 +10,32 @@ package simplenlg.xmlrealiser.wrapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+
+import javax.xml.bind.annotation.*;
 
 
 /**
- * <p>Java class for PhraseElement complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p>Java class for {@link simplenlg.framework.PhraseElement} complex type.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;complexType name="PhraseElement">
- *   &lt;complexContent>
- *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement">
- *       &lt;sequence>
- *         &lt;element name="frontMod" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="preMod" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="compl" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="postMod" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="head" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}WordElement" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="cat" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}phraseCategory" />
- *       &lt;attribute name="discourseFunction" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}discourseFunction" />
- *       &lt;attribute name="appositive" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="PhraseElement"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="frontMod" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="preMod" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="compl" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="postMod" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="head" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}WordElement" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="cat" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}phraseCategory" /&gt;
+ *       &lt;attribute name="discourseFunction" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}discourseFunction" /&gt;
+ *       &lt;attribute name="appositive" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -94,8 +91,8 @@ public abstract class XmlPhraseElement
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link XmlNLGElement }
-     * 
-     * 
+     *
+     * @return a instance {@link List} of {@link XmlNLGElement} front modifiers when called.
      */
     public List<XmlNLGElement> getFrontMod() {
         if (frontMod == null) {
@@ -123,8 +120,8 @@ public abstract class XmlPhraseElement
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link XmlNLGElement }
-     * 
-     * 
+     *
+     * @return a {@link List} of {@link XmlNLGElement} pre-modifiers when called.
      */
     public List<XmlNLGElement> getPreMod() {
         if (preMod == null) {
@@ -152,8 +149,8 @@ public abstract class XmlPhraseElement
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link XmlNLGElement }
-     * 
-     * 
+     *
+     * @return a {@link List} of {@link XmlNLGElement} compliments when called.
      */
     public List<XmlNLGElement> getCompl() {
         if (compl == null) {
@@ -181,8 +178,8 @@ public abstract class XmlPhraseElement
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link XmlNLGElement }
-     * 
-     * 
+     *
+     * @return a {@link List} of {@link XmlNLGElement} post modifiers when called.
      */
     public List<XmlNLGElement> getPostMod() {
         if (postMod == null) {
@@ -209,7 +206,7 @@ public abstract class XmlPhraseElement
      * @param value
      *     allowed object is
      *     {@link XmlWordElement }
-     *     
+     *
      */
     public void setHead(XmlWordElement value) {
         this.head = value;

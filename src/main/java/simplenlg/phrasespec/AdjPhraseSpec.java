@@ -56,7 +56,9 @@ public class AdjPhraseSpec extends PhraseElement {
 	}
 
 	/**
-	 * sets the adjective (head) of the phrase
+	 * Sets the adjective (head) of this phrase.
+	 *
+	 * @param adjective -- Sets the head adjective for this {@link AdjPhraseSpec}.
 	 */
 	public void setAdjective(Object adjective) {
 		if(adjective instanceof NLGElement)

@@ -12,17 +12,18 @@ import javax.xml.bind.annotation.XmlRegistry;
 
 
 /**
- * This object contains factory methods for each 
+ * <p>This object contains factory methods for each
  * Java content interface and Java element interface 
- * generated in the simplenlg.xmlrealiser.wrapper package. 
- * <p>An ObjectFactory allows you to programatically 
+ * generated in the simplenlg.xmlrealiser.wrapper package.</p>
+ *
+ * <p>An ObjectFactory allows you to programatically
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
  * content can consist of schema derived interfaces 
  * and classes representing the binding of schema 
  * type definitions, element declarations and model 
  * groups.  Factory methods for each of these are 
- * provided in this class.
+ * provided in this class.</p>
  * 
  */
 @XmlRegistry
@@ -38,7 +39,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link NLGSpec }
-     * 
+     *
+     * @return an {@link NLGSpec} instance when called.
      */
     public NLGSpec createNLGSpec() {
         return new NLGSpec();
@@ -46,7 +48,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RequestType }
-     * 
+     *
+     * @return a {@link RequestType} instance when called.
      */
     public RequestType createRequestType() {
         return new RequestType();
@@ -54,7 +57,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RecordSet }
-     * 
+     *
+     * @return a {@link RecordSet} instance when called.
      */
     public RecordSet createRecordSet() {
         return new RecordSet();
@@ -62,7 +66,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link XmlPPPhraseSpec }
-     * 
+     *
+     * @return a {@link XmlPPPhraseSpec} instance when called.
      */
     public XmlPPPhraseSpec createXmlPPPhraseSpec() {
         return new XmlPPPhraseSpec();
@@ -70,15 +75,17 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link XmlAdjPhraseSpec }
-     * 
+     *
+     * @return a {@link XmlAdjPhraseSpec} instance when called.
      */
     public XmlAdjPhraseSpec createXmlAdjPhraseSpec() {
         return new XmlAdjPhraseSpec();
     }
 
     /**
-     * Create an instance of {@link XmlDocumentElement }
-     * 
+     * Create an instance of {@link XmlDocumentElement}
+     *
+     * @return a {@link XmlDocumentElement} instance when called.
      */
     public XmlDocumentElement createXmlDocumentElement() {
         return new XmlDocumentElement();
@@ -86,7 +93,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link XmlWordElement }
-     * 
+     *
+     * @return a {@link XmlWordElement} instance when called.
      */
     public XmlWordElement createXmlWordElement() {
         return new XmlWordElement();
@@ -94,7 +102,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link XmlAdvPhraseSpec }
-     * 
+     *
+     * @return a {@link XmlAdvPhraseSpec} instance when called.
      */
     public XmlAdvPhraseSpec createXmlAdvPhraseSpec() {
         return new XmlAdvPhraseSpec();
@@ -102,7 +111,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link XmlCoordinatedPhraseElement }
-     * 
+     *
+     * @return a {@link XmlCoordinatedPhraseElement} instance when called.
      */
     public XmlCoordinatedPhraseElement createXmlCoordinatedPhraseElement() {
         return new XmlCoordinatedPhraseElement();
@@ -110,7 +120,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link XmlNPPhraseSpec }
-     * 
+     *
+     * @return a {@link XmlNPPhraseSpec} instance when called.
      */
     public XmlNPPhraseSpec createXmlNPPhraseSpec() {
         return new XmlNPPhraseSpec();
@@ -118,7 +129,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link DocumentRealisation }
-     * 
+     *
+     * @return a {@link DocumentRealisation} instance when called.
      */
     public DocumentRealisation createDocumentRealisation() {
         return new DocumentRealisation();
@@ -126,7 +138,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link XmlVPPhraseSpec }
-     * 
+     *
+     * @return a {@link XmlVPPhraseSpec} instance when called.
      */
     public XmlVPPhraseSpec createXmlVPPhraseSpec() {
         return new XmlVPPhraseSpec();
@@ -134,7 +147,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link XmlStringElement }
-     * 
+     *
+     * @return a {@link XmlStringElement} instance when called.
      */
     public XmlStringElement createXmlStringElement() {
         return new XmlStringElement();
@@ -142,7 +156,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link XmlSPhraseSpec }
-     * 
+     *
+     * @return a {@link XmlSPhraseSpec} when called.
      */
     public XmlSPhraseSpec createXmlSPhraseSpec() {
         return new XmlSPhraseSpec();

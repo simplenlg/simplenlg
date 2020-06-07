@@ -13,22 +13,22 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for phraseCategory.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p>Java class for {@link simplenlg.framework.PhraseCategory}</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;simpleType name="phraseCategory">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="CLAUSE"/>
- *     &lt;enumeration value="ADJECTIVE_PHRASE"/>
- *     &lt;enumeration value="ADVERB_PHRASE"/>
- *     &lt;enumeration value="NOUN_PHRASE"/>
- *     &lt;enumeration value="PREPOSITIONAL_PHRASE"/>
- *     &lt;enumeration value="VERB_PHRASE"/>
- *     &lt;enumeration value="CANNED_TEXT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="phraseCategory"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *     &lt;enumeration value="CLAUSE"/&gt;
+ *     &lt;enumeration value="ADJECTIVE_PHRASE"/&gt;
+ *     &lt;enumeration value="ADVERB_PHRASE"/&gt;
+ *     &lt;enumeration value="NOUN_PHRASE"/&gt;
+ *     &lt;enumeration value="PREPOSITIONAL_PHRASE"/&gt;
+ *     &lt;enumeration value="VERB_PHRASE"/&gt;
+ *     &lt;enumeration value="CANNED_TEXT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  * 
  */

@@ -76,7 +76,9 @@ import simplenlg.framework.*;
 public class VPPhraseSpec extends PhraseElement {
 
 	/**
-	 * create an empty clause
+	 * create an empty {@link VPPhraseSpec} clause.
+	 *
+	 * @param phraseFactory -- The {@link NLGFactory} to create this {@link VPPhraseSpec} object.
 	 */
 	public VPPhraseSpec(NLGFactory phraseFactory) {
 		super(PhraseCategory.VERB_PHRASE);
@@ -97,6 +99,8 @@ public class VPPhraseSpec extends PhraseElement {
 	/**
 	 * sets the verb (head) of a verb phrase.
 	 * Extract particle from verb if necessary
+	 *
+	 * @param verb -- The head verb {@link Object} to use for this {@link VPPhraseSpec}.
 	 */
 	public void setVerb(Object verb) {
 		NLGElement verbElement;
@@ -118,6 +122,8 @@ public class VPPhraseSpec extends PhraseElement {
 	}
 
 	/**
+	 * Returns the head verb of this {@link VPPhraseSpec}.
+	 *
 	 * @return verb (head) of verb phrase
 	 */
 	public NLGElement getVerb() {
@@ -126,6 +132,8 @@ public class VPPhraseSpec extends PhraseElement {
 
 	/**
 	 * Sets the direct object of a clause  (assumes this is the only direct object)
+	 *
+	 * @param object -- The object to use in this {@link VPPhraseSpec}.
 	 */
 	public void setObject(Object object) {
 		NLGElement objectPhrase;
@@ -153,6 +161,8 @@ public class VPPhraseSpec extends PhraseElement {
 
 	/**
 	 * Set the indirect object of a clause (assumes this is the only direct indirect object)
+	 *
+	 * @param indirectObject -- The indirect object to use in this {@link VPPhraseSpec}.
 	 */
 	public void setIndirectObject(Object indirectObject) {
 		NLGElement indirectObjectPhrase;

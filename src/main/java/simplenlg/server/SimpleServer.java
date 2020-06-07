@@ -76,6 +76,9 @@ public class SimpleServer implements Runnable {
 
 	/**
 	 * Construct a server with a pre-allocated socket.
+	 *
+	 * @param socket -- The socket for the server to use.
+	 * @throws IOException -- If there is an error when starting the server.
 	 */
 	public SimpleServer(ServerSocket socket) throws IOException {
 		startServer(socket);
@@ -85,6 +88,7 @@ public class SimpleServer implements Runnable {
 	 * startServer -- Start's the SimpleServer with a created ServerSocket.
 	 *
 	 * @param socket -- The socket for the server to use.
+	 * @throws IOException -- If there is an error when starting the server.
 	 */
 	private void startServer(ServerSocket socket) throws IOException, SocketException {
 		serverSocket = socket;

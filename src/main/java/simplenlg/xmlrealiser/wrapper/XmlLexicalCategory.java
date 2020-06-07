@@ -13,28 +13,28 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for lexicalCategory.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p>Java class for {@link simplenlg.framework.LexicalCategory}.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;simpleType name="lexicalCategory">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="ANY"/>
- *     &lt;enumeration value="SYMBOL"/>
- *     &lt;enumeration value="NOUN"/>
- *     &lt;enumeration value="ADJECTIVE"/>
- *     &lt;enumeration value="ADVERB"/>
- *     &lt;enumeration value="VERB"/>
- *     &lt;enumeration value="DETERMINER"/>
- *     &lt;enumeration value="PRONOUN"/>
- *     &lt;enumeration value="CONJUNCTION"/>
- *     &lt;enumeration value="PREPOSITION"/>
- *     &lt;enumeration value="COMPLEMENTISER"/>
- *     &lt;enumeration value="MODAL"/>
- *     &lt;enumeration value="AUXILIARY"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="lexicalCategory"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *     &lt;enumeration value="ANY"/&gt;
+ *     &lt;enumeration value="SYMBOL"/&gt;
+ *     &lt;enumeration value="NOUN"/&gt;
+ *     &lt;enumeration value="ADJECTIVE"/&gt;
+ *     &lt;enumeration value="ADVERB"/&gt;
+ *     &lt;enumeration value="VERB"/&gt;
+ *     &lt;enumeration value="DETERMINER"/&gt;
+ *     &lt;enumeration value="PRONOUN"/&gt;
+ *     &lt;enumeration value="CONJUNCTION"/&gt;
+ *     &lt;enumeration value="PREPOSITION"/&gt;
+ *     &lt;enumeration value="COMPLEMENTISER"/&gt;
+ *     &lt;enumeration value="MODAL"/&gt;
+ *     &lt;enumeration value="AUXILIARY"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  * 
  */

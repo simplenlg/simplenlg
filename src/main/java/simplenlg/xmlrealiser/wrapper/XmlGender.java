@@ -13,18 +13,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for gender.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p>Java class for {@link simplenlg.features.Gender}.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;simpleType name="gender">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="MASCULINE"/>
- *     &lt;enumeration value="FEMININE"/>
- *     &lt;enumeration value="NEUTER"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="gender"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *     &lt;enumeration value="MASCULINE"/&gt;
+ *     &lt;enumeration value="FEMININE"/&gt;
+ *     &lt;enumeration value="NEUTER"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  * 
  */

@@ -67,7 +67,9 @@ public class XMLLexicon extends Lexicon {
 	/**********************************************************************/
 
 	/**
-	 * Load an XML Lexicon from a named file
+	 * Load an XML Lexicon from a named file.
+	 *
+	 * @param filename -- The String file path to the {@link XMLLexicon} file.
 	 */
 	public XMLLexicon(String filename) {
 		super();
@@ -76,7 +78,9 @@ public class XMLLexicon extends Lexicon {
 	}
 
 	/**
-	 * Load an XML Lexicon from a File
+	 * Load an XML Lexicon from a File.
+	 *
+	 * @param file -- The {@link File} object to the {@link XMLLexicon} file.
 	 */
 	public XMLLexicon(File file) {
 		super();
@@ -85,6 +89,8 @@ public class XMLLexicon extends Lexicon {
 
 	/**
 	 * Load an XML Lexicon from a URI
+	 *
+	 * @param lexiconURI -- The lexicon {@link URI} to the {@link XMLLexicon} file.
 	 */
 	public XMLLexicon(URI lexiconURI) {
 		super();

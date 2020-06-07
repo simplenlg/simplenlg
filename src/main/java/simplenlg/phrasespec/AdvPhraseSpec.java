@@ -56,7 +56,9 @@ public class AdvPhraseSpec extends PhraseElement {
 	}
 
 	/**
-	 * sets the adverb (head) of the phrase
+	 * Sets the adverb (head) of this phrase.
+	 *
+	 * @param adverb -- Sets the head adverb for this {@link AdvPhraseSpec}.
 	 */
 	public void setAdverb(Object adverb) {
 		if(adverb instanceof NLGElement)

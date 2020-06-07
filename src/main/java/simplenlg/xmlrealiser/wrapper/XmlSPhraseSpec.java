@@ -10,31 +10,28 @@ package simplenlg.xmlrealiser.wrapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+
+import javax.xml.bind.annotation.*;
 
 
 /**
- * <p>Java class for SPhraseSpec complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Java class for {@link simplenlg.phrasespec.SPhraseSpec} complex type.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
  * <pre>
- * &lt;complexType name="SPhraseSpec">
- *   &lt;complexContent>
- *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}PhraseElement">
- *       &lt;sequence>
- *         &lt;element name="cuePhrase" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" minOccurs="0"/>
- *         &lt;element name="subj" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="vp" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}sPhraseAtts"/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="SPhraseSpec"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}PhraseElement"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="cuePhrase" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" minOccurs="0"/&gt;
+ *         &lt;element name="subj" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="vp" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attGroup ref="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}sPhraseAtts"/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -125,8 +122,8 @@ public class XmlSPhraseSpec
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link XmlNLGElement }
-     * 
-     * 
+     *
+     * @return a {@link List} of {@link XmlNLGElement} of subjects.
      */
     public List<XmlNLGElement> getSubj() {
         if (subj == null) {

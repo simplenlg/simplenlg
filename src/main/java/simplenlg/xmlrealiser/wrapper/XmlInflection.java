@@ -13,21 +13,21 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for inflection.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p>Java class for {@link simplenlg.features.Inflection}.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;simpleType name="inflection">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="GRECO_LATIN_REGULAR"/>
- *     &lt;enumeration value="IRREGULAR"/>
- *     &lt;enumeration value="REGULAR"/>
- *     &lt;enumeration value="REGULAR_DOUBLE"/>
- *     &lt;enumeration value="UNCOUNT"/>
- *     &lt;enumeration value="INVARIANT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="inflection"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *     &lt;enumeration value="GRECO_LATIN_REGULAR"/&gt;
+ *     &lt;enumeration value="IRREGULAR"/&gt;
+ *     &lt;enumeration value="REGULAR"/&gt;
+ *     &lt;enumeration value="REGULAR_DOUBLE"/&gt;
+ *     &lt;enumeration value="UNCOUNT"/&gt;
+ *     &lt;enumeration value="INVARIANT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  * 
  */

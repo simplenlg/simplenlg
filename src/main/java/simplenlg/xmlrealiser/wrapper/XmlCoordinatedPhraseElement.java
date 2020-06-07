@@ -10,29 +10,26 @@ package simplenlg.xmlrealiser.wrapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+
+import javax.xml.bind.annotation.*;
 
 
 /**
- * <p>Java class for CoordinatedPhraseElement complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Java class for {@link simplenlg.framework.CoordinatedPhraseElement} complex type.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
  * <pre>
- * &lt;complexType name="CoordinatedPhraseElement">
- *   &lt;complexContent>
- *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement">
- *       &lt;sequence>
- *         &lt;element name="coord" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attGroup ref="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}CoordinatedPhraseAtts"/>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="CoordinatedPhraseElement"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="coord" type="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}NLGElement" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attGroup ref="{https://github.com/simplenlg/simplenlg/tree/master/src/main/resources/xml}CoordinatedPhraseAtts"/&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -75,16 +72,18 @@ public class XmlCoordinatedPhraseElement
     protected XmlTense tense;
 
     /**
+     * <p>
      * Gets the value of the coord property.
-     * 
+     * </p>
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the coord property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     * This is why there is not a <CODE>set</CODE> method for the coord property.</p>
+     *
+     * <p>For example, to add a new item, do as follows:</p>
+     *
      * <pre>
      *    getCoord().add(newItem);
      * </pre>
@@ -92,9 +91,10 @@ public class XmlCoordinatedPhraseElement
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link XmlNLGElement }
-     * 
-     * 
+     * {@link XmlNLGElement}
+     * </p>
+     *
+     * @return a {@link List} of {@link XmlNLGElement} CoordinatedPhraseElements when called.
      */
     public List<XmlNLGElement> getCoord() {
         if (coord == null) {

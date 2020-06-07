@@ -88,8 +88,13 @@ public class NIHDBLexicon extends Lexicon {
 	}
 
 	/**
-	 * set up lexicon using general DB parameters; DB must be NIH specialist
-	 * lexicon from lexAccess
+	 * Set up lexicon using general DB parameters; DB must be NIH specialist
+	 * lexicon from lexAccess.
+	 *
+	 * @param driver -- The {@link String} driver name.
+	 * @param url -- The {@link String} URL path.
+	 * @param username -- The {@link String} username.
+	 * @param password -- The {@link String} password.
 	 */
 	public NIHDBLexicon(String driver, String url, String username, String password) {
 

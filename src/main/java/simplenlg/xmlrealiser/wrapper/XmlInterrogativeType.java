@@ -13,24 +13,24 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for interrogativeType.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p>Java class for {@link simplenlg.features.InterrogativeType}.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;simpleType name="interrogativeType">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="HOW"/>
- *     &lt;enumeration value="WHAT_OBJECT"/>
- *     &lt;enumeration value="WHAT_SUBJECT"/>
- *     &lt;enumeration value="WHERE"/>
- *     &lt;enumeration value="WHO_INDIRECT_OBJECT"/>
- *     &lt;enumeration value="WHO_OBJECT"/>
- *     &lt;enumeration value="WHO_SUBJECT"/>
- *     &lt;enumeration value="WHY"/>
- *     &lt;enumeration value="YES_NO"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="interrogativeType"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *     &lt;enumeration value="HOW"/&gt;
+ *     &lt;enumeration value="WHAT_OBJECT"/&gt;
+ *     &lt;enumeration value="WHAT_SUBJECT"/&gt;
+ *     &lt;enumeration value="WHERE"/&gt;
+ *     &lt;enumeration value="WHO_INDIRECT_OBJECT"/&gt;
+ *     &lt;enumeration value="WHO_OBJECT"/&gt;
+ *     &lt;enumeration value="WHO_SUBJECT"/&gt;
+ *     &lt;enumeration value="WHY"/&gt;
+ *     &lt;enumeration value="YES_NO"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  * 
  */

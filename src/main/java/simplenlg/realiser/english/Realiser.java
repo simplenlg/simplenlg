@@ -53,6 +53,8 @@ public class Realiser extends NLGModule {
 	/**
 	 * Create a realiser with a lexicon (should match lexicon used for
 	 * NLGFactory)
+	 *
+	 * @param lexicon -- The {@link Lexicon} for the realiser to use.
 	 */
 	public Realiser(Lexicon lexicon) {
 		this();
@@ -111,6 +113,8 @@ public class Realiser extends NLGModule {
 	 * <strong>Implementation note:</strong>: this method sets the relevant
 	 * parameter in the
 	 * {@link simplenlg.orthography.english.OrthographyProcessor}.
+	 *
+	 * @param commaSepCuephrase -- {@link Boolean} flag to use a comma seperator for cue phrases.
 	 */
 	public void setCommaSepCuephrase(boolean commaSepCuephrase) {
 		if(this.orthography != null) {
@@ -191,6 +195,7 @@ public class Realiser extends NLGModule {
 	/**
 	 * Convenience class to realise any NLGElement as a sentence
 	 *
+	 * @param element -- The {@link NLGElement} sentence to realise.
 	 * @return String realisation of the NLGElement
 	 */
 	public String realiseSentence(NLGElement element) {

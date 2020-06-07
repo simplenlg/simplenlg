@@ -13,18 +13,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for person.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
+ * <p>Java class for {@link simplenlg.features.Person}.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
+ *
  * <pre>
- * &lt;simpleType name="person">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="FIRST"/>
- *     &lt;enumeration value="SECOND"/>
- *     &lt;enumeration value="THIRD"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="person"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *     &lt;enumeration value="FIRST"/&gt;
+ *     &lt;enumeration value="SECOND"/&gt;
+ *     &lt;enumeration value="THIRD"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  * 
  */

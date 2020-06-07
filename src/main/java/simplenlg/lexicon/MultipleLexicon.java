@@ -55,7 +55,9 @@ public class MultipleLexicon extends Lexicon {
 	}
 
 	/**
-	 * create a multi lexicon with the specified lexicons
+	 * Create a multi lexicon with the specified lexicons.
+	 *
+	 * @param lexicons -- A {@link List} of {@link Lexicon} lexicons or a single {@link Lexicon}.
 	 */
 	public MultipleLexicon(Lexicon... lexicons) {
 		this();
@@ -68,14 +70,18 @@ public class MultipleLexicon extends Lexicon {
 	/**********************************************************************/
 
 	/**
-	 * add lexicon at beginning of list (is searched first)
+	 * Add lexicon at beginning of list (is searched first).
+	 *
+	 * @param lex -- Add the initial {@link Lexicon}.
 	 */
 	public void addInitialLexicon(Lexicon lex) {
 		lexiconList.add(0, lex);
 	}
 
 	/**
-	 * add lexicon at end of list (is searched last)
+	 * Add lexicon at end of list (is searched last)
+	 *
+	 * @param lex -- Adds the final {@link Lexicon}.
 	 */
 	public void addFinalLexicon(Lexicon lex) {
 		lexiconList.add(0, lex);

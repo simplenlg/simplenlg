@@ -13,18 +13,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for tense.
+ * <p>Java class for {@link simplenlg.features.Tense}.</p>
+ *
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
  * <pre>
- * &lt;simpleType name="tense">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="FUTURE"/>
- *     &lt;enumeration value="PAST"/>
- *     &lt;enumeration value="PRESENT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="tense"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *     &lt;enumeration value="FUTURE"/&gt;
+ *     &lt;enumeration value="PAST"/&gt;
+ *     &lt;enumeration value="PRESENT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  * 
  */

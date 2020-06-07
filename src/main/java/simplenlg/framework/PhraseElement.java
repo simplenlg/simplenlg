@@ -56,7 +56,7 @@ public class PhraseElement extends NLGElement {
 	}
 
 	/**
-	 * <p>
+	 *
 	 * This method retrieves the child components of this phrase. The list
 	 * returned will depend on the category of the element.<br>
 	 * <ul>
@@ -71,7 +71,6 @@ public class PhraseElement extends NLGElement {
 	 * <li>All the other phrases consist of pre-modifiers, the main phrase
 	 * element, complements and post-modifiers.</li>
 	 * </ul>
-	 * </p>
 	 *
 	 * @return a <code>List</code> of <code>NLGElement</code>s representing the
 	 * 		child elements of this phrase.
@@ -447,7 +446,9 @@ public class PhraseElement extends NLGElement {
 	}
 
 	/**
-	 * Add a modifier to a phrase Use heuristics to decide where it goes
+	 * Add a modifier to a phrase Use heuristics to decide where it goes.
+	 *
+	 * @param modifier -- Adds a modifier to this {@link PhraseElement}.
 	 */
 	public void addModifier(Object modifier) {
 		// default addModifier - always make modifier a preModifier
