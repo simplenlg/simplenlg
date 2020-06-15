@@ -46,19 +46,19 @@ If you have other questions about SimpleNLG, please contact Professor Ehud Reite
 SimpleNLG for other languages
 -----------------------------
 
-French: A version of SimpleNLG for *French* is avaliable from [this page](http://www-etud.iro.umontreal.ca/~vaudrypl/snlgbil/snlgEnFr_english.html).
+French 🇫🇷: A version of SimpleNLG for *French* is avaliable from [this page](http://www-etud.iro.umontreal.ca/~vaudrypl/snlgbil/snlgEnFr_english.html).
 
-Italian: The *Italian* version of SimpleNLG 4 is avaliable from [this page](https://github.com/alexmazzei/SimpleNLG-IT).
+Italian 🇮🇹: The *Italian* version of SimpleNLG 4 is avaliable from [this page](https://github.com/alexmazzei/SimpleNLG-IT).
 
-Spanish: The *Spanish* version of SimpleNLG 4 is avaliable from [this page](https://github.com/citiususc/SimpleNLG-ES). 
+Spanish 🇪🇸: The *Spanish* version of SimpleNLG 4 is avaliable from [this page](https://github.com/citiususc/SimpleNLG-ES). 
 
-Brazilian Portguese: The *Brazilian Portgue* version of SimpleNLG 4 is avaliable from [this page](https://github.com/rdeoliveira/simplenlg-bp).
+Brazilian Portguese 🇧🇷: The *Brazilian Portgue* version of SimpleNLG 4 is avaliable from [this page](https://github.com/rdeoliveira/simplenlg-bp).
 
-Dutch: The *Dutch* version of SimpleNLG 4 is avaliable from [this page](https://github.com/rfdj/SimpleNLG-NL).
+Dutch 🇳🇱: The *Dutch* version of SimpleNLG 4 is avaliable from [this page](https://github.com/rfdj/SimpleNLG-NL).
+
+German 🇩🇪: The *German* version of SimpleNLG 4 is avaliable from [this page](https://github.com/sebischair/SimpleNLG-DE). There is also an adaptation of SimpleNLG version 3.x to German. This is available from [this page](http://www.linguistics.rub.de/~bollmann/simplenlg-ger.html). Please remember that SimpleNLG version 3.x is not licensed for commercial use.
 
 Galician: The *Galician* version of SimpleNLG 4 is avaliable from [this page](https://github.com/citiususc/SimpleNLG-GL).
-
-German: The *German* version of SimpleNLG 4 is avaliable from [this page](https://github.com/sebischair/SimpleNLG-DE). There is also an adaptation of SimpleNLG version 3.x to German. This is available from [this page](http://www.linguistics.rub.de/~bollmann/simplenlg-ger.html). Please remember that SimpleNLG version 3.x is not licensed for commercial use.
 
 C# implementations of SimpleNLG are also avaliable. One by *Gert-Jan de Vries* [here](https://github.com/gjdv/simplenlg) and a second by *Nick Hodge* [here](https://github.com/nickhodge/SharpSimpleNLG).
 
