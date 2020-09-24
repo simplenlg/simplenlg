@@ -46,7 +46,7 @@ If you have other questions about SimpleNLG, please contact Professor Ehud Reite
 SimpleNLG for other languages
 -----------------------------
 
-French 🇫🇷: A version of SimpleNLG for *French* of SimpleNLG4 is avaliable from [this page](http://www-etud.iro.umontreal.ca/~vaudrypl/snlgbil/snlgEnFr_english.html).
+French 🇫🇷: A version of SimpleNLG for *French* of SimpleNLG 4 is avaliable from [this page](http://www-etud.iro.umontreal.ca/~vaudrypl/snlgbil/snlgEnFr_english.html).
 
 Italian 🇮🇹: The *Italian* version of SimpleNLG 4 is avaliable from [this page](https://github.com/alexmazzei/SimpleNLG-IT).
 
