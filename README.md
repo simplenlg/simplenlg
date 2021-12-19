@@ -52,7 +52,7 @@ Italian 🇮🇹: The *Italian* version of SimpleNLG 4 is avaliable from [this p
 
 Spanish 🇪🇸: The *Spanish* version of SimpleNLG 4 is avaliable from [this page](https://github.com/citiususc/SimpleNLG-ES). 
 
-Brazilian Portguese 🇧🇷: The *Brazilian Portguese* version of SimpleNLG 4 is avaliable from [this page](https://github.com/rdeoliveira/simplenlg-bp).
+Brazilian Portuguese 🇧🇷: The *Brazilian Portuguese* version of SimpleNLG 4 is avaliable from [this page](https://github.com/rdeoliveira/simplenlg-bp).
 
 Dutch 🇳🇱: The *Dutch* version of SimpleNLG 4 is avaliable from [this page](https://github.com/rfdj/SimpleNLG-NL).
 
