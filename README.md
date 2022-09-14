@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/simplenlg/simplenlg.svg?branch=master)](https://travis-ci.org/simplenlg/simplenlg)
-[![SourceSpy Dashboard](https://sourcespy.com/shield.svg)](https://sourcespy.com/github/simplenlgsimplenlg/)
+<!-- [![SourceSpy Dashboard](https://sourcespy.com/shield.svg)](https://sourcespy.com/github/simplenlgsimplenlg/) -->
 
 
 SimpleNLG
