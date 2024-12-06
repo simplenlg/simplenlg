@@ -1,7 +1,3 @@
-[![Build Status](https://travis-ci.org/simplenlg/simplenlg.svg?branch=master)](https://travis-ci.org/simplenlg/simplenlg)
-<!-- [![SourceSpy Dashboard](https://sourcespy.com/shield.svg)](https://sourcespy.com/github/simplenlgsimplenlg/) -->
-
-
 SimpleNLG
 =========
 
@@ -15,13 +11,13 @@ SimpleNLG is intended to function as a "[realisation engine](http://en.wikipedia
 
 Current release (English)
 -------------------------
-The current release of SimpleNLG is V4.5.0 ([API](https://cdn.rawgit.com/simplenlg/simplenlg/master/docs/javadoc/index.html)). The "official" version of SimpleNLG only produces texts in English. However, versions for other languages are under development, see the Papers and Publications page and [SimpleNLG discussion list](https://groups.google.com/forum/#!forum/simplenlg) for details.
+The current release of SimpleNLG is V4.5.0 ([API](http://simplenlg.github.io/simplenlg/javadoc/index.html)). The "official" version of SimpleNLG only produces texts in English. However, versions for other languages are under development, see the Papers and Publications page and [SimpleNLG discussion list](https://groups.google.com/forum/#!forum/simplenlg) for details.
 
 Please note that earlier versions of SimpleNLG have different licensing, in particular versions before V4.0 cannot be used commercially.
 
 Getting started
 ---------------
-For information on how to use SimpleNLG, please see the [tutorial](https://github.com/simplenlg/simplenlg/wiki/Section-0-–-SimpleNLG-Tutorial) and [API](https://cdn.rawgit.com/simplenlg/simplenlg/master/docs/javadoc/index.html).
+For information on how to use SimpleNLG, please see the [tutorial](https://github.com/simplenlg/simplenlg/wiki/Section-0-–-SimpleNLG-Tutorial) and [API](http://simplenlg.github.io/simplenlg/javadoc/index.html).
 
 The quickest way to use SimpleNLG is to add it as a dependency to your maven `pom.xml` file:
 
@@ -39,9 +35,7 @@ If you wish to cite SimpleNLG in an academic publication, please cite the follow
 
 * A Gatt and E Reiter (2009). [SimpleNLG: A realisation engine for practical applications](http://aclweb.org/anthology/W/W09/W09-0613.pdf). Proceedings of ENLG-2009
 
-The [sourcespy dashboard](https://sourcespy.com/github/simplenlgsimplenlg/) provides a high level overview of the repository including [class diagram](https://sourcespy.com/github/simplenlgsimplenlg/xx-omodel-.html), Ant [tasks and dependencies](https://sourcespy.com/github/simplenlgsimplenlg/xx-otasks-.html), [module dependencies](https://sourcespy.com/github/simplenlgsimplenlg/xx-omodulesc-.html), [external libraries](https://sourcespy.com/github/simplenlgsimplenlg/xx-ojavalibs-.html), and other components of the system.
-
-If you have other questions about SimpleNLG, please contact Professor Ehud Reiter via email: [ehud.reiter@arria.com](mailto:ehud.reiter@arria.com).
+If you have other questions about SimpleNLG, please contact Professor Ehud Reiter via email: [ehud.reiter@arria.com](mailto:e.reiter@abdn.ac.uk).
 
 SimpleNLG for other languages
 -----------------------------
